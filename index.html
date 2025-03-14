@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0HBK7XS1Z3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0HBK7XS1Z3');
+  </script>
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>testfeed | AI Audience Simulation | Predict Content Performance</title>
+  <meta name="description" content="testfeed: The AI audience simulation platform that predicts how your content will perform before you post.">
+  
+  <!-- Meta tags -->
+  <meta name="robots" content="index, follow">
+  <meta name="keywords" content="audience simulation, content performance prediction, AI content testing, social media analytics, linkedin content optimization">
+  <meta property="og:title" content="testfeed | AI Audience Simulation Platform">
+  <meta property="og:description" content="Simulate how thousands of people would react to your content before you publish. Make data-driven decisions for better engagement.">
+  <meta property="og:image" content="https://testfeed.ai/assets/og-image.jpg">
+  <meta property="og:url" content="https://testfeed.ai">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="testfeed | AI Audience Simulation Platform">
+  <meta name="twitter:description" content="Simulate how thousands of people would react to your content before you publish.">
+  <meta name="twitter:image" content="https://testfeed.ai/assets/twitter-image.jpg">
+  
+  <link rel="canonical" href="https://testfeed.ai">
+  
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tiny5&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  
+  <!-- Favicons -->
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "testfeed",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/ComingSoon"
+    },
+    "description": "AI-powered audience simulation platform that predicts how your content will perform before you publish it."
+  }
+  </script>
+  
+</head>
+
+<body>
+  <!-- Header Section -->
+  <header class="site-header">
+    <div class="container">
+      <nav>
+        <div class="logo"><span class="testfeed-font">testfeed</span></div>
+        <div class="mobile-menu-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <ul class="nav-menu">
+          <li><a href="#how-it-works">How it works</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#use-cases">Use cases</a></li>
+          <li><a href="#get-started" class="btn btn-primary pulse nav-cta">Join waitlist</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<!-- HERO SECTION WITH REFINED ANIMATION -->
+<section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Predict content success <span class="highlight">before</span> publishing</h1>
+        <p class="hero-description"><span class="testfeed-font">testfeed</span> helps you create better-performing content by showing how your target audience will likely respond, which version they'd prefer, and identifing potential issues before you post.</p>
+        <div class="cta-buttons">
+          <a href="#get-started" class="btn btn-primary pulse">Join waitlist</a>
+          <a href="#demo" class="btn btn-secondary">Watch demo</a>
+        </div>
+      </div>
+      
+      <div class="hero-visual">
+        <div class="mockup-container">
+          <!-- Post mockup -->
+          <div class="post-mockup">
+            <div class="post-avatar"></div>
+            <div class="post-content">
+              <div class="post-author">Sarah Johnson</div>
+              <div class="post-meta">Just now • LinkedIn</div>
+              <div class="post-text">
+                <p>AI isn't replacing jobs - it's transforming them.</p>
+                <p>Every technological shift in history has created more opportunities than it eliminated.</p>
+                <p>The key is adaptation, not resistance.</p>
+              </div>
+            </div>
+            
+            <!-- Testing indicator moved inside post-mockup -->
+            <div class="testing-indicator">
+              <div class="testing-pulse"></div>
+              <p>Testing with 10,000 profiles</p>
+            </div>
+          </div>
+          
+          <!-- Results panel - slides in from bottom -->
+          <div class="results-panel">
+            <div class="results-header">
+              <span class="testfeed-font">testfeed</span> results
+            </div>
+            
+            <div class="metrics-list">
+              <div class="metric">
+                <div class="metric-name">Reach</div>
+                <div class="metric-bar-container">
+                  <div class="metric-bar" id="reach-bar"></div>
+                </div>
+                <div class="metric-value"><span id="reach-value">0</span></div>
+              </div>
+              
+              <div class="metric">
+                <div class="metric-name">Engagement</div>
+                <div class="metric-bar-container">
+                  <div class="metric-bar" id="engagement-bar"></div>
+                </div>
+                <div class="metric-value"><span id="engagement-value">0</span>%</div>
+              </div>
+              
+              <div class="metric">
+                <div class="metric-name">Sentiment</div>
+                <div class="metric-bar-container sentiment">
+                  <div class="sentiment-section negative" id="sentiment-negative"></div>
+                  <div class="sentiment-section neutral" id="sentiment-neutral"></div>
+                  <div class="sentiment-section positive" id="sentiment-positive"></div>
+                </div>
+                <div class="metric-value">Positive</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Problem Section with New H2 and Reordered Problems -->
+  <section class="problem">
+    <div class="container">
+      <h2>The post-and-pray <span class="highlight">problem</span></h2>
+      <div class="problem-grid">
+        <div class="problem-card">
+          <div class="problem-icon">
+            <i data-lucide="trending-down"></i>
+          </div>
+          <h3>Brand impact cuts both ways</h3>
+          <p>Content that resonates builds your brand, but posts that miss the mark or are misinterpreted can actively damage perception. Each post either builds or erodes trust with your audience.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">
+            <i data-lucide="clock"></i>
+          </div>
+          <h3>High opportunity cost</h3>
+          <p>Hours spent creating content that underperforms wastes valuable resources. Second-guessing which version to publish creates stress, delays your momentum, and leaves potential engagement on the table.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">
+            <i data-lucide="shield-off"></i>
+          </div>
+          <h3>No safety net for organic content</h3>
+          <p>Once you hit publish, your can't undo. Unlike ads, organic posts can't be A/B tested or gradually rolled out - you only get one chance to make the right impression.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo Video Section -->
+  <section id="demo" class="demo-video">
+    <div class="container">
+      <h2>See <span class="testfeed-font">testfeed</span> in <span class="highlight">action</span></h2>
+      <div class="video-container">
+        <iframe width="100%" height="500" src="https://www.youtube.com/embed/UV8KBxPrln8" title="testfeed Demo Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section id="how-it-works" class="how-it-works">
+    <div class="container">
+      <h2>How <span class="testfeed-font">testfeed</span> <span class="highlight">works</span></h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>Audience simulation</h3>
+            <p>Tell us who your target audience is, and we'll create a statistically valid simulation with thousands of unique profiles that represent your real-world audience segments.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>Content testing</h3>
+            <p>Your content is served to this virtual audience in our simulated feed (this simulates LinkedIn only for now with more platforms coming soon). Each profile reacts based on authentic platform behaviors and their unique characteristics.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>Performance analysis</h3>
+            <p>Within seconds, see projected engagement metrics, sentiment analysis, potential reactions, and identify which version of your content will perform best.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+<section id="features" class="features">
+    <div class="container">
+      <h2>Core <span class="highlight">features</span></h2>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i data-lucide="users"></i>
+          </div>
+          <h3>Virtual audience</h3>
+          <p><span class="testfeed-font">testfeed</span> simulates a reach of 10,000 unique audience profiles, giving you statistically significant predictions before you publish.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i data-lucide="bar-chart-2"></i>
+          </div>
+          <h3>Engagement metrics</h3>
+          <p>Get detailed projections for platform-specific metrics including likes, and comments for each version of your content.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i data-lucide="message-square"></i>
+          </div>
+          <h3>Comment prediction</h3>
+          <p>Preview representative comments your content might generate, including questions, objections, in line with typical LinkedIn comment behavior.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i data-lucide="heart"></i>
+          </div>
+          <h3>Sentiment analysis</h3>
+          <p>Understand the emotional response spectrum your content will trigger, from positive to negative, with percentage breakdowns.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i data-lucide="alert-triangle"></i>
+          </div>
+          <h3>Controversy detection</h3>
+          <p>Receive early warnings about potentially divisive elements in your content that could damage your brand or trigger negative engagement.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i data-lucide="zap"></i>
+          </div>
+          <h3>A/B/C testing</h3>
+          <p>Test multiple versions of the same post to determine which will perform best with your specific audience and why certain elements resonate.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="use-cases" class="use-cases">
+    <div class="container">
+      <h2>Key <span class="highlight">use cases</span></h2>
+      
+      <div class="use-cases-grid">
+        <div class="use-case">
+          <div class="use-case-icon">
+            <i data-lucide="shield"></i>
+          </div>
+          <h3>Build posting confidence</h3>
+          <p>New to content creation? <span class="testfeed-font">testfeed</span> provides the validation you need to overcome hesitation and publish with confidence, knowing how your audience will likely respond before you post.</p>
+        </div>
+        
+        <div class="use-case">
+          <div class="use-case-icon">
+            <i data-lucide="bar-chart"></i>
+          </div>
+          <h3>Optimize content performance</h3>
+          <p>Already posting regularly? <span class="testfeed-font">testfeed</span> helps established creators maximize engagement through data-driven insights, version testing, and audience response predictions that would be impossible otherwise.</p>
+        </div>
+        
+        <div class="use-case">
+          <div class="use-case-icon">
+            <i data-lucide="alert-circle"></i>
+          </div>
+          <h3>Mitigate brand backlash</h3>
+          <p>For marketing and brand teams, <span class="testfeed-font">testfeed</span> provides crucial insights into how announcements and PR content will be received, detecting potential misinterpretations before they happen.</p>
+        </div>
+        
+        <div class="use-case">
+          <div class="use-case-icon">
+            <i data-lucide="zap"></i>
+          </div>
+          <h3>Accelerate content strategy</h3>
+          <p>Skip months of trial and error by understanding exactly what resonates with your specific audience from day one, helping you build a more effective content strategy immediately.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ <!-- Platform Support Section -->
+<section class="platform-support">
+    <div class="container">
+      <h2>Platforms we <span class="highlight">support</span></h2>
+      
+      <div class="platforms-container">
+        <div class="platform current">
+          <div class="platform-icon">
+            <i data-lucide="linkedin"></i>
+          </div>
+          <h3>LinkedIn</h3>
+          <span class="status-badge">Available Now</span>
+        </div>
+        
+        <div class="platform coming-soon">
+          <div class="platform-icon">
+            <i data-lucide="twitter"></i>
+          </div>
+          <h3>Twitter/X</h3>
+          <span class="status-badge">Coming Soon</span>
+        </div>
+        
+        <div class="platform coming-soon">
+          <div class="platform-icon">
+            <i data-lucide="instagram"></i>
+          </div>
+          <h3>Instagram</h3>
+          <span class="status-badge">Coming Soon</span>
+        </div>
+      </div>
+      
+      <div class="platform-explanation">
+        <p><span class="testfeed-font">testfeed</span> creates a specialized simulation feed that captures the unique engagement patterns and audience behaviors specific to each platform. Currently, we focus on optimizing text content for LinkedIn, with X coming soon. We're also working on expanding to image and video content testing in the near future for Instagram.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+<section class="testimonials">
+    <div class="container">
+      <h2>What <span class="highlight">early users</span> are saying</h2>
+      <div class="testimonial-carousel">
+        <div class="testimonial">
+          <p class="quote">"This is a seriously cool idea. Creating content on LinkedIn takes so much trial and error to figure out what works. With testfeed, I can refine my content and quickly determine which version will perform best when I'm working through multiple ideas. It's saving me weeks of learning the hard way."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">
+              <i data-lucide="user"></i>
+            </div>
+            <div class="author-info">
+              <p class="author-name">Tom W.</p>
+              <p class="author-role">LinkedIn Creator</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial">
+          <p class="quote">"Everyone kept telling me I needed to post more, but honestly, I was paralyzed by fear of it. Testfeed helped me break through that fear. It's not perfect at predicting everything, but it gave me enough confidence in the possible reactions to finally start creating content regularly."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">
+              <i data-lucide="user"></i>
+            </div>
+            <div class="author-info">
+              <p class="author-name">Ava M.</p>
+              <p class="author-role">SaaS Founder</p>
+            </div>
+          </div>
+        </div>
+  
+        <div class="testimonial">
+          <p class="quote">"As a brand manager, I'm always worried about content getting hijacked or being misinterpreted. TestFeed is brilliant for preemptively identifying potential negative responses and helping us prepare answers to skeptical comments. I've started using it with our whole content team to improve our response planning and risk management."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">
+              <i data-lucide="user"></i>
+            </div>
+            <div class="author-info">
+              <p class="author-name">James L.</p>
+              <p class="author-role">Brand Manager</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+<section id="faq" class="faq">
+    <div class="container">
+      <h2>Frequently asked <span class="highlight">questions</span></h2>
+      
+      <div class="faq-container">
+        <!-- FAQ Item 1 -->
+        <div class="faq-item">
+          <h3 class="faq-question">What makes testfeed different from just using regular AI tools?</h3>
+          <div class="faq-answer">
+            <p>Unlike general AI tools that just analyze your content directly, <span class="testfeed-font">testfeed</span> creates an entire simulated audience and shows how they would interact with your post. This gives you much more specific insights about engagement, sentiment distribution, and potential reactions instead of generic writing suggestions. <span class="testfeed-font">testfeed</span> focuses exclusively on predicting audience behavior rather than just improving your writing.</p>
+          </div>
+        </div>
+        
+        <!-- FAQ Item 2 -->
+        <div class="faq-item">
+          <h3 class="faq-question">How reliable are the predictions?</h3>
+          <div class="faq-answer">
+            <p><span class="testfeed-font">testfeed</span> provides directional guidance rather than exact predictions. The simulation is designed to help you identify which version of your content will perform better and spot potential issues before publishing. While no simulation can be 100% accurate (real audience behavior depends on countless factors), our users consistently report that <span class="testfeed-font">testfeed</span> helps them make better content decisions and avoid problematic posts.</p>
+          </div>
+        </div>
+        
+        <!-- FAQ Item 3 -->
+        <div class="faq-item">
+          <h3 class="faq-question">How do I access testfeed?</h3>
+          <div class="faq-answer">
+            <p>Currently, <span class="testfeed-font">testfeed</span> is available exclusively through <a href="https://chatpost.ai" target="_blank">ChatPost</a>, our AI-powered content creation tool. Join our waitlist to be notified when direct access to <span class="testfeed-font">testfeed</span> becomes available or to learn more about using it through <a href="https://chatpost.ai" target="_blank">ChatPost</a> today.</p>
+          </div>
+        </div>
+        
+        <!-- FAQ Item 4 -->
+        <div class="faq-item">
+          <h3 class="faq-question">Can testfeed help with specific industries or niches?</h3>
+          <div class="faq-answer">
+            <p>Yes! <span class="testfeed-font">testfeed</span> creates audience simulations tailored to your specific industry and target audience. When setting up, you'll define who you're trying to reach, and <span class="testfeed-font">testfeed</span> will generate a proportionate sample of that audience with appropriate expertise levels, interests, and demographic profiles. This makes the predictions much more relevant than generic content analysis.</p>
+          </div>
+        </div>
+        
+        <!-- FAQ Item 5 -->
+        <div class="faq-item">
+          <h3 class="faq-question">How long does it take to get results?</h3>
+          <div class="faq-answer">
+            <p><span class="testfeed-font">testfeed</span> produces results within seconds. Simply enter your target audience description and content, and you'll quickly receive detailed engagement predictions, sentiment analysis, and even sample comments that your content might generate. This rapid feedback loop makes it practical to test multiple versions before publishing.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA Section -->
+<section id="get-started" class="final-cta">
+    <div class="container">
+      <div class="cta-card">
+        <h2>See your audience's reaction <span class="highlight">before you post</span></h2>
+        <p>Join the <span class="testfeed-font">testfeed</span> waitlist and eliminate the guesswork from content creation</p>
+        <a href="https://testfeed.ai/waitlist" class="btn btn-primary btn-large pulse">Join waitlist</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="logo"><span class="testfeed-font">testfeed</span></div>
+        <div class="footer-legal">
+          <a href="/privacy-policy">Privacy policy</a>
+          <span class="divider">|</span>
+          <a href="/terms-of-service">Terms of service</a>
+        </div>
+        <div class="copyright">
+          <p>&copy; 2025 <span class="testfeed-font">testfeed</span>. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <script src="script.js"></script>
+</body>
+</html>
