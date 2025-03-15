@@ -1,7 +1,17 @@
 // JavaScript for TestFeed landing page
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize Lucide Icons
-    lucide.createIcons();
+    // Safely initialize Lucide icons with fallback
+    try {
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        } else {
+            console.warn('Lucide library not available, icons may not display correctly');
+            // Continue with other functionality
+        }
+    } catch (e) {
+        console.warn('Error initializing icons:', e);
+        // Continue with other functionality
+    }
     
     // Mobile menu toggle
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
