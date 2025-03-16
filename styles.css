@@ -1114,10 +1114,28 @@ footer {
     color: rgba(255, 255, 255, 0.2);
 }
 
+.copyright {
+    text-align: center;
+}
+
 .copyright p {
     color: rgba(255, 255, 255, 0.3);
     margin-bottom: 0;
     font-size: 0.9rem;
+}
+
+.made-by {
+    margin-top: var(--spacing-sm);
+    font-size: 0.8rem;
+}
+
+.made-by a {
+    color: rgba(255, 255, 255, 0.5);
+    transition: var(--transition);
+}
+
+.made-by a:hover {
+    color: var(--color-white);
 }
 
 /* Video Modal */
