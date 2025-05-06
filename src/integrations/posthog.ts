@@ -5,9 +5,9 @@ export default function posthogAnalytics(): AstroIntegration {
     name: 'astro-posthog-analytics-integration',
     hooks: {
       'astro:config:setup': ({ injectScript }) => {
-        const posthogApiKey = import.meta.env.PUBLIC_POSTHOG_API_KEY;
+        const posthogApiKey = process.env.PUBLIC_POSTHOG_API_KEY;
         // Default to 'https://us.i.posthog.com'
-        const posthogApiHost = import.meta.env.PUBLIC_POSTHOG_API_HOST || 'https://us.i.posthog.com';
+        const posthogApiHost = process.env.PUBLIC_POSTHOG_API_HOST || 'https://us.i.posthog.com';
 
         if (!posthogApiKey) {
           // console.warn(

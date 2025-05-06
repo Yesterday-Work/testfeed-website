@@ -5,8 +5,9 @@ export default function googleAnalytics(): AstroIntegration {
     name: 'astro-google-analytics-integration', // Unique name for the integration
     hooks: {
       'astro:config:setup': ({ injectScript, command }) => {
-        // Get the GA ID from environment variables
-        const gaId = import.meta.env.PUBLIC_GOOGLE_ANALYTICS_ID;
+        // Get the GA ID from environment variables (use process.env here because
+        // import.meta.env is not populated in integration hooks during build time)
+        const gaId = process.env.PUBLIC_GOOGLE_ANALYTICS_ID;
 
         // Only run if GA_ID is set and we are building for production
         // (or if you want it during development too, adjust the logic)
