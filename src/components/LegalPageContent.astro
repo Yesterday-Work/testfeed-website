@@ -1,5 +1,5 @@
 ---
-// No props needed for this component
+import { Icon } from 'astro-icon/components'; 
 ---
 <section class="legal-section">
   <div class="container">
@@ -7,7 +7,7 @@
       <slot /> <!-- Markdown content will be rendered here -->
       <div class="legal-footer">
         <a href="/" class="back-link">
-          <i data-lucide="arrow-left"></i> Back to home
+          <Icon name="lucide:arrow-left" /> Back to home
         </a>
       </div>
     </div>

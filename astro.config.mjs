@@ -4,6 +4,7 @@ import * as dotenv from 'dotenv';
 import sitemap from '@astrojs/sitemap';
 import googleAnalytics from './src/integrations/google-analytics';
 import posthogAnalytics from './src/integrations/posthog';
+import icon from 'astro-icon';
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ export default defineConfig({
   integrations: [
     sitemap(),
     googleAnalytics(),
-    posthogAnalytics()
+    posthogAnalytics(),
+    icon()
   ]
 });

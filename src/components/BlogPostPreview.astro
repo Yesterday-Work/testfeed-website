@@ -1,5 +1,6 @@
 ---
 // Define the props that this component accepts
+import { Icon } from 'astro-icon/components';
 export interface Props {
   post: {
     slug: string;
@@ -40,7 +41,7 @@ const displayTitle = post.data.articleTitle
       />
     ) : (
       <div class="placeholder-image">
-        <i data-lucide="file-text"></i>
+        <Icon name="lucide:file-text" />
       </div>
     )}
   </div>
@@ -57,7 +58,7 @@ const displayTitle = post.data.articleTitle
     <p class="excerpt">{post.data.excerpt}</p>
     <div class="blog-footer">
       <span class="author">By {post.data.author}</span>
-      <a href={`/blog/${post.slug}`} class="read-more">Read article <i data-lucide="arrow-right"></i></a>
+      <a href={`/blog/${post.slug}`} class="read-more">Read article <Icon name="lucide:arrow-right" /></a>
     </div>
   </div>
 </div>
@@ -106,7 +107,7 @@ const displayTitle = post.data.articleTitle
   color: var(--color-text-light);
 }
 
-.placeholder-image i {
+.placeholder-image :global(svg) {
   width: 40px;
   height: 40px;
 }
@@ -177,13 +178,13 @@ const displayTitle = post.data.articleTitle
   font-weight: 600;
 }
 
-.read-more i {
+.read-more :global(svg) {
   width: 16px;
   height: 16px;
   transition: transform 0.3s ease;
 }
 
-.read-more:hover i {
+.read-more:hover :global(svg) {
   transform: translateX(3px);
 }
 

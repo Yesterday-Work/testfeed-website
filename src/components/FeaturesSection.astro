@@ -1,6 +1,7 @@
 ---
 import type { z } from 'astro:content';
 import { featuresSectionSchema } from '../content/config';
+import { Icon } from 'astro-icon/components';
 
 // Define props type
 export type Props = z.infer<typeof featuresSectionSchema>;
@@ -16,7 +17,7 @@ const { title, features } = Astro.props;
       {features.map(feature => (
         <div class="feature-card">
           <div class="feature-icon">
-            <i data-lucide={feature.icon}></i>
+            <Icon name={`lucide:${feature.icon}`} />
           </div>
           <h3>{feature.title}</h3>
           <p>{feature.text}</p>
@@ -65,8 +66,8 @@ const { title, features } = Astro.props;
     color: var(--color-highlight);
 }
 
-.feature-icon i {
+.feature-icon :global(svg) {
     width: 30px;
     height: 30px;
-} 
+}
 </style> 

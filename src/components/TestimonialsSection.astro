@@ -1,6 +1,7 @@
 ---
 import type { z } from 'astro:content';
 import { testimonialsSectionSchema } from '../content/config';
+import { Icon } from 'astro-icon/components';
 
 // Define props type
 export type Props = z.infer<typeof testimonialsSectionSchema>;
@@ -17,7 +18,7 @@ const { title, testimonials } = Astro.props;
           <p class="quote">{testimonial.quote}</p>
           <div class="testimonial-author">
             <div class="author-avatar">
-              <i data-lucide="user"></i>
+              <Icon name="lucide:user" />
             </div>
             <div class="author-info">
               <p class="author-name">{testimonial.name}</p>
@@ -86,7 +87,7 @@ const { title, testimonials } = Astro.props;
     color: var(--color-highlight);
 }
 
-.author-avatar i {
+.author-avatar :global(svg) {
     width: 30px;
     height: 30px;
 }

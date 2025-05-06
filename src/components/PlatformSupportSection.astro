@@ -1,6 +1,7 @@
 ---
 import type { z } from 'astro:content';
 import { platformSupportSectionSchema } from '../content/config';
+import { Icon } from 'astro-icon/components';
 
 // Define props type
 export type Props = z.infer<typeof platformSupportSectionSchema>;
@@ -16,7 +17,7 @@ const { title, explanation, platforms } = Astro.props;
       {platforms.map(platform => (
         <div class={`platform ${platform.status === 'available' ? 'current' : 'coming-soon'}`}>
           <div class="platform-icon">
-            <i data-lucide={platform.icon}></i>
+            <Icon name={`lucide:${platform.icon}`} />
           </div>
           <h3>{platform.name}</h3>
           <span class="status-badge">{platform.status === 'available' ? 'Available Now' : 'Coming Soon'}</span>
@@ -93,7 +94,7 @@ const { title, explanation, platforms } = Astro.props;
     color: var(--color-highlight);
 }
 
-.platform-icon i {
+.platform-icon :global(svg) {
     width: 30px;
     height: 30px;
 }

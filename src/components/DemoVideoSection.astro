@@ -6,23 +6,57 @@ import type { z } from 'astro:content';
 export type Props = z.infer<typeof videoSectionSchema>;
 
 const { title, videoId } = Astro.props;
+const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
 ---
 
 <section id="demo" class="demo-video">
   <div class="container">
     <h2 set:html={title}></h2> 
-    <div class="video-container">
-      <iframe 
-        width="100%" 
-        height="500" 
-        src={`https://www.youtube.com/embed/${videoId}`} 
-        title="testfeed Demo Video" 
-        loading="lazy"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen></iframe>
+    <div class="video-container" id={`youtube-player-${videoId}`}>
+      <div class="video-placeholder" role="button" tabindex="0" aria-label="Play video">
+        <img src={thumbnailUrl} alt="Video thumbnail for {title}" loading="lazy" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: var(--border-radius-lg);"/>
+        <div class="play-button">
+          <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 5V19L19 12L8 5Z"/></svg>
+        </div>
+      </div>
     </div>
   </div>
-</section> 
+</section>
+
+<script define:vars={{ videoId }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const videoContainer = document.getElementById(`youtube-player-${videoId}`);
+    if (!videoContainer) return;
+
+    const placeholder = videoContainer.querySelector('.video-placeholder');
+    if (!placeholder) return;
+
+    placeholder.addEventListener('click', loadVideo);
+    placeholder.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        loadVideo();
+      }
+    });
+
+    function loadVideo() {
+      placeholder.removeEventListener('click', loadVideo);
+      placeholder.removeEventListener('keydown', loadVideo);
+      
+      const iframe = document.createElement('iframe');
+      iframe.setAttribute('width', '100%');
+      iframe.setAttribute('height', '500'); // Or inherit from container
+      iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`);
+      iframe.setAttribute('title', 'testfeed Demo Video');
+      iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+      iframe.setAttribute('allowfullscreen', '');
+      iframe.style.borderRadius = 'var(--border-radius-lg)';
+      iframe.style.display = 'block';
+
+      videoContainer.innerHTML = ''; // Clear placeholder
+      videoContainer.appendChild(iframe);
+    }
+  });
+</script>
 
 <style>
 .demo-video {
@@ -72,7 +106,7 @@ const { title, videoId } = Astro.props;
 .video-placeholder {
     background-color: rgba(0, 0, 0, 0.8);
     border-radius: var(--border-radius-lg);
-    height: 500px;
+    aspect-ratio: 16 / 9;
     display: flex;
     flex-direction: column;
     justify-content: center;
