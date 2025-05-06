@@ -1,0 +1,153 @@
+---
+import type { z } from 'astro:content';
+import { faqSectionSchema } from '../content/config';
+
+// Define props type
+export type Props = z.infer<typeof faqSectionSchema>;
+
+const { title, faqs } = Astro.props;
+
+// Generate the FAQ Schema.org structured data
+const faqSchemaData = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+};
+---
+
+<section id="faq" class="faq">
+  <div class="container">
+    <h2 set:html={title}></h2>
+
+    <div class="faq-container">
+      {faqs.map(faq => (
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span class="question-text">{faq.question}</span>
+          </button>
+          <div class="faq-answer">
+            <p set:html={faq.answer}></p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchemaData)}></script> 
+
+<script is:inline>
+document.addEventListener('DOMContentLoaded', function() {
+    const faqContainer = document.getElementById('faq'); 
+    if (!faqContainer) return;
+
+    const faqItems = faqContainer.querySelectorAll('.faq-item');
+    if (faqItems.length > 0) {
+      faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        if (!question) return;
+
+        question.setAttribute('aria-expanded', 'false');
+
+        const answer = item.querySelector('.faq-answer');
+        if (!answer) return;
+        
+        // Associate question with answer for screen readers
+        const answerId = `faq-answer-${Math.random().toString(36).substring(2, 15)}`;
+        answer.setAttribute('id', answerId);
+        question.setAttribute('aria-controls', answerId);
+        answer.setAttribute('aria-hidden', 'true');
+
+        const clickHandler = () => {
+            const expanded = item.classList.contains('active');
+            question.setAttribute('aria-expanded', String(!expanded));
+            answer.setAttribute('aria-hidden', String(expanded));
+            item.classList.toggle('active');
+
+            // Close other items (accordion style)
+            faqItems.forEach(otherItem => {
+              if (otherItem !== item && otherItem.classList.contains('active')) {
+                otherItem.classList.remove('active');
+                const otherQuestion = otherItem.querySelector('.faq-question');
+                const otherAnswer = otherItem.querySelector('.faq-answer');
+                if(otherQuestion) otherQuestion.setAttribute('aria-expanded', 'false');
+                if(otherAnswer) otherAnswer.setAttribute('aria-hidden', 'true');
+              }
+            });
+        };
+
+        question.addEventListener('click', clickHandler);
+      });
+    }
+});
+</script> 
+
+<style>
+.faq {
+    background-color: #151515;
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: var(--spacing-md);
+}
+
+.faq-question {
+    position: relative;
+    padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) 0;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 1.5rem;
+    font-family: var(--font-heading); /* Space Mono font */
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.2;
+}
+
+.question-text {
+    flex: 1;
+}
+
+.faq-question::after {
+    content: '+';
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-question::after {
+    content: '−';
+    transform: rotate(0deg);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0 var(--spacing-md) 0 0;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 500px;
+    padding: 0 var(--spacing-md) var(--spacing-md) 0;
+} 
+</style>

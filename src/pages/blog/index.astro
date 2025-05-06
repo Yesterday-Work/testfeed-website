@@ -1,0 +1,76 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogPostPreview from '../../components/BlogPostPreview.astro';
+
+// Fetch all blog entries and sort by date
+const allBlogPosts = await getCollection('blog');
+const sortedPosts = allBlogPosts.sort((a, b) => 
+  new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime()
+);
+
+// SEO metadata
+const title = "Blog | TestFeed | AI Audience Simulation";
+const description = "Explore the latest insights on content performance, audience simulation, and LinkedIn optimization from the TestFeed team.";
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="blog-index">
+    <div class="container">
+      <div class="blog-header">
+        <h1><span class="highlight">Blog</span></h1>
+        <p class="subtitle">Insights and strategies for optimizing your content performance</p>
+      </div>
+      
+      <div class="blog-grid">
+        {sortedPosts.map(post => (
+          <BlogPostPreview post={post} />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .blog-index {
+    padding: var(--spacing-xxl) 0;
+    background-color: var(--color-background);
+  }
+  
+  .blog-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .blog-header h1 {
+    margin-bottom: var(--spacing-md);
+    font-size: 3.5rem;
+  }
+  
+  .blog-header .highlight {
+    color: var(--color-primary);
+  }
+  
+  .subtitle {
+    font-size: 1.2rem;
+    color: var(--color-text-light);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: var(--spacing-lg);
+  }
+  
+  @media (max-width: 768px) {
+    .blog-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style> 

@@ -1,0 +1,86 @@
+---
+import type { z } from 'astro:content';
+import { useCasesSectionSchema } from '../content/config';
+
+// Define props type
+export type Props = z.infer<typeof useCasesSectionSchema>;
+
+const { title, useCases } = Astro.props;
+---
+
+<section id="use-cases" class="use-cases">
+  <div class="container">
+    <h2 set:html={title}></h2>
+
+    <div class="use-cases-grid">
+      {useCases.map(useCase => (
+        <div class="use-case">
+          <div class="use-case-icon">
+            <i data-lucide={useCase.icon}></i>
+          </div>
+          <h3>{useCase.title}</h3>
+          <p>{useCase.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section> 
+
+<style>
+.use-cases {
+    background-color: #111111;
+}
+
+.use-cases-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media (max-width: 1200px) {
+    .use-cases-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .use-cases-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.use-case {
+    text-align: center;
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+.use-case:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.use-case-icon {
+    margin: 0 auto var(--spacing-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-highlight);
+}
+
+.use-case-icon i {
+    width: 35px;
+    height: 35px;
+}
+
+.use-case h3 {
+    color: var(--color-white);
+    margin-bottom: var(--spacing-sm);
+}
+</style> 

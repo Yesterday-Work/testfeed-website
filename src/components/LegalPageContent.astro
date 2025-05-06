@@ -1,0 +1,144 @@
+---
+// No props needed for this component
+---
+<section class="legal-section">
+  <div class="container">
+    <div class="legal-content">
+      <slot /> <!-- Markdown content will be rendered here -->
+      <div class="legal-footer">
+        <a href="/" class="back-link">
+          <i data-lucide="arrow-left"></i> Back to home
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .legal-section {
+    padding: 4rem 0;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .legal-content {
+    background-color: #222;
+    border-radius: 8px;
+    padding: 3rem;
+    max-width: 800px;
+    margin: 0 auto;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Basic typography */
+  .legal-content :global(h1) {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: white;
+  }
+
+  .legal-content :global(h1 + p) {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #999;
+    font-style: italic;
+  }
+
+  .legal-content :global(p) {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    color: #bbb;
+  }
+
+  .legal-content :global(h2) {
+    font-size: 1.8rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: white;
+    text-align: left;
+  }
+
+  .legal-content :global(h3) {
+    font-size: 1.3rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: white;
+  }
+
+  .legal-content :global(ul),
+  .legal-content :global(ol) {
+    margin-bottom: 1.5rem;
+    margin-left: 1.5rem;
+    padding-left: 1rem;
+  }
+
+  .legal-content :global(ul) {
+    list-style-type: disc;
+  }
+
+  .legal-content :global(ol) {
+    list-style-type: decimal;
+  }
+
+  .legal-content :global(li) {
+    margin-bottom: 0.5rem;
+    color: #bbb;
+    line-height: 1.6;
+  }
+
+  .legal-content :global(a) {
+    color: white;
+    text-decoration: underline;
+    transition: color 0.2s;
+  }
+
+  .legal-content :global(a:hover) {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: underline;
+  }
+
+  .legal-footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  @media (max-width: 768px) {
+    .legal-section {
+      padding: 2rem 0;
+    }
+    
+    .legal-content {
+      padding: 2rem 1.5rem;
+    }
+    
+    .legal-content :global(h1) {
+      font-size: 2rem;
+    }
+    
+    .legal-content :global(h2) {
+      font-size: 1.5rem;
+    }
+  }
+</style> 

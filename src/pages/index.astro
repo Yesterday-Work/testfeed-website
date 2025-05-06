@@ -1,0 +1,67 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HomeHero from '../components/HomeHero.astro'; 
+import ProblemSection from '../components/ProblemSection.astro';
+import DemoVideoSection from '../components/DemoVideoSection.astro';
+import HowItWorksSection from '../components/HowItWorksSection.astro';
+import FeaturesSection from '../components/FeaturesSection.astro';
+import UseCasesSection from '../components/UseCasesSection.astro';
+import PlatformSupportSection from '../components/PlatformSupportSection.astro';
+import TestimonialsSection from '../components/TestimonialsSection.astro';
+import FAQsSection from '../components/FAQsSection.astro';
+import FinalCTASection from '../components/FinalCTASection.astro';
+import { collections } from '../content/config'; 
+
+// Fetch the content from main.md file
+const homepageEntries = await getCollection('homepage');
+const entry = homepageEntries.find(entry => entry.id === 'main.md') || homepageEntries[0];
+
+---
+
+<BaseLayout 
+  title={entry.data.pageTitle} 
+  description={entry.data.pageDescription} 
+  entry={entry}
+>
+
+  {entry.data.hero && (
+    <HomeHero {...entry.data.hero} />
+  )}
+
+  {entry.data.problemSection && (
+    <ProblemSection {...entry.data.problemSection} />
+  )}
+
+  {entry.data.videoSection && (
+    <DemoVideoSection {...entry.data.videoSection} />
+  )}
+
+  {entry.data.howItWorksSection && (
+    <HowItWorksSection {...entry.data.howItWorksSection} />
+  )}
+
+  {entry.data.featuresSection && (
+    <FeaturesSection {...entry.data.featuresSection} />
+  )}
+
+  {entry.data.useCasesSection && (
+    <UseCasesSection {...entry.data.useCasesSection} />
+  )}
+
+  {entry.data.platformSupportSection && (
+    <PlatformSupportSection {...entry.data.platformSupportSection} />
+  )}
+
+  {entry.data.testimonialsSection && (
+    <TestimonialsSection {...entry.data.testimonialsSection} />
+  )}
+
+  {entry.data.faqSection && (
+    <FAQsSection {...entry.data.faqSection} />
+  )}
+
+  {entry.data.finalCtaSection && (
+    <FinalCTASection {...entry.data.finalCtaSection} />
+  )}
+</BaseLayout>

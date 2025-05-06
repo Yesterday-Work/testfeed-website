@@ -1,0 +1,149 @@
+---
+import '../styles/styles.css'; 
+import Header from '../components/Header.astro'; 
+import Footer from '../components/Footer.astro'; 
+
+export interface Props {
+	// From the content file's frontmatter
+	title?: string;        // From pageTitle in content
+	description?: string;  // From pageDescription in content
+	entry?: any;           // The full content entry object
+	customMeta?: Array<{name: string, content: string}>; // Custom meta tags
+}
+
+// IMPORTANT: This is a fallback as a safety net,
+// best practice is to always include title and description 
+// in every content file 
+const { 
+	title = 'testfeed | AI Audience Simulation', 
+	description = 'AI-powered audience simulation tool that predicts how your content will perform before publishing',
+	entry = null,
+	customMeta = []
+} = Astro.props;
+
+// Determine robots content - default to index, follow
+let robotsContent = "index, follow";
+const customRobotsMeta = customMeta.find(meta => meta.name && meta.name.toLowerCase() === 'robots');
+if (customRobotsMeta) {
+  robotsContent = customRobotsMeta.content;
+}
+
+// Get the site URL for absolute paths
+const siteUrl = Astro.url.origin; // Gets https://testfeed.ai
+
+// Set up Open Graph and Twitter card images - ALWAYS use absolute URLs for social sharing
+let ogImage = new URL('/assets/og-image.jpg', siteUrl).href;
+let twitterImage = new URL('/assets/twitter-image.jpg', siteUrl).href;
+
+// Use featured image from page content if available
+if (entry?.data?.featuredImage) {
+  if (entry.data.featuredImage.startsWith('/')) {
+    // Convert relative URLs to absolute
+    ogImage = new URL(entry.data.featuredImage, siteUrl).href;
+    twitterImage = ogImage;
+  } else if (entry.data.featuredImage.startsWith('http')) {
+    // Already an absolute URL
+    ogImage = entry.data.featuredImage;
+    twitterImage = entry.data.featuredImage;
+  }
+}
+
+// Get image alt text if available
+const imageAlt = entry?.data?.imageAlt || entry?.data?.featuredImageAlt || title;
+
+// Determine content type
+const isArticle = entry?.data?.schemaMarkup?.type === 'BlogPosting' || 
+                 entry?.data?.publishDate != null;
+const contentType = isArticle ? 'article' : 'website';
+
+const schemaData = entry?.data?.schemaMarkup 
+	? {
+			"@context": "https://schema.org",
+			"@type": entry.data.schemaMarkup.type,
+			"name": title,
+			"description": description,
+			"url": Astro.url.href,
+			...(entry.data.schemaMarkup.properties || {})
+		}
+	: {
+			"@context": "https://schema.org",
+			"@type": "WebPage",
+			"name": title,
+			"description": description,
+			"url": Astro.url.href
+		};
+
+// Add image to schema if available
+if (ogImage) {
+  schemaData.image = ogImage;
+}
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+	<title>{title}</title>
+	<meta name="description" content={description}>
+
+	{/* Custom Meta Tags */}
+	{customMeta.filter(meta => meta.name && meta.name.toLowerCase() !== 'robots').map(meta => (
+		<meta name={meta.name} content={meta.content} />
+	))}
+
+	<meta name="robots" content={robotsContent} />
+	<link rel="canonical" href={Astro.url.href} />
+
+	{/* Open Graph Tags - used by Facebook, LinkedIn, etc. */}
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={description} />
+	<meta property="og:url" content={Astro.url.href} />
+	<meta property="og:image" content={ogImage} />
+	<meta property="og:image:alt" content={imageAlt} />
+	<meta property="og:type" content={contentType} />
+	<meta property="og:site_name" content="TestFeed" />
+	
+	{/* Twitter Card Tags */}
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={title} />
+	<meta name="twitter:description" content={description} />
+	<meta name="twitter:image" content={twitterImage} />
+	<meta name="twitter:image:alt" content={imageAlt} />
+	<meta name="twitter:site" content="@testfeed" />
+
+	{/* Schema.org JSON-LD structured data */}
+	<script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+
+	{/* SEO Performance Suggestions */}
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	
+	{/* Google Fonts */}
+	<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Tiny5&display=swap" rel="stylesheet">
+
+	{/* Favicons */}
+	<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="manifest" href="/site.webmanifest">
+</head>
+<body>
+	<Header />
+	
+	<!-- The main content from each page will be injected here -->
+	<slot />
+
+	<Footer />
+
+	<!-- Global scripts -->
+	<script src="/assets/js/lucide.min.js" is:inline></script>
+	<script src="/src/scripts/script.js"></script>
+
+	<!-- Initialize Lucide Icons -->
+	<script is:inline>
+		if (typeof lucide !== 'undefined') {
+			lucide.createIcons();
+		}
+	</script>
+</body>
+</html> 

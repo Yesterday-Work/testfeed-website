@@ -1,0 +1,79 @@
+---
+import { getCollection } from 'astro:content';
+import BlogPostPreview from './BlogPostPreview.astro'; 
+
+// Optional props
+export interface Props {
+  title?: string;
+  count?: number;
+}
+
+// Default values
+const { 
+  title = "Latest from our <span class='highlight'>blog</span>",
+  count = 3
+} = Astro.props;
+
+// Fetch blog posts
+const allBlogPosts = await getCollection('blog');
+const recentPosts = allBlogPosts
+  .sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime())
+  .slice(0, count);
+---
+
+<section class="recent-posts">
+  <div class="container">
+    <h2 set:html={title}></h2>
+    
+    {recentPosts.length > 0 ? (
+      <>
+        <div class="blog-grid">
+          {recentPosts.map(post => (
+            <BlogPostPreview post={post} />
+          ))}
+        </div>
+        
+        <div class="view-all-container">
+          <a href="/blog" class="btn btn-secondary">View all articles</a>
+        </div>
+      </>
+    ) : (
+      <p class="no-posts">No blog posts available yet. Check back soon!</p>
+    )}
+  </div>
+</section>
+
+<style>
+.recent-posts {
+  padding: var(--spacing-xxl) 0;
+  background-color: #151515;
+}
+
+h2 {
+  margin-bottom: var(--spacing-xl);
+  text-align: center;
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.view-all-container {
+  text-align: center;
+}
+
+.no-posts {
+  text-align: center;
+  color: var(--color-text-light);
+  padding: var(--spacing-xl) 0;
+}
+
+@media (max-width: 768px) {
+  .blog-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>

@@ -1,0 +1,113 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogHero from '../../components/BlogHero.astro';
+import FinalCTASection from '../../components/FinalCTASection.astro';
+import MarkdownContent from '../../components/MarkdownContent.astro';
+
+// Get the dynamic route parameter
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('blog');
+  
+  return blogEntries.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+// Get the entry from the params
+const { entry } = Astro.props;
+
+// Extract necessary data for BlogHero
+const articleDisplayTitle = entry.data.articleTitle || entry.data.pageTitle; // Use articleTitle, fallback to pageTitle
+const author = entry.data.author || 'TestFeed Team';
+const publishDate = entry.data.publishDate || new Date(); 
+const featuredImage = entry.data.featuredImage; 
+const tags = entry.data.tags;
+
+// Render the markdown content
+const { Content } = await entry.render();
+---
+
+<BaseLayout 
+  title={entry.data.pageTitle} 
+  description={entry.data.pageDescription}
+  entry={entry}
+>
+  <BlogHero 
+    title={articleDisplayTitle}
+    author={author}
+    publishDate={publishDate}
+    featuredImage={featuredImage}
+    tags={tags} 
+  />
+  <!-- Main content section with the blog content -->
+  <section class="blog-content">
+    <div class="container">
+      <article class="content-wrapper">
+        <MarkdownContent>
+          <Content />
+        </MarkdownContent>
+      </article>
+    </div>
+  </section>
+
+  <!-- Final CTA section if available -->
+  {entry.data.finalCtaSection && (
+    <FinalCTASection {...entry.data.finalCtaSection} />
+  )}
+</BaseLayout>
+
+<style>
+  .blog-content {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--color-background);
+  }
+
+  .content-wrapper {
+    background-color: var(--color-card-bg);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md) var(--spacing-xl) var(--spacing-xl);
+    max-width: 900px;
+    margin: 0 auto;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--shadow);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 992px) {
+    .content-wrapper {
+      padding: var(--spacing-lg);
+    }
+    
+    .content-wrapper :global(h1) {
+      font-size: 2rem;
+    }
+    
+    .content-wrapper :global(h2) {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .blog-content {
+      padding: var(--spacing-lg) 0;
+    }
+    
+    .content-wrapper {
+      padding: var(--spacing-md);
+    }
+    
+    .content-wrapper :global(h1) {
+      font-size: 1.8rem;
+    }
+    
+    .content-wrapper :global(h2) {
+      font-size: 1.3rem;
+    }
+    
+    .content-wrapper :global(h3) {
+      font-size: 1.1rem;
+    }
+  }
+</style> 

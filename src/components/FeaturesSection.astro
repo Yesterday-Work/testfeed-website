@@ -1,0 +1,72 @@
+---
+import type { z } from 'astro:content';
+import { featuresSectionSchema } from '../content/config';
+
+// Define props type
+export type Props = z.infer<typeof featuresSectionSchema>;
+
+const { title, features } = Astro.props;
+---
+
+<section id="features" class="features">
+  <div class="container">
+    <h2 set:html={title}></h2>
+
+    <div class="features-grid">
+      {features.map(feature => (
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i data-lucide={feature.icon}></i>
+          </div>
+          <h3>{feature.title}</h3>
+          <p>{feature.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section> 
+
+<style>
+.features {
+    background-color: #151515;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.feature-card {
+    background-color: var(--color-card-bg);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    height: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.feature-icon {
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-highlight);
+}
+
+.feature-icon i {
+    width: 30px;
+    height: 30px;
+} 
+</style> 

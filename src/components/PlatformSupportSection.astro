@@ -1,0 +1,145 @@
+---
+import type { z } from 'astro:content';
+import { platformSupportSectionSchema } from '../content/config';
+
+// Define props type
+export type Props = z.infer<typeof platformSupportSectionSchema>;
+
+const { title, explanation, platforms } = Astro.props;
+---
+
+<section class="platform-support">
+  <div class="container">
+    <h2 set:html={title}></h2>
+
+    <div class="platforms-container">
+      {platforms.map(platform => (
+        <div class={`platform ${platform.status === 'available' ? 'current' : 'coming-soon'}`}>
+          <div class="platform-icon">
+            <i data-lucide={platform.icon}></i>
+          </div>
+          <h3>{platform.name}</h3>
+          <span class="status-badge">{platform.status === 'available' ? 'Available Now' : 'Coming Soon'}</span>
+        </div>
+      ))}
+    </div>
+
+    <div class="platform-explanation">
+      <p set:html={explanation}></p>
+    </div>
+  </div>
+</section>
+
+<style>
+.platform-support {
+    background-color: #151515;
+}
+
+.platforms-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+}
+
+.platform-explanation {
+    max-width: 800px;
+    margin: 40px auto 0;
+    text-align: center;
+}
+
+.platform-explanation p {
+    color: var(--color-text-light);
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.platform {
+    background-color: var(--color-card-bg);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg);
+    text-align: center;
+    width: 200px;
+    transition: var(--transition);
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.platform:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+}
+
+.platform.current {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: var(--glow);
+}
+
+.platform-icon {
+    margin: 0 auto var(--spacing-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-white);
+}
+
+.platform.current .platform-icon {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-highlight);
+}
+
+.platform-icon i {
+    width: 30px;
+    height: 30px;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius-sm);
+    font-size: 0.7rem;
+    font-weight: 600;
+    margin-top: var(--spacing-sm);
+}
+
+.platform.current .status-badge { 
+    background-color: var(--color-success);
+    color: var(--color-background);
+}
+
+.platform.coming-soon .status-badge { 
+    background-color: var(--color-warning);
+    color: var(--color-background);
+}
+
+.platform.in-development .status-badge { 
+    background-color: var(--color-text-light);
+    color: var(--color-background);
+}
+
+
+@media (max-width: 768px) {
+    .platforms-container {
+        gap: var(--spacing-md);
+    }
+    
+    .platform {
+        width: calc(50% - var(--spacing-md));
+    }
+}
+
+@media (max-width: 480px) {
+    .platform {
+        width: 100%;
+    }
+    
+    .platforms-container {
+        gap: var(--spacing-sm);
+    }
+}
+</style> 

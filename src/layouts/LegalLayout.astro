@@ -1,0 +1,15 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+export interface Props {
+	title: string; 
+	description: string; 
+	pageSlug: 'privacy-policy' | 'terms-of-service'; 
+}
+
+const { title, description, pageSlug } = Astro.props;
+---
+<BaseLayout title={title} description={description}>
+  <!-- Main content slot for the specific legal text -->
+  <slot />
+</BaseLayout> 
