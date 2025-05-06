@@ -1,0 +1,116 @@
+---
+import PostMockup from './PostMockup.astro';
+import { heroSchema } from '../content/config';
+import type { z } from 'astro:content';
+
+// Props this component accepts
+export type Props = z.infer<typeof heroSchema>;
+
+// Destructure props with defaults for optional values
+const { 
+  title, 
+  description, 
+  cta1Text, 
+  cta1Link,
+  cta2Text,
+  cta2Link
+} = Astro.props;
+
+// Check if we have CTAs to display
+const hasCta1 = cta1Text && cta1Link;
+const hasCta2 = cta2Text && cta2Link;
+---
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1 set:html={title} />
+      <p class="hero-description">{description}</p>
+      
+      {/* Only render CTA buttons if defined */}
+      {(hasCta1 || hasCta2) && (
+        <div class="cta-buttons">
+          {hasCta1 && <a href={cta1Link} class="btn btn-primary pulse">{cta1Text}</a>}
+          {hasCta2 && <a href={cta2Link} class="btn btn-secondary">{cta2Text}</a>}
+        </div>
+      )}
+    </div>
+
+    <div class="hero-visual">
+      <PostMockup />
+    </div>
+  </div>
+</section> 
+
+<style>
+.hero {
+    padding: var(--spacing-xxl) 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+    z-index: -1;
+    animation: pulse-bg 15s infinite;
+}
+
+@keyframes pulse-bg {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+.hero .container {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xl);
+}
+
+.hero-content {
+    flex: 1;
+}
+
+.hero-visual {
+    flex: 1;
+    position: relative;
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-text-light);
+}
+
+.cta-buttons {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+@media (max-width: 992px) {
+    .hero .container {
+        flex-direction: column;
+    }
+    
+    .hero-content {
+        text-align: center;
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .cta-buttons {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .cta-buttons {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+} 
+</style> 

@@ -1,9 +1,0 @@
-User-agent: *
-Allow: /
-
-# Disallow crawling of legal pages
-Disallow: /privacy-policy/
-Disallow: /terms-of-service/
-
-# Sitemap location
-Sitemap: https://testfeed.ai/sitemap.xml

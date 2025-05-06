@@ -1,0 +1,127 @@
+---
+// Define props for the BlogHero
+export interface Props {
+  title: string; 
+  author: string;
+  publishDate: Date; 
+  featuredImage?: string; // Optional featured image URL
+  tags?: string[];
+}
+
+const { title, author, publishDate, featuredImage, tags } = Astro.props;
+
+// Format the date
+const formattedDate = new Date(publishDate).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+
+<section class="blog-hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1>{title}</h1> 
+      <div class="meta-info">
+        <span>By {author}</span>
+        <span>&bull;</span>
+        <span>{formattedDate}</span>
+      </div>
+      {tags && tags.length > 0 && (
+        <div class="tags-container">
+          {tags.map(tag => (
+            <span class="tag-chip">{tag}</span>
+          ))}
+        </div>
+      )}
+    </div>
+    {featuredImage && (
+      <div class="hero-visual">
+        <img src={featuredImage} alt={title} loading="lazy" />
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+.blog-hero {
+  padding: var(--spacing-xl) 0;
+  background-color: #1a1a1a;
+}
+
+.blog-hero .container {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  text-align: center;
+  gap: var(--spacing-lg);
+}
+
+.hero-content h1 {
+  font-size: 3rem; 
+  margin-bottom: var(--spacing-md);
+  color: var(--color-white);
+  line-height: 1.2;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.meta-info {
+  font-size: 1rem;
+  color: var(--color-text-light);
+  display: flex;
+  gap: var(--spacing-sm);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: var(--spacing-md);
+}
+
+.tags-container {
+  margin-top: var(--spacing-md); 
+  display: flex;
+  gap: var(--spacing-sm);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.tag-chip {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--color-white);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  font-size: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.2s ease;
+}
+
+.tag-chip:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+.hero-visual {
+  width: 100%;
+  max-width: 800px; 
+  margin: 0 auto;
+}
+
+.hero-visual img {
+  width: 100%;
+  height: auto;
+  max-height: 450px;
+  object-fit: cover;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .meta-info {
+    font-size: 0.9rem;
+  }
+}
+</style>

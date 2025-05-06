@@ -1,0 +1,105 @@
+---
+import type { z } from 'astro:content';
+import { testimonialsSectionSchema } from '../content/config';
+
+// Define props type
+export type Props = z.infer<typeof testimonialsSectionSchema>;
+
+const { title, testimonials } = Astro.props;
+---
+
+<section class="testimonials">
+  <div class="container">
+    <h2 set:html={title}></h2>
+    <div class="testimonial-carousel">
+      {testimonials.map(testimonial => (
+        <div class="testimonial">
+          <p class="quote">{testimonial.quote}</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">
+              <i data-lucide="user"></i>
+            </div>
+            <div class="author-info">
+              <p class="author-name">{testimonial.name}</p>
+              <p class="author-role">{testimonial.role}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section> 
+
+<style>
+.testimonials {
+    background-color: #111111;
+}
+
+.testimonial-carousel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+}
+
+.testimonial {
+    position: relative;
+    padding: var(--spacing-lg);
+    background: var(--color-card-bg);
+    border-radius: var(--border-radius);
+    margin: 0;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: var(--transition);
+}
+
+.testimonial:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(92, 222, 244, 0.2);
+}
+
+.quote {
+    position: relative;
+    padding-left: 0;
+    color: var(--color-text-light);
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    margin-top: var(--spacing-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: var(--spacing-md);
+}
+
+.author-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: var(--spacing-md);
+    flex-shrink: 0;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-highlight);
+}
+
+.author-avatar i {
+    width: 30px;
+    height: 30px;
+}
+
+.author-name {
+    font-weight: 600;
+    margin-bottom: 0;
+    color: var(--color-white);
+}
+
+.author-role {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+    color: var(--color-text-light);
+}
+</style> 

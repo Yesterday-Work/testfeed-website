@@ -1,0 +1,81 @@
+---
+import { howItWorksSectionSchema } from '../content/config';
+import type { z } from 'astro:content';
+
+// Define props type
+export type Props = z.infer<typeof howItWorksSectionSchema>;
+
+const { title, steps } = Astro.props;
+---
+
+<section id="how-it-works" class="how-it-works">
+  <div class="container">
+    <h2 set:html={title}></h2>
+    <div class="steps">
+      {steps.map((step, index) => (
+        <div class="step">
+          <div class="step-number">{index + 1}</div>
+          <div class="step-content">
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section> 
+
+<style>
+.how-it-works {
+    background-color: #111111;
+}
+
+.steps {
+    margin-top: var(--spacing-xl);
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.step {
+    display: flex;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    position: relative;
+}
+
+.step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: 60px;
+    bottom: -60px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--color-primary), transparent);
+}
+
+.step-number {
+    background-color: var(--color-card-bg);
+    color: var(--color-primary);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    border: 2px solid var(--color-primary);
+    box-shadow: var(--glow);
+    z-index: 2;
+}
+
+.step-content {
+    flex: 1;
+}
+
+.step-content h3 {
+    color: var(--color-white);
+} 
+</style> 

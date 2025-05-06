@@ -1,0 +1,107 @@
+---
+const currentYear = new Date().getFullYear();
+---
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="logo"><span class="testfeed-font">testfeed</span></div>
+      <div class="footer-legal">
+        <a href="/privacy-policy">Privacy policy</a>
+        <span class="divider">|</span>
+        <a href="/terms-of-service">Terms of service</a>
+      </div>
+      <div class="copyright">
+        <p>&copy; {currentYear} testfeed. All rights reserved.</p>
+        <p class="made-by">Made by <a href="https://yesterday.work" target="_blank">yesterday</a></p>
+      </div>
+    </div>
+  </div>
+</footer> 
+
+<style>
+footer {
+    background-color: #0A0A0A;
+    padding: var(--spacing-lg) 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.footer-legal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-md);
+    font-family: 'Space Mono', monospace;
+    text-align: center;
+    width: 100%;
+}
+
+.footer-legal a {
+    color: var(--color-text-light);
+}
+
+.footer-legal a:hover {
+    color: var(--color-primary);
+}
+
+.divider {
+    color: rgba(255, 255, 255, 0.2);
+    display: inline-block;
+}
+
+.copyright {
+    text-align: center;
+}
+
+.copyright p {
+    color: rgba(255, 255, 255, 0.3);
+    margin-bottom: 0;
+    font-size: 0.9rem;
+}
+
+.made-by {
+    margin-top: var(--spacing-sm);
+    font-size: 0.8rem;
+}
+
+.made-by a {
+    color: rgba(255, 255, 255, 0.5);
+    transition: var(--transition);
+}
+
+.made-by a:hover {
+    color: var(--color-white);
+}
+
+.footer-legal .active {
+    color: var(--color-white);
+    position: relative;
+}
+
+.footer-legal .active:after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--color-white);
+}
+
+@media (max-width: 480px) {
+    .footer-legal {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .divider {
+        display: none;
+    }
+} 
+</style>

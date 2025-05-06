@@ -1,0 +1,18 @@
+# Allow all web crawlers
+User-agent: *
+Allow: /
+
+# Allow AI/LLM crawlers
+User-agent: GPTBot
+Allow: /
+User-agent: Anthropic-AI
+Allow: /
+User-agent: Claude-Web
+Allow: /
+User-agent: Cohere-AI
+Allow: /
+User-agent: CCBot
+Allow: /
+
+# Sitemap location (updated for Astro-generated sitemap)
+Sitemap: https://testfeed.ai/sitemap-index.xml
