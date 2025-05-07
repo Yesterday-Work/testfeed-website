@@ -16,15 +16,15 @@
 .prose h2 {
   font-size: 1.8rem;
   text-align: left;
-  margin-top: var(--spacing-lg);
-  margin-bottom: var(--spacing-md);
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-sm);
   color: var(--color-white);
 }
 
 .prose h3 {
   font-size: 1.3rem;
-  margin-top: var(--spacing-md);
-  margin-bottom: var(--spacing-sm);
+  margin-top: var(--spacing-lg);
+  margin-bottom: var(--spacing-xs);
   color: var(--color-white);
 }
 
@@ -34,25 +34,29 @@
   color: var(--color-text-light);
 }
 
-.prose ul {
+.prose :global(ul),
+.prose :global(ol) {
+  margin-bottom: 1.5rem;
+  margin-left: 1.5rem;
+  padding-left: 1rem;
+  list-style-position: outside;
+}
+
+.prose :global(ul) {
   list-style-type: disc;
-  margin-bottom: var(--spacing-md);
-  padding-left: var(--spacing-lg);
 }
 
-.prose ol {
+.prose :global(ol) {
   list-style-type: decimal;
-  margin-bottom: var(--spacing-md);
-  padding-left: var(--spacing-lg);
 }
 
-.prose ul::marker, 
-.prose ol::marker {
+.prose :global(ul::marker),
+.prose :global(ol::marker) {
   color: var(--color-white);
 }
 
-.prose li {
-  margin-bottom: var(--spacing-sm);
+.prose :global(li) {
+  margin-bottom: 0.5rem;
   color: var(--color-text-light);
   line-height: 1.6;
 }
