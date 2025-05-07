@@ -1,0 +1,163 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HomeHero from '../components/HomeHero.astro'; 
+import FeaturesSection from '../components/FeaturesSection.astro';
+import FinalCTASection from '../components/FinalCTASection.astro';
+
+// Fetch the content from main.md file for the CTA section
+const homepageEntries = await getCollection('homepage');
+const homepageEntry = homepageEntries.find(entry => entry.id === 'main.md') || homepageEntries[0];
+
+// Get features collection
+const featuresEntries = await getCollection('features');
+---
+
+<BaseLayout 
+  title="Features - TestFeed" 
+  description="Explore the powerful features of TestFeed"
+>
+  <div class="py-12 md:py-16 lg:py-20">
+    <div class="container">
+      <div class="text-center mb-16">
+        <h1>All <span class="highlight">Features</span></h1>
+        <p class="feature-description">Discover the powerful tools and capabilities that TestFeed offers to enhance your productivity.</p>
+      </div>
+      
+      <div class="features-grid">
+        {featuresEntries.map((feature) => (
+          <a href={`/features/${feature.slug}`} class="feature-card animate-on-scroll">
+            {feature.data.icon && (
+              <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  {feature.data.icon === 'download' && <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>}
+                  {feature.data.icon === 'type' && <path d="M4 7V4h16v3M9 20h6M12 4v16"/>}
+                  {/* Add more icon paths as needed */}
+                </svg>
+              </div>
+            )}
+            <h3>{feature.data.title}</h3>
+            <p>{feature.data.description}</p>
+            <span class="learn-more">Learn more →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  {homepageEntry.data.finalCtaSection && (
+    <FinalCTASection {...homepageEntry.data.finalCtaSection} />
+  )}
+</BaseLayout>
+
+<style>
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+  }
+
+  .feature-description {
+    font-size: 1.25rem;
+    color: var(--color-text-light);
+    max-width: 48rem;
+    margin: 0 auto 2rem auto;
+    text-align: center;
+  }
+  
+  .feature-card {
+    background-color: var(--color-card-bg);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    height: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg), var(--glow);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .feature-icon {
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-highlight);
+  }
+  
+  .feature-icon svg {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .feature-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-white);
+  }
+  
+  .feature-card p {
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .learn-more {
+    color: var(--color-primary);
+    font-weight: 600;
+    transition: var(--transition);
+  }
+  
+  .feature-card:hover .learn-more {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    .features-grid {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const animateElements = document.querySelectorAll('.animate-on-scroll');
+    
+    // Function to check if element is in viewport
+    function isInViewport(element: HTMLElement) {
+      const rect = element.getBoundingClientRect();
+      return (
+        rect.top <= window.innerHeight - 100
+      );
+    }
+    
+    // Function to handle scroll animation
+    function handleScroll() {
+      animateElements.forEach((element, index) => {
+        if (isInViewport(element as HTMLElement)) {
+          // Add delay based on index for staggered animation
+          setTimeout(() => {
+            element.classList.add('show');
+          }, index * 100);
+        }
+      });
+    }
+    
+    // Run once on load
+    handleScroll();
+    
+    // Add scroll listener
+    window.addEventListener('scroll', handleScroll);
+  });
+</script> 

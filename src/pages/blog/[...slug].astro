@@ -1,0 +1,223 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+
+export async function getStaticPaths() {
+    const posts = await getCollection('blog', ({ data }) => {
+        return import.meta.env.PROD ? !data.draft : true;
+    });
+    return posts.map((post) => ({
+        params: { slug: post.slug },
+        props: post,
+    }));
+}
+type Props = CollectionEntry<'blog'>;
+
+const post = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout title={post.data.title}>
+    <main class="py-12 md:py-16 lg:py-20">
+        <div class="container">
+            <article class="blog-post">
+                <div class="blog-post-header">
+                    {post.data.heroImage && (
+                        <div class="blog-post-image-container">
+                            <img
+                                src={post.data.heroImage}
+                                alt={post.data.title}
+                                class="blog-post-image"
+                            />
+                        </div>
+                    )}
+                    <h1 class="blog-post-title">{post.data.title}</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-post-author">By {post.data.author}</span>
+                        <span class="blog-post-separator">•</span>
+                        <FormattedDate date={post.data.pubDate} />
+                        {post.data.minutesRead && (
+                            <>
+                                <span class="blog-post-separator">•</span>
+                                <span class="blog-post-read-time">{post.data.minutesRead} min read</span>
+                            </>
+                        )}
+                    </div>
+                    {post.data.tags.length > 0 && (
+                        <div class="blog-post-tags">
+                            {post.data.tags.map((tag) => (
+                                <span class="blog-post-tag">{tag}</span>
+                            ))}
+                        </div>
+                    )}
+                </div>
+                <div class="blog-post-content">
+                    <Content />
+                </div>
+                
+                <div class="blog-post-nav">
+                    <a href="/blog" class="blog-post-back-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                        Back to Blog
+                    </a>
+                </div>
+            </article>
+        </div>
+    </main>
+</Layout>
+
+<style>
+    .blog-post {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .blog-post-header {
+        margin-bottom: var(--spacing-xl);
+    }
+    
+    .blog-post-image-container {
+        margin-bottom: var(--spacing-lg);
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+    }
+    
+    .blog-post-image {
+        width: 100%;
+        max-height: 500px;
+        object-fit: cover;
+    }
+    
+    .blog-post-title {
+        margin-bottom: var(--spacing-md);
+        color: var(--color-white);
+    }
+    
+    .blog-post-meta {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+        font-size: 1rem;
+        color: var(--color-text-light);
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .blog-post-separator {
+        color: var(--color-text-light);
+    }
+    
+    .blog-post-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--spacing-xs);
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .blog-post-tag {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: var(--color-text-light);
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+    }
+    
+    .blog-post-content {
+        line-height: 1.8;
+    }
+    
+    .blog-post-content :global(h2) {
+        margin-top: var(--spacing-xl);
+        margin-bottom: var(--spacing-md);
+        font-size: 2rem;
+        color: var(--color-white);
+    }
+    
+    .blog-post-content :global(h3) {
+        margin-top: var(--spacing-lg);
+        margin-bottom: var(--spacing-sm);
+        font-size: 1.5rem;
+        color: var(--color-white);
+    }
+    
+    .blog-post-content :global(p) {
+        margin-bottom: var(--spacing-md);
+        color: var(--color-text-light);
+    }
+    
+    .blog-post-content :global(ul),
+    .blog-post-content :global(ol) {
+        margin-bottom: var(--spacing-md);
+        padding-left: var(--spacing-lg);
+        color: var(--color-text-light);
+    }
+    
+    .blog-post-content :global(li) {
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .blog-post-content :global(pre) {
+        background-color: var(--color-card-bg);
+        padding: var(--spacing-md);
+        border-radius: var(--border-radius);
+        overflow-x: auto;
+        margin-bottom: var(--spacing-md);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .blog-post-content :global(code) {
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 2px 6px;
+        border-radius: var(--border-radius-sm);
+        font-family: var(--font-heading);
+        font-size: 0.9em;
+    }
+    
+    .blog-post-content :global(blockquote) {
+        border-left: 4px solid var(--color-primary);
+        padding-left: var(--spacing-md);
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: var(--spacing-md);
+        font-style: italic;
+        color: var(--color-text-light);
+    }
+    
+    .blog-post-content :global(a) {
+        color: var(--color-primary);
+        transition: var(--transition);
+    }
+    
+    .blog-post-content :global(a:hover) {
+        color: var(--color-primary-dark);
+    }
+    
+    .blog-post-nav {
+        margin-top: var(--spacing-xl);
+        padding-top: var(--spacing-lg);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .blog-post-back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+        color: var(--color-primary);
+        font-family: var(--font-heading);
+        font-weight: 600;
+        transition: var(--transition);
+    }
+    
+    .blog-post-back-link:hover {
+        color: var(--color-primary-dark);
+    }
+    
+    @media (max-width: 768px) {
+        .blog-post-title {
+            font-size: 2.2rem;
+        }
+    }
+</style> 

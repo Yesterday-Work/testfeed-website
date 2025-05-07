@@ -1,0 +1,65 @@
+---
+import '../styles/styles.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+    title: string;
+    description?: string;
+}
+
+const { 
+    title = 'TestFeed | AI Audience Simulation', 
+    description = 'AI-powered audience simulation tool that predicts how your content will perform before publishing'
+} = Astro.props;
+
+// Get the site URL for absolute paths
+const siteUrl = Astro.url.origin;
+
+// Set up default Open Graph images
+let ogImage = new URL('/assets/og-image.jpg', siteUrl).href;
+let twitterImage = new URL('/assets/twitter-image.jpg', siteUrl).href;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        
+        <link rel="canonical" href={Astro.url.href} />
+        
+        <!-- Open Graph Tags -->
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={Astro.url.href} />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="TestFeed" />
+        
+        <!-- Twitter Card Tags -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={twitterImage} />
+        <meta name="twitter:site" content="@testfeed" />
+        
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Tiny5&display=swap" rel="stylesheet">
+        
+        <!-- Favicons -->
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="manifest" href="/site.webmanifest">
+    </head>
+    <body>
+        <Header />
+        <slot />
+        <Footer />
+    </body>
+</html> 

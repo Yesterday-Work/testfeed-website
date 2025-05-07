@@ -207,6 +207,27 @@ export const blogSchema = z.object({
 });
 
 /**
+ * FEATURE CONTENT SCHEMA
+ * ------------------
+ * This defines the structure for individual features.
+ */
+export const featureSchema = z.object({
+  // SEO fields
+  title: z.string().describe("Feature name and browser tab title"),
+  description: z.string().describe("Short description of the feature used for cards and SEO"),
+  
+  // Feature-specific metadata
+  icon: z.string().optional().describe("Lucide icon name (e.g., 'download', 'type')"),
+  featureImage: z.string().optional().describe("Path to feature image relative to /public"),
+  
+  // Schema.org markup for rich results
+  schemaMarkup: z.object({
+    type: z.string().default("WebPage").describe("Schema.org type for feature pages"),
+    properties: z.record(z.any()).optional().describe("Additional schema properties as key-value pairs")
+  }).optional().describe("Structured data for rich search results"),
+});
+
+/**
  * CONTENT COLLECTIONS
  * ------------------
  * These define the main content types in the site.
@@ -222,7 +243,17 @@ const homepageCollection = defineCollection({
 // Blog collection for articles and blog posts
 const blogCollection = defineCollection({
   type: 'content',
-  schema: blogSchema
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.date(),
+    updatedDate: z.date().optional(),
+    heroImage: z.string().optional(),
+    tags: z.array(z.string()).default([]),
+    draft: z.boolean().default(false),
+    author: z.string().default('Anonymous'),
+    minutesRead: z.number().optional()
+  }),
 });
 
 // Legal pages collection (for privacy policy, terms, etc.)
@@ -236,9 +267,16 @@ const legalCollection = defineCollection({
   }),
 });
 
+// Features collection
+const featuresCollection = defineCollection({
+  type: 'content',
+  schema: featureSchema
+});
+
 // Export collections
 export const collections = {
   'homepage': homepageCollection,
   'blog': blogCollection,
   'legal': legalCollection,
+  'features': featuresCollection
 }; 
