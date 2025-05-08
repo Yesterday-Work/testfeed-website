@@ -5,8 +5,8 @@ export interface Props {
   post: {
     slug: string;
     data: {
-      pageTitle: string;
-      articleTitle?: string;
+      title: string;
+      articleTitle: string;
       excerpt: string;
       publishDate: Date;
       author: string;
@@ -25,10 +25,8 @@ const formattedDate = new Date(post.data.publishDate).toLocaleDateString('en-US'
   day: 'numeric'
 });
 
-// Use articleTitle if available, otherwise fallback to pageTitle (without suffix)
-const displayTitle = post.data.articleTitle 
-  ? post.data.articleTitle
-  : post.data.pageTitle.split(' | ')[0];
+// Use articleTitle for the card display
+const displayTitle = post.data.articleTitle;
 ---
 
 <div class="blog-card">
@@ -36,7 +34,7 @@ const displayTitle = post.data.articleTitle
     {post.data.featuredImage ? (
       <img 
         src={post.data.featuredImage} 
-        alt={post.data.pageTitle} 
+        alt={post.data.title}
         loading="lazy" 
       />
     ) : (

@@ -183,16 +183,19 @@ export const contentSchema = z.object({
  */
 export const blogSchema = z.object({
   // SEO fields - required for blog posts
-  pageTitle: z.string().describe("Browser tab title - should include primary keyword"),
-  pageDescription: z.string().describe("Meta description for SEO - should be 150-160 characters with primary keyword"),
+  title: z.string().describe("Browser tab title - should include primary keyword"),
+  description: z.string().describe("Meta description for SEO - should be 150-160 characters with primary keyword"),
   
   // Blog-specific metadata
   articleTitle: z.string().describe("The main H1 title displayed on the blog post page"),
   publishDate: z.date().describe("Publication date for the blog post"),
+  updatedDate: z.date().optional().describe("Date the post was last updated"),
   author: z.string().describe("Author name"),
   featuredImage: z.string().optional().describe("Path to featured image relative to /public"),
   excerpt: z.string().describe("Short excerpt/summary used for previews and SEO"),
   tags: z.array(z.string()).optional().describe("Categories or tags for the blog post"),
+  minutesRead: z.number().optional().describe("Estimated time to read the article in minutes"),
+  draft: z.boolean().default(false).describe("Set to true to hide post from production builds"),
   
   // Schema.org markup for rich results
   schemaMarkup: z.object({
@@ -204,6 +207,27 @@ export const blogSchema = z.object({
   hero: heroSchema.optional().describe("Hero section at the top of the page"),
   problemSection: problemSectionSchema.optional().describe("Problem statement section with cards"),
   finalCtaSection: finalCtaSectionSchema.optional().describe("Final call-to-action section"),
+});
+
+/**
+ * FEATURE CONTENT SCHEMA
+ * ------------------
+ * This defines the structure for individual features.
+ */
+export const featureSchema = z.object({
+  // SEO fields
+  title: z.string().describe("Feature name and browser tab title"),
+  description: z.string().describe("Short description of the feature used for cards and SEO"),
+  
+  // Feature-specific metadata
+  icon: z.string().optional().describe("Lucide icon name (e.g., 'download', 'type')"),
+  featureImage: z.string().optional().describe("Path to feature image relative to /public"),
+  
+  // Schema.org markup for rich results
+  schemaMarkup: z.object({
+    type: z.string().default("WebPage").describe("Schema.org type for feature pages"),
+    properties: z.record(z.any()).optional().describe("Additional schema properties as key-value pairs")
+  }).optional().describe("Structured data for rich search results"),
 });
 
 /**
@@ -236,9 +260,16 @@ const legalCollection = defineCollection({
   }),
 });
 
+// Features collection
+const featuresCollection = defineCollection({
+  type: 'content',
+  schema: featureSchema
+});
+
 // Export collections
 export const collections = {
   'homepage': homepageCollection,
   'blog': blogCollection,
   'legal': legalCollection,
+  'features': featuresCollection
 }; 
