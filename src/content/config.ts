@@ -183,16 +183,19 @@ export const contentSchema = z.object({
  */
 export const blogSchema = z.object({
   // SEO fields - required for blog posts
-  pageTitle: z.string().describe("Browser tab title - should include primary keyword"),
-  pageDescription: z.string().describe("Meta description for SEO - should be 150-160 characters with primary keyword"),
+  title: z.string().describe("Browser tab title - should include primary keyword"),
+  description: z.string().describe("Meta description for SEO - should be 150-160 characters with primary keyword"),
   
   // Blog-specific metadata
   articleTitle: z.string().describe("The main H1 title displayed on the blog post page"),
   publishDate: z.date().describe("Publication date for the blog post"),
+  updatedDate: z.date().optional().describe("Date the post was last updated"),
   author: z.string().describe("Author name"),
   featuredImage: z.string().optional().describe("Path to featured image relative to /public"),
   excerpt: z.string().describe("Short excerpt/summary used for previews and SEO"),
   tags: z.array(z.string()).optional().describe("Categories or tags for the blog post"),
+  minutesRead: z.number().optional().describe("Estimated time to read the article in minutes"),
+  draft: z.boolean().default(false).describe("Set to true to hide post from production builds"),
   
   // Schema.org markup for rich results
   schemaMarkup: z.object({
@@ -243,17 +246,7 @@ const homepageCollection = defineCollection({
 // Blog collection for articles and blog posts
 const blogCollection = defineCollection({
   type: 'content',
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    pubDate: z.date(),
-    updatedDate: z.date().optional(),
-    heroImage: z.string().optional(),
-    tags: z.array(z.string()).default([]),
-    draft: z.boolean().default(false),
-    author: z.string().default('Anonymous'),
-    minutesRead: z.number().optional()
-  }),
+  schema: blogSchema
 });
 
 // Legal pages collection (for privacy policy, terms, etc.)

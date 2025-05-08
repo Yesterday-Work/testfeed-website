@@ -2,12 +2,13 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
+import BlogPostPreview from '../../components/BlogPostPreview.astro';
 
 const posts = await getCollection('blog', ({ data }) => {
-    return import.meta.env.PROD ? !data.draft : true;
+    return true; // Temporarily fetch all posts
 });
 
-posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+posts.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 
 // SEO metadata
 const title = "Blog | TestFeed | AI Audience Simulation";
@@ -25,41 +26,7 @@ const description = "Explore the latest insights on content performance, audienc
             <div class="blog-grid">
                 {
                     posts.map((post) => (
-                        <article class="blog-card animate-on-scroll">
-                            <a href={`/blog/${post.slug}`} class="blog-card-link">
-                                {post.data.heroImage && (
-                                    <div class="blog-image-container">
-                                        <img
-                                            src={post.data.heroImage}
-                                            alt={post.data.title}
-                                            class="blog-image"
-                                        />
-                                    </div>
-                                )}
-                                <div class="blog-content">
-                                    <h2 class="blog-title">{post.data.title}</h2>
-                                    <p class="blog-excerpt">{post.data.description}</p>
-                                    <div class="blog-meta">
-                                        <span class="blog-author">{post.data.author}</span>
-                                        <span class="blog-separator">•</span>
-                                        <FormattedDate date={post.data.pubDate} />
-                                        {post.data.minutesRead && (
-                                            <>
-                                                <span class="blog-separator">•</span>
-                                                <span class="blog-read-time">{post.data.minutesRead} min read</span>
-                                            </>
-                                        )}
-                                    </div>
-                                    {post.data.tags.length > 0 && (
-                                        <div class="blog-tags">
-                                            {post.data.tags.map((tag) => (
-                                                <span class="blog-tag">{tag}</span>
-                                            ))}
-                                        </div>
-                                    )}
-                                </div>
-                            </a>
-                        </article>
+                        <BlogPostPreview post={post} />
                     ))
                 }
             </div>
@@ -70,6 +37,7 @@ const description = "Explore the latest insights on content performance, audienc
 <style>
   .blog-header {
     text-align: center;
+    padding-top: var(--spacing-lg);
     margin-bottom: var(--spacing-xl);
     max-width: 800px;
     margin-left: auto;
@@ -93,89 +61,6 @@ const description = "Explore the latest insights on content performance, audienc
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: var(--spacing-lg);
-  }
-  
-  .blog-card {
-    background-color: var(--color-card-bg);
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    transition: var(--transition);
-    height: 100%;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-  }
-  
-  .blog-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg), var(--glow);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-  }
-  
-  .blog-card-link {
-    display: block;
-    height: 100%;
-    color: var(--color-text);
-    text-decoration: none;
-  }
-  
-  .blog-image-container {
-    height: 200px;
-    overflow: hidden;
-  }
-  
-  .blog-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-  }
-  
-  .blog-card:hover .blog-image {
-    transform: scale(1.05);
-  }
-  
-  .blog-content {
-    padding: var(--spacing-lg);
-  }
-  
-  .blog-title {
-    font-size: 1.5rem;
-    margin-bottom: var(--spacing-sm);
-    font-weight: 700;
-    color: var(--color-white);
-  }
-  
-  .blog-excerpt {
-    margin-bottom: var(--spacing-sm);
-    color: var(--color-text-light);
-    font-size: 0.95rem;
-  }
-  
-  .blog-meta {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-    font-size: 0.85rem;
-    color: var(--color-text-light);
-    margin-bottom: var(--spacing-sm);
-  }
-  
-  .blog-separator {
-    color: var(--color-text-light);
-  }
-  
-  .blog-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-xs);
-    margin-top: var(--spacing-sm);
-  }
-  
-  .blog-tag {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: var(--color-text-light);
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 0.75rem;
   }
   
   @media (max-width: 768px) {
