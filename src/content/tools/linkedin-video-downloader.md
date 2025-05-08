@@ -2,7 +2,7 @@
 title: LinkedIn Video Downloader
 description: Easily download videos from LinkedIn posts with a single click. Save training videos, product demos, and important content for offline viewing.
 icon: download
-featureImage: /features/linkedin-video-downloader.png
+toolImage: ""
 schemaMarkup:
   type: WebPage
   properties:

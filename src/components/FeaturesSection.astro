@@ -9,7 +9,7 @@ export type Props = z.infer<typeof featuresSectionSchema>;
 const { title, features } = Astro.props;
 ---
 
-<section id="features" class="features">
+<section id="features-section" class="features">
   <div class="container">
     <h2 set:html={title}></h2>
 

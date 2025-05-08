@@ -2,7 +2,7 @@
 title: Headline Generator
 description: Create attention-grabbing headlines for your social media posts, articles, and marketing content with AI-powered suggestions tailored to your audience.
 icon: type
-featureImage: /features/headline-generator.png
+toolImage: ""
 schemaMarkup:
   type: WebPage
   properties:

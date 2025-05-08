@@ -210,22 +210,22 @@ export const blogSchema = z.object({
 });
 
 /**
- * FEATURE CONTENT SCHEMA
+ * TOOL CONTENT SCHEMA
  * ------------------
- * This defines the structure for individual features.
+ * This defines the structure for individual tools.
  */
-export const featureSchema = z.object({
+export const toolSchema = z.object({
   // SEO fields
-  title: z.string().describe("Feature name and browser tab title"),
-  description: z.string().describe("Short description of the feature used for cards and SEO"),
+  title: z.string().describe("Tool name and browser tab title"),
+  description: z.string().describe("Short description of the tool used for cards and SEO"),
   
-  // Feature-specific metadata
+  // Tool-specific metadata
   icon: z.string().optional().describe("Lucide icon name (e.g., 'download', 'type')"),
-  featureImage: z.string().optional().describe("Path to feature image relative to /public"),
+  toolImage: z.string().optional().describe("Path to tool image relative to /public"),
   
   // Schema.org markup for rich results
   schemaMarkup: z.object({
-    type: z.string().default("WebPage").describe("Schema.org type for feature pages"),
+    type: z.string().default("WebPage").describe("Schema.org type for tool pages"),
     properties: z.record(z.any()).optional().describe("Additional schema properties as key-value pairs")
   }).optional().describe("Structured data for rich search results"),
 });
@@ -260,10 +260,10 @@ const legalCollection = defineCollection({
   }),
 });
 
-// Features collection
-const featuresCollection = defineCollection({
+// Tools collection
+const toolsCollection = defineCollection({
   type: 'content',
-  schema: featureSchema
+  schema: toolSchema
 });
 
 // Export collections
@@ -271,5 +271,5 @@ export const collections = {
   'homepage': homepageCollection,
   'blog': blogCollection,
   'legal': legalCollection,
-  'features': featuresCollection
+  'tools': toolsCollection
 }; 
