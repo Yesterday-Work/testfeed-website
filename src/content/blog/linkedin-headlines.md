@@ -1,7 +1,7 @@
 ---
 title: "The Ultimate Guide to LinkedIn Headline Examples That Get You Noticed in 2025"
 description: "Learn how to craft compelling LinkedIn headlines that attract recruiters and opportunities with proven formulas and examples."
-pubDate: "2023-05-15"
+pubDate: 2023-05-15
 heroImage: ""
 tags: ["linkedin", "career", "personal branding", "job search"]
 author: "Millie"
