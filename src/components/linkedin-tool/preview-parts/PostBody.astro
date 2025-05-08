@@ -1,0 +1,85 @@
+---
+export interface Props {
+  postText: string;
+  postImageUrl?: string;
+  hasReadMore?: boolean;
+}
+
+const { 
+  postText, 
+  postImageUrl, 
+  hasReadMore = false  // Keeping the prop but we won't actually use it
+} = Astro.props;
+
+// Process the post text to properly handle line breaks
+// LinkedIn treats consecutive \n as a single break, not as multiple paragraph breaks
+const formattedText = postText
+  .replace(/\n\s*\n/g, '\n\n') // Normalize multiple line breaks to exactly two
+  .split('\n\n')               // Split by paragraph (double line breaks)
+  .map((paragraph) => paragraph.trim());
+---
+
+<div class="post-body">
+  <div class="post-text">
+    {formattedText.map((paragraph) => (
+      <p>{paragraph}</p>
+    ))}
+  </div>
+  
+  {postImageUrl && (
+    <div class="post-media">
+      <img src={postImageUrl} alt="Post image" />
+    </div>
+  )}
+</div>
+
+<style>
+  .post-body {
+    width: 100%;
+    margin-bottom: 8px;
+    padding: 0;
+    position: relative;
+    top: -2px;
+    left: -1px;
+  }
+
+  .post-text {
+    margin-bottom: 8px;
+    width: 100%;
+    padding: 0;
+  }
+
+  .post-text p {
+    margin: 0 0 16px 0;
+    padding: 0;
+    font-size: 14px;
+    line-height: 1.4;
+    color: rgba(0, 0, 0, 0.9);
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    text-align: left;
+    width: 100%;
+    text-indent: 0;
+    display: block;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    padding-right: 8px;
+  }
+
+  .post-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .post-media {
+    width: 100%;
+    margin-top: 12px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .post-media img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+  }
+</style> 

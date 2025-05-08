@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostPreview from '../components/linkedin-tool/PostPreview.astro';
+
+// TODO: Add SEO meta tags as per the project brief (keywords, description)
+const pageTitle = "LinkedIn Post Preview Tool";
+const pageDescription = "Preview LinkedIn posts with our easy-to-use tool.";
+
+// Default post data
+const postData = {
+  profileName: "Millie Marconi",
+  profileHeadline: "Founder at TestFeed | Helping creators optimize LinkedIn content",
+  postTime: "1d",
+  postText: "Building in public backfired on me. I committed to a product release date without complete certainty we'd hit it.\n\nNow I'm living with the consequences - feeling like I've disappointed our waitlist and constantly answering \"when will it be ready?\" questions.\n\nThis is a painful lesson for my future founder self about under-promising and over-delivering.\n\nIn the wise words of Eminem, \"you only get one shot\" (I think that's how it goes - my lyric recall is shocking).\n\nIt's just another reminder that we're all on our own journey.\n\nThe pressure to announce dates when building publicly is intense. But missing them erodes trust quickly.\n \nI'd rather surprise people with an early launch than explain another delay.\n\nWhat's the biggest \"building in public\" mistake you've made?",
+  profileImageUrl: "",
+  likeCount: 87,
+  commentCount: 24,
+  repostCount: 12,
+  showFirstLiker: true,
+  firstLikerName: "Jack Bartlett"
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <div class="preview-container">
+    <PostPreview 
+      profileName={postData.profileName}
+      profileHeadline={postData.profileHeadline}
+      postTime={postData.postTime}
+      postText={postData.postText}
+      profileImageUrl={postData.profileImageUrl}
+      likeCount={postData.likeCount}
+      commentCount={postData.commentCount}
+      repostCount={postData.repostCount}
+      showFirstLiker={postData.showFirstLiker}
+      firstLikerName={postData.firstLikerName}
+    />
+  </div>
+</BaseLayout>
+
+<style>
+  .preview-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 2rem 1rem;
+  }
+</style> 

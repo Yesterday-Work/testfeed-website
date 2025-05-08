@@ -1,0 +1,154 @@
+---
+export interface Props {
+  likeCount?: number;
+  commentCount?: number;
+  repostCount?: number;
+  showFirstLiker?: boolean;
+  firstLikerName?: string;
+}
+
+const {
+  likeCount = 43,
+  commentCount = 14,
+  repostCount = 1,
+  showFirstLiker = true,
+  firstLikerName = "You"
+} = Astro.props;
+
+const displayLikeText = () => {
+  if (showFirstLiker && likeCount > 0) {
+    const othersText = likeCount > 1 ? `and ${likeCount - 1} others` : '';
+    return `${firstLikerName} ${othersText}`.trim();
+  }
+  
+  return likeCount > 0 ? `${likeCount}` : '';
+};
+
+const displayCommentText = () => {
+  return commentCount > 0 ? `${commentCount} comments` : '';
+};
+
+const displayRepostText = () => {
+  return repostCount > 0 ? `${repostCount} repost` : '';
+};
+
+const hasAnyEngagement = likeCount > 0 || commentCount > 0 || repostCount > 0;
+---
+
+{hasAnyEngagement && (
+  <div class="post-stats">
+    <div class="reactions-section">
+      <div class="reactions-icons">
+        <span class="reaction-icon like-icon">
+          <span class="like-icon-fallback">👍</span>
+        </span>
+        <span class="reaction-icon insightful-icon">
+          <span class="insightful-icon-fallback">💡</span>
+        </span>
+      </div>
+      <span class="reactions-text">{displayLikeText()}</span>
+    </div>
+    
+    <div class="comments-reposts">
+      {commentCount > 0 && (
+        <span class="comment-count">{displayCommentText()}</span>
+      )}
+      
+      {repostCount > 0 && commentCount > 0 && (
+        <span class="separator">•</span>
+      )}
+      
+      {repostCount > 0 && (
+        <span class="repost-count">{displayRepostText()}</span>
+      )}
+    </div>
+  </div>
+)}
+
+<style>
+  .post-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0;
+    margin: 4px 0 0;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 12px;
+    border-bottom: thin solid rgba(0, 0, 0, 0.08);
+  }
+  
+  .reactions-section {
+    display: flex;
+    align-items: center;
+  }
+  
+  .reactions-icons {
+    display: flex;
+    margin-right: 4px;
+  }
+  
+  .reaction-icon {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    margin-right: -2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+
+  .reaction-icon:nth-child(2) {
+    z-index: 0;
+  }
+  
+  .like-icon-fallback {
+    background-color: #0a66c2;
+    color: white;
+    font-size: 10px;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .insightful-icon-fallback {
+    background-color: #7fc15e;
+    color: white;
+    font-size: 10px;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: -5px;
+  }
+  
+  .reactions-text {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+  
+  .comments-reposts {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+  
+  .comment-count, .repost-count {
+    cursor: pointer;
+  }
+  
+  .comment-count:hover, .repost-count:hover {
+    color: #0a66c2;
+    text-decoration: underline;
+  }
+  
+  .separator {
+    margin: 0 4px;
+  }
+</style> 

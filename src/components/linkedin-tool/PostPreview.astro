@@ -1,0 +1,76 @@
+---
+// Import the component parts
+import PostHeader from './preview-parts/PostHeader.astro';
+import PostBody from './preview-parts/PostBody.astro';
+import PostStats from './preview-parts/PostStats.astro';
+import PostActions from './preview-parts/PostActions.astro';
+
+// Props for the preview (will be dynamic later)
+export interface Props {
+  profileName?: string;
+  profileHeadline?: string;
+  postTime?: string;
+  postText?: string;
+  profileImageUrl?: string;
+  postImageUrl?: string;
+  // Add more props as needed for reactions, comments, etc.
+  likeCount?: number;
+  commentCount?: number;
+  repostCount?: number;
+  showFirstLiker?: boolean;
+  firstLikerName?: string;
+}
+
+const {
+  profileName = "Millie Marconi", 
+  profileHeadline = "Founder at TestFeed | Helping creators optimize LinkedIn content",
+  postTime = "1d", 
+  postText = "Building in public backfired on me. I committed to a product release date without complete certainty we'd hit it.\n\nNow I'm living with the consequences - feeling like I've disappointed our waitlist and constantly answering \"when will it be ready?\" questions.\n\nThis is a painful lesson for my future founder self about under-promising and over-delivering.\n\nIn the wise words of Eminem, \"you only get one shot\" (I think that's how it goes - my lyric recall is shocking).\n\nIt's just another reminder that we're all on our own journey.\n\nThe pressure to announce dates when building publicly is intense. But missing them erodes trust quickly.\n \nI'd rather surprise people with an early launch than explain another delay.\n\nWhat's the biggest \"building in public\" mistake you've made?",
+  profileImageUrl = "",
+  postImageUrl = "", 
+  likeCount = 87,
+  commentCount = 24,
+  repostCount = 12,
+  showFirstLiker = true,
+  firstLikerName = "Jack Bartlett"
+} = Astro.props;
+---
+
+<div class="linkedin-post-preview">
+  <PostHeader 
+    profileName={profileName} 
+    profileHeadline={profileHeadline} 
+    postTime={postTime} 
+    profileImageUrl={profileImageUrl} 
+  />
+  <PostBody 
+    postText={postText} 
+    postImageUrl={postImageUrl}
+  />
+  <PostStats 
+    likeCount={likeCount}
+    commentCount={commentCount}
+    repostCount={repostCount}
+    showFirstLiker={showFirstLiker}
+    firstLikerName={firstLikerName}
+  />
+  <PostActions />
+</div>
+
+<style>
+  .linkedin-post-preview {
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+    max-width: 552px;
+    margin: 20px auto;
+    padding: 12px 16px 8px 16px;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: rgba(0, 0, 0, 0.9);
+    font-size: 14px;
+    line-height: 1.4;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+</style> 
