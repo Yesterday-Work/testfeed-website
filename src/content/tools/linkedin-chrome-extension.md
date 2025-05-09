@@ -13,9 +13,9 @@ schemaMarkup:
 
 Supercharge your LinkedIn workflow with a powerful browser extension that automates repetitive tasks, provides analytical insights, and helps you engage with your network more effectively.
 
-• Network Growth Automation
-• Engagement Analytics
-• Content Performance Tracking
+- Network Growth Automation
+- Engagement Analytics
+- Content Performance Tracking
 
 ## Benefits of LinkedIn Chrome Extension
 

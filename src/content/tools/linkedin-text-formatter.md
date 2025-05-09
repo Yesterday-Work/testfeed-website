@@ -13,9 +13,9 @@ schemaMarkup:
 
 Transform plain LinkedIn posts into professionally formatted content with custom fonts and bold text.
 
-• Instant Formatting
-• Custom Fonts
-• Engagement Boost
+- Instant Formatting
+- Custom Fonts
+- Engagement Boost
 
 ## Benefits of LinkedIn Bold Text
 

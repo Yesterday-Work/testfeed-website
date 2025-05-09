@@ -13,9 +13,9 @@ schemaMarkup:
 
 Create powerful, attention-grabbing LinkedIn profile headlines that instantly showcase your value and expertise to recruiters and connections.
 
-• AI-Powered Suggestions
-• Industry-Specific Templates
-• Keyword Optimization
+- AI-Powered Suggestions
+- Industry-Specific Templates
+- Keyword Optimization
 
 ## Benefits of LinkedIn Headline Generator AI
 

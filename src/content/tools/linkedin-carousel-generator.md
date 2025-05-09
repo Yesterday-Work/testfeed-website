@@ -13,9 +13,9 @@ schemaMarkup:
 
 Create professional, attention-grabbing carousel posts for LinkedIn that drive engagement and showcase your expertise in minutes.
 
-• AI-Powered Designs
-• One-Click Publishing
-• Performance Analytics
+- AI-Powered Designs
+- One-Click Publishing
+- Performance Analytics
 
 ## Benefits of LinkedIn Carousel Generator
 

@@ -13,9 +13,9 @@ schemaMarkup:
 
 Stay ahead of conversations by identifying real-time trending topics on LinkedIn to create timely, relevant content that drives engagement and expands your network.
 
-• Real-Time Topic Analysis
-• Industry-Specific Trends
-• Engagement Optimization
+- Real-Time Topic Analysis
+- Industry-Specific Trends
+- Engagement Optimization
 
 ## Benefits of Trending Topics on LinkedIn
 

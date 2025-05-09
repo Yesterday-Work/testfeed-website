@@ -13,9 +13,9 @@ schemaMarkup:
 
 See exactly how your posts will appear on LinkedIn before publishing. Test formatting, check visual elements, and perfect your content.
 
-• Instant Preview
-• Format Testing
-• Error Prevention
+- Instant Preview
+- Format Testing
+- Error Prevention
 
 ## Benefits of LinkedIn Preview
 

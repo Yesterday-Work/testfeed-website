@@ -13,9 +13,9 @@ schemaMarkup:
 
 Transform your professional presence with data-driven insights that evaluate your LinkedIn profile's effectiveness and provide actionable recommendations to increase visibility and engagement.
 
-• AI-Powered Scoring System
-• Personalized Improvement Recommendations
-• Keyword Optimization
+- AI-Powered Scoring System
+- Personalized Improvement Recommendations
+- Keyword Optimization
 
 ## Benefits of LinkedIn Profile Analyzer
 
