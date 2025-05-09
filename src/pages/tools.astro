@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FinalCTASection from '../components/FinalCTASection.astro';
+import { Icon } from 'astro-icon/components';
 
 // Fetch the content from main.md file for the CTA section
 const homepageEntries = await getCollection('homepage');
@@ -27,11 +28,7 @@ const toolsEntries = await getCollection('tools');
           <a href={`/tools/${tool.slug}`} class="tool-card animate-on-scroll">
             {tool.data.icon && (
               <div class="tool-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  {tool.data.icon === 'download' && <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>}
-                  {tool.data.icon === 'type' && <path d="M4 7V4h16v3M9 20h6M12 4v16"/>}
-                  {/* Add more icon paths as needed */}
-                </svg>
+                <Icon name={`lucide:${tool.data.icon}`} />
               </div>
             )}
             <h3>{tool.data.title}</h3>

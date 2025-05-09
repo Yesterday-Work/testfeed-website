@@ -223,6 +223,9 @@ export const toolSchema = z.object({
   // Tool-specific metadata
   icon: z.string().optional().describe("Lucide icon name (e.g., 'download', 'type')"),
   
+  // SEO team additions
+  toolImage: z.string().optional().describe("Optional image path for the tool"),
+  
   // Schema.org markup for rich results
   schemaMarkup: z.object({
     type: z.string().default("WebPage").describe("Schema.org type for tool pages"),
