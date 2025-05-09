@@ -6,13 +6,13 @@
 // 3. Add/remove component imports as needed based on what sections you included
 
 import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
 
 // Import only the components you're using
-import LandingPageHero from '../../components/LandingPageHero.astro';
-import FeaturesSection from '../../components/FeaturesSection.astro';
-import FAQsSection from '../../components/FAQsSection.astro';
-import FinalCTASection from '../../components/FinalCTASection.astro';
+import LandingPageHero from '../../../components/LandingPageHero.astro';
+import FeaturesSection from '../../../components/FeaturesSection.astro';
+import FAQsSection from '../../../components/FAQsSection.astro';
+import FinalCTASection from '../../../components/FinalCTASection.astro';
 
 // Fetch this specific page content - CHANGE 'landing-page-template.md' TO YOUR FILENAME
 const homepageEntries = await getCollection('homepage');

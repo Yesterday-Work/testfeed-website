@@ -46,6 +46,7 @@ The site has three main content collections:
 1. **Homepage**: Content for main pages and landing pages
 2. **Blog**: Blog posts and articles
 3. **Legal**: Legal pages like privacy policy, terms of service
+4. **Tools**: Tool pages for our micro-tools
 
 ## Creating or Editing Content
 
@@ -72,4 +73,36 @@ problemSection:
     - icon: "alert-circle"
       title: "Your new problem"
       text: "Description of the new problem..."
+```
+
+### Creating a New Tool Page
+
+1. **Copy the template**: Duplicate `src/content/_templates/tools/template.md` and save it in `src/content/tools/` with your SEO-friendly tool name (e.g., `linkedin-video-downloader.md`)
+
+2. **Edit the frontmatter**: 
+   ```yaml
+   title: "LinkedIn Video Downloader"
+   description: "Download videos from LinkedIn with a single click"
+   icon: "download"
+   ```
+
+3. **Configure sections**: Each tool page has several predefined sections:
+   - `howItWorksSection`: Step-by-step instructions (required)
+   - `keyBenefitsSection`: Main benefits as feature cards (required)
+   - `featuresSection`: Additional features (optional)
+   - `supportedTypesSection`: Types/formats supported (optional)
+   - `usageSection`: Guidelines or usage ideas (optional)
+
+4. **That's it!** Your tool page will be automatically created at `/tools/linkedin-video-downloader` (based on your filename)
+
+Example for updating the How It Works section:
+```yaml
+howItWorksSection:
+  title: "How It Works"
+  steps:
+    - title: "Install Extension"
+      text: "Download and install our browser extension with a single click"
+    - title: "Navigate to LinkedIn"
+      text: "Go to any LinkedIn post containing a video you want to save"
+    # Add more steps as needed
 ```

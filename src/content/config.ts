@@ -223,6 +223,49 @@ export const toolSchema = z.object({
   icon: z.string().optional().describe("Lucide icon name (e.g., 'download', 'type')"),
   toolImage: z.string().optional().describe("Path to tool image relative to /public"),
   
+  // Tool page sections with component schemas
+  howItWorksSection: z.object({
+    title: z.string().default("How It Works").describe("Section title"),
+    steps: z.array(
+      z.object({
+        title: z.string().describe("Step title"),
+        text: z.string().describe("Step description text"),
+      })
+    ).min(1).describe("Array of steps - can have any number of steps")
+  }).optional().describe("How it works section with steps"),
+
+  keyBenefitsSection: z.object({
+    title: z.string().default("Key Benefits").describe("Section title"),
+    features: z.array(
+      z.object({
+        icon: z.string().describe("Lucide icon name (e.g., 'users', 'bar-chart-2')"),
+        title: z.string().describe("Feature title"),
+        text: z.string().describe("Feature description text"),
+      })
+    ).min(1).describe("Array of features - can have any number of feature cards")
+  }).optional().describe("Key benefits displayed as feature cards"),
+
+  featuresSection: z.object({
+    title: z.string().default("Advanced Features").describe("Section title"),
+    features: z.array(
+      z.object({
+        icon: z.string().describe("Lucide icon name (e.g., 'users', 'bar-chart-2')"),
+        title: z.string().describe("Feature title"),
+        text: z.string().describe("Feature description text"),
+      })
+    ).min(1).describe("Array of features - can have any number of feature cards")
+  }).optional().describe("Features or advanced features section"),
+  
+  supportedTypesSection: z.object({
+    title: z.string().default("Supported Types").describe("Section title"),
+    types: z.array(z.string()).describe("Array of supported types")
+  }).optional().describe("Supported types or platforms section"),
+  
+  usageSection: z.object({
+    title: z.string().describe("Section title (e.g., 'Usage Guidelines')"),
+    content: z.string().describe("Text content for the section")
+  }).optional().describe("Usage guidelines or ideas section"),
+  
   // Schema.org markup for rich results
   schemaMarkup: z.object({
     type: z.string().default("WebPage").describe("Schema.org type for tool pages"),
