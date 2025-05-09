@@ -85,18 +85,18 @@ const breadcrumbItems: BreadcrumbItem[] = [
         {otherTools.length > 0 && (
           <div class="other-tools"> 
             <h2 class="other-tools-title">Explore Other Tools</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 px-2">
               {otherTools.map((tool) => (
                 <a href={`/tools/${tool.slug}`} class="tool-card"> 
-                  <div class="flex items-center">
+                  <div class="flex items-center space-x-2">
                     {tool.data.icon && (
-                      <div class="tool-card-icon-container mr-4"> 
+                      <div class="tool-card-icon-container"> 
                         <Icon name={`lucide:${tool.data.icon}`} class="tool-nav-icon" />
                       </div>
                     )}
-                    <div>
-                      <h3 class="text-xl font-bold">{tool.data.title}</h3>
-                      <p class="text-gray-400 line-clamp-2">{tool.data.description}</p>
+                    <div class="min-w-0">
+                      <h3 class="text-base font-bold truncate">{tool.data.title}</h3>
+                      <p class="text-gray-400 text-xs line-clamp-1">{tool.data.description}</p>
                     </div>
                   </div>
                 </a>
@@ -205,8 +205,8 @@ const breadcrumbItems: BreadcrumbItem[] = [
   }
   
   .tool-nav-icon {
-    width: 24px;
-    height: 24px;
+    width: 14px;
+    height: 14px;
   }
   
   .video-container {
@@ -289,18 +289,19 @@ const breadcrumbItems: BreadcrumbItem[] = [
 
   .tool-card {
     background-color: var(--color-card-bg, #222);
-    padding: 1.5rem;
-    border-radius: var(--border-radius, 10px);
-    transition: var(--transition, all 0.3s ease);
+    padding: 0.6rem;
+    border-radius: var(--border-radius, 8px);
+    transition: var(--transition, all 0.2s ease);
     border: 1px solid rgba(255, 255, 255, 0.05);
     display: block;
     text-decoration: none;
     color: inherit;
+    margin-bottom: 0.5rem;
   }
 
   .tool-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg, 0 10px 15px rgba(0, 0, 0, 0.5));
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md, 0 5px 10px rgba(0, 0, 0, 0.3));
     border: 1px solid rgba(255, 255, 255, 0.2);
   }
 
@@ -308,11 +309,12 @@ const breadcrumbItems: BreadcrumbItem[] = [
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.1);
     color: var(--color-highlight, #fff);
+    flex-shrink: 0;
   }
 
   .line-clamp-2 {
@@ -424,15 +426,15 @@ const breadcrumbItems: BreadcrumbItem[] = [
   }
 
   .other-tools {
-    padding-top: var(--spacing-lg);
-    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-md) var(--spacing-sm) var(--spacing-md);
+    margin-bottom: var(--spacing-md);
   }
 
   .other-tools-title {
-    font-size: 2rem;
+    font-size: 1.4rem;
     font-weight: 700;
     text-align: center;
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: var(--spacing-sm);
     color: var(--color-white);
   }
 
