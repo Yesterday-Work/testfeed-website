@@ -5,13 +5,13 @@ import FinalCTASection from '../../components/FinalCTASection.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import type { BreadcrumbItem } from '../../components/Breadcrumbs.astro';
 import { Icon } from 'astro-icon/components';
-import HowItWorksSection from '../../components/HowItWorksSection.astro';
-import FeaturesSection from '../../components/FeaturesSection.astro';
+import DemoVideoSection from '../../components/DemoVideoSection.astro';
 
 // Get homepage content for CTA section and video
 const homepageEntries = await getCollection('homepage');
 const homepageEntry = homepageEntries.find(entry => entry.id === 'main.md') || homepageEntries[0];
 const videoId = homepageEntry.data.videoSection?.videoId || "Ic-OcghxCuk";
+const videoTitle = homepageEntry.data.videoSection?.title || "See TestFeed in action";
 
 // Get all tool entries for static paths and "other tools" section
 export async function getStaticPaths() {
@@ -26,6 +26,48 @@ export async function getStaticPaths() {
 const { entry, allTools } = Astro.props;
 const otherTools = allTools.filter(tool => tool.slug !== entry.slug);
 
+// Render the markdown content and extract headings
+const { Content, headings } = await entry.render();
+
+// Process headings to identify sections
+type Section = {
+  title: string;
+  slug: string;
+  depth: number;
+  index: number;
+}
+// Map to find all level 2 headings (main sections)
+const mainSections = headings
+  .filter(h => h.depth === 2)
+  .map((h, i) => ({
+    title: h.text,
+    slug: h.slug,
+    depth: h.depth,
+    index: i
+  }));
+
+// Function to normalize section name for comparison
+function normalizeSection(title: string): string {
+  return title.toLowerCase().replace(/\s+/g, '_');
+}
+
+// Identify standard sections
+const howItWorksSection = mainSections.find(s => 
+  normalizeSection(s.title).includes('how_it_works') || 
+  normalizeSection(s.title).includes('getting_started')
+);
+
+const benefitsSection = mainSections.find(s => 
+  normalizeSection(s.title).includes('benefits')
+);
+
+// Find sections related to features, types, or use cases
+const featureTypesSections = mainSections.filter(s => 
+  normalizeSection(s.title).includes('features') || 
+  normalizeSection(s.title).includes('types') || 
+  normalizeSection(s.title).includes('use_cases')
+);
+
 // Prepare breadcrumb items
 const breadcrumbItems: BreadcrumbItem[] = [
   { label: "home", href: "/" },
@@ -38,7 +80,7 @@ const breadcrumbItems: BreadcrumbItem[] = [
   title={`${entry.data.title} - TestFeed`}
   description={entry.data.description}
 >
-  {/* Tool Page Hero Section */}
+  <!-- Tool Page Hero Section -->
   <section class="tool-page-hero">
     <div class="container">
       <div class="hero-content">
@@ -63,77 +105,38 @@ const breadcrumbItems: BreadcrumbItem[] = [
     <Breadcrumbs items={breadcrumbItems} /> 
   </div>
 
-  {/* Video Section */}
-  <div class="video-container">
-    <div class="video-placeholder" role="button" tabindex="0" aria-label="Play video">
-      <img src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`} alt="Video thumbnail" loading="lazy" />
-      <div class="play-button">
-        <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 5V19L19 12L8 5Z"/></svg>
-      </div>
-    </div>
+  <!-- Use the DemoVideoSection component instead of embedded video HTML -->
+  <div class="demo-video-wrapper">
+    <DemoVideoSection
+      title=""
+      videoId={videoId}
+    />
   </div>
 
+  <!-- Tool Content Area -->
   <div class="tool-content-area">
     <div class="container">
-      <div class="max-w-4xl mx-auto">
-        {/* Component-based content sections */}
-        {entry.data.howItWorksSection && (
-          <HowItWorksSection {...entry.data.howItWorksSection} />
-        )}
+      <div class="tool-content-wrapper">
+        <article class="tool-content">
+          <Content />
+        </article>
 
-        {entry.data.keyBenefitsSection && (
-          <FeaturesSection {...entry.data.keyBenefitsSection} />
-        )}
-
-        {entry.data.featuresSection && (
-          <FeaturesSection {...entry.data.featuresSection} />
-        )}
-
-        {/* Supported Types Section */}
-        {entry.data.supportedTypesSection && (
-          <section class="tool-section supported-types">
-            <div class="container">
-              <h2>{entry.data.supportedTypesSection.title}</h2>
-              <ul class="supported-types-list">
-                {entry.data.supportedTypesSection.types.map((type) => (
-                  <li class="supported-type-item">
-                    <span class="bullet-point">•</span>
-                    <span>{type}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </section>
-        )}
-
-        {/* Usage Guidelines Section */}
-        {entry.data.usageSection && (
-          <section class="tool-section usage-section">
-            <div class="container">
-              <h2>{entry.data.usageSection.title}</h2>
-              <div class="usage-content">
-                <p>{entry.data.usageSection.content}</p>
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* Other Tools Section */}
+        <!-- Other Tools Section -->
         {otherTools.length > 0 && (
           <div class="other-tools"> 
             <h2 class="other-tools-title">Explore Other Tools</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="tools-grid">
               {otherTools.map((tool) => (
                 <a href={`/tools/${tool.slug}`} class="tool-card"> 
-                  <div class="flex items-center">
+                  <div class="tool-card-inner">
                     {tool.data.icon && (
-                      <div class="tool-card-icon-container mr-4"> 
+                      <div class="tool-card-icon-container"> 
                         <Icon name={`lucide:${tool.data.icon}`} class="tool-nav-icon" />
                       </div>
                     )}
-                    <div>
-                      <h3 class="text-xl font-bold">{tool.data.title}</h3>
-                      <p class="text-gray-400 line-clamp-2">{tool.data.description}</p>
+                    <div class="tool-card-content">
+                      <h3>{tool.data.title}</h3>
+                      <p>{tool.data.description}</p>
                     </div>
                   </div>
                 </a>
@@ -145,13 +148,14 @@ const breadcrumbItems: BreadcrumbItem[] = [
     </div>
   </div>
 
+  <!-- Final CTA Section -->
   {homepageEntry.data.finalCtaSection && (
     <FinalCTASection {...homepageEntry.data.finalCtaSection} />
   )}
 </BaseLayout>
 
 <style>
-  /* Tool Page Hero Styles */
+  /* Hero Section */
   .tool-page-hero {
     background-color: var(--color-background-offset, #1a1a1a);
     padding: var(--spacing-xl) 0 var(--spacing-lg) 0;
@@ -205,18 +209,20 @@ const breadcrumbItems: BreadcrumbItem[] = [
   .hero-cta {
     margin-bottom: var(--spacing-sm);
   }
+  
   .hero-cta .btn {
-      display: inline-block;
-      background-color: var(--color-primary);
-      color: var(--color-secondary);
-      font-weight: 700;
-      padding: 0.75rem 2rem;
-      border-radius: var(--border-radius);
-      transition: all 0.3s ease;
-      text-decoration: none;
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    font-weight: 700;
+    padding: 0.75rem 2rem;
+    border-radius: var(--border-radius);
+    transition: all 0.3s ease;
+    text-decoration: none;
   }
-   .hero-cta .btn:hover {
-      filter: brightness(110%);
+  
+  .hero-cta .btn:hover {
+    filter: brightness(110%);
   }
 
   .cta-subtext {
@@ -225,192 +231,204 @@ const breadcrumbItems: BreadcrumbItem[] = [
     color: var(--color-white);
   }
   
-  .video-placeholder img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: var(--border-radius-lg);
+  .breadcrumbs-container {
+    padding-top: var(--spacing-sm);
+    padding-bottom: 0;
   }
 
-  .back-icon-wrapper {
-    display: inline-flex;
-    align-items: center;
-    margin-right: 4px;
+  /* Custom styling for the DemoVideoSection */
+  .demo-video-wrapper :global(.demo-video) {
+    padding: var(--spacing-xs) 0 var(--spacing-lg);
   }
   
-  .tool-nav-icon {
-    width: 24px;
-    height: 24px;
-  }
-  
-  .video-container {
-    position: relative;
-    width: 100%;
-    max-width: 1000px;
-    margin: var(--spacing-sm) auto var(--spacing-lg) auto;
-    border-radius: var(--border-radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-lg);
-    transition: var(--transition);
-  }
-
   @media (min-width: 768px) {
-    .video-container {
-      margin-top: var(--spacing-xl);
-      margin-bottom: var(--spacing-xl);
+    .demo-video-wrapper :global(.demo-video) {
+      padding: var(--spacing-md) 0 var(--spacing-lg);
     }
   }
 
-  .video-container:hover {
-    transform: scale(1.01);
-    box-shadow: var(--shadow-lg), var(--glow);
+  .tool-content-area {
+    background-color: var(--color-background);
+    padding: var(--spacing-md) 0;
   }
 
-  .video-placeholder {
-    background-color: rgba(0, 0, 0, 0.8);
-    border-radius: var(--border-radius-lg);
-    aspect-ratio: 16 / 9;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: var(--transition);
-    box-shadow: var(--shadow-lg);
-    position: relative;
-    overflow: hidden;
+  .tool-content-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
   }
 
-  .video-placeholder::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 1;
-  }
-
-  .video-placeholder .play-button {
-    position: relative;
-    z-index: 2;
-  }
-
-  .video-placeholder:hover {
-    transform: scale(1.02);
-    box-shadow: var(--shadow-lg), var(--glow);
-  }
-
-  .play-button {
-    background-color: var(--color-primary);
-    color: var(--color-secondary);
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5rem;
-    box-shadow: var(--glow);
-  }
-
-  .play-icon {
-    width: 30px;
-    height: 30px;
-    color: var(--color-secondary);
-  }
-
-  .tool-card {
-    background-color: var(--color-card-bg, #222);
-    padding: 1.5rem;
-    border-radius: var(--border-radius, 10px);
-    transition: var(--transition, all 0.3s ease);
+  .tool-content {
+    background-color: var(--color-card-bg);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-md) var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow);
     border: 1px solid rgba(255, 255, 255, 0.05);
-    display: block;
-    text-decoration: none;
-    color: inherit;
   }
 
-  .tool-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg, 0 10px 15px rgba(0, 0, 0, 0.5));
-    border: 1px solid rgba(255, 255, 255, 0.2);
-  }
 
-  .tool-card-icon-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: var(--color-highlight, #fff);
-  }
-
-  .line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  
-  /* Custom Tool Section Styles */
-  .tool-section {
-    padding: var(--spacing-xl) 0;
-  }
-
-  .tool-section h2 {
+  .tool-content :global(h2) {
     font-size: 2rem;
     text-align: center;
-    margin-bottom: var(--spacing-lg);
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
     color: var(--color-white);
   }
 
-  .supported-types-list {
+  .tool-content :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .tool-content :global(h3) {
+    font-size: 1.4rem;
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-white);
+  }
+
+  .tool-content :global(p) {
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-light);
+    line-height: 1.6;
+  }
+
+  /* Numbered Lists - How It Works */
+  .tool-content :global(ol) {
+    counter-reset: step-counter;
+    list-style-type: none !important;
+    padding: 0 !important;
+    margin: var(--spacing-md) 0 var(--spacing-lg) !important;
+  }
+
+  .tool-content :global(ol li) {
+    position: relative;
+    padding-left: 60px !important;
+    margin-bottom: var(--spacing-md) !important;
+    min-height: 50px;
+    color: var(--color-text-light) !important;
+    display: block !important;
+    background: none !important;
+    border: none !important;
+  }
+
+  .tool-content :global(ol li::before) {
+    content: counter(step-counter) !important;
+    counter-increment: step-counter;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 40px !important;
+    height: 40px !important;
+    background-color: var(--color-card-bg) !important;
+    border: 2px solid var(--color-primary) !important;
+    color: var(--color-primary) !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-weight: bold !important;
+    font-family: var(--font-heading) !important;
+    font-size: 1rem !important;
+    margin-right: var(--spacing-md) !important;
+  }
+
+  .tool-content :global(ol li > strong:first-child) {
+    display: block !important;
+    color: var(--color-white) !important;
+    font-size: 1.1rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  /* Bullet Lists - Benefits and Features */
+  .tool-content :global([id*="benefits"] + ul),
+  .tool-content :global([id*="features"] + ul) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+    list-style-type: none;
+    padding: 0;
+    margin: var(--spacing-md) 0 var(--spacing-lg);
+  }
+
+  .tool-content :global([id*="benefits"] + ul li),
+  .tool-content :global([id*="features"] + ul li) {
+    position: relative;
+    padding: var(--spacing-md);
+    background-color: rgba(255, 255, 255, 0.07);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    transition: var(--transition);
+    color: var(--color-text-light);
+  }
+
+  .tool-content :global([id*="benefits"] + ul li:hover),
+  .tool-content :global([id*="features"] + ul li:hover) {
+    transform: translateY(-2px);
+    background-color: rgba(255, 255, 255, 0.09);
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow: var(--shadow);
+  }
+
+  .tool-content :global([id*="benefits"] + ul li > strong:first-child),
+  .tool-content :global([id*="features"] + ul li > strong:first-child) {
+    display: block;
+    color: var(--color-white);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Types and Use Cases styling */
+  .tool-content :global([id*="types"] + ul),
+  .tool-content :global([id*="use-cases"] + ul) {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: var(--spacing-md);
-    margin: 0 auto;
-    max-width: 800px;
+    gap: var(--spacing-sm);
+    margin: var(--spacing-md) auto var(--spacing-lg);
   }
 
-  .supported-type-item {
-    display: flex;
-    align-items: center;
-    background-color: var(--color-card-bg);
+  .tool-content :global([id*="types"] + ul li),
+  .tool-content :global([id*="use-cases"] + ul li) {
     padding: var(--spacing-sm) var(--spacing-md);
-    border-radius: var(--border-radius);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    min-width: auto;
+    display: inline-flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: var(--border-radius); 
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    margin: 0.2rem;
+    transition: var(--transition);
   }
 
-  .bullet-point {
+  .tool-content :global([id*="types"] + ul li:hover),
+  .tool-content :global([id*="use-cases"] + ul li:hover) {
+    transform: translateY(-2px);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: var(--shadow);
+  }
+
+  .tool-content :global([id*="types"] + ul li::before),
+  .tool-content :global([id*="use-cases"] + ul li::before) {
+    content: "•";
     color: var(--color-primary);
-    margin-right: var(--spacing-sm);
+    margin-right: var(--spacing-xs);
     font-size: 1.5rem;
   }
 
-  .usage-content {
-    max-width: 800px;
-    margin: 0 auto;
+  /* Any other section's paragraphs */
+  .tool-content :global(h2:not([id*="how-it-works"]):not([id*="benefits"]):not([id*="features"]):not([id*="types"]):not([id*="use-cases"]) + p) {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
-    color: var(--color-text-light);
     font-size: 1.1rem;
-    line-height: 1.6;
-  }
-  
-  .breadcrumbs-container {
-    padding-top: var(--spacing-sm);
-    padding-bottom: var(--spacing-xs);
+    line-height: 1.7;
   }
 
+  /* Other Tools Section */
   .other-tools {
-    padding-top: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
     margin-bottom: var(--spacing-xl);
   }
 
@@ -422,44 +440,85 @@ const breadcrumbItems: BreadcrumbItem[] = [
     color: var(--color-white);
   }
 
-  .tool-content-area {
-    background-color: var(--color-background);
-    padding: var(--spacing-xl) 0;
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+  }
+
+  .tool-card {
+    background-color: var(--color-card-bg);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    transition: var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .tool-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .tool-card-inner {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  .tool-card-icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-white);
+    flex-shrink: 0;
+  }
+
+  .tool-nav-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .tool-card-content {
+    flex: 1;
+  }
+
+  .tool-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-white);
+  }
+
+  .tool-card p {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 0;
+  }
+
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    /* Grid layout for benefits/features becomes single column */
+    .tool-content :global([id*="benefits"] + ul),
+    .tool-content :global([id*="features"] + ul) {
+      grid-template-columns: 1fr;
+    }
+    
+    /* Other tools grid becomes single column */
+    .tools-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
 
-<script define:vars={{ videoId }}>
-  document.addEventListener('DOMContentLoaded', () => {
-    const videoContainer = document.querySelector('.video-container');
-    if (!videoContainer) return;
-
-    const placeholder = videoContainer.querySelector('.video-placeholder');
-    if (!placeholder) return;
-
-    placeholder.addEventListener('click', loadVideo);
-    placeholder.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        loadVideo();
-      }
-    });
-
-    function loadVideo() {
-      placeholder.removeEventListener('click', loadVideo);
-      placeholder.removeEventListener('keydown', loadVideo);
-      
-      const iframe = document.createElement('iframe');
-      iframe.setAttribute('width', '100%');
-      iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`);
-      iframe.setAttribute('title', 'TestFeed Demo Video');
-      iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-      iframe.setAttribute('allowfullscreen', '');
-      iframe.style.borderRadius = 'var(--border-radius-lg)';
-      iframe.style.display = 'block';
-      iframe.style.border = 'none';
-      iframe.style.aspectRatio = '16 / 9';
-
-      videoContainer.innerHTML = '';
-      videoContainer.appendChild(iframe);
-    }
-  });
-</script> 
+</BaseLayout> 

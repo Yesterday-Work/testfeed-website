@@ -2,86 +2,34 @@
 title: Headline Generator
 description: Create attention-grabbing headlines for your social media posts, articles, and marketing content with AI-powered suggestions tailored to your audience.
 icon: type
-toolImage: ""
-schemaMarkup:
-  type: WebPage
-  properties:
-    name: AI Headline Generator
-
-# HOW IT WORKS SECTION
-howItWorksSection:
-  title: "How It Works"
-  steps:
-    - title: "Enter Topic"
-      text: "Enter your topic or content summary"
-    - title: "Specify Audience"
-      text: "Specify your target audience and platform (LinkedIn, Twitter, etc.)"
-    - title: "Choose Tone"
-      text: "Choose your preferred tone (professional, casual, provocative)"
-    - title: "Generate Variations"
-      text: "Generate multiple headline variations"
-    - title: "Select Headline"
-      text: "Select and use your favorite headline with one click"
-
-# KEY BENEFITS SECTION
-keyBenefitsSection:
-  title: "Key Benefits"
-  features:
-    - icon: "trending-up"
-      title: "Higher Engagement"
-      text: "Create headlines proven to increase click-through rates"
-    - icon: "clock"
-      title: "Time Savings"
-      text: "Generate dozens of headline options in seconds"
-    - icon: "users"
-      title: "Audience Targeting"
-      text: "Customize headlines for specific professional audiences"
-    - icon: "check-square"
-      title: "A/B Testing"
-      text: "Easily create multiple variations to test performance"
-    - icon: "search"
-      title: "SEO Optimization"
-      text: "Generate headlines with relevant keywords for better search visibility"
-
-# ADVANCED FEATURES SECTION
-featuresSection:
-  title: "Advanced Features"
-  features:
-    - icon: "key"
-      title: "Smart Keyword Integration"
-      text: "Automatically includes relevant keywords in your headlines"
-    - icon: "maximize"
-      title: "Character Count Optimization"
-      text: "Optimizes character length based on the platform"
-    - icon: "heart"
-      title: "Emotional Trigger Analysis"
-      text: "Analyzes emotional impact of different headline options"
-    - icon: "bar-chart"
-      title: "Performance Predictions"
-      text: "Predicts how well each headline variation might perform"
-    - icon: "calendar"
-      title: "Content Calendar Integration"
-      text: "Integrates with your content calendar for seamless publishing"
-
-# USAGE SECTION
-usageSection:
-  title: "Usage Ideas"
-  content: "Use the Headline Generator for LinkedIn posts that drive engagement, email subject lines with higher open rates, blog titles that rank better in search, newsletter headlines that grab attention, and product launch announcements that convert."
 ---
+
+## How It Works
+
+testfeed's Headline Generator leverages advanced AI to create headlines that resonate with your specific audience:
+
+1. **Enter Your Topic** Start by entering your topic or content summary
+2. **Specify Audience** Define your target audience and platform (LinkedIn, Twitter, etc.)
+3. **Choose Tone** Select your preferred tone (professional, casual, provocative)
+4. **Generate Options** Get multiple headline variations instantly
+5. **Select & Use** Choose your favorite headline and use it with one click
+
+## Key Benefits
+
+- **Higher Engagement** Create headlines proven to increase click-through rates
+- **Time Savings** Generate dozens of headline options in seconds
+- **Audience Targeting** Customize headlines for specific professional audiences
+- **A/B Testing** Easily create multiple variations to test performance
+- **SEO Optimization** Generate headlines with relevant keywords for better search visibility
 
 ## Advanced Features
 
-- Smart keyword integration
-- Character count optimization by platform
-- Emotional trigger analysis
-- Headline performance predictions
-- Integration with your content calendar
+- **Smart Keyword Integration** Automatically includes relevant keywords in your headlines
+- **Character Count Optimization** Optimizes character length based on the platform
+- **Emotional Trigger Analysis** Analyzes emotional impact of different headline options
+- **Performance Predictions** Predicts how well each headline variation might perform
+- **Content Calendar Integration** Integrates with your content calendar for seamless publishing
 
 ## Usage Ideas
 
-Use the Headline Generator for:
-- LinkedIn posts that drive engagement
-- Email subject lines with higher open rates
-- Blog titles that rank better in search
-- Newsletter headlines that grab attention
-- Product launch announcements that convert 
+Use the Headline Generator for LinkedIn posts that drive engagement, email subject lines with higher open rates, blog titles that rank better in search, newsletter headlines that grab attention, and product launch announcements that convert. 

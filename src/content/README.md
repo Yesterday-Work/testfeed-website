@@ -86,23 +86,28 @@ problemSection:
    icon: "download"
    ```
 
-3. **Configure sections**: Each tool page has several predefined sections:
-   - `howItWorksSection`: Step-by-step instructions (required)
-   - `keyBenefitsSection`: Main benefits as feature cards (required)
-   - `featuresSection`: Additional features (optional)
-   - `supportedTypesSection`: Types/formats supported (optional)
-   - `usageSection`: Guidelines or usage ideas (optional)
+3. **Write standard markdown sections**: Simply use standard markdown with these section headings:
+   - `## How It Works` - Numbered list with steps (use bold text for step names)
+   - `## Key Benefits` - Bulleted list with bold benefit names
+   - `## Advanced Features` (optional) - Bulleted list with bold feature names
+   - `## Supported Types` (optional) - Simple bulleted list
+   - `## Usage Guidelines` (optional) - Paragraph text
 
-4. **That's it!** Your tool page will be automatically created at `/tools/linkedin-video-downloader` (based on your filename)
+4. **That's it!** Your tool page will be automatically created at `/tools/linkedin-video-downloader` with proper styling
 
-Example for updating the How It Works section:
-```yaml
-howItWorksSection:
-  title: "How It Works"
-  steps:
-    - title: "Install Extension"
-      text: "Download and install our browser extension with a single click"
-    - title: "Navigate to LinkedIn"
-      text: "Go to any LinkedIn post containing a video you want to save"
-    # Add more steps as needed
+Example of the "How It Works" section:
+```markdown
+## How It Works
+
+1. **Install Extension**: Download and install our browser extension
+2. **Navigate to LinkedIn**: Go to any LinkedIn post containing a video
+3. **Click the Icon**: Click the TestFeed icon that appears on the video
+```
+
+Example of the "Key Benefits" section:
+```markdown
+## Key Benefits
+
+- **Offline Access**: Watch important training videos without an internet connection
+- **Training Libraries**: Build a collection of industry videos for team training
 ```
