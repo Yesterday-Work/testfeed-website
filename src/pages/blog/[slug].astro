@@ -91,6 +91,16 @@ const { Content } = await entry.render();
     box-shadow: var(--shadow);
   }
 
+  /* Ensure blog headings are left-aligned */
+  .content-wrapper :global(h1),
+  .content-wrapper :global(h2),
+  .content-wrapper :global(h3),
+  .content-wrapper :global(h4),
+  .content-wrapper :global(h5),
+  .content-wrapper :global(h6) {
+    text-align: left !important;
+  }
+
   /* Responsive adjustments */
   @media (max-width: 992px) {
     .content-wrapper {
