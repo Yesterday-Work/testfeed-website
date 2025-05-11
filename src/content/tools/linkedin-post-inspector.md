@@ -13,9 +13,9 @@ schemaMarkup:
 
 Instantly preview and validate how your LinkedIn posts will appear before publishing to ensure perfect formatting and link previews.
 
-• Link Validation
-• Preview Generation
-• Error Detection
+- Link Validation
+- Preview Generation
+- Error Detection
 
 ## The Best LinkedIn Debugger
 

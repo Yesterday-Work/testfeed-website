@@ -213,6 +213,7 @@ export const blogSchema = z.object({
  * TOOL CONTENT SCHEMA
  * ------------------
  * This defines the structure for individual tools.
+ * Tool content is now handled directly through markdown with automatic styling.
  */
 export const toolSchema = z.object({
   // SEO fields
@@ -221,13 +222,19 @@ export const toolSchema = z.object({
   
   // Tool-specific metadata
   icon: z.string().optional().describe("Lucide icon name (e.g., 'download', 'type')"),
-  toolImage: z.string().optional().describe("Path to tool image relative to /public"),
+  
+  // SEO team additions
+  toolImage: z.string().optional().describe("Optional image path for the tool"),
   
   // Schema.org markup for rich results
   schemaMarkup: z.object({
     type: z.string().default("WebPage").describe("Schema.org type for tool pages"),
     properties: z.record(z.any()).optional().describe("Additional schema properties as key-value pairs")
   }).optional().describe("Structured data for rich search results"),
+
+  // Note: The actual tool content is written in Markdown in the body of the file.
+  // Sections like "How It Works", "Key Benefits", "Features", etc. are automatically styled
+  // based on their heading names. No additional frontmatter configuration is needed.
 });
 
 /**

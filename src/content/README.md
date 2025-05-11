@@ -46,6 +46,7 @@ The site has three main content collections:
 1. **Homepage**: Content for main pages and landing pages
 2. **Blog**: Blog posts and articles
 3. **Legal**: Legal pages like privacy policy, terms of service
+4. **Tools**: Tool pages for our micro-tools
 
 ## Creating or Editing Content
 

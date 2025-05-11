@@ -5,11 +5,14 @@ import FinalCTASection from '../../components/FinalCTASection.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import type { BreadcrumbItem } from '../../components/Breadcrumbs.astro';
 import { Icon } from 'astro-icon/components';
+import DemoVideoSection from '../../components/DemoVideoSection.astro';
+import MarkdownContent from '../../components/MarkdownContent.astro';
 
 // Get homepage content for CTA section and video
 const homepageEntries = await getCollection('homepage');
 const homepageEntry = homepageEntries.find(entry => entry.id === 'main.md') || homepageEntries[0];
 const videoId = homepageEntry.data.videoSection?.videoId || "Ic-OcghxCuk";
+const videoTitle = homepageEntry.data.videoSection?.title || "See TestFeed in action";
 
 // Get all tool entries for static paths and "other tools" section
 export async function getStaticPaths() {
@@ -23,6 +26,8 @@ export async function getStaticPaths() {
 // Get the tool entry and all tools from props
 const { entry, allTools } = Astro.props;
 const otherTools = allTools.filter(tool => tool.slug !== entry.slug);
+
+// Render the markdown content
 const { Content } = await entry.render();
 
 // Prepare breadcrumb items
@@ -37,7 +42,7 @@ const breadcrumbItems: BreadcrumbItem[] = [
   title={`${entry.data.title} - TestFeed`}
   description={entry.data.description}
 >
-  {/* New Tool Page Hero Section */}
+  <!-- Tool Page Hero Section -->
   <section class="tool-page-hero">
     <div class="container">
       <div class="hero-content">
@@ -62,41 +67,40 @@ const breadcrumbItems: BreadcrumbItem[] = [
     <Breadcrumbs items={breadcrumbItems} /> 
   </div>
 
-  {/* Video Section - Breadcrumbs are now above this */}
-  <div class="video-container">
-    <div class="video-placeholder" role="button" tabindex="0" aria-label="Play video">
-      <img src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`} alt="Video thumbnail" loading="lazy" />
-      <div class="play-button">
-        <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 5V19L19 12L8 5Z"/></svg>
-      </div>
-    </div>
+  <!-- Use the DemoVideoSection component instead of embedded video HTML -->
+  <div class="demo-video-wrapper">
+    <DemoVideoSection
+      title=""
+      videoId={videoId}
+    />
   </div>
 
-  <div class="tool-content-area py-12 lg:py-16">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden p-6 p-8 md:p-10 mb-20">
-          <div class="prose prose-lg max-w-none content-section">
+  <!-- Tool Content Area -->
+  <div class="tool-content-area">
+    <div class="container">
+      <div class="tool-content-wrapper">
+        <article class="tool-content">
+          <MarkdownContent>
             <Content />
-          </div>
-        </div>
+          </MarkdownContent>
+        </article>
 
-        {/* Other Tools Section */}
+        <!-- Other Tools Section -->
         {otherTools.length > 0 && (
           <div class="other-tools"> 
             <h2 class="other-tools-title">Explore Other Tools</h2>
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 px-2">
+            <div class="tools-grid">
               {otherTools.map((tool) => (
                 <a href={`/tools/${tool.slug}`} class="tool-card"> 
-                  <div class="flex items-center space-x-2">
+                  <div class="tool-card-inner">
                     {tool.data.icon && (
                       <div class="tool-card-icon-container"> 
                         <Icon name={`lucide:${tool.data.icon}`} class="tool-nav-icon" />
                       </div>
                     )}
-                    <div class="min-w-0">
-                      <h3 class="text-base font-bold truncate">{tool.data.title}</h3>
-                      <p class="text-gray-400 text-xs line-clamp-1">{tool.data.description}</p>
+                    <div class="tool-card-content">
+                      <h3>{tool.data.title}</h3>
+                      <p>{tool.data.description}</p>
                     </div>
                   </div>
                 </a>
@@ -108,13 +112,14 @@ const breadcrumbItems: BreadcrumbItem[] = [
     </div>
   </div>
 
+  <!-- Final CTA Section -->
   {homepageEntry.data.finalCtaSection && (
     <FinalCTASection {...homepageEntry.data.finalCtaSection} />
   )}
 </BaseLayout>
 
 <style>
-  /* New Tool Page Hero Styles */
+  /* Hero Section */
   .tool-page-hero {
     background-color: var(--color-background-offset, #1a1a1a);
     padding: var(--spacing-xl) 0 var(--spacing-lg) 0;
@@ -168,18 +173,20 @@ const breadcrumbItems: BreadcrumbItem[] = [
   .hero-cta {
     margin-bottom: var(--spacing-sm);
   }
+  
   .hero-cta .btn {
-      display: inline-block;
-      background-color: var(--color-primary);
-      color: var(--color-secondary);
-      font-weight: 700;
-      padding: 0.75rem 2rem;
-      border-radius: var(--border-radius);
-      transition: all 0.3s ease;
-      text-decoration: none;
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    font-weight: 700;
+    padding: 0.75rem 2rem;
+    border-radius: var(--border-radius);
+    transition: all 0.3s ease;
+    text-decoration: none;
   }
-   .hero-cta .btn:hover {
-      filter: brightness(110%);
+  
+  .hero-cta .btn:hover {
+    filter: brightness(110%);
   }
 
   .cta-subtext {
@@ -188,290 +195,138 @@ const breadcrumbItems: BreadcrumbItem[] = [
     color: var(--color-white);
   }
   
-  .video-placeholder img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: var(--border-radius-lg);
+  .breadcrumbs-container {
+    padding-top: var(--spacing-sm);
+    padding-bottom: 0;
   }
 
-  .back-icon-wrapper {
-    display: inline-flex;
-    align-items: center;
-    margin-right: 4px;
+  /* Custom styling for the DemoVideoSection */
+  .demo-video-wrapper :global(.demo-video) {
+    padding: var(--spacing-xs) 0 var(--spacing-lg);
   }
   
-  .tool-nav-icon {
-    width: 14px;
-    height: 14px;
-  }
-  
-  .video-container {
-    position: relative;
-    width: 100%;
-    max-width: 1000px;
-    margin: var(--spacing-sm) auto var(--spacing-lg) auto;
-    border-radius: var(--border-radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-lg);
-    transition: var(--transition);
-  }
-
   @media (min-width: 768px) {
-    .video-container {
-      margin-top: var(--spacing-xl);
-      margin-bottom: var(--spacing-xl);
+    .demo-video-wrapper :global(.demo-video) {
+      padding: var(--spacing-md) 0 var(--spacing-lg);
     }
   }
 
-  .video-container:hover {
-    transform: scale(1.01);
-    box-shadow: var(--shadow-lg), var(--glow);
+  .tool-content-area {
+    background-color: var(--color-background);
+    padding: var(--spacing-md) 0;
   }
 
-  .video-placeholder {
-    background-color: rgba(0, 0, 0, 0.8);
-    border-radius: var(--border-radius-lg);
-    aspect-ratio: 16 / 9;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: var(--transition);
-    box-shadow: var(--shadow-lg);
-    position: relative;
-    overflow: hidden;
+  .tool-content-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
   }
 
-  .video-placeholder::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 1;
+  .tool-content {
+    background-color: var(--color-card-bg);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-md) var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
 
-  .video-placeholder .play-button {
-    position: relative;
-    z-index: 2;
+  /* Ensure tool page headings are left-aligned */
+  .tool-content :global(h1),
+  .tool-content :global(h2),
+  .tool-content :global(h3),
+  .tool-content :global(h4),
+  .tool-content :global(h5),
+  .tool-content :global(h6) {
+    text-align: left !important;
   }
 
-  .video-placeholder:hover {
-    transform: scale(1.02);
-    box-shadow: var(--shadow-lg), var(--glow);
+  /* Other Tools Section */
+  .other-tools {
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
   }
 
-  .play-button {
-    background-color: var(--color-primary);
-    color: var(--color-secondary);
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5rem;
-    box-shadow: var(--glow);
+  .other-tools-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-white);
   }
 
-  .play-icon {
-    width: 30px;
-    height: 30px;
-    color: var(--color-secondary);
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-md);
   }
 
   .tool-card {
-    background-color: var(--color-card-bg, #222);
-    padding: 0.6rem;
-    border-radius: var(--border-radius, 8px);
-    transition: var(--transition, all 0.2s ease);
+    background-color: var(--color-card-bg);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    transition: var(--transition);
     border: 1px solid rgba(255, 255, 255, 0.05);
     display: block;
     text-decoration: none;
     color: inherit;
-    margin-bottom: 0.5rem;
   }
 
   .tool-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md, 0 5px 10px rgba(0, 0, 0, 0.3));
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
     border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .tool-card-inner {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
   }
 
   .tool-card-icon-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 28px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.1);
-    color: var(--color-highlight, #fff);
+    color: var(--color-white);
     flex-shrink: 0;
   }
 
-  .line-clamp-2 {
+  .tool-nav-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .tool-card-content {
+    flex: 1;
+  }
+
+  .tool-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-white);
+  }
+
+  .tool-card p {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    margin-bottom: 0;
   }
-  
-  .content-section {
-    color: var(--color-text, #333);
-  }
-  
-  .content-section :global(h2) {
-    font-size: 1.75rem;
-    font-weight: 700;
-    margin-top: 2.5rem;
-    margin-bottom: 0.75rem;
-    line-height: 1.3;
-  }
-  
-  .content-section :global(h3) {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-top: 2rem;
-    margin-bottom: 0.5rem;
-    line-height: 1.4;
-  }
-  
-  .content-section :global(h4) {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-top: 1.75rem;
-    margin-bottom: 0.5rem;
-    line-height: 1.4;
-  }
-  
-  .content-section :global(p) {
-    margin-bottom: 1.5rem;
-    line-height: 1.7;
-  }
-  
-  .content-section :global(h2 + p),
-  .content-section :global(h3 + p),
-  .content-section :global(h4 + p) {
-    margin-top: 0.5rem;
-  }
-  
-  .content-section :global(ul),
-  .content-section :global(ol) {
-    margin: 1.5rem 0 2rem;
-    padding-left: 1.75rem;
-  }
-  
-  .content-section :global(li) {
-    margin-bottom: 0.75rem;
-    line-height: 1.6;
-    position: relative;
-    padding-left: 0.5rem;
-  }
-  
-  .content-section :global(ul li::before) {
-    content: '';
-    position: absolute;
-    left: -1rem;
-    top: 0.7rem;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: var(--color-primary);
-  }
-  
-  .content-section :global(ol li) {
-    padding-left: 0.25rem;
-  }
-  
-  .content-section :global(pre) {
-    margin: 1.5rem 0 2rem;
-    padding: 1.25rem;
-    border-radius: 0.5rem;
-    overflow-x: auto;
-  }
-  
-  .content-section :global(blockquote) {
-    margin: 2rem 0;
-    padding: 1rem 1.5rem;
-    border-left: 4px solid var(--color-primary);
-    background-color: rgba(0, 0, 0, 0.03);
-    font-style: italic;
-  }
-  
-  @media (min-width: 768px) {
-    .content-section :global(ul),
-    .content-section :global(ol) {
-      padding-left: 2.5rem;
-    }
-    
-    .content-section :global(li) {
-      padding-left: 0.75rem;
+
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    /* Other tools grid becomes single column */
+    .tools-grid {
+      grid-template-columns: 1fr;
     }
   }
-  .tool-content-area {
-    background-color: var(--color-background);
-  }
-
-  .breadcrumbs-container {
-    padding-top: var(--spacing-sm);
-    padding-bottom: var(--spacing-xs);
-  }
-
-  .other-tools {
-    padding: var(--spacing-md) var(--spacing-sm) var(--spacing-md);
-    margin-bottom: var(--spacing-md);
-  }
-
-  .other-tools-title {
-    font-size: 1.4rem;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: var(--spacing-sm);
-    color: var(--color-white);
-  }
-
 </style>
 
-<script define:vars={{ videoId }}>
-  document.addEventListener('DOMContentLoaded', () => {
-    const videoContainer = document.querySelector('.video-container');
-    if (!videoContainer) return;
-
-    const placeholder = videoContainer.querySelector('.video-placeholder');
-    if (!placeholder) return;
-
-    placeholder.addEventListener('click', loadVideo);
-    placeholder.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        loadVideo();
-      }
-    });
-
-    function loadVideo() {
-      placeholder.removeEventListener('click', loadVideo);
-      placeholder.removeEventListener('keydown', loadVideo);
-      
-      const iframe = document.createElement('iframe');
-      iframe.setAttribute('width', '100%');
-      iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`);
-      iframe.setAttribute('title', 'TestFeed Demo Video');
-      iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-      iframe.setAttribute('allowfullscreen', '');
-      iframe.style.borderRadius = 'var(--border-radius-lg)';
-      iframe.style.display = 'block';
-      iframe.style.border = 'none';
-      iframe.style.aspectRatio = '16 / 9';
-
-      videoContainer.innerHTML = '';
-      videoContainer.appendChild(iframe);
-    }
-  });
-</script> 
+</BaseLayout> 
