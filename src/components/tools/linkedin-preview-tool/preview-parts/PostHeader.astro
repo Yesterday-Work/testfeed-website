@@ -48,7 +48,7 @@ const hasImageUrl = profileImageUrl && !profileImageUrl.includes('placeholder-pr
       <div class="time-section">
         <span class="post-time">{postTime}</span>
         {isGlobal && <span class="global-indicator"><span class="dot-separator">•</span><span class="globe-icon">
-          <img src="/assets/globeicon.png" alt="Global" width="17" height="17" />
+          <img src="/icons/globeicon.png" alt="Global" width="17" height="17" />
         </span></span>}
       </div>
     </div>
@@ -82,6 +82,9 @@ const hasImageUrl = profileImageUrl && !profileImageUrl.includes('placeholder-pr
     height: 48px;
     flex-shrink: 0;
     margin-top: 2px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
   }
 
   .profile-image img {
@@ -89,7 +92,9 @@ const hasImageUrl = profileImageUrl && !profileImageUrl.includes('placeholder-pr
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
+    object-position: center;
     border: none;
+    display: block;
   }
 
   .profile-image-fallback {
@@ -217,5 +222,44 @@ const hasImageUrl = profileImageUrl && !profileImageUrl.includes('placeholder-pr
     border-radius: 50%;
     background-color: rgba(0, 0, 0, 0.6);
     margin: 0 2px;
+  }
+
+  /* Medium screen adjustments - headline starts truncating earlier */
+  @media (max-width: 600px) {
+    .headline {
+      max-width: 300px;
+    }
+    
+    .more-actions {
+      margin-left: 4px;
+      padding-right: 4px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .profile-image {
+      width: 40px;
+      height: 40px;
+    }
+
+    .profile-name {
+      font-size: 14px;
+    }
+
+    .headline {
+      max-width: 220px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 11px;
+    }
+
+    .time-section {
+      font-size: 11px;
+    }
+    
+    .more-actions {
+      padding-right: 6px;
+    }
   }
 </style> 

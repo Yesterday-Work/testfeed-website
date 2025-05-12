@@ -8,31 +8,33 @@ export interface Props {
 }
 
 const {
-  likeCount = 43,
-  commentCount = 14,
-  repostCount = 1,
+  likeCount = 0,
+  commentCount = 0,
+  repostCount = 0,
   showFirstLiker = true,
-  firstLikerName = "You"
+  firstLikerName = ""
 } = Astro.props;
 
 const displayLikeText = () => {
   if (showFirstLiker && likeCount > 0) {
-    const othersText = likeCount > 1 ? `and ${likeCount - 1} others` : '';
+    const othersText = likeCount > 1 ? `and ${(likeCount - 1).toLocaleString()} other${likeCount > 2 ? 's' : ''}` : '';
     return `${firstLikerName} ${othersText}`.trim();
   }
   
-  return likeCount > 0 ? `${likeCount}` : '';
+  return likeCount > 0 ? `${likeCount.toLocaleString()}` : '';
 };
 
 const displayCommentText = () => {
-  return commentCount > 0 ? `${commentCount} comments` : '';
+  return commentCount > 0 ? `${commentCount.toLocaleString()} comment${commentCount > 1 ? 's' : ''}` : '';
 };
 
 const displayRepostText = () => {
-  return repostCount > 0 ? `${repostCount} repost` : '';
+  if (repostCount <= 0) return '';
+  return `${repostCount.toLocaleString()} repost${repostCount > 1 ? 's' : ''}`;
 };
 
 const hasAnyEngagement = likeCount > 0 || commentCount > 0 || repostCount > 0;
+const totalLikeCount = likeCount > 0 ? likeCount.toLocaleString() : '';
 ---
 
 {hasAnyEngagement && (
@@ -40,13 +42,11 @@ const hasAnyEngagement = likeCount > 0 || commentCount > 0 || repostCount > 0;
     <div class="reactions-section">
       <div class="reactions-icons">
         <span class="reaction-icon like-icon">
-          <span class="like-icon-fallback">👍</span>
-        </span>
-        <span class="reaction-icon insightful-icon">
-          <span class="insightful-icon-fallback">💡</span>
+          <img src="/icons/like-small.png" alt="Like" class="like-icon-image" />
         </span>
       </div>
-      <span class="reactions-text">{displayLikeText()}</span>
+      <span class="reactions-text desktop-reactions">{displayLikeText()}</span>
+      <span class="reactions-text mobile-reactions">{totalLikeCount}</span>
     </div>
     
     <div class="comments-reposts">
@@ -70,10 +70,10 @@ const hasAnyEngagement = likeCount > 0 || commentCount > 0 || repostCount > 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 4px 0;
+    padding: 4px 0 12px;
     margin: 4px 0 0;
     color: rgba(0, 0, 0, 0.6);
-    font-size: 12px;
+    font-size: 14px;
     border-bottom: thin solid rgba(0, 0, 0, 0.08);
   }
   
@@ -84,71 +84,78 @@ const hasAnyEngagement = likeCount > 0 || commentCount > 0 || repostCount > 0;
   
   .reactions-icons {
     display: flex;
-    margin-right: 4px;
+    margin-right: 6px;
   }
   
   .reaction-icon {
     width: 16px;
     height: 16px;
     border-radius: 50%;
-    margin-right: -2px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1;
-  }
-
-  .reaction-icon:nth-child(2) {
-    z-index: 0;
-  }
-  
-  .like-icon-fallback {
-    background-color: #0a66c2;
-    color: white;
-    font-size: 10px;
-    border-radius: 50%;
-    width: 16px;
-    height: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
   
-  .insightful-icon-fallback {
-    background-color: #7fc15e;
-    color: white;
-    font-size: 10px;
-    border-radius: 50%;
+  .like-icon-image {
     width: 16px;
     height: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: -5px;
   }
   
   .reactions-text {
-    font-size: 12px;
+    font-size: 14px;
     color: rgba(0, 0, 0, 0.6);
+    padding-top: 1px;
+  }
+  
+  .mobile-reactions {
+    display: none;
   }
   
   .comments-reposts {
     display: flex;
     align-items: center;
-    font-size: 12px;
+    font-size: 14px;
     color: rgba(0, 0, 0, 0.6);
   }
   
   .comment-count, .repost-count {
-    cursor: pointer;
-  }
-  
-  .comment-count:hover, .repost-count:hover {
-    color: #0a66c2;
-    text-decoration: underline;
+    cursor: default;
   }
   
   .separator {
     margin: 0 4px;
+  }
+
+  /* Mobile styles */
+  @media (max-width: 480px) {
+    .post-stats {
+      font-size: 12px !important;
+      padding: 3px 0 10px;
+    }
+    
+    .reactions-text {
+      font-size: 12px !important;
+    }
+    
+    .desktop-reactions {
+      display: none;
+    }
+    
+    .mobile-reactions {
+      display: inline;
+    }
+    
+    .comments-reposts {
+      font-size: 12px !important;
+    }
+    
+    .comment-count, .repost-count {
+      font-size: 12px !important;
+    }
+    
+    .like-icon-image {
+      width: 14px;
+      height: 14px;
+    }
   }
 </style> 

@@ -1,0 +1,127 @@
+---
+// This component doesn't need any props since it's static
+// It's purely visual to match LinkedIn's UI
+---
+
+<div class="post-actions">
+  <button class="action-button like-button">
+    <span class="action-icon">
+      <img src="/icons/like.png" alt="Like" />
+    </span>
+    <span class="action-text">Like</span>
+  </button>
+  
+  <button class="action-button comment-button">
+    <span class="action-icon">
+      <img src="/icons/comment.png" alt="Comment" />
+    </span>
+    <span class="action-text">Comment</span>
+  </button>
+  
+  <button class="action-button repost-button">
+    <span class="action-icon">
+      <img src="/icons/repost.png" alt="Repost" />
+    </span>
+    <span class="action-text">Repost</span>
+  </button>
+  
+  <button class="action-button send-button">
+    <span class="action-icon">
+      <img src="/icons/share.png" alt="Send" />
+    </span>
+    <span class="action-text">Send</span>
+  </button>
+</div>
+
+<style>
+  .post-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0;
+    margin-top: 4px;
+  }
+  
+  .action-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    color: rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 6px;
+    min-width: 80px;
+    flex: 1;
+  }
+  
+  .action-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 6px;
+  }
+  
+  .action-icon img {
+    width: 20px;
+    height: 20px;
+    opacity: 0.6;
+  }
+  
+  /* Specific sizing for different icons */
+  .like-button .action-icon img {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .comment-button .action-icon img,
+  .repost-button .action-icon img,
+  .send-button .action-icon img {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .action-text {
+    font-size: 14px;
+    white-space: nowrap;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  /* Mobile styles */
+  @media (max-width: 500px) {
+    .action-button {
+      padding: 6px 4px;
+      min-width: auto;
+      font-size: 12px;
+    }
+    
+    .action-icon img {
+      width: 16px;
+      height: 16px;
+    }
+    
+    .like-button .action-icon img {
+      width: 16px;
+      height: 16px;
+    }
+    
+    .comment-button .action-icon img,
+    .send-button .action-icon img {
+      width: 15px;
+      height: 15px;
+    }
+    
+    .action-text {
+      font-size: 12px;
+    }
+    
+    /* Hide repost button on mobile */
+    .repost-button {
+      display: none;
+    }
+  }
+</style> 
