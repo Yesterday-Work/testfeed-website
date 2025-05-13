@@ -190,6 +190,17 @@ const emptyFormValues = {
   
   declare function html2canvas(element: HTMLElement, options?: any): Promise<HTMLCanvasElement>;
   
+  // Logging utility that only logs in development
+  const logger = {
+    isDev: () => window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1',
+    log: (...args: any[]) => {
+      if (logger.isDev()) console.log(...args);
+    },
+    error: (...args: any[]) => {
+      if (logger.isDev()) console.error(...args);
+    }
+  };
+  
   // Add html2canvas script dynamically
   function loadScript(url: string): Promise<void> {
     return new Promise((resolve, reject) => {
@@ -202,7 +213,7 @@ const emptyFormValues = {
   }
 
   loadScript('https://html2canvas.hertzen.com/dist/html2canvas.min.js')
-    .catch(err => console.error('Failed to load html2canvas:', err));
+    .catch(err => logger.error('Failed to load html2canvas:', err));
   
   const defaultValues: PostState = {
     profileName: "Millie Marconi",
@@ -260,7 +271,6 @@ const emptyFormValues = {
     
     updatePreview();
     
-    console.log('Tool initialized with state:', currentState);
   }
   
   function setupEventListeners(): void {
@@ -381,8 +391,6 @@ const emptyFormValues = {
         saveToLocalStorage();
         
         updatePreview();
-        
-        console.log('Updated state with image:', input.id, dataUrl.substring(0, 50) + '...');
       }
     };
     
@@ -526,14 +534,9 @@ const emptyFormValues = {
   function updatePostImage(container: HTMLElement, imageUrl: string): void {
     const postMedia = container.querySelector<HTMLElement>('.post-media');
     
-    console.log('updatePostImage called with imageUrl:', imageUrl ? 'image present' : 'no image');
-    console.log('Found post-media element:', postMedia ? 'yes' : 'no');
-    
     if (!postMedia) {
-      console.error('Post media container not found. Creating one.');
       const postBody = container.querySelector<HTMLElement>('.post-body');
       if (!postBody) {
-        console.error('Post body not found either.');
         return;
       }
       
@@ -569,10 +572,8 @@ const emptyFormValues = {
     }
     
     if (imageUrl) {
-      console.log('Setting post image with URL');
       let imgElement = postMedia.querySelector<HTMLImageElement>('img');
       if (!imgElement) {
-        console.log('No existing img element, creating one');
         imgElement = document.createElement('img');
         imgElement.alt = 'Post image';
         imgElement.className = 'post-image';
@@ -591,25 +592,13 @@ const emptyFormValues = {
       postMedia.style.display = 'block';
     } else {
       postMedia.style.display = 'none';
-      console.log('Hiding post media container');
     }
   }
   
   function updateEngagementStats(container: HTMLElement): void {
-    console.log('Updating engagement stats:', 
-      { 
-        likeCount: currentState.likeCount,
-        commentCount: currentState.commentCount,
-        repostCount: currentState.repostCount,
-        showFirstLiker: currentState.showFirstLiker,
-        firstLikerName: currentState.firstLikerName
-      }
-    );
-    
     const hasEngagement = currentState.likeCount > 0 || currentState.commentCount > 0 || currentState.repostCount > 0;
     const postActionsContainer = container.querySelector<HTMLElement>('.post-actions');
     if (!postActionsContainer) {
-      console.error('Post actions container not found');
       return;
     }
     
@@ -786,8 +775,6 @@ const emptyFormValues = {
     updateFirstLikerVisibility();
     
     updatePreview();
-    
-    console.log('Form reset: fields cleared, preview reset to defaults');
   }
   
   async function exportAsImage(): Promise<void> {
@@ -854,7 +841,7 @@ const emptyFormValues = {
             exportButton.disabled = false;
           }
         } catch (error) {
-          console.error('Error generating canvas:', error);
+          logger.error('Error generating canvas:', error);
           alert('Error generating image. Please try again.');
           if (exportButton) {
             exportButton.textContent = 'Export as Image';
@@ -863,7 +850,7 @@ const emptyFormValues = {
         }
       }, 100);
     } catch (error) {
-      console.error('Error exporting image:', error);
+      logger.error('Error exporting image:', error);
       alert('Error generating image. Please try again.');
       if (exportButton) {
         exportButton.textContent = 'Export as Image';
@@ -876,7 +863,7 @@ const emptyFormValues = {
     try {
       localStorage.setItem('linkedinToolState', JSON.stringify(currentState));
     } catch (error) {
-      console.error('Error saving to localStorage:', error);
+      logger.error('Error saving to localStorage:', error);
     }
   }
   
@@ -901,11 +888,10 @@ const emptyFormValues = {
         });
       } else {
         currentState = {...defaultValues};
-        
       }
       
     } catch (error) {
-      console.error('Error loading saved data:', error);
+      logger.error('Error loading saved data:', error);
       currentState = {...defaultValues};
     }
   }

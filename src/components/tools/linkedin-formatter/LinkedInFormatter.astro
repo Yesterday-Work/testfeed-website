@@ -1,0 +1,328 @@
+---
+import TextEditor from './TextEditor.astro';
+import FormattingBar from './FormattingBar.astro';
+import SymbolsDropdown from './SymbolsDropdown.astro';
+---
+
+<div class="linkedin-formatter">
+  <div class="variant-editor-container">
+    <div class="linkedin-post-editor">
+      <div class="post-header">
+        <div class="profile-info">
+          <div class="profile-pic avatar">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+          <div class="user-info">
+            <div class="user-name">Your Name</div>
+            <div class="user-title">Your Title</div>
+          </div>
+        </div>
+        <button id="smart-format-button" class="copy-button" disabled>AI Formatter</button>
+      </div>
+      
+      <FormattingBar />
+      
+      <TextEditor />
+      
+      <div class="post-footer">
+        <div class="character-counter">
+          <span id="char-count">0</span>/3,000
+        </div>
+        <button id="copy-button" class="copy-button copy-button-white" disabled>Copy to Clipboard</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="coming-soon-toast" class="toast">AI formatting coming soon! 🚀</div>
+
+<script>
+  import { copyToClipboard, getCharCount } from './utils/editor-utils';
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    const textArea = document.getElementById('linkedin-text-editor') as HTMLTextAreaElement;
+    const charCount = document.getElementById('char-count');
+    const copyButton = document.getElementById('copy-button') as HTMLButtonElement;
+    const smartFormatButton = document.getElementById('smart-format-button') as HTMLButtonElement;
+    const comingSoonToast = document.getElementById('coming-soon-toast');
+
+    const updateButtonStates = () => {
+      const hasContent = textArea && textArea.value.trim().length > 0;
+      
+      if (copyButton) {
+        copyButton.disabled = !hasContent;
+      }
+      
+      if (smartFormatButton) {
+        smartFormatButton.disabled = !hasContent;
+      }
+    };
+
+    if (textArea && charCount) {
+      textArea.addEventListener('input', () => {
+        const count = getCharCount(textArea);
+        charCount.textContent = count.toLocaleString('en-US');
+        
+        if (count > 2700) {
+          charCount.classList.add('near-limit');
+        } else {
+          charCount.classList.remove('near-limit');
+        }
+        
+        if (count > 3000) {
+          charCount.classList.add('exceed-limit');
+        } else {
+          charCount.classList.remove('exceed-limit');
+        }
+        
+        updateButtonStates();
+      });
+    }
+
+    if (copyButton && textArea) {
+      copyButton.addEventListener('click', async () => {
+        const success = await copyToClipboard(textArea);
+        
+        if (success) {
+          const originalText = copyButton.textContent;
+          copyButton.textContent = 'Copied!';
+          copyButton.classList.add('copied');
+          
+          setTimeout(() => {
+            if (originalText) {
+              copyButton.textContent = originalText;
+            }
+            copyButton.classList.remove('copied');
+          }, 2000);
+        }
+      });
+    }
+    
+    if (smartFormatButton && comingSoonToast) {
+      smartFormatButton.addEventListener('click', () => {
+        comingSoonToast.classList.add('show');
+        
+        setTimeout(() => {
+          comingSoonToast.classList.remove('show');
+        }, 3000);
+        
+        try {
+        } catch (e) {
+        }
+      });
+    }
+    
+    updateButtonStates();
+  });
+</script>
+
+<style>
+  .linkedin-formatter {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: var(--color-background);
+    padding: var(--spacing-lg) 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+  }
+  
+  .variant-editor-container {
+    background-color: rgba(0, 0, 0, 0.15);
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+  }
+  
+  .linkedin-post-editor {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .post-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  .profile-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .profile-pic {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 0.75rem;
+    background-color: #444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .profile-pic.avatar svg {
+    width: 2rem;
+    height: 2rem;
+    color: #777;
+  }
+  
+  .user-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .user-name {
+    font-weight: 600;
+    color: var(--color-text);
+    font-size: 1rem;
+  }
+  
+  .user-title {
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+  }
+  
+  .post-footer {
+    padding: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .character-counter {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+  }
+  
+  .near-limit {
+    color: var(--color-warning);
+  }
+  
+  .exceed-limit {
+    color: var(--color-danger);
+  }
+  
+  .copy-button {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--muted-foreground, var(--color-text-light));
+    font-family: var(--font-mono, 'Space Mono', monospace);
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 0.25rem;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    letter-spacing: 0.5px;
+  }
+  
+  .copy-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--foreground, var(--color-text));
+    transform: translateY(-1px);
+  }
+  
+  .copy-button.copied {
+    background-color: var(--color-success, #CCCCCC);
+    color: var(--color-secondary, #222222);
+  }
+  
+  .copy-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  .copy-button-white {
+    background-color: #FFFFFF;
+    color: #000000;
+  }
+  
+  .copy-button-white:hover {
+    background-color: #F0F0F0;
+    color: #000000;
+  }
+  
+  .copy-button-white.copied {
+    background-color: var(--color-success, #CCCCCC);
+    color: #000000;
+  }
+  
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-family: var(--font-primary);
+    z-index: 1000;
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    font-size: 0.9rem;
+  }
+  
+  .toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+  
+  @media (max-width: 768px) {
+    .linkedin-formatter {
+      padding: var(--spacing-md) var(--spacing-sm);
+    }
+    
+    .post-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+    
+    .profile-info {
+      width: 100%;
+    }
+    
+    #smart-format-button {
+      align-self: flex-end;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .linkedin-formatter {
+      padding: var(--spacing-sm) var(--spacing-xs);
+    }
+    
+    .post-footer {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+    
+    .character-counter {
+      width: 100%;
+      margin-bottom: 0.5rem;
+    }
+    
+    #copy-button {
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style> 

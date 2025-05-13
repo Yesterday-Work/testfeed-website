@@ -8,6 +8,7 @@ import { Icon } from 'astro-icon/components';
 import DemoVideoSection from '../../components/DemoVideoSection.astro';
 import MarkdownContent from '../../components/MarkdownContent.astro';
 import LinkedInTool from '../../components/tools/linkedin-preview-tool/LinkedInTool.astro';
+import LinkedInFormatter from '../../components/tools/linkedin-formatter/LinkedInFormatter.astro';
 
 // Get homepage content for CTA section and video
 const homepageEntries = await getCollection('homepage');
@@ -71,6 +72,8 @@ const breadcrumbItems: BreadcrumbItem[] = [
   <!-- Conditionally rendering of tools -->
   {entry.slug === 'linkedin-post-preview' ? (
     <LinkedInTool />
+  ) : entry.slug === 'linkedin-text-formatter' ? (
+    <LinkedInFormatter />
   ) : (
     <div class="demo-video-wrapper">
       <DemoVideoSection
