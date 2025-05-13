@@ -10,6 +10,30 @@ const homepageEntry = homepageEntries.find(entry => entry.id === 'main.md') || h
 
 // Get tools collection
 const toolsEntries = await getCollection('tools');
+
+// Define the desired order of slugs
+const prioritizedSlugs = [
+  'linkedin-text-formatter',
+  'linkedin-post-preview',
+  'linkedin-carousel-generator'
+];
+
+// Sort the toolsEntries
+toolsEntries.sort((a, b) => {
+  const indexA = prioritizedSlugs.indexOf(a.slug);
+  const indexB = prioritizedSlugs.indexOf(b.slug);
+
+  if (indexA !== -1 && indexB === -1) {
+    return -1;
+  }
+  if (indexA === -1 && indexB !== -1) {
+    return 1;
+  }
+  if (indexA !== -1 && indexB !== -1) {
+    return indexA - indexB;
+  }
+  return 0;
+});
 ---
 
 <BaseLayout 

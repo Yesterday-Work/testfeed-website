@@ -1,0 +1,106 @@
+---
+import SymbolsDropdown from './SymbolsDropdown.astro';
+---
+
+<div class="formatting-bar">
+  <div class="formatting-buttons">
+    <button class="format-btn" id="bold-btn" title="Bold">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path>
+        <path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path>
+      </svg>
+    </button>
+    <button class="format-btn" id="italic-btn" title="Italic">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="4" x2="10" y2="4"></line>
+        <line x1="14" y1="20" x2="5" y2="20"></line>
+        <line x1="15" y1="4" x2="9" y2="20"></line>
+      </svg>
+    </button>
+    <button class="format-btn" id="small-caps-btn" title="ALL CAPS">
+      <span>AA</span>
+    </button>
+    <div class="divider"></div>
+    <SymbolsDropdown />
+  </div>
+</div>
+
+<script>
+  import { 
+    boldMap, 
+    italicMap, 
+    smallCapsMap, 
+    transformSelectedText 
+  } from './utils/unicode-transformations';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const textArea = document.getElementById('linkedin-text-editor') as HTMLTextAreaElement;
+    const boldBtn = document.getElementById('bold-btn');
+    const italicBtn = document.getElementById('italic-btn');
+    const smallCapsBtn = document.getElementById('small-caps-btn');
+    
+    if (boldBtn && textArea) {
+      boldBtn.addEventListener('click', () => {
+        transformSelectedText(textArea, boldMap);
+      });
+    }
+    
+    if (italicBtn && textArea) {
+      italicBtn.addEventListener('click', () => {
+        transformSelectedText(textArea, italicMap);
+      });
+    }
+    
+    if (smallCapsBtn && textArea) {
+      smallCapsBtn.addEventListener('click', () => {
+        transformSelectedText(textArea, smallCapsMap);
+      });
+    }
+  });
+</script>
+
+<style>
+  .formatting-bar {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  
+  .formatting-buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .format-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.25rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: var(--color-text);
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  
+  .format-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .format-btn span {
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+  
+  .divider {
+    height: 1.5rem;
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 0 0.25rem;
+  }
+</style> 

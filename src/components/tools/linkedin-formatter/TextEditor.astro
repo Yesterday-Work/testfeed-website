@@ -1,0 +1,43 @@
+<div class="text-editor-container">
+  <textarea 
+    id="linkedin-text-editor" 
+    class="linkedin-post-editor-textarea" 
+    placeholder="Write your LinkedIn post here..."
+  ></textarea>
+</div>
+
+<style>
+  .text-editor-container {
+    width: 100%;
+  }
+  
+  .linkedin-post-editor-textarea {
+    min-height: 20rem;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: var(--color-text);
+    border: none;
+    border-radius: 0;
+    resize: vertical;
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    padding: 1rem;
+  }
+  
+  .linkedin-post-editor-textarea::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+    font-style: italic;
+    opacity: 0.7;
+  }
+  
+  .linkedin-post-editor-textarea:focus::placeholder {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  
+  .linkedin-post-editor-textarea:focus {
+    outline: none;
+    box-shadow: none;
+  }
+</style> 

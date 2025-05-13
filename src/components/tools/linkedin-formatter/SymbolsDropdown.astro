@@ -1,0 +1,185 @@
+---
+---
+
+<div class="symbols-dropdown">
+  <button class="symbols-toggle" id="symbols-toggle" title="Insert Symbols">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+      <line x1="9" y1="9" x2="9.01" y2="9"></line>
+      <line x1="15" y1="9" x2="15.01" y2="9"></line>
+    </svg>
+  </button>
+  
+  <div class="symbols-panel" id="symbols-panel">
+    <div class="symbols-category">
+      <h3>Arrows</h3>
+      <div class="symbols-grid">
+        <button class="symbol-btn" data-symbol="→">→</button>
+        <button class="symbol-btn" data-symbol="⇒">⇒</button>
+        <button class="symbol-btn" data-symbol="↳">↳</button>
+        <button class="symbol-btn" data-symbol="➞">➞</button>
+        <button class="symbol-btn" data-symbol="➜">➜</button>
+        <button class="symbol-btn" data-symbol="⟶">⟶</button>
+      </div>
+    </div>
+    
+    <div class="symbols-category">
+      <h3>Bullets</h3>
+      <div class="symbols-grid">
+        <button class="symbol-btn" data-symbol="•">•</button>
+        <button class="symbol-btn" data-symbol="◦">◦</button>
+        <button class="symbol-btn" data-symbol="‣">‣</button>
+        <button class="symbol-btn" data-symbol="✓">✓</button>
+        <button class="symbol-btn" data-symbol="✔">✔</button>
+        <button class="symbol-btn" data-symbol="☑">☑</button>
+      </div>
+    </div>
+    
+    <div class="symbols-category">
+      <h3>Dividers</h3>
+      <div class="symbols-grid">
+        <button class="symbol-btn" data-symbol="|">|</button>
+        <button class="symbol-btn" data-symbol="—">—</button>
+        <button class="symbol-btn" data-symbol="·">·</button>
+        <button class="symbol-btn" data-symbol="•••">•••</button>
+        <button class="symbol-btn" data-symbol="⟡">⟡</button>
+        <button class="symbol-btn" data-symbol="◆">◆</button>
+      </div>
+    </div>
+    
+    <div class="symbols-category">
+      <h3>Special</h3>
+      <div class="symbols-grid">
+        <button class="symbol-btn" data-symbol="★">★</button>
+        <button class="symbol-btn" data-symbol="✧">✧</button>
+        <button class="symbol-btn" data-symbol="✗">✗</button>
+        <button class="symbol-btn" data-symbol="♥">♥</button>
+        <button class="symbol-btn" data-symbol="◈">◈</button>
+        <button class="symbol-btn" data-symbol="≈">≈</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { insertSymbolAtCursor } from './utils/editor-utils';
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    const symbolsToggle = document.getElementById('symbols-toggle');
+    const symbolsPanel = document.getElementById('symbols-panel');
+    const symbolBtns = document.querySelectorAll('.symbol-btn');
+    const textArea = document.getElementById('linkedin-text-editor') as HTMLTextAreaElement;
+    
+    if (symbolsToggle && symbolsPanel) {
+      symbolsToggle.addEventListener('click', (e: MouseEvent) => {
+        e.stopPropagation();
+        symbolsPanel.classList.toggle('show');
+      });
+      
+      document.addEventListener('click', (e: MouseEvent) => {
+        if (!symbolsPanel) return;
+        
+        if (symbolsPanel.classList.contains('show') && 
+            !symbolsPanel.contains(e.target as Node) && 
+            e.target !== symbolsToggle) {
+          symbolsPanel.classList.remove('show');
+        }
+      });
+    }
+    
+    if (symbolBtns && textArea) {
+      symbolBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const symbol = btn.getAttribute('data-symbol');
+          
+          if (!symbol || !symbolsPanel) return;
+          
+          insertSymbolAtCursor(textArea, symbol);
+          
+          symbolsPanel.classList.remove('show');
+        });
+      });
+    }
+  });
+</script>
+
+<style>
+  .symbols-dropdown {
+    position: relative;
+  }
+  
+  .symbols-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.25rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: var(--color-text);
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  
+  .symbols-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .symbols-panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+    background-color: var(--color-card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    z-index: 100;
+    padding: 1rem;
+    display: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .symbols-panel.show {
+    display: block;
+  }
+  
+  .symbols-category {
+    margin-bottom: 1rem;
+  }
+  
+  .symbols-category h3 {
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-text-light);
+  }
+  
+  .symbols-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.5rem;
+  }
+  
+  .symbol-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.25rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: var(--color-text);
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 1rem;
+  }
+  
+  .symbol-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+  }
+</style> 
