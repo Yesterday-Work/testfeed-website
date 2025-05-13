@@ -183,16 +183,19 @@ export const contentSchema = z.object({
  */
 export const blogSchema = z.object({
   // SEO fields - required for blog posts
-  pageTitle: z.string().describe("Browser tab title - should include primary keyword"),
-  pageDescription: z.string().describe("Meta description for SEO - should be 150-160 characters with primary keyword"),
+  title: z.string().describe("Browser tab title - should include primary keyword"),
+  description: z.string().describe("Meta description for SEO - should be 150-160 characters with primary keyword"),
   
   // Blog-specific metadata
   articleTitle: z.string().describe("The main H1 title displayed on the blog post page"),
   publishDate: z.date().describe("Publication date for the blog post"),
+  updatedDate: z.date().optional().describe("Date the post was last updated"),
   author: z.string().describe("Author name"),
   featuredImage: z.string().optional().describe("Path to featured image relative to /public"),
   excerpt: z.string().describe("Short excerpt/summary used for previews and SEO"),
   tags: z.array(z.string()).optional().describe("Categories or tags for the blog post"),
+  minutesRead: z.number().optional().describe("Estimated time to read the article in minutes"),
+  draft: z.boolean().default(false).describe("Set to true to hide post from production builds"),
   
   // Schema.org markup for rich results
   schemaMarkup: z.object({
@@ -204,6 +207,34 @@ export const blogSchema = z.object({
   hero: heroSchema.optional().describe("Hero section at the top of the page"),
   problemSection: problemSectionSchema.optional().describe("Problem statement section with cards"),
   finalCtaSection: finalCtaSectionSchema.optional().describe("Final call-to-action section"),
+});
+
+/**
+ * TOOL CONTENT SCHEMA
+ * ------------------
+ * This defines the structure for individual tools.
+ * Tool content is now handled directly through markdown with automatic styling.
+ */
+export const toolSchema = z.object({
+  // SEO fields
+  title: z.string().describe("Tool name and browser tab title"),
+  description: z.string().describe("Short description of the tool used for cards and SEO"),
+  
+  // Tool-specific metadata
+  icon: z.string().optional().describe("Lucide icon name (e.g., 'download', 'type')"),
+  
+  // SEO team additions
+  toolImage: z.string().optional().describe("Optional image path for the tool"),
+  
+  // Schema.org markup for rich results
+  schemaMarkup: z.object({
+    type: z.string().default("WebPage").describe("Schema.org type for tool pages"),
+    properties: z.record(z.any()).optional().describe("Additional schema properties as key-value pairs")
+  }).optional().describe("Structured data for rich search results"),
+
+  // Note: The actual tool content is written in Markdown in the body of the file.
+  // Sections like "How It Works", "Key Benefits", "Features", etc. are automatically styled
+  // based on their heading names. No additional frontmatter configuration is needed.
 });
 
 /**
@@ -236,9 +267,16 @@ const legalCollection = defineCollection({
   }),
 });
 
+// Tools collection
+const toolsCollection = defineCollection({
+  type: 'content',
+  schema: toolSchema
+});
+
 // Export collections
 export const collections = {
   'homepage': homepageCollection,
   'blog': blogCollection,
   'legal': legalCollection,
+  'tools': toolsCollection
 }; 

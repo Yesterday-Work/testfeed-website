@@ -15,7 +15,20 @@ export default defineConfig({
     envPrefix: 'PUBLIC_'
   },
   integrations: [
-    sitemap(),
+    sitemap({
+      changefreq: 'weekly',
+      priority: 0.7,
+      lastmod: new Date(),
+      filter: (page) => {
+        // Include all pages except draft blog posts
+        return !page.includes('draft');
+      },
+      customPages: [
+        'https://testfeed.ai/features',
+        'https://testfeed.ai/privacy-policy',
+        'https://testfeed.ai/terms-of-service'
+      ]
+    }),
     googleAnalytics(),
     posthogAnalytics(),
     icon()

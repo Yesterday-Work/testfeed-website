@@ -1,0 +1,176 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FinalCTASection from '../components/FinalCTASection.astro';
+import { Icon } from 'astro-icon/components';
+
+// Fetch the content from main.md file for the CTA section
+const homepageEntries = await getCollection('homepage');
+const homepageEntry = homepageEntries.find(entry => entry.id === 'main.md') || homepageEntries[0];
+
+// Get tools collection
+const toolsEntries = await getCollection('tools');
+---
+
+<BaseLayout 
+  title="Tools - TestFeed" 
+  description="Explore the powerful tools TestFeed offers to boost your content creation."
+>
+  <div class="py-12 md:py-16 lg:py-20">
+    <div class="container">
+      <div class="page-header">
+        <h1>All <span class="highlight">Tools</span></h1>
+        <p class="subtitle">Discover the powerful utilities that TestFeed offers to enhance your productivity and content creation process.</p>
+      </div>
+      
+      <div class="tools-grid">
+        {toolsEntries.map((tool) => (
+          <a href={`/tools/${tool.slug}`} class="tool-card animate-on-scroll">
+            {tool.data.icon && (
+              <div class="tool-icon">
+                <Icon name={`lucide:${tool.data.icon}`} />
+              </div>
+            )}
+            <h3>{tool.data.title}</h3>
+            <p>{tool.data.description}</p>
+            <span class="learn-more">Learn more →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  {homepageEntry.data.finalCtaSection && (
+    <FinalCTASection {...homepageEntry.data.finalCtaSection} />
+  )}
+</BaseLayout>
+
+<style>
+  .page-header {
+    text-align: center;
+    padding-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .page-header h1 {
+    margin-bottom: var(--spacing-md);
+    font-size: 3.5rem;
+  }
+  
+  .subtitle {
+    font-size: 1.2rem;
+    color: var(--color-text-light);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+  }
+  
+  .tool-card {
+    background-color: var(--color-card-bg);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    height: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .tool-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg), var(--glow);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .tool-icon {
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-highlight);
+  }
+  
+  .tool-icon svg {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .tool-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-white);
+  }
+  
+  .tool-card p {
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .learn-more {
+    color: var(--color-primary);
+    font-weight: 600;
+    transition: var(--transition);
+  }
+  
+  .tool-card:hover .learn-more {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    .tools-grid {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+    
+    .page-header h1 {
+      font-size: 2.5rem;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const animateElements = document.querySelectorAll('.animate-on-scroll');
+    
+    // Function to check if element is in viewport
+    function isInViewport(element: HTMLElement) {
+      const rect = element.getBoundingClientRect();
+      return (
+        rect.top <= window.innerHeight - 100
+      );
+    }
+    
+    // Function to handle scroll animation
+    function handleScroll() {
+      animateElements.forEach((element, index) => {
+        if (isInViewport(element as HTMLElement)) {
+          // Add delay based on index for staggered animation
+          setTimeout(() => {
+            element.classList.add('show');
+          }, index * 100);
+        }
+      });
+    }
+    
+    // Run once on load
+    handleScroll();
+    
+    // Add scroll listener
+    window.addEventListener('scroll', handleScroll);
+  });
+</script> 

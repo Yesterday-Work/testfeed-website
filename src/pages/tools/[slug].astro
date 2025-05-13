@@ -1,0 +1,332 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FinalCTASection from '../../components/FinalCTASection.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import type { BreadcrumbItem } from '../../components/Breadcrumbs.astro';
+import { Icon } from 'astro-icon/components';
+import DemoVideoSection from '../../components/DemoVideoSection.astro';
+import MarkdownContent from '../../components/MarkdownContent.astro';
+
+// Get homepage content for CTA section and video
+const homepageEntries = await getCollection('homepage');
+const homepageEntry = homepageEntries.find(entry => entry.id === 'main.md') || homepageEntries[0];
+const videoId = homepageEntry.data.videoSection?.videoId || "Ic-OcghxCuk";
+const videoTitle = homepageEntry.data.videoSection?.title || "See TestFeed in action";
+
+// Get all tool entries for static paths and "other tools" section
+export async function getStaticPaths() {
+  const toolEntries = await getCollection('tools');
+  return toolEntries.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry, allTools: toolEntries }, 
+  }));
+}
+
+// Get the tool entry and all tools from props
+const { entry, allTools } = Astro.props;
+const otherTools = allTools.filter(tool => tool.slug !== entry.slug);
+
+// Render the markdown content
+const { Content } = await entry.render();
+
+// Prepare breadcrumb items
+const breadcrumbItems: BreadcrumbItem[] = [
+  { label: "home", href: "/" },
+  { label: "tools", href: "/tools" },
+  { label: entry.data.title.toLowerCase() }
+];
+---
+
+<BaseLayout 
+  title={`${entry.data.title} - TestFeed`}
+  description={entry.data.description}
+>
+  <!-- Tool Page Hero Section -->
+  <section class="tool-page-hero">
+    <div class="container">
+      <div class="hero-content">
+        {entry.data.icon && (
+          <div class="hero-icon-wrapper">
+            <Icon name={`lucide:${entry.data.icon}`} class="hero-icon" />
+          </div>
+        )}
+        <h1 class="hero-title">{entry.data.title}</h1>
+        <p class="hero-description">{entry.data.description}</p>
+        <div class="hero-cta">
+          <a href="/#get-started" class="btn btn-primary pulse">
+            Sign Up Free
+          </a>
+          <p class="cta-subtext">Trusted by 10,000+ people worldwide</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container breadcrumbs-container">
+    <Breadcrumbs items={breadcrumbItems} /> 
+  </div>
+
+  <!-- Use the DemoVideoSection component instead of embedded video HTML -->
+  <div class="demo-video-wrapper">
+    <DemoVideoSection
+      title=""
+      videoId={videoId}
+    />
+  </div>
+
+  <!-- Tool Content Area -->
+  <div class="tool-content-area">
+    <div class="container">
+      <div class="tool-content-wrapper">
+        <article class="tool-content">
+          <MarkdownContent>
+            <Content />
+          </MarkdownContent>
+        </article>
+
+        <!-- Other Tools Section -->
+        {otherTools.length > 0 && (
+          <div class="other-tools"> 
+            <h2 class="other-tools-title">Explore Other Tools</h2>
+            <div class="tools-grid">
+              {otherTools.map((tool) => (
+                <a href={`/tools/${tool.slug}`} class="tool-card"> 
+                  <div class="tool-card-inner">
+                    {tool.data.icon && (
+                      <div class="tool-card-icon-container"> 
+                        <Icon name={`lucide:${tool.data.icon}`} class="tool-nav-icon" />
+                      </div>
+                    )}
+                    <div class="tool-card-content">
+                      <h3>{tool.data.title}</h3>
+                      <p>{tool.data.description}</p>
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+
+  <!-- Final CTA Section -->
+  {homepageEntry.data.finalCtaSection && (
+    <FinalCTASection {...homepageEntry.data.finalCtaSection} />
+  )}
+</BaseLayout>
+
+<style>
+  /* Hero Section */
+  .tool-page-hero {
+    background-color: var(--color-background-offset, #1a1a1a);
+    padding: var(--spacing-xl) 0 var(--spacing-lg) 0;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .tool-page-hero .container {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
+  }
+  
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-primary);
+  }
+
+  .hero-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .hero-title {
+    font-size: 2.8rem;
+    line-height: 1.2;
+    font-weight: 700;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-white);
+  }
+
+  .hero-description {
+    font-size: 1.2rem;
+    color: var(--color-text-light);
+    max-width: 600px;
+    margin: 0 auto var(--spacing-lg) auto;
+    line-height: 1.6;
+  }
+
+  .hero-cta {
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .hero-cta .btn {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    font-weight: 700;
+    padding: 0.75rem 2rem;
+    border-radius: var(--border-radius);
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+  
+  .hero-cta .btn:hover {
+    filter: brightness(110%);
+  }
+
+  .cta-subtext {
+    margin-top: var(--spacing-md);
+    font-size: 0.875rem;
+    color: var(--color-white);
+  }
+  
+  .breadcrumbs-container {
+    padding-top: var(--spacing-sm);
+    padding-bottom: 0;
+  }
+
+  /* Custom styling for the DemoVideoSection */
+  .demo-video-wrapper :global(.demo-video) {
+    padding: var(--spacing-xs) 0 var(--spacing-lg);
+  }
+  
+  @media (min-width: 768px) {
+    .demo-video-wrapper :global(.demo-video) {
+      padding: var(--spacing-md) 0 var(--spacing-lg);
+    }
+  }
+
+  .tool-content-area {
+    background-color: var(--color-background);
+    padding: var(--spacing-md) 0;
+  }
+
+  .tool-content-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .tool-content {
+    background-color: var(--color-card-bg);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-md) var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  /* Ensure tool page headings are left-aligned */
+  .tool-content :global(h1),
+  .tool-content :global(h2),
+  .tool-content :global(h3),
+  .tool-content :global(h4),
+  .tool-content :global(h5),
+  .tool-content :global(h6) {
+    text-align: left !important;
+  }
+
+  /* Other Tools Section */
+  .other-tools {
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .other-tools-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-white);
+  }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+  }
+
+  .tool-card {
+    background-color: var(--color-card-bg);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    transition: var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .tool-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .tool-card-inner {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  .tool-card-icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-white);
+    flex-shrink: 0;
+  }
+
+  .tool-nav-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .tool-card-content {
+    flex: 1;
+  }
+
+  .tool-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-white);
+  }
+
+  .tool-card p {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 0;
+  }
+
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    /* Other tools grid becomes single column */
+    .tools-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+</BaseLayout> 
