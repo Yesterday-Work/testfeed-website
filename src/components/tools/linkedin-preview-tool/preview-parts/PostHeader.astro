@@ -15,7 +15,6 @@ const {
   isGlobal = true 
 } = Astro.props;
 
-// Function to get initials from name (for fallback avatar)
 const getInitials = () => {
   return profileName
     .split(' ')
@@ -41,7 +40,7 @@ const hasImageUrl = profileImageUrl && !profileImageUrl.includes('placeholder-pr
     </div>
     <div class="profile-info">
       <div class="name-and-designation">
-        <a href="#" class="profile-name">{profileName}</a>
+        <span class="profile-name">{profileName}</span>
         <span class="connection-level">• 1st</span>
       </div>
       <div class="headline">{profileHeadline}</div>
@@ -224,7 +223,6 @@ const hasImageUrl = profileImageUrl && !profileImageUrl.includes('placeholder-pr
     margin: 0 2px;
   }
 
-  /* Medium screen adjustments - headline starts truncating earlier */
   @media (max-width: 600px) {
     .headline {
       max-width: 300px;

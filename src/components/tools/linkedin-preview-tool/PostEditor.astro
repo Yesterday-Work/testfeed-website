@@ -1,8 +1,7 @@
 ---
-// Import the required components
 import PostPreview from './PostPreview.astro';
 
-// Default values for the preview data (used for the initial preview)
+// Default values for the preview data
 export const previewData = {
   profileName: "Millie Marconi",
   profileHeadline: "Founder of TestFeed | Helping creators optimize LinkedIn content",
@@ -17,7 +16,7 @@ export const previewData = {
   firstLikerName: "Millie's Mum"
 };
 
-// Empty form values for the editor
+// Empty form values for the composer
 const emptyFormValues = {
   profileName: "",
   profileHeadline: "",
@@ -164,11 +163,13 @@ const emptyFormValues = {
         firstLikerName={previewData.firstLikerName}
       />
     </div>
+    <p class="preview-disclaimer">
+      This preview is a mockup for content planning purposes and is not affiliated with or endorsed by LinkedIn. testfeed tools are designed to help create better content, not to impersonate or misrepresent actual LinkedIn posts.
+    </p>
   </div>
 </div>
 
 <script>
-  // Define the state interface
   interface PostState {
     profileName: string;
     profileHeadline: string;
@@ -183,12 +184,10 @@ const emptyFormValues = {
     firstLikerName: string;
   }
   
-  // Define form element types
   interface FormElements {
     [key: string]: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
   }
   
-  // Add html2canvas types
   declare function html2canvas(element: HTMLElement, options?: any): Promise<HTMLCanvasElement>;
   
   // Add html2canvas script dynamically
@@ -202,11 +201,9 @@ const emptyFormValues = {
     });
   }
 
-  // Load html2canvas from CDN
   loadScript('https://html2canvas.hertzen.com/dist/html2canvas.min.js')
     .catch(err => console.error('Failed to load html2canvas:', err));
   
-  // Default values for preview and reset functionality
   const defaultValues: PostState = {
     profileName: "Millie Marconi",
     profileHeadline: "Founder of testfeed | Creating better content through audience simulation",
@@ -221,10 +218,8 @@ const emptyFormValues = {
     firstLikerName: "Millie's Mum"
   };
   
-  // Current state - start with default preview values
   let currentState: PostState = {...defaultValues};
   
-  // DOM elements
   let previewContainer: HTMLElement | null;
   let formElements: FormElements = {};
   let showFirstLikerCheckbox: HTMLInputElement | null;
@@ -234,11 +229,9 @@ const emptyFormValues = {
   let removePostImageButton: HTMLButtonElement | null;
   let removeProfileImageButton: HTMLButtonElement | null;
   
-  // Initialize on DOM load
   document.addEventListener('DOMContentLoaded', init);
   
   function init(): void {
-    // Get DOM elements
     previewContainer = document.getElementById('preview-container');
     showFirstLikerCheckbox = document.getElementById('showFirstLiker') as HTMLInputElement;
     firstLikerGroup = document.getElementById('firstLikerGroup');
@@ -247,7 +240,6 @@ const emptyFormValues = {
     removePostImageButton = document.getElementById('removePostImage') as HTMLButtonElement;
     removeProfileImageButton = document.getElementById('removeProfileImage') as HTMLButtonElement;
     
-    // Get all form inputs
     const inputs = document.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(
       '#post-editor-form input, #post-editor-form textarea, #post-editor-form select'
     );
@@ -258,26 +250,20 @@ const emptyFormValues = {
       }
     });
     
-    // Start with default values for the preview
     currentState = {...defaultValues};
     
-    // Load saved data if available, otherwise keep empty form
     loadSavedData();
     
-    // Setup event listeners
     setupEventListeners();
     
-    // Update first liker visibility
     updateFirstLikerVisibility();
     
-    // Do initial render of the preview
     updatePreview();
     
     console.log('Tool initialized with state:', currentState);
   }
   
   function setupEventListeners(): void {
-    // Form input changes
     Object.values(formElements).forEach(input => {
       if (input.type === 'file') {
         input.addEventListener('change', handleFileUpload);
@@ -288,27 +274,22 @@ const emptyFormValues = {
       }
     });
     
-    // Reset button
     if (resetButton) {
       resetButton.addEventListener('click', resetForm);
     }
     
-    // Export button
     if (exportButton) {
       exportButton.addEventListener('click', exportAsImage);
     }
     
-    // Remove post image button
     if (removePostImageButton) {
       removePostImageButton.addEventListener('click', removePostImage);
     }
     
-    // Remove profile image button
     if (removeProfileImageButton) {
       removeProfileImageButton.addEventListener('click', removeProfileImage);
     }
     
-    // Show/hide first liker field
     if (showFirstLikerCheckbox) {
       showFirstLikerCheckbox.addEventListener('change', updateFirstLikerVisibility);
     }
@@ -319,9 +300,7 @@ const emptyFormValues = {
     const name = input.name;
     let value = input.value;
     
-    // Convert numeric values
     if (input.type === 'number') {
-      // Limit engagement metrics to 6 digits (999,999 max)
       if (['likeCount', 'commentCount', 'repostCount'].includes(name) && value.length > 6) {
         value = value.slice(0, 6);
         (input as HTMLInputElement).value = value;
@@ -333,11 +312,8 @@ const emptyFormValues = {
       (currentState as any)[name] = value;
     }
     
-    // Special case for profile name to update initials in preview
     if (name === 'profileName') {
-      // Force an update of the profile image to refresh initials
       if (!currentState.profileImageUrl) {
-        // The setTimeout ensures the DOM has updated with the new name
         setTimeout(() => {
           const preview = document.querySelector<HTMLElement>('.linkedin-post-preview');
           if (preview) {
@@ -347,10 +323,8 @@ const emptyFormValues = {
       }
     }
     
-    // Save to localStorage
     saveToLocalStorage();
     
-    // Update preview
     updatePreview();
   }
   
@@ -358,18 +332,14 @@ const emptyFormValues = {
     const checkbox = event.target as HTMLInputElement;
     const name = checkbox.name;
     
-    // Update state
     (currentState as any)[name] = checkbox.checked;
     
-    // Update UI if needed
     if (name === 'showFirstLiker') {
       updateFirstLikerVisibility();
     }
     
-    // Save to localStorage
     saveToLocalStorage();
     
-    // Update preview
     updatePreview();
   }
   
@@ -377,15 +347,12 @@ const emptyFormValues = {
     const input = event.target as HTMLInputElement;
     const files = input.files;
     
-    // Update file name display
     const wrapper = input.closest('.file-input-wrapper');
     if (wrapper) {
       const nameDisplay = wrapper.querySelector('.file-input-name');
       if (nameDisplay) {
         const filename = files && files.length > 0 ? files[0].name : 'No file chosen';
-        // Truncate filename for display if it's too long
         nameDisplay.textContent = filename;
-        // Add title for hover tooltip with full name
         if (files && files.length > 0) {
           nameDisplay.setAttribute('title', files[0].name);
         } else {
@@ -403,7 +370,6 @@ const emptyFormValues = {
       if (e.target && e.target.result) {
         const dataUrl = e.target.result as string;
         
-        // Update state based on which file input was changed
         if (input.id === 'profileImage') {
           currentState.profileName = currentState.profileName || defaultValues.profileName;
           currentState.profileHeadline = currentState.profileHeadline || defaultValues.profileHeadline;
@@ -412,10 +378,8 @@ const emptyFormValues = {
           currentState.postImageUrl = dataUrl;
         }
         
-        // Save to localStorage
         saveToLocalStorage();
         
-        // Update preview
         updatePreview();
         
         console.log('Updated state with image:', input.id, dataUrl.substring(0, 50) + '...');
@@ -435,26 +399,20 @@ const emptyFormValues = {
   function removePostImage(): void {
     currentState.postImageUrl = "";
     
-    // Reset the file input and name display
     resetFileInput('postImage');
     
-    // Save to localStorage
     saveToLocalStorage();
     
-    // Update preview
     updatePreview();
   }
   
   function removeProfileImage(): void {
     currentState.profileImageUrl = "";
     
-    // Reset the file input and name display
     resetFileInput('profileImage');
     
-    // Save to localStorage
     saveToLocalStorage();
     
-    // Update preview
     updatePreview();
   }
   
@@ -473,25 +431,20 @@ const emptyFormValues = {
   }
   
   function updatePreview(): void {
-    // Find the current preview component
     if (!previewContainer) return;
     
     const currentPreview = previewContainer.querySelector<HTMLElement>('.linkedin-post-preview');
     if (!currentPreview) return;
     
-    // Update all text content in the preview
     updatePreviewText(currentPreview, '.profile-name', currentState.profileName || defaultValues.profileName);
     updatePreviewText(currentPreview, '.headline', currentState.profileHeadline || defaultValues.profileHeadline);
     updatePreviewText(currentPreview, '.post-time', currentState.postTime || defaultValues.postTime);
     
-    // Update post text paragraphs
     updatePostText(currentPreview, currentState.postText || defaultValues.postText);
     
-    // Update images
     updateProfileImage(currentPreview, currentState.profileImageUrl);
     updatePostImage(currentPreview, currentState.postImageUrl);
     
-    // Update engagement stats
     updateEngagementStats(currentPreview);
   }
   
@@ -504,16 +457,13 @@ const emptyFormValues = {
     const postTextContainer = container.querySelector<HTMLElement>('.post-text');
     if (!postTextContainer) return;
     
-    // Process the text into paragraphs
     const paragraphs = text
       .replace(/\n\s*\n/g, '\n\n')
       .split('\n\n')
       .map(p => p.trim());
     
-    // Clear existing paragraphs
     postTextContainer.innerHTML = '';
     
-    // Add new paragraphs
     paragraphs.forEach(paragraph => {
       const p = document.createElement('p');
       p.textContent = paragraph;
@@ -522,18 +472,15 @@ const emptyFormValues = {
   }
   
   function updateProfileImage(container: HTMLElement, imageUrl: string): void {
-    // Find the profile image container
     const profileImage = container.querySelector<HTMLElement>('.profile-image');
     if (!profileImage) return;
     
-    // Find image and fallback elements
     const imgElement = profileImage.querySelector<HTMLImageElement>('img');
     const fallbackElement = profileImage.querySelector<HTMLElement>('.profile-image-fallback');
     
     if (!imgElement && !fallbackElement) return;
     
     if (imageUrl) {
-      // Show image if available
       if (imgElement) {
         imgElement.src = imageUrl;
         imgElement.style.display = 'block';
@@ -543,7 +490,6 @@ const emptyFormValues = {
         imgElement.style.objectFit = 'cover';
         imgElement.style.objectPosition = 'center';
       } else {
-        // Create image if it doesn't exist
         const newImg = document.createElement('img');
         newImg.src = imageUrl;
         newImg.alt = "Profile picture";
@@ -555,21 +501,17 @@ const emptyFormValues = {
         profileImage.appendChild(newImg);
       }
       
-      // Hide fallback
       if (fallbackElement) {
         fallbackElement.style.display = 'none';
       }
     } else {
-      // Hide image
       if (imgElement) {
         imgElement.style.display = 'none';
       }
       
-      // Show fallback with initials
       if (fallbackElement) {
         fallbackElement.style.display = 'flex';
         
-        // Update initials
         const nameToUse = currentState.profileName || defaultValues.profileName;
         const initials = getInitials(nameToUse);
         
@@ -582,23 +524,19 @@ const emptyFormValues = {
   }
   
   function updatePostImage(container: HTMLElement, imageUrl: string): void {
-    // Find the post media container
     const postMedia = container.querySelector<HTMLElement>('.post-media');
     
-    // Log for debugging
     console.log('updatePostImage called with imageUrl:', imageUrl ? 'image present' : 'no image');
     console.log('Found post-media element:', postMedia ? 'yes' : 'no');
     
     if (!postMedia) {
       console.error('Post media container not found. Creating one.');
-      // If post media container doesn't exist, find post body and create it
       const postBody = container.querySelector<HTMLElement>('.post-body');
       if (!postBody) {
         console.error('Post body not found either.');
         return;
       }
       
-      // Create the post media container
       const newPostMedia = document.createElement('div');
       newPostMedia.className = 'post-media';
       newPostMedia.style.marginTop = '8px';
@@ -612,7 +550,6 @@ const emptyFormValues = {
       postBody.appendChild(newPostMedia);
       
       if (imageUrl) {
-        // Create image element
         const imgElement = document.createElement('img');
         imgElement.src = imageUrl;
         imgElement.alt = 'Post image';
@@ -633,7 +570,6 @@ const emptyFormValues = {
     
     if (imageUrl) {
       console.log('Setting post image with URL');
-      // If there's already an image, update it; otherwise, create a new one
       let imgElement = postMedia.querySelector<HTMLImageElement>('img');
       if (!imgElement) {
         console.log('No existing img element, creating one');
@@ -651,11 +587,9 @@ const emptyFormValues = {
         postMedia.appendChild(imgElement);
       }
       
-      // Set new source and ensure visibility
       imgElement.src = imageUrl;
       postMedia.style.display = 'block';
     } else {
-      // Hide the media section if no image
       postMedia.style.display = 'none';
       console.log('Hiding post media container');
     }
@@ -672,35 +606,27 @@ const emptyFormValues = {
       }
     );
     
-    // Check if we need to show or hide the entire stats section
     const hasEngagement = currentState.likeCount > 0 || currentState.commentCount > 0 || currentState.repostCount > 0;
-    
-    // Find the post actions container (which comes after stats)
     const postActionsContainer = container.querySelector<HTMLElement>('.post-actions');
     if (!postActionsContainer) {
       console.error('Post actions container not found');
       return;
     }
     
-    // Find the existing stats container
     let statsContainer = container.querySelector<HTMLElement>('.post-stats');
     
-    // Remove the existing stats container if it exists
     if (statsContainer) {
       statsContainer.remove();
     }
     
-    // If no engagement, don't create a new stats container
     if (!hasEngagement) {
       return;
     }
     
-    // Format a number with commas for thousands
     const formatNumber = (num: number): string => {
       return num.toLocaleString('en-US');
     };
     
-    // Create a new stats container
     statsContainer = document.createElement('div');
     statsContainer.className = 'post-stats';
     statsContainer.style.display = 'flex';
@@ -712,19 +638,16 @@ const emptyFormValues = {
     statsContainer.style.fontSize = '14px';
     statsContainer.style.borderBottom = 'thin solid rgba(0, 0, 0, 0.08)';
     
-    // Create reactions section
     const reactionsSection = document.createElement('div');
     reactionsSection.className = 'reactions-section';
     reactionsSection.style.display = 'flex';
     reactionsSection.style.alignItems = 'center';
     
-    // Create reactions icons
     const reactionsIcons = document.createElement('div');
     reactionsIcons.className = 'reactions-icons';
     reactionsIcons.style.display = 'flex';
     reactionsIcons.style.marginRight = '6px';
     
-    // Create like icon
     const likeIcon = document.createElement('span');
     likeIcon.className = 'reaction-icon like-icon';
     likeIcon.style.width = '16px';
@@ -734,7 +657,6 @@ const emptyFormValues = {
     likeIcon.style.alignItems = 'center';
     likeIcon.style.justifyContent = 'center';
     
-    // Create like icon image
     const likeIconImage = document.createElement('img');
     likeIconImage.src = '/icons/like-small.png';
     likeIconImage.alt = 'Like';
@@ -742,14 +664,12 @@ const emptyFormValues = {
     likeIconImage.style.width = '16px';
     likeIconImage.style.height = '16px';
     
-    // Create reactions text for desktop
     const reactionsTextDesktop = document.createElement('span');
     reactionsTextDesktop.className = 'reactions-text desktop-reactions';
     reactionsTextDesktop.style.fontSize = '14px';
     reactionsTextDesktop.style.color = 'rgba(0, 0, 0, 0.6)';
     reactionsTextDesktop.style.paddingTop = '1px';
     
-    // Create reactions text for mobile
     const reactionsTextMobile = document.createElement('span');
     reactionsTextMobile.className = 'reactions-text mobile-reactions';
     reactionsTextMobile.style.fontSize = '10px';
@@ -757,7 +677,6 @@ const emptyFormValues = {
     reactionsTextMobile.style.paddingTop = '1px';
     reactionsTextMobile.style.display = 'none';
     
-    // Set reactions text content
     if (currentState.showFirstLiker && currentState.likeCount > 0) {
       const likerName = currentState.firstLikerName || 'You';
       let likeText = likerName;
@@ -765,14 +684,12 @@ const emptyFormValues = {
         likeText += ` and ${formatNumber(currentState.likeCount - 1)} other${currentState.likeCount > 2 ? 's' : ''}`;
       }
       reactionsTextDesktop.textContent = likeText;
-      // Mobile always shows just the number
       reactionsTextMobile.textContent = formatNumber(currentState.likeCount);
     } else if (currentState.likeCount > 0) {
       reactionsTextDesktop.textContent = formatNumber(currentState.likeCount);
       reactionsTextMobile.textContent = formatNumber(currentState.likeCount);
     }
     
-    // Create comments-reposts section
     const commentsReposts = document.createElement('div');
     commentsReposts.className = 'comments-reposts';
     commentsReposts.style.display = 'flex';
@@ -780,7 +697,6 @@ const emptyFormValues = {
     commentsReposts.style.fontSize = '14px';
     commentsReposts.style.color = 'rgba(0, 0, 0, 0.6)';
     
-    // Add comment count if needed
     if (currentState.commentCount > 0) {
       const commentCount = document.createElement('span');
       commentCount.className = 'comment-count';
@@ -789,7 +705,6 @@ const emptyFormValues = {
       commentsReposts.appendChild(commentCount);
     }
     
-    // Add separator if needed
     if (currentState.commentCount > 0 && currentState.repostCount > 0) {
       const separator = document.createElement('span');
       separator.className = 'separator';
@@ -798,7 +713,6 @@ const emptyFormValues = {
       commentsReposts.appendChild(separator);
     }
     
-    // Add repost count if needed
     if (currentState.repostCount > 0) {
       const repostCount = document.createElement('span');
       repostCount.className = 'repost-count';
@@ -807,7 +721,6 @@ const emptyFormValues = {
       commentsReposts.appendChild(repostCount);
     }
     
-    // Assemble the DOM structure
     likeIcon.appendChild(likeIconImage);
     reactionsIcons.appendChild(likeIcon);
     reactionsSection.appendChild(reactionsIcons);
@@ -816,10 +729,8 @@ const emptyFormValues = {
     statsContainer.appendChild(reactionsSection);
     statsContainer.appendChild(commentsReposts);
     
-    // Insert the stats container before the post actions
     container.insertBefore(statsContainer, postActionsContainer);
     
-    // Add mobile-specific style to handle the mobile view
     const styleEl = document.createElement('style');
     styleEl.textContent = `
       @media (max-width: 500px) {
@@ -849,7 +760,6 @@ const emptyFormValues = {
   }
   
   function resetForm(): void {
-    // Clear form values but keep default preview
     Object.keys(formElements).forEach((key) => {
       const input = formElements[key];
       if (!input) return;
@@ -857,8 +767,6 @@ const emptyFormValues = {
       if (input.type === 'checkbox') {
         (input as HTMLInputElement).checked = false;
       } else if (input.type === 'file') {
-        // Can't set file input values for security reasons, 
-        // but we can reset the file name display
         const wrapper = input.closest('.file-input-wrapper');
         if (wrapper) {
           const nameDisplay = wrapper.querySelector('.file-input-name');
@@ -867,64 +775,96 @@ const emptyFormValues = {
           }
         }
       } else {
-        // Clear text, number, and select inputs
         input.value = '';
       }
     });
     
-    // Reset the current state for preview
     currentState = {...defaultValues};
     
-    // Clear localStorage
     localStorage.removeItem('linkedinToolState');
     
-    // Update UI
     updateFirstLikerVisibility();
     
-    // Update preview
     updatePreview();
     
     console.log('Form reset: fields cleared, preview reset to defaults');
   }
   
   async function exportAsImage(): Promise<void> {
-    // Check if html2canvas is loaded
     if (typeof html2canvas !== 'function') {
       alert('Image export feature is still loading. Please try again in a moment.');
       return;
     }
     
     try {
-      // Find the preview element
       const previewElement = document.querySelector<HTMLElement>('.linkedin-post-preview');
       if (!previewElement) {
         alert('Preview element not found.');
         return;
       }
       
-      // Update button state
       if (exportButton) {
         exportButton.textContent = 'Generating...';
         exportButton.disabled = true;
       }
+
+      const container = document.createElement('div');
+      container.style.position = 'relative';
+      container.style.display = 'inline-block';
+
+      const clone = previewElement.cloneNode(true) as HTMLElement;
+      clone.style.position = 'static'; 
+      clone.style.margin = '0'; 
+      container.appendChild(clone);
       
-      // Generate canvas
-      const canvas = await html2canvas(previewElement, {
-        scale: 2, // Higher resolution
-        logging: false,
-        useCORS: true // For external images
-      });
+      const watermark = document.createElement('div');
+      watermark.innerText = 'Mock-up post created with testfeed.ai';
+      watermark.style.position = 'absolute';
+      watermark.style.bottom = '40px'; 
+      watermark.style.right = '16px';
+      watermark.style.fontSize = '10px';
+      watermark.style.color = 'rgba(0,0,0,0.3)';
+      watermark.style.fontFamily = 'Arial, sans-serif';
+      watermark.style.pointerEvents = 'none';
+      watermark.style.zIndex = '100';
+      container.appendChild(watermark);
       
-      // Create download link
-      const link = document.createElement('a');
-      link.download = `linkedin-post-${new Date().toISOString().slice(0, 10)}.png`;
-      link.href = canvas.toDataURL('image/png');
-      link.click();
+      document.body.appendChild(container);
+      container.style.position = 'absolute';
+      container.style.left = '-9999px';
+      
+      setTimeout(async () => {
+        try {
+          const canvas = await html2canvas(container, {
+            scale: 2, 
+            logging: false,
+            useCORS: true, 
+            backgroundColor: null
+          });
+          
+          document.body.removeChild(container);
+          
+          const link = document.createElement('a');
+          link.download = `testfeed-linkedin-mockup-${new Date().toISOString().slice(0, 10)}.png`;
+          link.href = canvas.toDataURL('image/png');
+          link.click();
+          
+          if (exportButton) {
+            exportButton.textContent = 'Export as Image';
+            exportButton.disabled = false;
+          }
+        } catch (error) {
+          console.error('Error generating canvas:', error);
+          alert('Error generating image. Please try again.');
+          if (exportButton) {
+            exportButton.textContent = 'Export as Image';
+            exportButton.disabled = false;
+          }
+        }
+      }, 100);
     } catch (error) {
       console.error('Error exporting image:', error);
       alert('Error generating image. Please try again.');
-    } finally {
-      // Reset button state
       if (exportButton) {
         exportButton.textContent = 'Export as Image';
         exportButton.disabled = false;
@@ -942,17 +882,13 @@ const emptyFormValues = {
   
   function loadSavedData(): void {
     try {
-      // Try to get saved state from localStorage
       const savedState = localStorage.getItem('linkedinToolState');
       
       if (savedState) {
-        // Parse saved state
         const parsedState = JSON.parse(savedState) as PostState;
         
-        // Update current state with saved values
         currentState = {...parsedState};
         
-        // Update form elements with saved values
         Object.entries(currentState).forEach(([key, value]) => {
           const input = formElements[key];
           if (!input || input.type === 'file') return;
@@ -964,22 +900,16 @@ const emptyFormValues = {
           }
         });
       } else {
-        // On first load: empty form but show preview with default values
-        // Set current state to default values for preview
         currentState = {...defaultValues};
         
-        // But keep the form fields empty (don't set values)
-        // This way the preview shows example content but form is empty
       }
       
     } catch (error) {
       console.error('Error loading saved data:', error);
-      // In case of error, use default values for preview only
       currentState = {...defaultValues};
     }
   }
   
-  // Add scroll behavior to keep preview visible
   window.addEventListener('scroll', function() {
     const editorSection = document.querySelector('.editor-section');
     const previewSection = document.querySelector('.preview-section');
@@ -988,16 +918,12 @@ const emptyFormValues = {
       const editorRect = editorSection.getBoundingClientRect();
       const previewRect = previewSection.getBoundingClientRect();
       
-      // If editor is longer than preview, adjust sticky behavior
       if (editorRect.height > previewRect.height) {
-        // Already handled by position: sticky
       }
     }
   });
 
-  // Add event listeners for file input styling
   document.addEventListener('DOMContentLoaded', () => {
-    // Set up file input display
     const fileInputs = document.querySelectorAll('input[type="file"]');
     fileInputs.forEach(input => {
       const wrapper = input.closest('.file-input-wrapper');
@@ -1011,7 +937,6 @@ const emptyFormValues = {
       }
     });
     
-    // Existing init code will be called automatically
   });
 </script>
 
@@ -1118,7 +1043,6 @@ select:focus {
   background-color: rgba(255, 255, 255, 0.05);
 }
 
-/* Remove WebKit autofill background color */
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus,
@@ -1343,7 +1267,6 @@ small {
   align-self: flex-end;
 }
 
-/* Portrait profile image display */
 .profile-image {
   border-radius: 50%;
   object-fit: cover;
@@ -1352,5 +1275,15 @@ small {
 .profile-image-fallback {
   background-color: #0a66c2;
   color: white;
+}
+
+.preview-disclaimer {
+  font-size: 0.75rem; 
+  color: rgba(0, 0, 0, 0.5); 
+  text-align: center;
+  margin-top: var(--spacing-sm); 
+  max-width: 552px; 
+  line-height: 1.4;
+  padding: 0 var(--spacing-sm);
 }
 </style> 

@@ -75,7 +75,6 @@ const {
     color: #000000 !important;
   }
   
-  /* Start reducing margins at larger screens */
   @media (max-width: 768px) {
     .linkedin-post-preview {
       max-width: 100%;
@@ -83,7 +82,6 @@ const {
     }
   }
   
-  /* Medium screens - start adjusting font sizes */
   @media (max-width: 600px) {
     .linkedin-post-preview {
       padding: 12px 14px 8px 14px;
@@ -94,7 +92,6 @@ const {
     }
   }
   
-  /* Small screens - more aggressive adjustments */
   @media (max-width: 500px) {
     .linkedin-post-preview {
       padding: 10px 12px 6px 12px;
@@ -102,7 +99,6 @@ const {
       border-radius: 6px;
     }
     
-    /* Remove the font-size override from parent to allow child components to set their own size */
     .linkedin-post-preview :global(.post-stats) {
       font-size: 10px !important;
     }

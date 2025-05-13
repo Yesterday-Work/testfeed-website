@@ -8,14 +8,12 @@ export interface Props {
 const { 
   postText, 
   postImageUrl, 
-  hasReadMore = false  // Keeping the prop but we won't actually use it
+  hasReadMore = false  
 } = Astro.props;
 
-// Process the post text to properly handle line breaks
-// LinkedIn treats consecutive \n as a single break, not as multiple paragraph breaks
 const formattedText = postText
-  .replace(/\n\s*\n/g, '\n\n') // Normalize multiple line breaks to exactly two
-  .split('\n\n')               // Split by paragraph (double line breaks)
+  .replace(/\n\s*\n/g, '\n\n') 
+  .split('\n\n')             
   .map((paragraph) => paragraph.trim());
 ---
 
