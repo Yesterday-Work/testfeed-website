@@ -1,0 +1,160 @@
+---
+export interface Props {
+  likeCount?: number;
+  commentCount?: number;
+  repostCount?: number;
+  showFirstLiker?: boolean;
+  firstLikerName?: string;
+}
+
+const {
+  likeCount = 0,
+  commentCount = 0,
+  repostCount = 0,
+  showFirstLiker = true,
+  firstLikerName = ""
+} = Astro.props;
+
+const displayLikeText = () => {
+  if (showFirstLiker && likeCount > 0) {
+    const othersText = likeCount > 1 ? `and ${(likeCount - 1).toLocaleString()} other${likeCount > 2 ? 's' : ''}` : '';
+    return `${firstLikerName} ${othersText}`.trim();
+  }
+  
+  return likeCount > 0 ? `${likeCount.toLocaleString()}` : '';
+};
+
+const displayCommentText = () => {
+  return commentCount > 0 ? `${commentCount.toLocaleString()} comment${commentCount > 1 ? 's' : ''}` : '';
+};
+
+const displayRepostText = () => {
+  if (repostCount <= 0) return '';
+  return `${repostCount.toLocaleString()} repost${repostCount > 1 ? 's' : ''}`;
+};
+
+const hasAnyEngagement = likeCount > 0 || commentCount > 0 || repostCount > 0;
+const totalLikeCount = likeCount > 0 ? likeCount.toLocaleString() : '';
+---
+
+{hasAnyEngagement && (
+  <div class="post-stats">
+    <div class="reactions-section">
+      <div class="reactions-icons">
+        <span class="reaction-icon like-icon">
+          <img src="/icons/like-small.png" alt="Like" class="like-icon-image" />
+        </span>
+      </div>
+      <span class="reactions-text desktop-reactions">{displayLikeText()}</span>
+      <span class="reactions-text mobile-reactions">{totalLikeCount}</span>
+    </div>
+    
+    <div class="comments-reposts">
+      {commentCount > 0 && (
+        <span class="comment-count">{displayCommentText()}</span>
+      )}
+      
+      {repostCount > 0 && commentCount > 0 && (
+        <span class="separator">•</span>
+      )}
+      
+      {repostCount > 0 && (
+        <span class="repost-count">{displayRepostText()}</span>
+      )}
+    </div>
+  </div>
+)}
+
+<style>
+  .post-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0 12px;
+    margin: 4px 0 0;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 14px;
+    border-bottom: thin solid rgba(0, 0, 0, 0.08);
+  }
+  
+  .reactions-section {
+    display: flex;
+    align-items: center;
+  }
+  
+  .reactions-icons {
+    display: flex;
+    margin-right: 6px;
+  }
+  
+  .reaction-icon {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .like-icon-image {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .reactions-text {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.6);
+    padding-top: 1px;
+  }
+  
+  .mobile-reactions {
+    display: none;
+  }
+  
+  .comments-reposts {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+  
+  .comment-count, .repost-count {
+    cursor: default;
+  }
+  
+  .separator {
+    margin: 0 4px;
+  }
+
+  @media (max-width: 480px) {
+    .post-stats {
+      font-size: 12px !important;
+      padding: 3px 0 10px;
+    }
+    
+    .reactions-text {
+      font-size: 12px !important;
+    }
+    
+    .desktop-reactions {
+      display: none;
+    }
+    
+    .mobile-reactions {
+      display: inline;
+    }
+    
+    .comments-reposts {
+      font-size: 12px !important;
+    }
+    
+    .comment-count, .repost-count {
+      font-size: 12px !important;
+    }
+    
+    .like-icon-image {
+      width: 14px;
+      height: 14px;
+    }
+  }
+</style> 

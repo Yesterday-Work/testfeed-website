@@ -1,0 +1,263 @@
+---
+export interface Props {
+  profileName: string;
+  profileHeadline: string;
+  postTime: string;
+  profileImageUrl: string;
+  isGlobal?: boolean;
+}
+
+const { 
+  profileName, 
+  profileHeadline, 
+  postTime, 
+  profileImageUrl, 
+  isGlobal = true 
+} = Astro.props;
+
+const getInitials = () => {
+  return profileName
+    .split(' ')
+    .map(word => word.charAt(0))
+    .slice(0, 2)
+    .join('')
+    .toUpperCase();
+};
+
+const hasImageUrl = profileImageUrl && !profileImageUrl.includes('placeholder-profile.png');
+---
+
+<div class="post-header">
+  <div class="profile-section">
+    <div class="profile-image">
+      {hasImageUrl ? (
+        <img src={profileImageUrl} alt={`${profileName}'s profile picture`} />
+      ) : (
+        <div class="profile-image-fallback">
+          <span>{getInitials()}</span>
+        </div>
+      )}
+    </div>
+    <div class="profile-info">
+      <div class="name-and-designation">
+        <span class="profile-name">{profileName}</span>
+        <span class="connection-level">• 1st</span>
+      </div>
+      <div class="headline">{profileHeadline}</div>
+      <div class="time-section">
+        <span class="post-time">{postTime}</span>
+        {isGlobal && <span class="global-indicator"><span class="dot-separator">•</span><span class="globe-icon">
+          <img src="/icons/globeicon.png" alt="Global" width="17" height="17" />
+        </span></span>}
+      </div>
+    </div>
+  </div>
+  <div class="more-actions">
+    <div class="more-dots">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 8px;
+    font-family: -apple-system, system-ui, "system-ui", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .profile-section {
+    display: flex;
+    gap: 8px;
+  }
+
+  .profile-image {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .profile-image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    border: none;
+    display: block;
+  }
+
+  .profile-image-fallback {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #0a66c2;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .name-and-designation {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2px;
+  }
+
+  .profile-name {
+    font-weight: 600;
+    font-size: 16px;
+    color: #000000;
+    text-decoration: none;
+    margin-right: 4px;
+    line-height: 20px;
+    letter-spacing: normal;
+    margin-left: 1px;
+  }
+
+  .connection-level {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 12px;
+    font-weight: 400;
+    position: relative;
+    left: -1px;
+    top: 1px;
+  }
+
+  .headline {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.6);
+    margin-bottom: 2px;
+    max-width: 450px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 15px;
+    font-weight: 400;
+    letter-spacing: normal;
+    position: relative;
+    left: 1px;
+    top: -2px;
+  }
+
+  .time-section {
+    display: flex;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 15px;
+    position: relative;
+    left: 1px;
+    top: -4px;
+  }
+
+  .post-time {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 4px;
+  }
+
+  .global-indicator {
+    display: flex;
+    align-items: center;
+    line-height: 16px;
+    position: relative;
+    top: 0.5px;
+  }
+  
+  .dot-separator {
+    margin-right: 4px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .globe-icon {
+    font-size: 12px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .globe-icon img {
+    width: 17px;
+    height: 17px;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+    max-width: none;
+  }
+
+  .more-actions {
+    margin-left: 8px;
+    position: relative;
+    top: 2px;
+  }
+
+  .more-dots {
+    display: flex;
+    padding: 4px 0;
+  }
+
+  .dot {
+    width: 2.5px;
+    height: 2.5px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.6);
+    margin: 0 2px;
+  }
+
+  @media (max-width: 600px) {
+    .headline {
+      max-width: 300px;
+    }
+    
+    .more-actions {
+      margin-left: 4px;
+      padding-right: 4px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .profile-image {
+      width: 40px;
+      height: 40px;
+    }
+
+    .profile-name {
+      font-size: 14px;
+    }
+
+    .headline {
+      max-width: 220px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 11px;
+    }
+
+    .time-section {
+      font-size: 11px;
+    }
+    
+    .more-actions {
+      padding-right: 6px;
+    }
+  }
+</style> 

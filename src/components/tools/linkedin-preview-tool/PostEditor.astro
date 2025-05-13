@@ -1,0 +1,1290 @@
+---
+import PostPreview from './PostPreview.astro';
+
+// Default values for the preview data
+export const previewData = {
+  profileName: "Millie Marconi",
+  profileHeadline: "Founder of TestFeed | Helping creators optimize LinkedIn content",
+  postTime: "1d",
+  postText: "Imagine knowing exactly how your LinkedIn post will perform BEFORE you hit publish.\n\ntestfeed creates a simulated audience that shows exactly how people will respond to your LinkedIn posts.\n\nNo more guessing which version works better or if your message will resonate. See potential issues and audience preferences BEFORE posting.\n\nStop publishing content without knowing how it will perform.",
+  profileImageUrl: "",
+  postImageUrl: "",
+  likeCount: 100,
+  commentCount: 50,
+  repostCount: 4,
+  showFirstLiker: true,
+  firstLikerName: "Millie's Mum"
+};
+
+// Empty form values for the composer
+const emptyFormValues = {
+  profileName: "",
+  profileHeadline: "",
+  postTime: "1d",
+  postText: "",
+  profileImageUrl: "",
+  postImageUrl: "",
+  likeCount: "",
+  commentCount: "",
+  repostCount: "",
+  showFirstLiker: false,
+  firstLikerName: ""
+};
+---
+
+<div class="linkedin-tool-container">
+  <div class="editor-section">
+    <h2>Post Composer</h2>
+    
+    <form id="post-editor-form">
+      <div class="form-section">
+        <h3>Profile Details</h3>
+        <div class="form-group">
+          <label for="profileName">Name</label>
+          <input type="text" id="profileName" name="profileName" value={emptyFormValues.profileName} />
+        </div>
+        
+        <div class="form-group">
+          <label for="profileHeadline">Headline</label>
+          <input type="text" id="profileHeadline" name="profileHeadline" value={emptyFormValues.profileHeadline} />
+        </div>
+        
+        <div class="form-group">
+          <label for="profileImage">Profile Image (Optional)</label>
+          <div class="file-input-wrapper">
+            <div class="file-input-row">
+              <input type="file" id="profileImage" name="profileImage" accept="image/*" />
+              <span class="file-input-button">Choose File</span>
+              <span class="file-input-name">No file chosen</span>
+            </div>
+            <button type="button" id="removeProfileImage" class="btn btn-secondary btn-small btn-remove">Remove</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-section">
+        <h3>Post Content</h3>
+        <div class="form-group">
+          <label for="postTime">Post Time</label>
+          <select id="postTime" name="postTime">
+            <option value="1h">1h</option>
+            <option value="2h">2h</option>
+            <option value="3h">3h</option>
+            <option value="4h">4h</option>
+            <option value="5h">5h</option>
+            <option value="6h">6h</option>
+            <option value="7h">7h</option>
+            <option value="8h">8h</option>
+            <option value="9h">9h</option>
+            <option value="10h">10h</option>
+            <option value="11h">11h</option>
+            <option value="12h">12h</option>
+            <option value="1d" selected>1d</option>
+            <option value="2d">2d</option>
+            <option value="3d">3d</option>
+            <option value="4d">4d</option>
+            <option value="5d">5d</option>
+            <option value="6d">6d</option>
+            <option value="1w">1w</option>
+            <option value="2w">2w</option>
+            <option value="3w">3w</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="postText">Post Text</label>
+          <textarea id="postText" name="postText" rows="8">{emptyFormValues.postText}</textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="postImage">Post Image (Optional)</label>
+          <div class="file-input-wrapper">
+            <div class="file-input-row">
+              <input type="file" id="postImage" name="postImage" accept="image/*" />
+              <span class="file-input-button">Choose File</span>
+              <span class="file-input-name">No file chosen</span>
+            </div>
+            <button type="button" id="removePostImage" class="btn btn-secondary btn-small btn-remove">Remove</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-section">
+        <h3>Engagement</h3>
+        <div class="form-group">
+          <label for="likeCount">Like Count</label>
+          <input type="number" id="likeCount" name="likeCount" min="0" max="999999" value={emptyFormValues.likeCount} />
+        </div>
+        
+        <div class="form-group">
+          <div class="checkbox-wrapper">
+            <input type="checkbox" id="showFirstLiker" name="showFirstLiker" checked={emptyFormValues.showFirstLiker} />
+            <label for="showFirstLiker" class="checkbox-label">Show First Liker</label>
+          </div>
+        </div>
+        
+        <div class="form-group" id="firstLikerGroup">
+          <label for="firstLikerName">First Liker Name</label>
+          <input type="text" id="firstLikerName" name="firstLikerName" value={emptyFormValues.firstLikerName} />
+        </div>
+        
+        <div class="form-group">
+          <label for="commentCount">Comment Count</label>
+          <input type="number" id="commentCount" name="commentCount" min="0" max="999999" value={emptyFormValues.commentCount} />
+        </div>
+        
+        <div class="form-group">
+          <label for="repostCount">Repost Count</label>
+          <input type="number" id="repostCount" name="repostCount" min="0" max="999999" value={emptyFormValues.repostCount} />
+        </div>
+      </div>
+      
+      <div class="actions">
+        <button type="button" id="reset-form" class="btn btn-secondary">Reset to Default</button>
+        <button type="button" id="export-image" class="btn btn-primary">Export as Image</button>
+      </div>
+    </form>
+  </div>
+  
+  <div class="preview-section">
+    <h2>Post Preview</h2>
+    <div id="preview-container">
+      <PostPreview
+        profileName={previewData.profileName}
+        profileHeadline={previewData.profileHeadline}
+        postTime={previewData.postTime}
+        postText={previewData.postText}
+        profileImageUrl={previewData.profileImageUrl}
+        postImageUrl={previewData.postImageUrl}
+        likeCount={previewData.likeCount}
+        commentCount={previewData.commentCount}
+        repostCount={previewData.repostCount}
+        showFirstLiker={previewData.showFirstLiker}
+        firstLikerName={previewData.firstLikerName}
+      />
+    </div>
+    <p class="preview-disclaimer">
+      This preview is a mockup for content planning purposes and is not affiliated with or endorsed by LinkedIn. testfeed tools are designed to help create better content, not to impersonate or misrepresent actual LinkedIn posts.
+    </p>
+  </div>
+</div>
+
+<script>
+  interface PostState {
+    profileName: string;
+    profileHeadline: string;
+    postTime: string;
+    postText: string;
+    profileImageUrl: string;
+    postImageUrl: string;
+    likeCount: number;
+    commentCount: number;
+    repostCount: number;
+    showFirstLiker: boolean;
+    firstLikerName: string;
+  }
+  
+  interface FormElements {
+    [key: string]: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+  }
+  
+  declare function html2canvas(element: HTMLElement, options?: any): Promise<HTMLCanvasElement>;
+  
+  // Add html2canvas script dynamically
+  function loadScript(url: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = url;
+      script.onload = () => resolve();
+      script.onerror = (e) => reject(e);
+      document.head.appendChild(script);
+    });
+  }
+
+  loadScript('https://html2canvas.hertzen.com/dist/html2canvas.min.js')
+    .catch(err => console.error('Failed to load html2canvas:', err));
+  
+  const defaultValues: PostState = {
+    profileName: "Millie Marconi",
+    profileHeadline: "Founder of testfeed | Creating better content through audience simulation",
+    postTime: "1d",
+    postText: "Imagine knowing exactly how your LinkedIn post will perform BEFORE you hit publish.\n\ntestfeed creates a simulated audience that shows exactly how people will respond to your LinkedIn posts.\n\nNo more guessing which version works better or if your message will resonate. See potential issues and audience preferences BEFORE posting.\n\nStop publishing content without knowing how it will perform.",
+    profileImageUrl: "",
+    postImageUrl: "",
+    likeCount: 100,
+    commentCount: 50,
+    repostCount: 4,
+    showFirstLiker: true,
+    firstLikerName: "Millie's Mum"
+  };
+  
+  let currentState: PostState = {...defaultValues};
+  
+  let previewContainer: HTMLElement | null;
+  let formElements: FormElements = {};
+  let showFirstLikerCheckbox: HTMLInputElement | null;
+  let firstLikerGroup: HTMLElement | null;
+  let resetButton: HTMLButtonElement | null;
+  let exportButton: HTMLButtonElement | null;
+  let removePostImageButton: HTMLButtonElement | null;
+  let removeProfileImageButton: HTMLButtonElement | null;
+  
+  document.addEventListener('DOMContentLoaded', init);
+  
+  function init(): void {
+    previewContainer = document.getElementById('preview-container');
+    showFirstLikerCheckbox = document.getElementById('showFirstLiker') as HTMLInputElement;
+    firstLikerGroup = document.getElementById('firstLikerGroup');
+    resetButton = document.getElementById('reset-form') as HTMLButtonElement;
+    exportButton = document.getElementById('export-image') as HTMLButtonElement;
+    removePostImageButton = document.getElementById('removePostImage') as HTMLButtonElement;
+    removeProfileImageButton = document.getElementById('removeProfileImage') as HTMLButtonElement;
+    
+    const inputs = document.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(
+      '#post-editor-form input, #post-editor-form textarea, #post-editor-form select'
+    );
+    
+    inputs.forEach(input => {
+      if (input.name) {
+        formElements[input.name] = input;
+      }
+    });
+    
+    currentState = {...defaultValues};
+    
+    loadSavedData();
+    
+    setupEventListeners();
+    
+    updateFirstLikerVisibility();
+    
+    updatePreview();
+    
+    console.log('Tool initialized with state:', currentState);
+  }
+  
+  function setupEventListeners(): void {
+    Object.values(formElements).forEach(input => {
+      if (input.type === 'file') {
+        input.addEventListener('change', handleFileUpload);
+      } else if (input.type === 'checkbox') {
+        input.addEventListener('change', handleCheckboxChange);
+      } else {
+        input.addEventListener('input', handleInputChange);
+      }
+    });
+    
+    if (resetButton) {
+      resetButton.addEventListener('click', resetForm);
+    }
+    
+    if (exportButton) {
+      exportButton.addEventListener('click', exportAsImage);
+    }
+    
+    if (removePostImageButton) {
+      removePostImageButton.addEventListener('click', removePostImage);
+    }
+    
+    if (removeProfileImageButton) {
+      removeProfileImageButton.addEventListener('click', removeProfileImage);
+    }
+    
+    if (showFirstLikerCheckbox) {
+      showFirstLikerCheckbox.addEventListener('change', updateFirstLikerVisibility);
+    }
+  }
+  
+  function handleInputChange(event: Event): void {
+    const input = event.target as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+    const name = input.name;
+    let value = input.value;
+    
+    if (input.type === 'number') {
+      if (['likeCount', 'commentCount', 'repostCount'].includes(name) && value.length > 6) {
+        value = value.slice(0, 6);
+        (input as HTMLInputElement).value = value;
+      }
+      
+      const numValue = parseInt(value, 10);
+      (currentState as any)[name] = isNaN(numValue) ? 0 : numValue;
+    } else {
+      (currentState as any)[name] = value;
+    }
+    
+    if (name === 'profileName') {
+      if (!currentState.profileImageUrl) {
+        setTimeout(() => {
+          const preview = document.querySelector<HTMLElement>('.linkedin-post-preview');
+          if (preview) {
+            updateProfileImage(preview, "");
+          }
+        }, 0);
+      }
+    }
+    
+    saveToLocalStorage();
+    
+    updatePreview();
+  }
+  
+  function handleCheckboxChange(event: Event): void {
+    const checkbox = event.target as HTMLInputElement;
+    const name = checkbox.name;
+    
+    (currentState as any)[name] = checkbox.checked;
+    
+    if (name === 'showFirstLiker') {
+      updateFirstLikerVisibility();
+    }
+    
+    saveToLocalStorage();
+    
+    updatePreview();
+  }
+  
+  function handleFileUpload(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const files = input.files;
+    
+    const wrapper = input.closest('.file-input-wrapper');
+    if (wrapper) {
+      const nameDisplay = wrapper.querySelector('.file-input-name');
+      if (nameDisplay) {
+        const filename = files && files.length > 0 ? files[0].name : 'No file chosen';
+        nameDisplay.textContent = filename;
+        if (files && files.length > 0) {
+          nameDisplay.setAttribute('title', files[0].name);
+        } else {
+          nameDisplay.removeAttribute('title');
+        }
+      }
+    }
+    
+    if (!files || files.length === 0) return;
+    
+    const file = files[0];
+    const reader = new FileReader();
+    
+    reader.onload = (e: ProgressEvent<FileReader>) => {
+      if (e.target && e.target.result) {
+        const dataUrl = e.target.result as string;
+        
+        if (input.id === 'profileImage') {
+          currentState.profileName = currentState.profileName || defaultValues.profileName;
+          currentState.profileHeadline = currentState.profileHeadline || defaultValues.profileHeadline;
+          currentState.profileImageUrl = dataUrl;
+        } else if (input.id === 'postImage') {
+          currentState.postImageUrl = dataUrl;
+        }
+        
+        saveToLocalStorage();
+        
+        updatePreview();
+        
+        console.log('Updated state with image:', input.id, dataUrl.substring(0, 50) + '...');
+      }
+    };
+    
+    reader.readAsDataURL(file);
+  }
+  
+  function updateFirstLikerVisibility(): void {
+    if (!showFirstLikerCheckbox || !firstLikerGroup) return;
+    
+    const isVisible = showFirstLikerCheckbox.checked;
+    firstLikerGroup.style.display = isVisible ? 'block' : 'none';
+  }
+  
+  function removePostImage(): void {
+    currentState.postImageUrl = "";
+    
+    resetFileInput('postImage');
+    
+    saveToLocalStorage();
+    
+    updatePreview();
+  }
+  
+  function removeProfileImage(): void {
+    currentState.profileImageUrl = "";
+    
+    resetFileInput('profileImage');
+    
+    saveToLocalStorage();
+    
+    updatePreview();
+  }
+  
+  function resetFileInput(inputId: string): void {
+    const fileInput = document.getElementById(inputId) as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = "";
+      const wrapper = fileInput.closest('.file-input-wrapper');
+      if (wrapper) {
+        const nameDisplay = wrapper.querySelector('.file-input-name');
+        if (nameDisplay) {
+          nameDisplay.textContent = 'No file chosen';
+        }
+      }
+    }
+  }
+  
+  function updatePreview(): void {
+    if (!previewContainer) return;
+    
+    const currentPreview = previewContainer.querySelector<HTMLElement>('.linkedin-post-preview');
+    if (!currentPreview) return;
+    
+    updatePreviewText(currentPreview, '.profile-name', currentState.profileName || defaultValues.profileName);
+    updatePreviewText(currentPreview, '.headline', currentState.profileHeadline || defaultValues.profileHeadline);
+    updatePreviewText(currentPreview, '.post-time', currentState.postTime || defaultValues.postTime);
+    
+    updatePostText(currentPreview, currentState.postText || defaultValues.postText);
+    
+    updateProfileImage(currentPreview, currentState.profileImageUrl);
+    updatePostImage(currentPreview, currentState.postImageUrl);
+    
+    updateEngagementStats(currentPreview);
+  }
+  
+  function updatePreviewText(container: HTMLElement, selector: string, text: string): void {
+    const element = container.querySelector<HTMLElement>(selector);
+    if (element) element.textContent = text;
+  }
+  
+  function updatePostText(container: HTMLElement, text: string): void {
+    const postTextContainer = container.querySelector<HTMLElement>('.post-text');
+    if (!postTextContainer) return;
+    
+    const paragraphs = text
+      .replace(/\n\s*\n/g, '\n\n')
+      .split('\n\n')
+      .map(p => p.trim());
+    
+    postTextContainer.innerHTML = '';
+    
+    paragraphs.forEach(paragraph => {
+      const p = document.createElement('p');
+      p.textContent = paragraph;
+      postTextContainer.appendChild(p);
+    });
+  }
+  
+  function updateProfileImage(container: HTMLElement, imageUrl: string): void {
+    const profileImage = container.querySelector<HTMLElement>('.profile-image');
+    if (!profileImage) return;
+    
+    const imgElement = profileImage.querySelector<HTMLImageElement>('img');
+    const fallbackElement = profileImage.querySelector<HTMLElement>('.profile-image-fallback');
+    
+    if (!imgElement && !fallbackElement) return;
+    
+    if (imageUrl) {
+      if (imgElement) {
+        imgElement.src = imageUrl;
+        imgElement.style.display = 'block';
+        imgElement.style.width = '100%';
+        imgElement.style.height = '100%';
+        imgElement.style.borderRadius = '50%';
+        imgElement.style.objectFit = 'cover';
+        imgElement.style.objectPosition = 'center';
+      } else {
+        const newImg = document.createElement('img');
+        newImg.src = imageUrl;
+        newImg.alt = "Profile picture";
+        newImg.style.width = '100%';
+        newImg.style.height = '100%';
+        newImg.style.borderRadius = '50%';
+        newImg.style.objectFit = 'cover';
+        newImg.style.objectPosition = 'center';
+        profileImage.appendChild(newImg);
+      }
+      
+      if (fallbackElement) {
+        fallbackElement.style.display = 'none';
+      }
+    } else {
+      if (imgElement) {
+        imgElement.style.display = 'none';
+      }
+      
+      if (fallbackElement) {
+        fallbackElement.style.display = 'flex';
+        
+        const nameToUse = currentState.profileName || defaultValues.profileName;
+        const initials = getInitials(nameToUse);
+        
+        const initialsSpan = fallbackElement.querySelector('span');
+        if (initialsSpan) {
+          initialsSpan.textContent = initials;
+        }
+      }
+    }
+  }
+  
+  function updatePostImage(container: HTMLElement, imageUrl: string): void {
+    const postMedia = container.querySelector<HTMLElement>('.post-media');
+    
+    console.log('updatePostImage called with imageUrl:', imageUrl ? 'image present' : 'no image');
+    console.log('Found post-media element:', postMedia ? 'yes' : 'no');
+    
+    if (!postMedia) {
+      console.error('Post media container not found. Creating one.');
+      const postBody = container.querySelector<HTMLElement>('.post-body');
+      if (!postBody) {
+        console.error('Post body not found either.');
+        return;
+      }
+      
+      const newPostMedia = document.createElement('div');
+      newPostMedia.className = 'post-media';
+      newPostMedia.style.marginTop = '8px';
+      newPostMedia.style.marginLeft = '-16px';
+      newPostMedia.style.marginRight = '-16px';
+      newPostMedia.style.width = 'calc(100% + 32px)';
+      newPostMedia.style.overflow = 'hidden';
+      newPostMedia.style.backgroundColor = '#f3f2f0';
+      newPostMedia.style.borderRadius = '0';
+      newPostMedia.style.display = imageUrl ? 'block' : 'none';
+      postBody.appendChild(newPostMedia);
+      
+      if (imageUrl) {
+        const imgElement = document.createElement('img');
+        imgElement.src = imageUrl;
+        imgElement.alt = 'Post image';
+        imgElement.className = 'post-image';
+        imgElement.style.width = '100%';
+        imgElement.style.height = 'auto';
+        imgElement.style.display = 'block';
+        imgElement.style.margin = '0';
+        imgElement.style.padding = '0';
+        imgElement.style.border = 'none';
+        imgElement.style.objectFit = 'cover';
+        imgElement.style.borderRadius = '0';
+        newPostMedia.appendChild(imgElement);
+      }
+      
+      return;
+    }
+    
+    if (imageUrl) {
+      console.log('Setting post image with URL');
+      let imgElement = postMedia.querySelector<HTMLImageElement>('img');
+      if (!imgElement) {
+        console.log('No existing img element, creating one');
+        imgElement = document.createElement('img');
+        imgElement.alt = 'Post image';
+        imgElement.className = 'post-image';
+        imgElement.style.width = '100%';
+        imgElement.style.height = 'auto';
+        imgElement.style.display = 'block';
+        imgElement.style.margin = '0';
+        imgElement.style.padding = '0';
+        imgElement.style.border = 'none';
+        imgElement.style.objectFit = 'cover';
+        imgElement.style.borderRadius = '0';
+        postMedia.appendChild(imgElement);
+      }
+      
+      imgElement.src = imageUrl;
+      postMedia.style.display = 'block';
+    } else {
+      postMedia.style.display = 'none';
+      console.log('Hiding post media container');
+    }
+  }
+  
+  function updateEngagementStats(container: HTMLElement): void {
+    console.log('Updating engagement stats:', 
+      { 
+        likeCount: currentState.likeCount,
+        commentCount: currentState.commentCount,
+        repostCount: currentState.repostCount,
+        showFirstLiker: currentState.showFirstLiker,
+        firstLikerName: currentState.firstLikerName
+      }
+    );
+    
+    const hasEngagement = currentState.likeCount > 0 || currentState.commentCount > 0 || currentState.repostCount > 0;
+    const postActionsContainer = container.querySelector<HTMLElement>('.post-actions');
+    if (!postActionsContainer) {
+      console.error('Post actions container not found');
+      return;
+    }
+    
+    let statsContainer = container.querySelector<HTMLElement>('.post-stats');
+    
+    if (statsContainer) {
+      statsContainer.remove();
+    }
+    
+    if (!hasEngagement) {
+      return;
+    }
+    
+    const formatNumber = (num: number): string => {
+      return num.toLocaleString('en-US');
+    };
+    
+    statsContainer = document.createElement('div');
+    statsContainer.className = 'post-stats';
+    statsContainer.style.display = 'flex';
+    statsContainer.style.justifyContent = 'space-between';
+    statsContainer.style.alignItems = 'center';
+    statsContainer.style.padding = '4px 0 12px';
+    statsContainer.style.margin = '4px 0 0';
+    statsContainer.style.color = 'rgba(0, 0, 0, 0.6)';
+    statsContainer.style.fontSize = '14px';
+    statsContainer.style.borderBottom = 'thin solid rgba(0, 0, 0, 0.08)';
+    
+    const reactionsSection = document.createElement('div');
+    reactionsSection.className = 'reactions-section';
+    reactionsSection.style.display = 'flex';
+    reactionsSection.style.alignItems = 'center';
+    
+    const reactionsIcons = document.createElement('div');
+    reactionsIcons.className = 'reactions-icons';
+    reactionsIcons.style.display = 'flex';
+    reactionsIcons.style.marginRight = '6px';
+    
+    const likeIcon = document.createElement('span');
+    likeIcon.className = 'reaction-icon like-icon';
+    likeIcon.style.width = '16px';
+    likeIcon.style.height = '16px';
+    likeIcon.style.borderRadius = '50%';
+    likeIcon.style.display = 'flex';
+    likeIcon.style.alignItems = 'center';
+    likeIcon.style.justifyContent = 'center';
+    
+    const likeIconImage = document.createElement('img');
+    likeIconImage.src = '/icons/like-small.png';
+    likeIconImage.alt = 'Like';
+    likeIconImage.className = 'like-icon-image';
+    likeIconImage.style.width = '16px';
+    likeIconImage.style.height = '16px';
+    
+    const reactionsTextDesktop = document.createElement('span');
+    reactionsTextDesktop.className = 'reactions-text desktop-reactions';
+    reactionsTextDesktop.style.fontSize = '14px';
+    reactionsTextDesktop.style.color = 'rgba(0, 0, 0, 0.6)';
+    reactionsTextDesktop.style.paddingTop = '1px';
+    
+    const reactionsTextMobile = document.createElement('span');
+    reactionsTextMobile.className = 'reactions-text mobile-reactions';
+    reactionsTextMobile.style.fontSize = '10px';
+    reactionsTextMobile.style.color = 'rgba(0, 0, 0, 0.6)';
+    reactionsTextMobile.style.paddingTop = '1px';
+    reactionsTextMobile.style.display = 'none';
+    
+    if (currentState.showFirstLiker && currentState.likeCount > 0) {
+      const likerName = currentState.firstLikerName || 'You';
+      let likeText = likerName;
+      if (currentState.likeCount > 1) {
+        likeText += ` and ${formatNumber(currentState.likeCount - 1)} other${currentState.likeCount > 2 ? 's' : ''}`;
+      }
+      reactionsTextDesktop.textContent = likeText;
+      reactionsTextMobile.textContent = formatNumber(currentState.likeCount);
+    } else if (currentState.likeCount > 0) {
+      reactionsTextDesktop.textContent = formatNumber(currentState.likeCount);
+      reactionsTextMobile.textContent = formatNumber(currentState.likeCount);
+    }
+    
+    const commentsReposts = document.createElement('div');
+    commentsReposts.className = 'comments-reposts';
+    commentsReposts.style.display = 'flex';
+    commentsReposts.style.alignItems = 'center';
+    commentsReposts.style.fontSize = '14px';
+    commentsReposts.style.color = 'rgba(0, 0, 0, 0.6)';
+    
+    if (currentState.commentCount > 0) {
+      const commentCount = document.createElement('span');
+      commentCount.className = 'comment-count';
+      commentCount.style.cursor = 'default';
+      commentCount.textContent = `${formatNumber(currentState.commentCount)} comment${currentState.commentCount > 1 ? 's' : ''}`;
+      commentsReposts.appendChild(commentCount);
+    }
+    
+    if (currentState.commentCount > 0 && currentState.repostCount > 0) {
+      const separator = document.createElement('span');
+      separator.className = 'separator';
+      separator.style.margin = '0 4px';
+      separator.textContent = '•';
+      commentsReposts.appendChild(separator);
+    }
+    
+    if (currentState.repostCount > 0) {
+      const repostCount = document.createElement('span');
+      repostCount.className = 'repost-count';
+      repostCount.style.cursor = 'default';
+      repostCount.textContent = `${formatNumber(currentState.repostCount)} repost${currentState.repostCount > 1 ? 's' : ''}`;
+      commentsReposts.appendChild(repostCount);
+    }
+    
+    likeIcon.appendChild(likeIconImage);
+    reactionsIcons.appendChild(likeIcon);
+    reactionsSection.appendChild(reactionsIcons);
+    reactionsSection.appendChild(reactionsTextDesktop);
+    reactionsSection.appendChild(reactionsTextMobile);
+    statsContainer.appendChild(reactionsSection);
+    statsContainer.appendChild(commentsReposts);
+    
+    container.insertBefore(statsContainer, postActionsContainer);
+    
+    const styleEl = document.createElement('style');
+    styleEl.textContent = `
+      @media (max-width: 500px) {
+        .desktop-reactions { display: none !important; }
+        .mobile-reactions { display: inline !important; }
+        .post-stats, .mobile-reactions, .comments-reposts, .comment-count, .repost-count {
+          font-size: 10px !important;
+        }
+        .like-icon-image {
+          width: 14px;
+          height: 14px;
+        }
+      }
+    `;
+    document.head.appendChild(styleEl);
+  }
+  
+  function getInitials(name: string): string {
+    if (!name || name.trim() === '') return '';
+    
+    const parts = name.trim().split(/\s+/);
+    if (parts.length === 1) {
+      return parts[0].charAt(0).toUpperCase();
+    }
+    
+    return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
+  }
+  
+  function resetForm(): void {
+    Object.keys(formElements).forEach((key) => {
+      const input = formElements[key];
+      if (!input) return;
+      
+      if (input.type === 'checkbox') {
+        (input as HTMLInputElement).checked = false;
+      } else if (input.type === 'file') {
+        const wrapper = input.closest('.file-input-wrapper');
+        if (wrapper) {
+          const nameDisplay = wrapper.querySelector('.file-input-name');
+          if (nameDisplay) {
+            nameDisplay.textContent = 'No file chosen';
+          }
+        }
+      } else {
+        input.value = '';
+      }
+    });
+    
+    currentState = {...defaultValues};
+    
+    localStorage.removeItem('linkedinToolState');
+    
+    updateFirstLikerVisibility();
+    
+    updatePreview();
+    
+    console.log('Form reset: fields cleared, preview reset to defaults');
+  }
+  
+  async function exportAsImage(): Promise<void> {
+    if (typeof html2canvas !== 'function') {
+      alert('Image export feature is still loading. Please try again in a moment.');
+      return;
+    }
+    
+    try {
+      const previewElement = document.querySelector<HTMLElement>('.linkedin-post-preview');
+      if (!previewElement) {
+        alert('Preview element not found.');
+        return;
+      }
+      
+      if (exportButton) {
+        exportButton.textContent = 'Generating...';
+        exportButton.disabled = true;
+      }
+
+      const container = document.createElement('div');
+      container.style.position = 'relative';
+      container.style.display = 'inline-block';
+
+      const clone = previewElement.cloneNode(true) as HTMLElement;
+      clone.style.position = 'static'; 
+      clone.style.margin = '0'; 
+      container.appendChild(clone);
+      
+      const watermark = document.createElement('div');
+      watermark.innerText = 'Mock-up post created with testfeed.ai';
+      watermark.style.position = 'absolute';
+      watermark.style.bottom = '40px'; 
+      watermark.style.right = '16px';
+      watermark.style.fontSize = '10px';
+      watermark.style.color = 'rgba(0,0,0,0.3)';
+      watermark.style.fontFamily = 'Arial, sans-serif';
+      watermark.style.pointerEvents = 'none';
+      watermark.style.zIndex = '100';
+      container.appendChild(watermark);
+      
+      document.body.appendChild(container);
+      container.style.position = 'absolute';
+      container.style.left = '-9999px';
+      
+      setTimeout(async () => {
+        try {
+          const canvas = await html2canvas(container, {
+            scale: 2, 
+            logging: false,
+            useCORS: true, 
+            backgroundColor: null
+          });
+          
+          document.body.removeChild(container);
+          
+          const link = document.createElement('a');
+          link.download = `testfeed-linkedin-mockup-${new Date().toISOString().slice(0, 10)}.png`;
+          link.href = canvas.toDataURL('image/png');
+          link.click();
+          
+          if (exportButton) {
+            exportButton.textContent = 'Export as Image';
+            exportButton.disabled = false;
+          }
+        } catch (error) {
+          console.error('Error generating canvas:', error);
+          alert('Error generating image. Please try again.');
+          if (exportButton) {
+            exportButton.textContent = 'Export as Image';
+            exportButton.disabled = false;
+          }
+        }
+      }, 100);
+    } catch (error) {
+      console.error('Error exporting image:', error);
+      alert('Error generating image. Please try again.');
+      if (exportButton) {
+        exportButton.textContent = 'Export as Image';
+        exportButton.disabled = false;
+      }
+    }
+  }
+  
+  function saveToLocalStorage(): void {
+    try {
+      localStorage.setItem('linkedinToolState', JSON.stringify(currentState));
+    } catch (error) {
+      console.error('Error saving to localStorage:', error);
+    }
+  }
+  
+  function loadSavedData(): void {
+    try {
+      const savedState = localStorage.getItem('linkedinToolState');
+      
+      if (savedState) {
+        const parsedState = JSON.parse(savedState) as PostState;
+        
+        currentState = {...parsedState};
+        
+        Object.entries(currentState).forEach(([key, value]) => {
+          const input = formElements[key];
+          if (!input || input.type === 'file') return;
+          
+          if (input.type === 'checkbox') {
+            (input as HTMLInputElement).checked = !!value;
+          } else {
+            input.value = value as string;
+          }
+        });
+      } else {
+        currentState = {...defaultValues};
+        
+      }
+      
+    } catch (error) {
+      console.error('Error loading saved data:', error);
+      currentState = {...defaultValues};
+    }
+  }
+  
+  window.addEventListener('scroll', function() {
+    const editorSection = document.querySelector('.editor-section');
+    const previewSection = document.querySelector('.preview-section');
+    
+    if (editorSection && previewSection) {
+      const editorRect = editorSection.getBoundingClientRect();
+      const previewRect = previewSection.getBoundingClientRect();
+      
+      if (editorRect.height > previewRect.height) {
+      }
+    }
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const fileInputs = document.querySelectorAll('input[type="file"]');
+    fileInputs.forEach(input => {
+      const wrapper = input.closest('.file-input-wrapper');
+      if (wrapper) {
+        const button = wrapper.querySelector('.file-input-button');
+        if (button) {
+          button.addEventListener('click', () => {
+            (input as HTMLInputElement).click();
+          });
+        }
+      }
+    });
+    
+  });
+</script>
+
+<style>
+.linkedin-tool-container {
+  display: flex;
+  gap: var(--spacing-lg);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  justify-content: center;
+  position: relative;
+}
+
+.editor-section {
+  flex: 1;
+  min-width: 350px;
+  max-width: 450px;
+  background-color: var(--color-card-bg);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: var(--shadow);
+}
+
+.preview-section {
+  flex: 1;
+  min-width: 450px;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-md);
+  background-color: #F4F2ED;
+  border-radius: var(--border-radius);
+  height: fit-content;
+  position: sticky;
+  top: var(--spacing-lg);
+  align-self: flex-start;
+}
+
+.preview-section h2 {
+  color: #333;
+  align-self: flex-start;
+  font-size: 1.5rem;
+}
+
+h2 {
+  font-family: var(--font-heading);
+  color: var(--color-white);
+  margin-bottom: var(--spacing-md);
+  font-size: 1.5rem;
+  text-align: left;
+}
+
+h3 {
+  font-family: var(--font-heading);
+  color: var(--color-white);
+  margin-bottom: var(--spacing-md);
+  font-size: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: var(--spacing-xs);
+}
+
+.form-section {
+  margin-bottom: var(--spacing-md);
+}
+
+.form-group {
+  margin-bottom: var(--spacing-sm);
+}
+
+label {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  color: var(--color-text-light);
+  font-family: var(--font-primary);
+  font-size: 0.9rem;
+}
+
+input[type="text"], 
+input[type="number"], 
+textarea, 
+select {
+  width: 100%;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-sm);
+  color: var(--color-white);
+  font-family: var(--font-primary);
+  transition: var(--transition);
+  font-size: 0.9rem;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type="text"]:focus, 
+input[type="number"]:focus, 
+textarea:focus, 
+select:focus {
+  border-color: var(--color-primary);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--color-white);
+  -webkit-box-shadow: 0 0 0px 1000px var(--color-card-bg) inset;
+  transition: background-color 5000s ease-in-out 0s;
+  background-color: transparent !important;
+  caret-color: var(--color-white);
+}
+
+input[type="file"] {
+  background-color: transparent;
+  border: none;
+  color: var(--color-text-light);
+  padding: var(--spacing-xs) 0;
+  font-size: 0.9rem;
+}
+
+small {
+  display: block;
+  color: var(--color-text-light);
+  margin-top: var(--spacing-xs);
+  font-size: 0.8rem;
+}
+
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  padding-left: 28px;
+  user-select: none;
+  color: var(--color-text-light);
+  font-family: var(--font-primary);
+  font-size: 0.9rem;
+}
+
+.checkbox-label:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+.checkbox-wrapper input[type="checkbox"]:checked + .checkbox-label:after {
+  content: '✓';
+  position: absolute;
+  left: 4px;
+  top: -1px;
+  font-size: 14px;
+  color: var(--color-text);
+}
+
+.actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+}
+
+.actions button {
+  padding: var(--spacing-xs) var(--spacing-md);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 992px) {
+  .linkedin-tool-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 var(--spacing-sm);
+  }
+  
+  .editor-section,
+  .preview-section {
+    min-width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .preview-section {
+    padding: var(--spacing-sm);
+  }
+  
+  .linkedin-post-preview {
+    max-width: 100%;
+    margin: 0;
+  }
+  
+  h2 {
+    font-size: 1.3rem;
+  }
+  
+  .form-section {
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .form-group {
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .actions button {
+    width: 100%;
+  }
+  
+  .file-input-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .file-input-row {
+    width: 100%;
+  }
+  
+  .file-input-name {
+    max-width: calc(100% - 100px);
+  }
+  
+  .btn-remove {
+    margin-top: 6px;
+    align-self: flex-start;
+  }
+}
+
+#preview-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.file-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: var(--spacing-xs);
+  width: 100%;
+}
+
+.file-input-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+}
+
+.file-input-wrapper input[type="file"] {
+  position: absolute;
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.file-input-button {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--color-text-light);
+  border-radius: var(--border-radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.file-input-button:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: var(--color-white);
+}
+
+.file-input-name {
+  margin-left: var(--spacing-xs);
+  color: var(--color-text-light);
+  font-size: 0.85rem;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 120px);
+}
+
+.btn-small {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: 0.85rem;
+  height: fit-content;
+}
+
+.btn-remove {
+  align-self: flex-end;
+}
+
+.profile-image {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-image-fallback {
+  background-color: #0a66c2;
+  color: white;
+}
+
+.preview-disclaimer {
+  font-size: 0.75rem; 
+  color: rgba(0, 0, 0, 0.5); 
+  text-align: center;
+  margin-top: var(--spacing-sm); 
+  max-width: 552px; 
+  line-height: 1.4;
+  padding: 0 var(--spacing-sm);
+}
+</style> 
