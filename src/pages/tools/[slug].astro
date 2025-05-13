@@ -7,6 +7,7 @@ import type { BreadcrumbItem } from '../../components/Breadcrumbs.astro';
 import { Icon } from 'astro-icon/components';
 import DemoVideoSection from '../../components/DemoVideoSection.astro';
 import MarkdownContent from '../../components/MarkdownContent.astro';
+import LinkedInTool from '../../components/tools/linkedin-preview-tool/LinkedInTool.astro';
 
 // Get homepage content for CTA section and video
 const homepageEntries = await getCollection('homepage');
@@ -67,13 +68,17 @@ const breadcrumbItems: BreadcrumbItem[] = [
     <Breadcrumbs items={breadcrumbItems} /> 
   </div>
 
-  <!-- Use the DemoVideoSection component instead of embedded video HTML -->
-  <div class="demo-video-wrapper">
-    <DemoVideoSection
-      title=""
-      videoId={videoId}
-    />
-  </div>
+  <!-- Conditionally rendering of tools -->
+  {entry.slug === 'linkedin-post-preview' ? (
+    <LinkedInTool />
+  ) : (
+    <div class="demo-video-wrapper">
+      <DemoVideoSection
+        title=""
+        videoId={videoId}
+      />
+    </div>
+  )}
 
   <!-- Tool Content Area -->
   <div class="tool-content-area">
