@@ -1,6 +1,7 @@
 ---
 import type { landingPageHeroSchema } from '../content/config';
 import { z } from 'astro:content';
+import EmailMockup from './EmailMockup.astro';
 
 // Define the props based on the Zod schema
 type Props = z.infer<typeof landingPageHeroSchema>;
@@ -13,123 +14,125 @@ const {
     cta1Text,
     cta1Link,
     cta2Text,
-    cta2Link 
+    cta2Link,
+    showEmailMockup = false
 } = Astro.props;
+
+// Check if we have CTAs to display
+const hasCta1 = cta1Text && cta1Link;
+const hasCta2 = cta2Text && cta2Link;
 ---
 
-<section class="hero-section">
-    <div class="container">
-        <div class="hero-content">
-            <div class="text-container">
-                <h1 set:html={title}></h1>
-                <p>{description}</p>
-                
-                {(cta1Text && cta1Link) || (cta2Text && cta2Link) ? (
-                    <div class="button-group">
-                        {cta1Text && cta1Link && (
-                            <a href={cta1Link} class="btn btn-primary btn-large pulse">{cta1Text}</a>
-                        )}
-                        {cta2Text && cta2Link && (
-                            <a href={cta2Link} class="btn btn-secondary btn-large">{cta2Text}</a>
-                        )}
-                    </div>
-                ) : null}
-            </div>
-
-            {imageUrl && (
-                <div class="image-container">
-                    <img 
-                        src={imageUrl} 
-                        alt={imageAlt || 'Hero image'} 
-                        class="hero-image" 
-                        loading="eager" 
-                        decoding="async"
-                    />
-                </div>
-            )}
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1 set:html={title} />
+      <p class="hero-description">{description}</p>
+      
+      {(hasCta1 || hasCta2) && (
+        <div class="cta-buttons">
+          {hasCta1 && <a href={cta1Link} class="btn btn-primary pulse">{cta1Text}</a>}
+          {hasCta2 && <a href={cta2Link} class="btn btn-secondary">{cta2Text}</a>}
         </div>
+      )}
     </div>
+
+    <div class="hero-visual">
+      {showEmailMockup ? (
+        <EmailMockup />
+      ) : (
+        imageUrl && (
+          <img 
+            src={imageUrl} 
+            alt={imageAlt || 'Hero image'} 
+            class="hero-image" 
+            loading="eager" 
+            decoding="async"
+          />
+        )
+      )}
+    </div>
+  </div>
 </section> 
 
 <style>
-.hero-section {
-    background-color: var(--color-background); 
-    padding: var(--spacing-xl) 0; 
-    text-align: center; 
+.hero {
+    padding: var(--spacing-xxl) 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+    z-index: -1;
+    animation: pulse-bg 15s infinite;
+}
+
+@keyframes pulse-bg {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+.hero .container {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xl);
 }
 
 .hero-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--spacing-lg);
+    flex: 1;
 }
 
-.text-container h1 {
-    margin-bottom: var(--spacing-sm);
-
+.hero-visual {
+    flex: 1;
+    position: relative;
 }
 
-.text-container p {
+.hero-description {
+    font-size: 1.2rem;
+    margin-bottom: var(--spacing-lg);
     color: var(--color-text-light);
-    max-width: 600px; 
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: var(--spacing-md);
 }
 
-.button-group {
+.cta-buttons {
     display: flex;
-    flex-wrap: wrap; 
-    justify-content: center;
-    gap: var(--spacing-sm);
-    margin-top: var(--spacing-md);
-}
-
-.image-container {
-    margin-top: var(--spacing-lg);
-    max-width: 800px;
-    width: 100%;
+    gap: var(--spacing-md);
 }
 
 .hero-image {
     width: 100%;
     height: auto;
-    border-radius: var(--border-radius-lg); 
+    border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-lg);
-    object-fit: cover; 
+    object-fit: cover;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 992px) {
+    .hero .container {
+        flex-direction: column;
+    }
+    
     .hero-content {
-        flex-direction: row; 
-        text-align: left;
-        gap: var(--spacing-xl);
+        text-align: center;
+        margin-bottom: var(--spacing-lg);
     }
-
-    .text-container {
-        flex: 1; 
-    }
-
-    .text-container p {
-        margin-left: 0;
-        margin-right: 0;
-    }
-
-    .button-group {
-        justify-content: flex-start;
-    }
-
-    .image-container {
-        flex: 1; 
-        margin-top: 0;
-        max-width: 50%; 
+    
+    .cta-buttons {
+        justify-content: center;
     }
 }
 
-@media (min-width: 992px) {
-    .hero-section {
-        padding: var(--spacing-xxl) 0;
+@media (max-width: 480px) {
+    .cta-buttons {
+        flex-direction: column;
+        gap: var(--spacing-md);
     }
-} 
+}
 </style> 

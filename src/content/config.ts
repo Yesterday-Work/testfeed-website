@@ -36,6 +36,7 @@ export const landingPageHeroSchema = z.object({
   cta1Link: z.string().optional().describe("Primary button URL or anchor link"),
   cta2Text: z.string().optional().describe("Secondary button text (optional)"),
   cta2Link: z.string().optional().describe("Secondary button URL or anchor link"),
+  showEmailMockup: z.boolean().optional().default(false).describe("Show the email mockup visualization instead of an image")
 }).refine(data => !data.imageUrl || (data.imageUrl && data.imageAlt), {
   message: "Image Alt text is required if Image URL is provided",
   path: ["imageAlt"], 
@@ -278,5 +279,9 @@ export const collections = {
   'homepage': homepageCollection,
   'blog': blogCollection,
   'legal': legalCollection,
-  'tools': toolsCollection
+  'tools': toolsCollection,
+  'landing-pages': defineCollection({
+    type: 'content',
+    schema: contentSchema
+  })
 }; 

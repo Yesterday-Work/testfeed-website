@@ -1,0 +1,396 @@
+---
+// This component represents the visual mockup for email testing
+---
+<div class="email-mockup">
+  <div class="email-content-container">
+    <div class="email-header">
+      <div class="email-meta">
+        <div class="email-from">From: <span>Sarah Johnson &lt;sarah@example.com&gt;</span></div>
+        <div class="email-to">To: <span>potential-client@company.com</span></div>
+        <div class="email-subject">Subject: <span>Quick question about your team's needs</span></div>
+      </div>
+    </div>
+    <div class="email-content">
+      <p>Hi there,</p>
+      <p>I noticed your company is growing quickly, and I wanted to reach out about how we might be able to help with your team's collaboration challenges.</p>
+      <p>Would you be interested in a quick call next week to discuss?</p>
+      <p>Thanks,<br>Sarah</p>
+    </div>
+  </div>
+
+  <div class="testing-indicator">
+    <div class="testing-pulse"></div>
+    <p>Testing performance</p>
+  </div>
+
+
+  <div class="results-panel">
+    <div class="results-header">
+      <span class="testfeed-font">testfeed</span> results
+    </div>
+
+    <div class="metrics-list">
+      <div class="metric">
+        <div class="metric-name">Open rate</div>
+        <div class="metric-bar-container">
+          <div class="metric-bar" id="open-bar"></div>
+        </div>
+        <div class="metric-value"><span id="open-value">0</span>%</div>
+      </div>
+
+      <div class="metric">
+        <div class="metric-name">Reply rate</div>
+        <div class="metric-bar-container">
+          <div class="metric-bar" id="reply-bar"></div>
+        </div>
+        <div class="metric-value"><span id="reply-value">0</span>%</div>
+      </div>
+
+      <div class="metric">
+        <div class="metric-name">Sentiment</div>
+        <div class="metric-bar-container sentiment">
+          <div class="sentiment-section negative" id="sentiment-negative"></div>
+          <div class="sentiment-section neutral" id="sentiment-neutral"></div>
+          <div class="sentiment-section positive" id="sentiment-positive"></div>
+        </div>
+        <div class="metric-value">Positive</div>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<script is:inline>
+document.addEventListener('DOMContentLoaded', function() {
+    initializeEmailMockupAnimation();
+});
+
+
+function initializeEmailMockupAnimation() {
+    const mockupContainer = document.querySelector('.email-mockup');
+    if (!mockupContainer) return;
+    
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                runAnimation();
+                observer.unobserve(mockupContainer);
+            }
+        });
+    }, { threshold: 0.3 });
+    
+    observer.observe(mockupContainer);
+}
+
+function runAnimation() {
+    // Initial state reset
+    const testingIndicator = document.querySelector('.testing-indicator');
+    const resultsPanel = document.querySelector('.results-panel');
+    
+    if (!testingIndicator || !resultsPanel) return;
+    
+    testingIndicator.classList.remove('active');
+    resultsPanel.classList.remove('active');
+    
+    const openValue = document.getElementById('open-value');
+    const replyValue = document.getElementById('reply-value');
+    const openBar = document.getElementById('open-bar');
+    const replyBar = document.getElementById('reply-bar');
+    const sentimentNegative = document.getElementById('sentiment-negative');
+    const sentimentNeutral = document.getElementById('sentiment-neutral');
+    const sentimentPositive = document.getElementById('sentiment-positive');
+    
+
+    if (openValue) openValue.textContent = '0';
+    if (replyValue) replyValue.textContent = '0';
+    if (openBar) openBar.style.width = '0%';
+    if (replyBar) replyBar.style.width = '0%';
+    if (sentimentNegative) sentimentNegative.style.width = '0%';
+    if (sentimentNeutral) sentimentNeutral.style.width = '0%';
+    if (sentimentPositive) sentimentPositive.style.width = '0%';
+    
+
+    setTimeout(() => {
+        // Step 1: Show testing indicator
+        testingIndicator.classList.add('active');
+        
+        // Step 2: Hide testing, show results
+        setTimeout(() => {
+            testingIndicator.classList.remove('active');
+            
+            setTimeout(() => {
+                resultsPanel.classList.add('active');
+                
+                // Animate open rate
+                setTimeout(() => {
+                    if (openBar) openBar.style.width = '51%';
+                    animateCounter('open-value', 51, 1500);
+                }, 300);
+                
+                // Animate reply rate
+                setTimeout(() => {
+                    if (replyBar) replyBar.style.width = '16%';
+                    animateCounter('reply-value', 16, 1500);
+                }, 600);
+                
+                // Animate sentiment
+                setTimeout(() => {
+                    if (sentimentNegative) sentimentNegative.style.width = '15%';
+                    
+                    setTimeout(() => {
+                        if (sentimentNeutral) sentimentNeutral.style.width = '35%';
+                        
+                        setTimeout(() => {
+                            if (sentimentPositive) sentimentPositive.style.width = '50%';
+                        }, 200);
+                    }, 200);
+                }, 900);
+            }, 400);
+        }, 2500);
+        
+        // Reset and restart animation
+        setTimeout(() => {
+            runAnimation();
+        }, 10000);
+    }, 1000);
+}
+
+// Function to animate the counter
+function animateCounter(elementId, targetValue, duration) {
+    const element = document.getElementById(elementId);
+    if (!element) return;
+    
+    let startValue = 0;
+    let increment = targetValue > 50 ? 1 : 0.5;
+    let stepTime = Math.abs(Math.floor(duration / (targetValue / increment)));
+    
+    let currentValue = startValue;
+    
+    const timer = setInterval(function() {
+        currentValue += increment;
+        
+        if (currentValue >= targetValue) {
+            clearInterval(timer);
+            currentValue = targetValue;
+        }
+        
+        // Format the displayed value
+        element.textContent = Math.round(currentValue);
+        
+    }, stepTime);
+}
+</script>
+
+<style>
+.email-mockup {
+    max-width: 400px;
+    width: 100%;
+    position: relative;
+    margin: 0 auto;
+}
+
+.email-content-container {
+    background-color: #222222;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.email-header {
+    padding: 16px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.email-meta {
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.email-from, .email-to, .email-subject {
+    color: var(--color-text-light);
+    margin-bottom: 5px;
+}
+
+.email-from span, .email-to span, .email-subject span {
+    color: var(--color-white);
+    font-weight: 500;
+}
+
+.email-content {
+    padding: 16px;
+}
+
+.email-content p {
+    margin-bottom: 12px;
+    color: var(--color-white);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.email-content p:last-child {
+    margin-bottom: 0;
+}
+
+.testing-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 12px;
+    z-index: 2;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.testing-indicator.active {
+    opacity: 1;
+}
+
+.testing-pulse {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    margin-bottom: 12px;
+    animation: testing-pulse-animation 1.5s infinite;
+}
+
+@keyframes testing-pulse-animation {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0.8);
+        opacity: 0.8;
+    }
+}
+
+.testing-indicator p {
+    color: var(--color-white);
+    font-size: 14px;
+    margin: 0;
+}
+
+.results-panel {
+    background-color: #222222;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 16px;
+    margin-top: 12px;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.results-panel.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.results-header {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-white);
+    margin-bottom: 16px;
+}
+
+.metrics-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.metric {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.metric-name {
+    width: 80px;
+    font-size: 13px;
+    color: var(--color-text-light);
+    flex-shrink: 0;
+}
+
+.metric-bar-container {
+    flex: 1;
+    height: 6px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.metric-bar {
+    height: 100%;
+    width: 0;
+    background-color: var(--color-white);
+    border-radius: 3px;
+    transition: width 1.5s ease-out;
+}
+
+#open-bar {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+#reply-bar {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.sentiment-section {
+    height: 100%;
+    width: 0;
+    transition: width 0.5s ease-out;
+    float: left;
+}
+
+.sentiment-section.negative {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.sentiment-section.neutral {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.sentiment-section.positive {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.metric-value {
+    width: 60px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-white);
+    text-align: right;
+    flex-shrink: 0;
+}
+
+@media (max-width: 992px) {
+    .email-mockup {
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .email-mockup {
+        max-width: 350px;
+    }
+}
+</style> 
