@@ -39,21 +39,21 @@ const entry = homepageEntries.find(entry => entry.id === 'main.md') || homepageE
     </div>
     
     <!-- Floating Cursors -->
-    <div class="figma-cursor" id="cursor-1">
+    <div class="floating-cursor" id="cursor-1">
         <svg width="26" height="30" fill="none" xmlns="http://www.w3.org/2000/svg"><g filter="url(#a)"><path d="m8.5 19.5-2-12 10 6L11 15l-2.5 4.5Z" fill="#0080FE" rx="2"></path><path d="m6.757 7.071-.928-.557.178 1.068 2 12 .235 1.412.695-1.251 2.398-4.316 5.297-1.445 1.13-.308-1.005-.603-10-6Z" stroke="#fff" stroke-width="1.5"></path></g><defs><filter id="a" x=".158" y=".528" width="23.866" height="26.959" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix><feOffset dy="2"></feOffset><feGaussianBlur stdDeviation="3"></feGaussianBlur><feComposite in2="hardAlpha" operator="out"></feComposite><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"></feColorMatrix><feBlend in2="BackgroundImageFix" result="effect1_dropShadow_1_4"></feBlend><feBlend in="SourceGraphic" in2="effect1_dropShadow_1_4" result="shape"></feBlend></filter></defs></svg>
-      <span class="figma-name">Startup Founders</span>
+      <span class="cursor-name">Startup Founders</span>
       <div class="cursor-comment" id="comment-1"></div>
     </div>
     
-    <div class="figma-cursor-2" id="cursor-2">
+    <div class="floating-cursor-2" id="cursor-2">
         <svg width="26" height="30" fill="none" xmlns="http://www.w3.org/2000/svg"><g filter="url(#a)"><path d="m8.5 19.5-2-12 10 6L11 15l-2.5 4.5Z" fill="#8B5CF6" rx="2"></path><path d="m6.757 7.071-.928-.557.178 1.068 2 12 .235 1.412.695-1.251 2.398-4.316 5.297-1.445 1.13-.308-1.005-.603-10-6Z" stroke="#fff" stroke-width="1.5"></path></g><defs><filter id="a" x=".158" y=".528" width="23.866" height="26.959" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix><feOffset dy="2"></feOffset><feGaussianBlur stdDeviation="3"></feGaussianBlur><feComposite in2="hardAlpha" operator="out"></feComposite><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"></feColorMatrix><feBlend in2="BackgroundImageFix" result="effect1_dropShadow_1_4"></feBlend><feBlend in="SourceGraphic" in2="effect1_dropShadow_1_4" result="shape"></feBlend></filter></defs></svg>
-      <span class="figma-name">Greg from Finance</span>
+      <span class="cursor-name">Greg from Finance</span>
       <div class="cursor-comment" id="comment-2"></div>
     </div>
     
-    <div class="figma-cursor-3" id="cursor-3">
+    <div class="floating-cursor-3" id="cursor-3">
         <svg width="26" height="30" fill="none" xmlns="http://www.w3.org/2000/svg"><g filter="url(#a)"><path d="m8.5 19.5-2-12 10 6L11 15l-2.5 4.5Z" fill="#F59E0B" rx="2"></path><path d="m6.757 7.071-.928-.557.178 1.068 2 12 .235 1.412.695-1.251 2.398-4.316 5.297-1.445 1.13-.308-1.005-.603-10-6Z" stroke="#fff" stroke-width="1.5"></path></g><defs><filter id="a" x=".158" y=".528" width="23.866" height="26.959" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix><feOffset dy="2"></feOffset><feGaussianBlur stdDeviation="3"></feGaussianBlur><feComposite in2="hardAlpha" operator="out"></feComposite><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"></feColorMatrix><feBlend in2="BackgroundImageFix" result="effect1_dropShadow_1_4"></feBlend><feBlend in="SourceGraphic" in2="effect1_dropShadow_1_4" result="shape"></feBlend></filter></defs></svg>
-      <span class="figma-name">Gen Z Creators</span>
+      <span class="cursor-name">Gen Z Creators</span>
       <div class="cursor-comment" id="comment-3"></div>
     </div>
   </section>
@@ -67,7 +67,7 @@ const entry = homepageEntries.find(entry => entry.id === 'main.md') || homepageE
           <div class="problem-icon">
             <Icon name="lucide:target" />
           </div>
-          <h3>You only get one shot</h3>
+          <h3>You only get one shot at it</h3>
           <p>
             That sales email to your dream client? One shot. The proposal that could make your business? One shot. Your reply to that tricky customer situation? One shot. Most communication is binary, it either works or it doesn't. There's no A/B tests or practice runs. You get one chance to communicate correctly, and you better hope you nail it.
           </p>
@@ -179,46 +179,86 @@ const entry = homepageEntries.find(entry => entry.id === 'main.md') || homepageE
   <section class="use-cases">
     <div class="container">
       <div class="use-cases-content">
-        <h2>Use TestFeed for...</h2>
-        <div class="rotating-use-case">
-          <p class="use-case-text">Testing whether your "following up" message sounds persistent instead of stalker-ish</p>
-        </div>
+        <h2>Use <span class="space-mono">TestFeed</span> for...</h2>
       </div>
     </div>
-  </section>
+        <div class="use-case-cards">
+      <div class="use-case-card">
+        <div class="channel-tag">Email</div>
+        <p>Testing whether your "following up" message sounds persistent instead of stalker-ish</p>
+      </div>
+      <div class="use-case-card">
+        <div class="channel-tag">Google Slides</div>
+        <p>Making sure that joke in your presentation lands as hilarious instead of getting you called into HR</p>
+      </div>
+      <div class="use-case-card">
+        <div class="channel-tag">Website</div>
+        <p>Checking if your website copy actually makes sense or just sounds like you let ChatGPT loose</p>
+      </div>
+      <div class="use-case-card">
+        <div class="channel-tag">Slack</div>
+        <p>Making sure your feedback to Dave sounds constructive instead of soul-crushing</p>
+      </div>
+      <div class="use-case-card">
+        <div class="channel-tag">Google Docs</div>
+        <p>Seeing if your proposal comes across as "shut up and take my money" instead of "this smells like a scam"</p>
+      </div>
+      <div class="use-case-card">
+        <div class="channel-tag">LinkedIn</div>
+        <p>Testing whether your LinkedIn post sounds witty or just makes everyone cringe</p>
+      </div>
+      <div class="use-case-card">
+        <div class="channel-tag">Email</div>
+        <p>Checking if your fundraising email comes across as "invest in the future" instead of "please save our dying startup"</p>
+      </div>
+      <div class="use-case-card">
+        <div class="channel-tag">Website</div>
+        <p>Making sure your price increase announcement feels "value upgrade" rather than "we're squeezing you dry"</p>
+      </div>
+      <!-- Duplicate cards for infinite scroll -->
+      <div class="use-case-card">
+        <div class="channel-tag">Email</div>
+        <p>Testing whether your "following up" message sounds persistent instead of stalker-ish</p>
+      </div>
+      <div class="use-case-card">
+        <div class="channel-tag">Google Slides</div>
+        <p>Making sure that joke in your presentation lands as hilarious instead of getting you called into HR</p>
+      </div>
+      <div class="use-case-card">
+        <div class="channel-tag">Website</div>
+        <p>Checking if your website copy actually makes sense or just sounds like you let ChatGPT loose</p>
+      </div>
+      <div class="use-case-card">
+        <div class="channel-tag">Slack</div>
+        <p>Making sure your feedback to Dave sounds constructive instead of soul-crushing</p>
+      </div>
+      <div class="use-case-card">
+        <div class="channel-tag">Google Docs</div>
+        <p>Seeing if your proposal comes across as "shut up and take my money" instead of "this smells like a scam"</p>
+      </div>
+      <div class="use-case-card">
+        <div class="channel-tag">LinkedIn</div>
+        <p>Testing whether your LinkedIn post sounds witty or just makes everyone cringe</p>
+      </div>
+      <div class="use-case-card">
+        <div class="channel-tag">Email</div>
+        <p>Checking if your fundraising email comes across as "invest in the future" instead of "please save our dying startup"</p>
+      </div>
+      <div class="use-case-card">
+        <div class="channel-tag">Website</div>
+        <p>Making sure your price increase announcement feels "value upgrade" rather than "we're squeezing you dry"</p>
+      </div>
+    </div>
+   </section>
 
   <!-- Empathy Section -->
   <section class="empathy-section">
     <div class="container">
       <div class="empathy-content">
-        <h2>Empathy as a <span class="highlight">superpower</span></h2>
+        <h2>The <span class="power-emphasis">power</span> of perspective</h2>
         
         <div class="main-insight">
-          <p class="lead-text">Most communication failures happen in the same place: the gap between what you intended and how it was perceived.</p>
-          
-          <div class="perception-examples">
-            <div class="perception-line">
-              <span class="intention-text">You intended to sound confident</span>
-              <span class="arrow">></span>
-              <span class="perception-text">they heard arrogant</span>
-            </div>
-            <div class="perception-line">
-              <span class="intention-text">You intended to be helpful</span>
-              <span class="arrow">></span>
-              <span class="perception-text">they heard condescending</span>
-            </div>
-          </div>
-        </div>
-        
-        <div class="key-questions">
-          <p class="question-contrast">
-            The best communicators don't ask <span class="dim-question">"what do I want to say?"</span> - they ask <span class="bright-question">"what do they want to hear?"</span>
-          </p>
-          <p class="result-text">That's why their emails get replies and their deals close.</p>
-        </div>
-        
-        <div class="solution">
-          <p class="solution-text">TestFeed helps get you out of your own head and into theirs. Quick perspective checks that show you how your message really lands, not how you think it lands.</p>
+          <p class="lead-text">Most communication failures happen in the same place: the gap between what you intended and how it was perceived. The best communicators don't ask "what do I want to say?" - they ask "how will they hear it?" TestFeed helps you get out of your own head and into theirs.</p>
         </div>
       </div>
     </div>
@@ -453,7 +493,7 @@ const entry = homepageEntries.find(entry => entry.id === 'main.md') || homepageE
 }
 
 /* Floating Cursors */
-.figma-name {
+.cursor-name {
     padding: 2px 6px;
     color: #FFF;
     font-size: 11px;
@@ -466,39 +506,39 @@ const entry = homepageEntries.find(entry => entry.id === 'main.md') || homepageE
     white-space: nowrap;
 }
 
-.figma-cursor, .figma-cursor-2, .figma-cursor-3 {
+.floating-cursor, .floating-cursor-2, .floating-cursor-3 {
     position: absolute;
     z-index: 10;
     pointer-events: none;
 }
 
-.figma-cursor {
+.floating-cursor {
     right: 20%;
     top: 40%;
     animation: 28s hovering-1 infinite ease-in-out;
 }
 
-.figma-cursor-2 {
+.floating-cursor-2 {
     left: 15%;
     top: 55%;
     animation: 33s hovering-2 infinite ease-in-out;
 }
 
-.figma-cursor-3 {
+.floating-cursor-3 {
     right: 40%;
     top: 65%;
     animation: 41s hovering-3 infinite ease-in-out;
 }
 
-.figma-cursor .figma-name {
+.floating-cursor .cursor-name {
     background-color: #0080FE;
 }
 
-.figma-cursor-2 .figma-name {
+.floating-cursor-2 .cursor-name {
     background-color: #8B5CF6;
 }
 
-.figma-cursor-3 .figma-name {
+.floating-cursor-3 .cursor-name {
     background-color: #F59E0B;
 }
 
@@ -587,7 +627,7 @@ const entry = homepageEntries.find(entry => entry.id === 'main.md') || homepageE
 }
 
 @media (max-width: 768px) {
-    .figma-cursor, .figma-cursor-2, .figma-cursor-3 {
+    .floating-cursor, .floating-cursor-2, .floating-cursor-3 {
         display: none;
     }
 }
@@ -605,36 +645,73 @@ const entry = homepageEntries.find(entry => entry.id === 'main.md') || homepageE
 }
 
 .problem-card {
-    background-color: var(--color-card-bg);
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.06) 0%, 
+        rgba(255, 255, 255, 0.02) 100%);
     padding: var(--spacing-lg);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    transition: var(--transition);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
     height: 100%;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
 }
 
 .problem-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.08) 0%, 
+        rgba(255, 255, 255, 0.03) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 .problem-icon {
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 60px;
-    height: 60px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: var(--color-highlight);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--color-white);
+    transition: all 0.3s ease;
+}
+
+.problem-card:hover .problem-icon {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .problem-icon :global(svg) {
-    width: 30px;
-    height: 30px;
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
+}
+
+.problem-card:hover .problem-icon :global(svg) {
+    transform: scale(1.05);
+}
+
+.problem-card h3 {
+    color: var(--color-white);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+    transition: color 0.3s ease;
+}
+
+.problem-card p {
+    color: var(--color-text-light);
+    line-height: 1.6;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+.problem-card:hover p {
+    color: rgba(255, 255, 255, 0.8);
 }
 
 /* How it works Section */
@@ -839,42 +916,115 @@ const entry = homepageEntries.find(entry => entry.id === 'main.md') || homepageE
 
 /* Use Cases Section */
 .use-cases {
-    background-color: #151515;
+    background: linear-gradient(135deg, #151515 0%, #0f0f0f 100%);
     padding: var(--spacing-xxl) 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.use-cases::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.02) 0%, transparent 70%);
+    pointer-events: none;
 }
 
 .use-cases-content {
-    text-align: center;
-    max-width: 900px;
-    margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
 .use-cases h2 {
-    color: var(--color-text-light);
-    font-size: 1.5rem;
-    font-weight: 500;
-    margin-bottom: var(--spacing-md);
-    font-family: var(--font-heading);
-}
-
-.rotating-use-case {
-    min-height: 250px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.use-case-text {
     color: var(--color-white);
-    font-size: 3rem;
-    line-height: 1.2;
+    font-size: 2.5rem;
     font-weight: 700;
-    opacity: 1;
-    transition: opacity 0.6s ease;
-    max-width: 900px;
-    margin: 0 auto;
-    font-family: var(--font-heading);
+    margin-bottom: var(--spacing-xl);
     text-align: center;
+    line-height: 1.2;
+}
+
+.space-mono {
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.use-case-cards {
+    display: flex;
+    gap: var(--spacing-lg);
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: var(--spacing-md) 0;
+    padding-left: var(--spacing-lg);
+    padding-right: var(--spacing-lg);
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+
+.use-case-cards::-webkit-scrollbar {
+    display: none;
+}
+
+.use-case-cards {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.use-case-card {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.06) 0%, 
+        rgba(255, 255, 255, 0.02) 100%);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: var(--spacing-lg);
+    min-width: 400px;
+    max-width: 400px;
+    position: relative;
+    backdrop-filter: blur(20px);
+    transition: all 0.3s ease;
+}
+
+.use-case-card:hover {
+    transform: translateY(-4px);
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.08) 0%, 
+        rgba(255, 255, 255, 0.03) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.channel-tag {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-white);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.use-case-card p {
+    color: var(--color-white);
+    font-size: 1.5rem;
+    line-height: 1.4;
+    font-weight: 600;
+    margin: 0;
+    padding-top: var(--spacing-md);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .content-text {
@@ -1041,12 +1191,32 @@ const entry = homepageEntries.find(entry => entry.id === 'main.md') || homepageE
     }
     
     .use-cases h2 {
-        font-size: 1.25rem;
+        font-size: 2rem;
+        margin-bottom: var(--spacing-lg);
     }
     
-    .use-case-text {
-        font-size: 1.75rem;
-        line-height: 1.3;
+    .use-case-cards {
+        padding-left: var(--spacing-md);
+        padding-right: var(--spacing-md);
+    }
+    
+    .use-case-card {
+        min-width: 300px;
+        max-width: 300px;
+        padding: var(--spacing-md);
+    }
+    
+    .use-case-card p {
+        font-size: 1.25rem;
+        line-height: 1.4;
+        padding-top: var(--spacing-sm);
+    }
+    
+    .channel-tag {
+        top: var(--spacing-sm);
+        right: var(--spacing-sm);
+        padding: 3px 8px;
+        font-size: 0.7rem;
     }
 }
 
@@ -1128,108 +1298,36 @@ const entry = homepageEntries.find(entry => entry.id === 'main.md') || homepageE
 
 .empathy-content h2 {
     font-size: 2.5rem;
-    margin-bottom: var(--spacing-xxl);
+    margin-bottom: var(--spacing-xl);
     line-height: 1.2;
+    color: var(--color-white);
 }
 
-.main-insight {
-    margin-bottom: var(--spacing-xxl);
+.power-emphasis {
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+    padding: 8px 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    letter-spacing: -0.5px;
+    position: relative;
+    display: inline-block;
+    backdrop-filter: blur(15px);
+    box-shadow: 
+        0 8px 32px rgba(255, 255, 255, 0.1),
+        0 0 20px rgba(255, 255, 255, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
 }
 
 .lead-text {
-    font-size: 1.75rem;
-    font-weight: 500;
-    margin-bottom: var(--spacing-xl);
-    line-height: 1.4;
-    color: var(--color-white);
-}
-
-.perception-examples {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-lg);
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-.perception-line {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-md);
     font-size: 1.5rem;
-    line-height: 1.4;
-    padding: var(--spacing-md) 0;
-}
-
-.intention-text {
-    color: var(--color-white);
-    font-weight: 500;
-    text-align: right;
-    flex: 1;
-}
-
-.arrow {
-    color: var(--color-text-light);
-    font-size: 2rem;
-    font-weight: 300;
-    margin: 0 var(--spacing-sm);
-}
-
-.perception-text {
-    color: var(--color-text-light);
-    font-weight: 500;
-    text-align: left;
-    flex: 1;
-}
-
-.key-questions {
-    margin-bottom: var(--spacing-xxl);
-}
-
-.question-contrast {
-    font-size: 1.75rem;
-    font-weight: 600;
-    margin-bottom: var(--spacing-lg);
-    line-height: 1.3;
-    color: var(--color-white);
-}
-
-.dim-question {
-    color: var(--color-text-light);
-    opacity: 0.6;
     font-weight: 400;
-}
-
-.bright-question {
-    color: var(--color-white);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
-    padding: 6px 16px;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    font-weight: 600;
-}
-
-.result-text {
-    font-size: 1.25rem;
+    line-height: 1.6;
     color: var(--color-text-light);
-    font-weight: 500;
-}
-
-.solution {
-    padding: var(--spacing-xl);
-    background-color: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
     max-width: 800px;
     margin: 0 auto;
-}
-
-.solution-text {
-    font-size: 1.5rem;
-    line-height: 1.4;
-    color: var(--color-white);
-    margin: 0;
 }
 
 @media (max-width: 768px) {
@@ -1241,31 +1339,12 @@ const entry = homepageEntries.find(entry => entry.id === 'main.md') || homepageE
         font-size: 2rem;
     }
     
+    .power-emphasis {
+        font-size: 2.25rem;
+        padding: 6px 16px;
+    }
+    
     .lead-text {
-        font-size: 1.4rem;
-    }
-    
-    .perception-line {
-        flex-direction: column;
-        gap: var(--spacing-sm);
-        font-size: 1.25rem;
-    }
-    
-    .intention-text,
-    .perception-text {
-        text-align: center;
-    }
-    
-    .arrow {
-        transform: rotate(90deg);
-        font-size: 1.5rem;
-    }
-    
-    .question-contrast {
-        font-size: 1.4rem;
-    }
-    
-    .solution-text {
         font-size: 1.25rem;
     }
 }
@@ -1288,38 +1367,36 @@ const entry = homepageEntries.find(entry => entry.id === 'main.md') || homepageE
       setInterval(rotateText, 2000);
     }
     
-    // Use case rotating text
-    const useCaseText = document.querySelector('.use-case-text') as HTMLElement;
-    if (useCaseText) {
-      const useCases = [
-        'Testing whether your "following up" message sounds persistent instead of stalker-ish',
-        'Making sure that joke in your presentation lands as hilarious instead of getting you called into HR',
-        'Checking if your website copy actually makes sense or just sounds like you let ChatGPT loose',
-        'Making sure your feedback to Dave sounds constructive instead of soul-crushing',
-        'Seeing if your proposal comes across as "shut up and take my money" instead of "this smells like a scam"',
-        'Testing whether your LinkedIn post sounds witty or just makes everyone cringe',
-        'Checking if your fundraising email comes across as "invest in the future" instead of "please save our dying startup"',
-        'Making sure your price increase announcement feels "value upgrade" rather than "we\'re squeezing you dry."',
-      ];
+    // Auto-scroll use case cards with infinite scroll
+    const useCaseCards = document.querySelector('.use-case-cards') as HTMLElement;
+    if (useCaseCards) {
+      let scrollPosition = 0;
+      const cardWidth = 416; // 400px card + 16px gap
+      const totalCards = useCaseCards.children.length;
+      const originalCards = totalCards / 2; // Half are duplicates
+      const resetPoint = originalCards * cardWidth;
       
-      let currentUseCaseIndex = 0;
-      
-      function rotateUseCase() {
-        // Fade out
-        useCaseText.style.opacity = '0';
+      function autoScroll() {
+        scrollPosition += cardWidth;
         
-        setTimeout(() => {
-          // Change text
-          currentUseCaseIndex = (currentUseCaseIndex + 1) % useCases.length;
-          useCaseText.textContent = useCases[currentUseCaseIndex];
-          
-          // Fade in
-          useCaseText.style.opacity = '1';
-        }, 250);
+        // Reset to beginning seamlessly when we reach the duplicate section
+        if (scrollPosition >= resetPoint) {
+          // Instantly reset to the beginning (no animation)
+          useCaseCards.scrollTo({
+            left: 0,
+            behavior: 'instant'
+          });
+          scrollPosition = cardWidth; // Start from the second card to continue smoothly
+        }
+        
+        useCaseCards.scrollTo({
+          left: scrollPosition,
+          behavior: 'smooth'
+        });
       }
       
-             // Change use case every 7 seconds
-       setInterval(rotateUseCase, 7000);
+      // Auto-scroll every 4 seconds
+      setInterval(autoScroll, 4000);
     }
     
     // FAQ functionality
