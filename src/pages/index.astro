@@ -112,8 +112,13 @@ const entry = homepageEntries.find(entry => entry.id === 'main.md') || homepageE
               Describe who you're communicating with and we'll build a virtual version of them. Build them once, use them everywhere. Plus they get smarter as you collect real reactions.
             </p>
             <div class="step-demo">
-              <div class="audience-tag-green">B2B SaaS decision makers</div>
-              <div class="audience-tag-red">My demanding boss</div>
+              <div class="dropdown-mockup" id="audience-dropdown">
+                <div class="dropdown-menu">
+                  <div class="dropdown-item">Gen Z Creators</div>
+                  <div class="dropdown-item">Greg from Finance</div>
+                  <div class="dropdown-item" id="startup-founders-item">Startup Founders</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -131,8 +136,9 @@ const entry = homepageEntries.find(entry => entry.id === 'main.md') || homepageE
             <div class="step-demo">
               <div class="content-text highlighted-text">Hey there! I wanted to follow up about our conversation last week...</div>
               <div class="static-cursor">
-                <svg width="26" height="30" fill="none" xmlns="http://www.w3.org/2000/svg"><g filter="url(#a)"><path d="m8.5 19.5-2-12 10 6L11 15l-2.5 4.5Z" fill="#8B5CF6" rx="2"></path><path d="m6.757 7.071-.928-.557.178 1.068 2 12 .235 1.412.695-1.251 2.398-4.316 5.297-1.445 1.13-.308-1.005-.603-10-6Z" stroke="#fff" stroke-width="1.5"></path></g><defs><filter id="a" x=".158" y=".528" width="23.866" height="26.959" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix><feOffset dy="2"></feOffset><feGaussianBlur stdDeviation="3"></feGaussianBlur><feComposite in2="hardAlpha" operator="out"></feComposite><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"></feColorMatrix><feBlend in2="BackgroundImageFix" result="effect1_dropShadow_1_4"></feBlend><feBlend in="SourceGraphic" in2="effect1_dropShadow_1_4" result="shape"></feBlend></filter></defs></svg>
-                <span class="static-cursor-name">Greg from Finance</span>
+                <svg width="26" height="30" fill="none" xmlns="http://www.w3.org/2000/svg"><g filter="url(#a)"><path d="m8.5 19.5-2-12 10 6L11 15l-2.5 4.5Z" fill="#0080FE" rx="2"></path><path d="m6.757 7.071-.928-.557.178 1.068 2 12 .235 1.412.695-1.251 2.398-4.316 5.297-1.445 1.13-.308-1.005-.603-10-6Z" stroke="#fff" stroke-width="1.5"></path></g><defs><filter id="a" x=".158" y=".528" width="23.866" height="26.959" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix><feOffset dy="2"></feOffset><feGaussianBlur stdDeviation="3"></feGaussianBlur><feComposite in2="hardAlpha" operator="out"></feComposite><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"></feColorMatrix><feBlend in2="BackgroundImageFix" result="effect1_dropShadow_1_4"></feBlend><feBlend in="SourceGraphic" in2="effect1_dropShadow_1_4" result="shape"></feBlend></filter></defs></svg>
+                <span class="static-cursor-name">Startup Founders</span>
+                <div class="cursor-comment" id="greg-step2-comment"></div>
               </div>
             </div>
           </div>
@@ -729,64 +735,85 @@ const entry = homepageEntries.find(entry => entry.id === 'main.md') || homepageE
     position: relative;
 }
 
-.audience-tag {
-    display: inline-block;
-    background-color: rgba(255, 255, 255, 0.15);
-    color: var(--color-white);
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 0.875rem;
-    margin: 4px 8px 4px 0;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    font-weight: 600;
-    transition: all 0.2s ease;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+.dropdown-mockup {
+    position: relative;
+    width: 100%;
 }
 
-.audience-tag:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.4);
+.dropdown-menu {
+    background: linear-gradient(135deg, 
+        rgba(0, 0, 0, 0.95) 0%, 
+        rgba(20, 20, 20, 0.9) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    backdrop-filter: blur(20px);
+    overflow: hidden;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.6),
+        0 4px 16px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-.audience-tag-green {
-    display: inline-block;
-    background-color: #22c55e;
+.dropdown-item {
+    padding: 16px 20px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: default;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: left;
+    position: relative;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item:first-child {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.dropdown-item:last-child {
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.dropdown-item.selected {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.15) 0%, 
+        rgba(255, 255, 255, 0.08) 100%);
     color: #ffffff;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-size: 0.875rem;
-    margin: 4px 8px 4px 0;
-    border: 1px solid #16a34a;
     font-weight: 600;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3);
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-.audience-tag-green:hover {
-    background-color: #16a34a;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+.dropdown-item.animate-selection {
+    animation: selectItem 0.5s ease-out forwards;
 }
 
-.audience-tag-red {
-    display: inline-block;
-    background-color: #ec4899;
-    color: #ffffff;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-size: 0.875rem;
-    margin: 4px 8px 4px 0;
-    border: 1px solid #db2777;
-    font-weight: 600;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 8px rgba(236, 72, 153, 0.3);
+@keyframes selectItem {
+    0% {
+        background: transparent;
+        color: rgba(255, 255, 255, 0.8);
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(4px);
+    }
+    100% {
+        background: linear-gradient(135deg, 
+            rgba(255, 255, 255, 0.15) 0%, 
+            rgba(255, 255, 255, 0.08) 100%);
+        color: #ffffff;
+        transform: translateX(0);
+    }
 }
 
-.audience-tag-red:hover {
-    background-color: #db2777;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(236, 72, 153, 0.4);
-}
+
 
 .static-cursor {
     position: absolute;
@@ -807,7 +834,7 @@ const entry = homepageEntries.find(entry => entry.id === 'main.md') || homepageE
     border-radius: 4px;
     font-weight: 500;
     white-space: nowrap;
-    background-color: #8B5CF6;
+    background-color: #0080FE;
 }
 
 /* Use Cases Section */
@@ -898,17 +925,67 @@ const entry = homepageEntries.find(entry => entry.id === 'main.md') || homepageE
     height: 16px;
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 3px;
-    background-color: var(--color-white);
+    background-color: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 2px;
+    transition: all 0.3s ease;
 }
 
 .suggestion-checkbox :global(svg) {
     width: 12px;
     height: 12px;
     color: var(--color-background);
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.3s ease;
+}
+
+.suggestion-checkbox.animate {
+    animation: checkboxFill 1.5s ease-out forwards;
+}
+
+.suggestion-checkbox.animate :global(svg) {
+    animation: checkAppear 1.5s ease-out forwards;
+}
+
+@keyframes checkboxFill {
+    0% {
+        background-color: transparent;
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+    60% {
+        background-color: transparent;
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+    70% {
+        background-color: var(--color-white);
+        border-color: var(--color-white);
+    }
+    100% {
+        background-color: var(--color-white);
+        border-color: var(--color-white);
+    }
+}
+
+@keyframes checkAppear {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    60% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    70% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .suggestion-content {
@@ -1343,6 +1420,13 @@ const entry = homepageEntries.find(entry => entry.id === 'main.md') || homepageE
       "Why am I not using this yet"
     ];
     
+    const founderFollowUpComments = [
+      "This sounds too desperate",
+      "What's the business impact here?",
+      "This guy's got no business sense",
+      "I don't want to be followed up on",
+    ];
+    
               function showRandomComment(commentId: string) {
        const commentElement = document.getElementById(commentId);
        if (!commentElement) return;
@@ -1351,6 +1435,7 @@ const entry = homepageEntries.find(entry => entry.id === 'main.md') || homepageE
        if (commentId === 'comment-1') comments = startupComments;
        else if (commentId === 'comment-2') comments = gregComments;
        else if (commentId === 'comment-3') comments = genzComments;
+       else if (commentId === 'greg-step2-comment') comments = founderFollowUpComments;
        else return;
        
        const randomComment = comments[Math.floor(Math.random() * comments.length)];
@@ -1366,10 +1451,59 @@ const entry = homepageEntries.find(entry => entry.id === 'main.md') || homepageE
     setInterval(() => showRandomComment('comment-1'), 8000);
     setInterval(() => showRandomComment('comment-2'), 12000);
     setInterval(() => showRandomComment('comment-3'), 15000);
+    setInterval(() => showRandomComment('greg-step2-comment'), 5000);
     
     // Initial comments after page load
     setTimeout(() => showRandomComment('comment-1'), 3000);
     setTimeout(() => showRandomComment('comment-2'), 6000);
     setTimeout(() => showRandomComment('comment-3'), 9000);
+    setTimeout(() => showRandomComment('greg-step2-comment'), 2000);
+    
+    // Checkbox animation on scroll into view
+    const checkboxElement = document.querySelector('.suggestion-checkbox') as HTMLElement;
+    if (checkboxElement) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !entry.target.classList.contains('animate')) {
+            entry.target.classList.add('animate');
+          }
+        });
+      }, {
+        threshold: 0.5 // Trigger when 50% of the element is visible
+      });
+      
+      observer.observe(checkboxElement);
+    }
+    
+    // Dropdown animation on scroll into view
+    const dropdownElement = document.getElementById('audience-dropdown');
+    if (dropdownElement) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+            entry.target.classList.add('animated');
+            
+            // Animate the selection after a short delay
+            setTimeout(() => {
+              const startupItem = document.getElementById('startup-founders-item');
+              
+              if (startupItem) {
+                // Add selection animation to the item
+                startupItem.classList.add('animate-selection');
+                
+                // After animation completes, add the final selected state
+                setTimeout(() => {
+                  startupItem.classList.add('selected');
+                }, 500);
+              }
+            }, 500);
+          }
+        });
+      }, {
+        threshold: 0.4 // Trigger when 40% of the element is visible
+      });
+      
+      observer.observe(dropdownElement);
+    }
   });
 </script>
