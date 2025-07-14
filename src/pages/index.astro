@@ -1,15 +1,12 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { Icon } from 'astro-icon/components';
 import HomeHero from '../components/HomeHero.astro'; 
-import ProblemSection from '../components/ProblemSection.astro';
-import DemoVideoSection from '../components/DemoVideoSection.astro';
-import HowItWorksSection from '../components/HowItWorksSection.astro';
-import FeaturesSection from '../components/FeaturesSection.astro';
-import UseCasesSection from '../components/UseCasesSection.astro';
-import PlatformSupportSection from '../components/PlatformSupportSection.astro';
-import TestimonialsSection from '../components/TestimonialsSection.astro';
-import FAQsSection from '../components/FAQsSection.astro';
+
+
+
+
 import FinalCTASection from '../components/FinalCTASection.astro';
 import { collections } from '../content/config'; 
 
@@ -25,43 +22,1272 @@ const entry = homepageEntries.find(entry => entry.id === 'main.md') || homepageE
   entry={entry}
 >
 
-  {entry.data.hero && (
-    <HomeHero {...entry.data.hero} />
-  )}
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>
+          See <span class="react-emphasis">reactions</span> from your audience, <span class="before-fade">before</span> <span class="rotating-text">sending</span>
+        </h1>
+        <p class="hero-description">
+          Test your content on virtual audiences who think and react like your real ones. Before your customer says 'I don't get it.' Before your prospect ghosts you. Before you waste another hour rewording the same email with ChatGPT.
+        </p>
+        <div class="cta-buttons">
+          <a href="https://testfeed.beehiiv.com/subscribe" class="btn btn-primary pulse">Join Waitlist</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Floating Cursors -->
+    <div class="figma-cursor" id="cursor-1">
+        <svg width="26" height="30" fill="none" xmlns="http://www.w3.org/2000/svg"><g filter="url(#a)"><path d="m8.5 19.5-2-12 10 6L11 15l-2.5 4.5Z" fill="#00D4FF" rx="2"></path><path d="m6.757 7.071-.928-.557.178 1.068 2 12 .235 1.412.695-1.251 2.398-4.316 5.297-1.445 1.13-.308-1.005-.603-10-6Z" stroke="#fff" stroke-width="1.5"></path></g><defs><filter id="a" x=".158" y=".528" width="23.866" height="26.959" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix><feOffset dy="2"></feOffset><feGaussianBlur stdDeviation="3"></feGaussianBlur><feComposite in2="hardAlpha" operator="out"></feComposite><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"></feColorMatrix><feBlend in2="BackgroundImageFix" result="effect1_dropShadow_1_4"></feBlend><feBlend in="SourceGraphic" in2="effect1_dropShadow_1_4" result="shape"></feBlend></filter></defs></svg>
+      <span class="figma-name">Startup Founders</span>
+      <div class="cursor-comment" id="comment-1"></div>
+    </div>
+    
+    <div class="figma-cursor-2" id="cursor-2">
+        <svg width="26" height="30" fill="none" xmlns="http://www.w3.org/2000/svg"><g filter="url(#a)"><path d="m8.5 19.5-2-12 10 6L11 15l-2.5 4.5Z" fill="#8B5CF6" rx="2"></path><path d="m6.757 7.071-.928-.557.178 1.068 2 12 .235 1.412.695-1.251 2.398-4.316 5.297-1.445 1.13-.308-1.005-.603-10-6Z" stroke="#fff" stroke-width="1.5"></path></g><defs><filter id="a" x=".158" y=".528" width="23.866" height="26.959" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix><feOffset dy="2"></feOffset><feGaussianBlur stdDeviation="3"></feGaussianBlur><feComposite in2="hardAlpha" operator="out"></feComposite><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"></feColorMatrix><feBlend in2="BackgroundImageFix" result="effect1_dropShadow_1_4"></feBlend><feBlend in="SourceGraphic" in2="effect1_dropShadow_1_4" result="shape"></feBlend></filter></defs></svg>
+      <span class="figma-name">Greg from Finance</span>
+      <div class="cursor-comment" id="comment-2"></div>
+    </div>
+    
+    <div class="figma-cursor-3" id="cursor-3">
+        <svg width="26" height="30" fill="none" xmlns="http://www.w3.org/2000/svg"><g filter="url(#a)"><path d="m8.5 19.5-2-12 10 6L11 15l-2.5 4.5Z" fill="#F59E0B" rx="2"></path><path d="m6.757 7.071-.928-.557.178 1.068 2 12 .235 1.412.695-1.251 2.398-4.316 5.297-1.445 1.13-.308-1.005-.603-10-6Z" stroke="#fff" stroke-width="1.5"></path></g><defs><filter id="a" x=".158" y=".528" width="23.866" height="26.959" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix><feOffset dy="2"></feOffset><feGaussianBlur stdDeviation="3"></feGaussianBlur><feComposite in2="hardAlpha" operator="out"></feComposite><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"></feColorMatrix><feBlend in2="BackgroundImageFix" result="effect1_dropShadow_1_4"></feBlend><feBlend in="SourceGraphic" in2="effect1_dropShadow_1_4" result="shape"></feBlend></filter></defs></svg>
+      <span class="figma-name">Gen Z Creators</span>
+      <div class="cursor-comment" id="comment-3"></div>
+    </div>
+  </section>
 
-  {entry.data.problemSection && (
-    <ProblemSection {...entry.data.problemSection} />
-  )}
+  <!-- Communication Trap Section -->
+  <section class="problem">
+    <div class="container">
+      <h2>The communication <span class="highlight">trap</span></h2>
+      <div class="problem-grid">
+        <div class="problem-card">
+          <div class="problem-icon">
+            <Icon name="lucide:target" />
+          </div>
+          <h3>You only get one shot</h3>
+          <p>
+            That sales email to your dream client? One shot. The proposal that could make your business? One shot. Your reply to that tricky customer situation? One shot. Most communication is binary, it either works or it doesn't. There's no A/B tests or practice runs. You get one chance to communicate correctly, and you better hope you nail it.
+          </p>
+        </div>
 
-  {entry.data.videoSection && (
-    <DemoVideoSection {...entry.data.videoSection} />
-  )}
+        <div class="problem-card">
+          <div class="problem-icon">
+            <Icon name="lucide:clock" />
+          </div>
+          <h3>You waste hours second-guessing</h3>
+          <p>
+            When something really matters, the more you second-guess yourself. Does this sound professional enough? Too formal? Not formal enough? You know what you want to achieve, but you have no idea if your words will actually get you there. So you keep tweaking, editing, rewriting - burning hours on messages that should take minutes.
+          </p>
+        </div>
 
-  {entry.data.howItWorksSection && (
-    <HowItWorksSection {...entry.data.howItWorksSection} />
-  )}
+        <div class="problem-card">
+          <div class="problem-icon">
+            <Icon name="lucide:message-circle-x" />
+          </div>
+          <h3>You rarely get any feedback</h3>
+          <p>
+            You send that carefully crafted email and get... nothing. Radio silence. Was it too pushy? Not compelling enough? Did it end up in spam? You have absolutely no idea. Your LinkedIn post gets three likes instead of thirty - but why? Did it sound boring? Pretentious? When communication fails, you rarely find out why.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  {entry.data.featuresSection && (
-    <FeaturesSection {...entry.data.featuresSection} />
-  )}
+  <!-- How it works Section -->
+  <section class="how-it-works">
+    <div class="container">
+      <h2>How it works</h2>
+      <div class="steps-vertical">
+        <div class="step-item">
+          <div class="step-visual">
+            <div class="step-number">1</div>
+            <div class="step-connector"></div>
+          </div>
+          <div class="step-content">
+            <h3>Create virtual audiences</h3>
+            <p>
+              Describe who you're communicating with and we'll build a virtual version of them. Build them once, use them everywhere. Plus they get smarter as you collect real reactions.Okay
+            </p>
+            <div class="step-demo">
+              <div class="audience-tag">B2B SaaS decision makers</div>
+              <div class="audience-tag">My demanding boss</div>
+            </div>
+          </div>
+        </div>
 
-  {entry.data.useCasesSection && (
-    <UseCasesSection {...entry.data.useCasesSection} />
-  )}
+        <div class="step-item">
+          <div class="step-visual">
+            <div class="step-number">2</div>
+            <div class="step-connector"></div>
+          </div>
+          <div class="step-content">
+            <h3>Test any content</h3>
+            <p>
+              Right-click any content on any website - emails in Gmail, posts on LinkedIn, replies in Slack, sales proposals, website copy. Select the audience, get their reactions instantly.
+            </p>
+            <div class="step-demo">
+              <div class="content-text highlighted-text">Hey there! I wanted to follow up about our conversation last week...</div>
+            </div>
+          </div>
+        </div>
 
-  {entry.data.platformSupportSection && (
-    <PlatformSupportSection {...entry.data.platformSupportSection} />
-  )}
+        <div class="step-item">
+          <div class="step-visual">
+            <div class="step-number">3</div>
+            <div class="step-connector"></div>
+          </div>
+          <div class="step-content">
+            <h3>Improve and send</h3>
+            <p>
+              Spot the issues. Get suggestions to make it better. Fix what's not working. Share knowing it'll land the way you actually intended with your real audience.
+            </p>
+            <div class="step-demo">
+              <div class="reaction-preview">
+                <div class="reaction">
+                  <div class="suggestion-checkbox">
+                    <Icon name="lucide:check" />
+                  </div>
+                  <div class="suggestion-content">
+                    <div class="suggestion-header">Lead with the specific case study</div>
+                    <div class="suggestion-insight">They want proof before investing time</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  {entry.data.testimonialsSection && (
-    <TestimonialsSection {...entry.data.testimonialsSection} />
-  )}
 
-  {entry.data.faqSection && (
-    <FAQsSection {...entry.data.faqSection} />
-  )}
+
+  <!-- Use Cases Section -->
+  <section class="use-cases">
+    <div class="container">
+      <div class="use-cases-content">
+        <h2>Use TestFeed for...</h2>
+        <div class="rotating-use-case">
+          <p class="use-case-text">Testing whether your "following up" message sounds persistent instead of stalker-ish</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Empathy Section -->
+  <section class="empathy-section">
+    <div class="container">
+      <div class="empathy-content">
+        <h2>Empathy as a <span class="highlight">superpower</span></h2>
+        
+        <div class="main-insight">
+          <p class="lead-text">Most communication failures happen in the same place: the gap between what you intended and how it was perceived.</p>
+          
+          <div class="perception-examples">
+            <div class="perception-line">
+              <span class="intention-text">You intended to sound confident</span>
+              <span class="arrow">></span>
+              <span class="perception-text">they heard arrogant</span>
+            </div>
+            <div class="perception-line">
+              <span class="intention-text">You intended to be helpful</span>
+              <span class="arrow">></span>
+              <span class="perception-text">they heard condescending</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="key-questions">
+          <p class="question-contrast">
+            The best communicators don't ask <span class="dim-question">"what do I want to say?"</span> - they ask <span class="bright-question">"what do they want to hear?"</span>
+          </p>
+          <p class="result-text">That's why their emails get replies and their deals close.</p>
+        </div>
+        
+        <div class="solution">
+          <p class="solution-text">TestFeed helps get you out of your own head and into theirs. Quick perspective checks that show you how your message really lands, not how you think it lands.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="faq">
+    <div class="container">
+      <h2>Frequently asked questions</h2>
+
+      <div class="faq-container">
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span class="question-text">How is this different from just using ChatGPT or Claude?</span>
+          </button>
+          <div class="faq-answer">
+            <p>Those tools help you write better, but they don't help you understand your audience better. They're stuck in your perspective, not your audience's perspective. TestFeed shows you exactly how your specific audience will react to your message, not just how to improve your writing.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span class="question-text">How do I know the virtual audiences are actually accurate?</span>
+          </button>
+          <div class="faq-answer">
+            <p>We create psychology-based profiles from your inputs about your audience. You can see exactly how your virtual audience thinks and sees the world, and you can make suggestions and updates to improve their profile over time. Plus, you can add real reactions from your actual audience to help your virtual audience match how your real audience speaks and responds. While no virtual audience can perfectly replicate the human mind, our alpha users find this gives them useful directional guidance that helps them communicate better and avoid mistakes they would have made otherwise.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span class="question-text">Is this just for marketers and salespeople?</span>
+          </button>
+          <div class="faq-answer">
+            <p>Not at all. Anyone who sends important messages can use TestFeed. We've had founders test investor emails, employees test messages to their boss, and people test replies to difficult customers. If the message matters to you, TestFeed can help.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span class="question-text">What sort of audiences can I create?</span>
+          </button>
+          <div class="faq-answer">
+            <p>You can create any audience you need to communicate with. Go specific with individual people like "Difficult client who's always pushing back." Go broad with groups like "US based Gen Z gamers." Create professional audiences like "CTOs at fintech startups" or "Marketing managers at agencies." Basically, if you need to communicate with them, you can create a virtual version of them. The more specific you get with your audience description, the more targeted and useful the reactions will be.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span class="question-text">I already understand my audience pretty well...</span>
+          </button>
+          <div class="faq-answer">
+            <p>You might understand what they care about, but do you understand how you sound to them? There's a big difference between knowing your audience and knowing how your message lands with your audience. That's the gap TestFeed fills.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span class="question-text">How can I use TestFeed?</span>
+          </button>
+          <div class="faq-answer">
+            <p>TestFeed works on any content you're about to share. Test sales emails before sending to prospects, check your LinkedIn posts before publishing, vibe-check your replies to difficult customers, test website copy before it goes live, validate product ideas with your target users, check your Intercom responses before hitting send, test your proposals before presenting them. Basically, if you're about to communicate something important and you want to know how it'll land, TestFeed can help.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span class="question-text">When will this actually be available?</span>
+          </button>
+          <div class="faq-answer">
+            <p>We're in alpha testing right now. We launched v1 back in May, but we're rolling out v2 with a completely new approach - Chrome extension first so you can test content anywhere on the internet, not just in our web app. Our waitlist gets first access to the new version.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How is this different from just using ChatGPT or Claude?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Those tools help you write better, but they don't help you understand your audience better. They're stuck in your perspective, not your audience's perspective. TestFeed shows you exactly how your specific audience will react to your message, not just how to improve your writing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I know the virtual audiences are actually accurate?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We create psychology-based profiles from your inputs about your audience. You can see exactly how your virtual audience thinks and sees the world, and you can make suggestions and updates to improve their profile over time. Plus, you can add real reactions from your actual audience to help your virtual audience match how your real audience speaks and responds. While no virtual audience can perfectly replicate the human mind, our alpha users find this gives them useful directional guidance that helps them communicate better and avoid mistakes they would have made otherwise."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this just for marketers and salespeople?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not at all. Anyone who sends important messages can use TestFeed. We've had founders test investor emails, employees test messages to their boss, and people test replies to difficult customers. If the message matters to you, TestFeed can help."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What sort of audiences can I create?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can create any audience you need to communicate with. Go specific with individual people like 'Difficult client who's always pushing back.' Go broad with groups like 'US based Gen Z gamers.' Create professional audiences like 'CTOs at fintech startups' or 'Marketing managers at agencies.' Basically, if you need to communicate with them, you can create a virtual version of them. The more specific you get with your audience description, the more targeted and useful the reactions will be."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "I already understand my audience pretty well...",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You might understand what they care about, but do you understand how you sound to them? There's a big difference between knowing your audience and knowing how your message lands with your audience. That's the gap TestFeed fills."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I use TestFeed?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "TestFeed works on any content you're about to share. Test sales emails before sending to prospects, check your LinkedIn posts before publishing, vibe-check your replies to difficult customers, test website copy before it goes live, validate product ideas with your target users, check your Intercom responses before hitting send, test your proposals before presenting them. Basically, if you're about to communicate something important and you want to know how it'll land, TestFeed can help."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When will this actually be available?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We're in alpha testing right now. We launched v1 back in May, but we're rolling out v2 with a completely new approach - Chrome extension first so you can test content anywhere on the internet, not just in our web app. Our waitlist gets first access to the new version."
+        }
+      }
+    ]
+  }
+  </script>
 
   {entry.data.finalCtaSection && (
     <FinalCTASection {...entry.data.finalCtaSection} />
   )}
 </BaseLayout>
+
+<style>
+/* Hero Section */
+.hero {
+    padding: var(--spacing-xxl) 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+    z-index: -1;
+    animation: pulse-bg 15s infinite;
+}
+
+@keyframes pulse-bg {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+.hero-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-text);
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-text-light);
+    line-height: 1.6;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.rotating-text {
+    color: var(--color-text);
+    position: relative;
+    display: inline-block;
+    min-width: 120px;
+    text-align: left;
+}
+
+.react-emphasis {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%);
+    padding: 2px 12px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    font-weight: 800;
+    letter-spacing: -0.3px;
+    position: relative;
+    display: inline-block;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.before-fade {
+    color: var(--color-text-light);
+    opacity: 0.6;
+    font-weight: 800;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3), 0 0 16px rgba(255, 255, 255, 0.2);
+    filter: blur(0.3px);
+    position: relative;
+    display: inline-block;
+    letter-spacing: 0.5px;
+}
+
+/* Floating Cursors */
+.figma-name {
+    padding: 2px 6px;
+    color: #FFF;
+    font-size: 11px;
+    display: inline-block;
+    position: absolute;
+    top: 24px;
+    left: 20px;
+    border-radius: 4px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.figma-cursor, .figma-cursor-2, .figma-cursor-3 {
+    position: absolute;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.figma-cursor {
+    right: 20%;
+    top: 40%;
+    animation: 25s hovering-1 infinite;
+}
+
+.figma-cursor-2 {
+    left: 15%;
+    top: 55%;
+    animation: 30s hovering-2 infinite;
+}
+
+.figma-cursor-3 {
+    right: 40%;
+    top: 65%;
+    animation: 35s hovering-3 infinite;
+}
+
+.figma-cursor .figma-name {
+    background-color: #00D4FF;
+}
+
+.figma-cursor-2 .figma-name {
+    background-color: #8B5CF6;
+}
+
+.figma-cursor-3 .figma-name {
+    background-color: #F59E0B;
+}
+
+.cursor-comment {
+    position: absolute;
+    top: -45px;
+    left: 25px;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.cursor-comment.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.cursor-comment::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 15px;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid rgba(0, 0, 0, 0.9);
+}
+
+@keyframes hovering-1 {
+    0% { transform: translate3d(0px, 0px, 0px); }
+    15% { transform: translate3d(-30px, 20px, 0px); }
+    30% { transform: translate3d(40px, -10px, 0px); }
+    45% { transform: translate3d(-20px, 30px, 0px); }
+    60% { transform: translate3d(60px, 5px, 0px); }
+    75% { transform: translate3d(-40px, -20px, 0px); }
+    90% { transform: translate3d(20px, 15px, 0px); }
+    100% { transform: translate3d(0px, 0px, 0px); }
+}
+
+@keyframes hovering-2 {
+    0% { transform: translate3d(0px, 0px, 0px); }
+    20% { transform: translate3d(50px, -15px, 0px); }
+    35% { transform: translate3d(-30px, 25px, 0px); }
+    50% { transform: translate3d(70px, 40px, 0px); }
+    65% { transform: translate3d(-50px, -10px, 0px); }
+    80% { transform: translate3d(30px, 20px, 0px); }
+    95% { transform: translate3d(-10px, -5px, 0px); }
+    100% { transform: translate3d(0px, 0px, 0px); }
+}
+
+@keyframes hovering-3 {
+    0% { transform: translate3d(0px, 0px, 0px); }
+    12% { transform: translate3d(-60px, 30px, 0px); }
+    25% { transform: translate3d(40px, -25px, 0px); }
+    40% { transform: translate3d(-80px, 15px, 0px); }
+    55% { transform: translate3d(50px, 35px, 0px); }
+    70% { transform: translate3d(-30px, -20px, 0px); }
+    85% { transform: translate3d(70px, 10px, 0px); }
+    100% { transform: translate3d(0px, 0px, 0px); }
+}
+
+@media (max-width: 768px) {
+    .figma-cursor, .figma-cursor-2, .figma-cursor-3 {
+        display: none;
+    }
+}
+
+/* Problem Section */
+.problem {
+    background-color: #151515;
+    padding: var(--spacing-xxl) 0;
+}
+
+.problem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.problem-card {
+    background-color: var(--color-card-bg);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    height: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.problem-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.problem-icon {
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-highlight);
+}
+
+.problem-icon :global(svg) {
+    width: 30px;
+    height: 30px;
+}
+
+/* How it works Section */
+.how-it-works {
+    background-color: var(--color-background);
+    padding: var(--spacing-xxl) 0;
+}
+
+.steps-vertical {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--spacing-xl) 0;
+}
+
+.step-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: var(--spacing-xxl);
+    position: relative;
+}
+
+.step-item:last-child {
+    margin-bottom: 0;
+}
+
+.step-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.step-number {
+    background: linear-gradient(135deg, var(--color-highlight), rgba(255, 255, 255, 0.8));
+    color: var(--color-background);
+    font-weight: 800;
+    font-size: 1.5rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+    z-index: 2;
+    position: relative;
+}
+
+.step-connector {
+    width: 2px;
+    height: 80px;
+    background: linear-gradient(to bottom, 
+        rgba(255, 255, 255, 1) 0%, 
+        rgba(255, 255, 255, 0) 100%);
+    margin-top: var(--spacing-md);
+}
+
+.step-content {
+    width: 100%;
+    max-width: 600px;
+    background-color: var(--color-card-bg);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: var(--transition);
+    position: relative;
+    margin-top: var(--spacing-md);
+}
+
+.step-content:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.step-content h3 {
+    color: var(--color-white);
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-md);
+    font-weight: 700;
+}
+
+.step-content p {
+    color: var(--color-text-light);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-md);
+}
+
+.step-demo {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-md);
+    background-color: rgba(255, 255, 255, 0.02);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+}
+
+.audience-tag {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.15);
+    color: var(--color-white);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    margin: 4px 8px 4px 0;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-weight: 600;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.audience-tag:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Use Cases Section */
+.use-cases {
+    background-color: #151515;
+    padding: var(--spacing-xxl) 0;
+}
+
+.use-cases-content {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.use-cases h2 {
+    color: var(--color-text-light);
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: var(--spacing-md);
+    font-family: var(--font-heading);
+}
+
+.rotating-use-case {
+    min-height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.use-case-text {
+    color: var(--color-white);
+    font-size: 3rem;
+    line-height: 1.2;
+    font-weight: 700;
+    opacity: 1;
+    transition: opacity 0.6s ease;
+    max-width: 900px;
+    margin: 0 auto;
+    font-family: var(--font-heading);
+    text-align: center;
+}
+
+.content-text {
+    color: var(--color-white);
+    font-size: 0.875rem;
+    margin-bottom: var(--spacing-sm);
+    font-style: italic;
+}
+
+.highlighted-text {
+    background: var(--color-white);
+    color: var(--color-background);
+    font-size: 1rem;
+    line-height: 1.5;
+    padding: 4px 6px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    display: inline;
+}
+
+.step2-badge {
+    position: absolute;
+    top: -8px;
+    right: var(--spacing-md);
+    margin: 0;
+}
+
+.reaction-preview {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.reaction {
+    padding: var(--spacing-md);
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+}
+
+.suggestion-checkbox {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+    background-color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+}
+
+.suggestion-checkbox :global(svg) {
+    width: 12px;
+    height: 12px;
+    color: var(--color-background);
+}
+
+.suggestion-content {
+    flex: 1;
+}
+
+.suggestion-header {
+    color: var(--color-white);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    line-height: 1.3;
+}
+
+.suggestion-insight {
+    color: var(--color-text-light);
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.4;
+    font-style: italic;
+}
+
+
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-description {
+        font-size: 1.1rem;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .steps-vertical {
+        padding: var(--spacing-md) 0;
+    }
+    
+    .step-item {
+        margin-bottom: var(--spacing-xl);
+    }
+    
+    .step-content {
+        padding: var(--spacing-md);
+    }
+    
+    .step-content h3 {
+        font-size: 1.25rem;
+    }
+    
+    .use-cases h2 {
+        font-size: 1.25rem;
+    }
+    
+    .use-case-text {
+        font-size: 1.75rem;
+        line-height: 1.3;
+    }
+}
+
+/* FAQ Section */
+.faq {
+    background-color: #151515;
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: var(--spacing-md);
+}
+
+.faq-question {
+    position: relative;
+    padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) 0;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 1.5rem;
+    font-family: var(--font-heading);
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.2;
+}
+
+.question-text {
+    flex: 1;
+}
+
+.faq-question::after {
+    content: '+';
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-question::after {
+    content: '−';
+    transform: rotate(0deg);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0 var(--spacing-md) 0 0;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 500px;
+    padding: 0 var(--spacing-md) var(--spacing-md) 0;
+}
+
+/* Empathy Section */
+.empathy-section {
+    background-color: var(--color-background);
+    padding: var(--spacing-xxl) 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.empathy-content {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.empathy-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-xxl);
+    line-height: 1.2;
+}
+
+.main-insight {
+    margin-bottom: var(--spacing-xxl);
+}
+
+.lead-text {
+    font-size: 1.75rem;
+    font-weight: 500;
+    margin-bottom: var(--spacing-xl);
+    line-height: 1.4;
+    color: var(--color-white);
+}
+
+.perception-examples {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.perception-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-md);
+    font-size: 1.5rem;
+    line-height: 1.4;
+    padding: var(--spacing-md) 0;
+}
+
+.intention-text {
+    color: var(--color-white);
+    font-weight: 500;
+    text-align: right;
+    flex: 1;
+}
+
+.arrow {
+    color: var(--color-text-light);
+    font-size: 2rem;
+    font-weight: 300;
+    margin: 0 var(--spacing-sm);
+}
+
+.perception-text {
+    color: var(--color-text-light);
+    font-weight: 500;
+    text-align: left;
+    flex: 1;
+}
+
+.key-questions {
+    margin-bottom: var(--spacing-xxl);
+}
+
+.question-contrast {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.3;
+    color: var(--color-white);
+}
+
+.dim-question {
+    color: var(--color-text-light);
+    opacity: 0.6;
+    font-weight: 400;
+}
+
+.bright-question {
+    color: var(--color-white);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    padding: 6px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-weight: 600;
+}
+
+.result-text {
+    font-size: 1.25rem;
+    color: var(--color-text-light);
+    font-weight: 500;
+}
+
+.solution {
+    padding: var(--spacing-xl);
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.solution-text {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    color: var(--color-white);
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .empathy-section {
+        padding: var(--spacing-xl) 0;
+    }
+    
+    .empathy-content h2 {
+        font-size: 2rem;
+    }
+    
+    .lead-text {
+        font-size: 1.4rem;
+    }
+    
+    .perception-line {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+        font-size: 1.25rem;
+    }
+    
+    .intention-text,
+    .perception-text {
+        text-align: center;
+    }
+    
+    .arrow {
+        transform: rotate(90deg);
+        font-size: 1.5rem;
+    }
+    
+    .question-contrast {
+        font-size: 1.4rem;
+    }
+    
+    .solution-text {
+        font-size: 1.25rem;
+    }
+}
+</style>
+
+<script>
+  // Rotating text functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const rotatingText = document.querySelector('.rotating-text') as HTMLElement;
+    if (rotatingText) {
+      const words = ['sending', 'posting', 'publishing'];
+      let currentIndex = 0;
+      
+      function rotateText() {
+        currentIndex = (currentIndex + 1) % words.length;
+        rotatingText.textContent = words[currentIndex];
+      }
+      
+      // Change word every 2 seconds
+      setInterval(rotateText, 2000);
+    }
+    
+    // Use case rotating text
+    const useCaseText = document.querySelector('.use-case-text') as HTMLElement;
+    if (useCaseText) {
+      const useCases = [
+        'Testing whether your "following up" message sounds persistent instead of stalker-ish',
+        'Making sure that joke in your presentation lands as hilarious instead of getting you called into HR',
+        'Checking if your website copy actually makes sense or just sounds like you let ChatGPT loose',
+        'Making sure your feedback to Dave sounds constructive instead of soul-crushing',
+        'Seeing if your proposal comes across as "shut up and take my money" instead of "this smells like a scam"',
+        'Testing whether your LinkedIn post sounds witty or just makes everyone cringe',
+        'Checking if your fundraising email comes across as "invest in the future" instead of "please save our dying startup"',
+        'Making sure your price increase announcement feels "value upgrade" rather than "we\'re squeezing you dry."',
+      ];
+      
+      let currentUseCaseIndex = 0;
+      
+      function rotateUseCase() {
+        // Fade out
+        useCaseText.style.opacity = '0';
+        
+        setTimeout(() => {
+          // Change text
+          currentUseCaseIndex = (currentUseCaseIndex + 1) % useCases.length;
+          useCaseText.textContent = useCases[currentUseCaseIndex];
+          
+          // Fade in
+          useCaseText.style.opacity = '1';
+        }, 250);
+      }
+      
+             // Change use case every 7 seconds
+       setInterval(rotateUseCase, 7000);
+    }
+    
+    // FAQ functionality
+    const faqContainer = document.getElementById('faq');
+    if (faqContainer) {
+      const faqItems = faqContainer.querySelectorAll('.faq-item');
+      if (faqItems.length > 0) {
+        faqItems.forEach(item => {
+          const question = item.querySelector('.faq-question');
+          if (!question) return;
+
+          question.setAttribute('aria-expanded', 'false');
+
+          const answer = item.querySelector('.faq-answer');
+          if (!answer) return;
+          
+          // Associate question with answer for screen readers
+          const answerId = `faq-answer-${Math.random().toString(36).substring(2, 15)}`;
+          answer.setAttribute('id', answerId);
+          question.setAttribute('aria-controls', answerId);
+          answer.setAttribute('aria-hidden', 'true');
+
+          const clickHandler = () => {
+              const expanded = item.classList.contains('active');
+              question.setAttribute('aria-expanded', String(!expanded));
+              answer.setAttribute('aria-hidden', String(expanded));
+              item.classList.toggle('active');
+
+              // Close other items (accordion style)
+              faqItems.forEach(otherItem => {
+                if (otherItem !== item && otherItem.classList.contains('active')) {
+                  otherItem.classList.remove('active');
+                  const otherQuestion = otherItem.querySelector('.faq-question');
+                  const otherAnswer = otherItem.querySelector('.faq-answer');
+                  if(otherQuestion) otherQuestion.setAttribute('aria-expanded', 'false');
+                  if(otherAnswer) otherAnswer.setAttribute('aria-hidden', 'true');
+                }
+              });
+          };
+
+          question.addEventListener('click', clickHandler);
+        });
+      }
+    }
+    
+    // Floating cursors with random comments
+    const startupComments = [
+      "Obviously we're building this already",
+      "This is just ChatGPT with extra steps",
+      "We did this at my last unicorn",
+      "Cool but where's the blockchain?",
+      "This won't scale past 10k users",
+      "My intern could build this in a weekend",
+      "Why didn't they just use our API?",
+      "We're disrupting this space harder",
+      "This is so 2023",
+      "Our solution is way more elegant",
+      "They clearly don't understand PMF",
+      "This is what we pivoted from",
+      "We should just acquihire them",
+      "Cute MVP but not enterprise-ready",
+      "Our Series A pitch deck had this"
+    ];
+    
+    const gregComments = [
+      "I need to update my spreadsheet",
+      "This goes in Q3 expenses",
+      "Is this tax deductible?",
+      "We already have email for this",
+      "Can't we just use what we have?",
+      "I'll need to see the receipt",
+      "This needs approval from Janet",
+      "What's the cancellation policy?",
+      "We're over budget this quarter",
+      "Did you submit the expense report?",
+      "This looks like marketing spend",
+      "Are there any hidden fees?",
+      "We should table this until next year",
+      "I'll add it to the review queue",
+      "Does this integrate with QuickBooks?"
+    ];
+    
+    const genzComments = [
+      "This is actually genius ngl",
+      "Virtual audiences hit different",
+      "No cap this slaps",
+      "Why didn't I think of this",
+      "This would save my content",
+      "My posts need this fr",
+      "Audience reactions = everything",
+      "Testing before posting? Valid",
+      "This is so necessary bestie",
+      "My content flops need this",
+      "Actually revolutionary",
+      "This could change the game",
+      "Need this for my brand",
+      "Audience insight is chef's kiss",
+      "Why am I not using this yet"
+    ];
+    
+              function showRandomComment(commentId: string) {
+       const commentElement = document.getElementById(commentId);
+       if (!commentElement) return;
+       
+       let comments;
+       if (commentId === 'comment-1') comments = startupComments;
+       else if (commentId === 'comment-2') comments = gregComments;
+       else if (commentId === 'comment-3') comments = genzComments;
+       else return;
+       
+       const randomComment = comments[Math.floor(Math.random() * comments.length)];
+       commentElement.textContent = randomComment;
+       commentElement.classList.add('show');
+       
+       setTimeout(() => {
+         commentElement.classList.remove('show');
+       }, 3000);
+     }
+    
+    // Show random comments at intervals
+    setInterval(() => showRandomComment('comment-1'), 8000);
+    setInterval(() => showRandomComment('comment-2'), 12000);
+    setInterval(() => showRandomComment('comment-3'), 15000);
+    
+    // Initial comments after page load
+    setTimeout(() => showRandomComment('comment-1'), 3000);
+    setTimeout(() => showRandomComment('comment-2'), 6000);
+    setTimeout(() => showRandomComment('comment-3'), 9000);
+  });
+</script>
