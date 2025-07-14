@@ -19,7 +19,7 @@ schemaMarkup:
 hero:
   title: "Predict content success <span class='highlight'>before</span> publishing"
   description: "testfeed helps you create better-performing content by showing how your target audience will likely respond, which version they'd prefer, and identifying potential issues before you post."
-  cta1Text: "Join waitlist"
+  cta1Text: "JOIN WAITLIST"
   cta1Link: "#get-started"
   cta2Text: "Watch demo"
   cta2Link: "#demo"
@@ -142,7 +142,7 @@ faqSection:
 finalCtaSection:
   title: "See your audience's reaction <span class='highlight'>before you post</span>"
   text: "Join the testfeed waitlist and eliminate the guesswork from your content creation."
-  buttonText: "Join waitlist"
+  buttonText: "JOIN WAITLIST"
   buttonLink: "https://testfeed.beehiiv.com/subscribe"
   buttonType: "primary"
 ---

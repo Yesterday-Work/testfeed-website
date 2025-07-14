@@ -30,13 +30,9 @@ Making sure your feedback to Dave sounds constructive instead of soul-crushing
 Testing if your newsletter signup pop-up entices sign-ups or just triggers "close tab forever."
 Testing whether your apology tweet after a PR blunder rebuilds trust or digs the hole deeper
 Seeing if your Zoom icebreaker breaks the ice or freezes the room in awkward silence
-The mindset shift that changes everything / What separates good communicators from great ones
-Most communication failures happen in the same place: the gap between what you intended and how it was perceived. 
-You intended to sound confident > they heard arrogant.
-You intended to be helpful > they heard condescending
-You intended to be direct > they heard rude
-The best communicators don't ask "what do I want to say?" - they ask "what do they want to hear?" That mindset shift changes everything. That's why their emails get replies, their posts get engagement, and their deals close.
-TestFeed helps get you out of your own head and into theirs. Quick perspective checks that show you how your message really lands, not how you think it lands. That's how you improve your odds of success every single time you hit send.
+
+Empathy as a superpower
+
 Most communication failures happen in the same place: the gap between what you intended and how it was perceived. You intended to sound confident > they heard arrogant. You intended to be helpful > they heard condescending. The best communicators don't ask "what do I want to say?" - they ask "what do they want to hear?" That's why their emails get replies and their deals close. TestFeed helps get you out of your own head and into theirs. Quick perspective checks that show you how your message really lands, not how you think it lands.
 
 
@@ -61,5 +57,5 @@ We're in alpha testing right now. We launched v1 back in May, but we're rolling 
 
 Never wonder "how will this land?" again
 Join the waitlist and get first access. Test any content on any website before you send, post, or publish it.
-Join Waitlist
+Join waitlist
 (Because "wing it and wait" has never been a great plan.)
