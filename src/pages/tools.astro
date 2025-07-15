@@ -4,10 +4,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import FinalCTASection from '../components/FinalCTASection.astro';
 import { Icon } from 'astro-icon/components';
 
-// Fetch the content from main.md file for the CTA section
-const homepageEntries = await getCollection('homepage');
-const homepageEntry = homepageEntries.find(entry => entry.id === 'main.md') || homepageEntries[0];
-
 // Get tools collection
 const toolsEntries = await getCollection('tools');
 
@@ -64,9 +60,7 @@ toolsEntries.sort((a, b) => {
     </div>
   </div>
 
-  {homepageEntry.data.finalCtaSection && (
-    <FinalCTASection {...homepageEntry.data.finalCtaSection} />
-  )}
+  <FinalCTASection />
 </BaseLayout>
 
 <style>

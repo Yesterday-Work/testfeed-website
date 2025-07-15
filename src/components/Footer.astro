@@ -4,105 +4,166 @@ const currentYear = new Date().getFullYear();
 <footer>
   <div class="container">
     <div class="footer-content">
-      <div class="logo"><span class="testfeed-font">testfeed</span></div>
-      <div class="footer-legal">
-        <a href="/privacy-policy">Privacy policy</a>
-        <span class="divider">|</span>
-        <a href="/terms-of-service">Terms of service</a>
+      <div class="footer-top">
+        <div class="footer-logo">
+          <span class="testfeed-font">testfeed</span>
+        </div>
+        <div class="footer-links">
+          <div class="footer-section">
+            <h4>Product</h4>
+            <ul>
+              <li><a href="/tools">Tools</a></li>
+              <li><a href="/about">About</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="/blog">Blog</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="/privacy-policy">Privacy Policy</a></li>
+              <li><a href="/terms-of-service">Terms of Service</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <div class="copyright">
-        <p>&copy; {currentYear} testfeed. All rights reserved.</p>
-        <p class="made-by">Made by <a href="https://yesterday.work" target="_blank">yesterday</a></p>
+      <div class="footer-bottom">
+        <div class="copyright">
+          <p>&copy; {currentYear} testfeed. All rights reserved.</p>
+        </div>
+        <div class="made-by">
+          <p>Made by <a href="https://yesterday.work" target="_blank">yesterday</a></p>
+        </div>
       </div>
     </div>
   </div>
-</footer> 
+</footer>
 
 <style>
 footer {
     background-color: #0A0A0A;
-    padding: var(--spacing-lg) 0;
+    padding: var(--spacing-xl) 0 var(--spacing-lg);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .footer-content {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: var(--spacing-md);
+    gap: var(--spacing-xl);
 }
 
-.footer-legal {
+.footer-top {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: var(--spacing-md);
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--spacing-xl);
+}
+
+.footer-logo {
+    flex-shrink: 0;
+}
+
+.footer-logo .testfeed-font {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--color-white);
+}
+
+.footer-links {
+    display: flex;
+    gap: var(--spacing-xl);
+    flex-wrap: wrap;
+}
+
+.footer-section h4 {
+    color: var(--color-white);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
     font-family: 'Space Mono', monospace;
-    text-align: center;
-    width: 100%;
 }
 
-.footer-legal a {
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.footer-section a {
     color: var(--color-text-light);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: var(--transition);
 }
 
-.footer-legal a:hover {
+.footer-section a:hover {
     color: var(--color-primary);
 }
 
-.divider {
-    color: rgba(255, 255, 255, 0.2);
-    display: inline-block;
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.copyright {
-    text-align: center;
-}
-
-.copyright p {
+.copyright p,
+.made-by p {
     color: var(--color-text-light);
-    margin-bottom: 0;
-    font-size: 0.9rem;
-}
-
-.made-by {
-    margin-top: var(--spacing-sm);
-    font-size: 0.8rem;
+    margin: 0;
+    font-size: 0.85rem;
 }
 
 .made-by a {
     color: var(--color-text-light);
-    transition: var(--transition);
     text-decoration: underline;
+    transition: var(--transition);
 }
 
 .made-by a:hover {
     color: var(--color-white);
 }
 
-.footer-legal .active {
-    color: var(--color-white);
-    position: relative;
-}
-
-.footer-legal .active:after {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background-color: var(--color-white);
+@media (max-width: 768px) {
+    .footer-top {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: var(--spacing-lg);
+    }
+    
+    .footer-links {
+        gap: var(--spacing-lg);
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .footer-section {
+        flex: 1;
+        min-width: 120px;
+        text-align: center;
+    }
 }
 
 @media (max-width: 480px) {
-    .footer-legal {
+    .footer-links {
         flex-direction: column;
-        gap: var(--spacing-sm);
+        gap: var(--spacing-md);
     }
     
-    .divider {
-        display: none;
+    .footer-bottom {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+        text-align: center;
     }
-} 
+}
 </style>

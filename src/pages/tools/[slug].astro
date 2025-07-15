@@ -10,11 +10,9 @@ import MarkdownContent from '../../components/MarkdownContent.astro';
 import LinkedInTool from '../../components/tools/linkedin-preview-tool/LinkedInTool.astro';
 import LinkedInFormatter from '../../components/tools/linkedin-formatter/LinkedInFormatter.astro';
 
-// Get homepage content for CTA section and video
-const homepageEntries = await getCollection('homepage');
-const homepageEntry = homepageEntries.find(entry => entry.id === 'main.md') || homepageEntries[0];
-const videoId = homepageEntry.data.videoSection?.videoId || "Ic-OcghxCuk";
-const videoTitle = homepageEntry.data.videoSection?.title || "See TestFeed in action";
+// Hardcoded video data (no longer using homepage collection)
+const videoId = "Ic-OcghxCuk";
+const videoTitle = "See TestFeed in action";
 
 // Get all tool entries for static paths and "other tools" section
 export async function getStaticPaths() {
@@ -121,9 +119,7 @@ const breadcrumbItems: BreadcrumbItem[] = [
   </div>
 
   <!-- Final CTA Section -->
-  {homepageEntry.data.finalCtaSection && (
-    <FinalCTASection {...homepageEntry.data.finalCtaSection} />
-  )}
+  <FinalCTASection />
 </BaseLayout>
 
 <style>

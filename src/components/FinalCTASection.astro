@@ -1,75 +1,131 @@
 ---
-import type { z } from 'astro:content';
-import { finalCtaSectionSchema } from '../content/config';
-
-// Define props type
-export type Props = z.infer<typeof finalCtaSectionSchema>;
-
-const { title, text, buttonText, buttonLink, buttonType = 'primary' } = Astro.props;
+import WaitlistForm from './WaitlistForm.astro';
 ---
 
 <section id="get-started" class="final-cta">
   <div class="container">
     <div class="cta-card">
-      <h2 set:html={title}></h2>
-      <p set:html={text}></p>
-      <a href={buttonLink} class={`btn btn-${buttonType} btn-large pulse`}>{buttonText}</a>
+      <h2>Never wonder "how will this land?" again</h2>
+      <p>Join the waitlist and get first access. Test any content on any website before you send, post, or publish it.</p>
+      <div class="waitlist-form-container">
+        <WaitlistForm />
+      </div>
+      <p class="cta-subtitle">(Because hoping for the best isn't a strategy.)</p>
     </div>
   </div>
 </section> 
 
 <style>
 .final-cta {
-    padding: var(--spacing-xxl) 0;
-    background-color: #111111;
+    padding: var(--spacing-xl) 0;
+    background: linear-gradient(135deg, #111111 0%, #0a0a0a 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.final-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+    pointer-events: none;
 }
 
 .cta-card {
-    background-color: var(--color-card-bg);
-    border-radius: var(--border-radius-lg);
-    padding: var(--spacing-xl) var(--spacing-lg);
-    max-width: 800px;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.08) 0%, 
+        rgba(255, 255, 255, 0.03) 50%,
+        rgba(0, 0, 0, 0.1) 100%);
+    border-radius: 20px;
+    padding: var(--spacing-lg) var(--spacing-md);
+    max-width: 1100px;
     margin: 0 auto;
     text-align: center;
-    box-shadow: var(--shadow-lg);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    position: relative;
+    z-index: 1;
 }
+
+
 
 .cta-card h2 {
     color: var(--color-white);
-    margin-bottom: var(--spacing-md);
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .cta-card p {
-    color: var(--color-text-light);
-    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-xl);
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+.cta-card .btn {
     margin-bottom: var(--spacing-lg);
 }
 
-.waitlist-form {
-    display: flex;
-    max-width: 600px;
-    margin: 0 auto;
-    gap: var(--spacing-sm);
+.waitlist-form-container {
+    margin-bottom: var(--spacing-lg);
 }
 
-.waitlist-form input {
-    flex: 1;
-    padding: 15px;
-    border-radius: var(--border-radius);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background-color: rgba(255, 255, 255, 0.05);
-    color: var(--color-white);
-    font-size: 1rem;
+.cta-subtitle {
+    color: rgba(255, 255, 255, 0.5) !important;
+    font-size: 0.8rem !important;
+    margin-bottom: 0 !important;
+    font-weight: 400 !important;
 }
 
-.waitlist-form input:focus {
-    outline: none;
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+    .final-cta {
+        padding: var(--spacing-md) 0;
+    }
+
+.cta-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.3) 50%, 
+        transparent 100%);
 }
 
-.waitlist-form button {
-    padding: 15px 30px;
-} 
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+    .final-cta {
+        padding: var(--spacing-md) 0;
+    }
+    
+    .cta-card {
+        padding: var(--spacing-md) var(--spacing-md);
+        margin: 0 var(--spacing-md);
+    }
+    
+    .cta-card h2 {
+        font-size: 2rem;
+    }
+    
+    .cta-card p {
+        font-size: 1.1rem;
+    }
+    
+    .cta-subtitle {
+        font-size: 0.75rem !important;
+    }
+}
 </style> 

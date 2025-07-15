@@ -23,8 +23,8 @@ schemaMarkup:
 finalCtaSection:
   title: "Ready to predict your content <span class='highlight'>performance</span>?"
   text: "Join the TestFeed waitlist to get early access to our AI audience simulation platform and publish with confidence."
-  buttonText: "Join Waitlist"
-  buttonLink: "https://testfeed.beehiiv.com/subscribe"
+  buttonText: "JOIN WAITLIST"
+  buttonLink: "/#get-started"
   buttonType: "primary"
 ---
 
