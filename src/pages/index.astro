@@ -637,6 +637,10 @@ const entry = homepageEntries.find(entry => entry.id === 'main.md') || homepageE
     .floating-cursor, .floating-cursor-2, .floating-cursor-3 {
         display: none;
     }
+    
+    .cursor-comment {
+        display: none !important;
+    }
 }
 
 /* Problem Section */
@@ -1030,7 +1034,7 @@ const entry = homepageEntries.find(entry => entry.id === 'main.md') || homepageE
     line-height: 1.4;
     font-weight: 600;
     margin: 0;
-    padding-top: var(--spacing-md);
+    padding-top: var(--spacing-xl);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
@@ -1216,7 +1220,7 @@ const entry = homepageEntries.find(entry => entry.id === 'main.md') || homepageE
     .use-case-card p {
         font-size: 1.25rem;
         line-height: 1.4;
-        padding-top: var(--spacing-sm);
+        padding-top: var(--spacing-lg);
     }
     
     .channel-tag {
@@ -1409,27 +1413,48 @@ const entry = homepageEntries.find(entry => entry.id === 'main.md') || homepageE
     // Auto-scroll use case cards with infinite scroll
     const useCaseCards = document.querySelector('.use-case-cards') as HTMLElement;
     if (useCaseCards) {
-      let scrollPosition = 0;
-      const cardWidth = 416; // 400px card + 16px gap
+      let currentCardIndex = 0;
       const totalCards = useCaseCards.children.length;
       const originalCards = totalCards / 2; // Half are duplicates
-      const resetPoint = originalCards * cardWidth;
       
       function autoScroll() {
-        scrollPosition += cardWidth;
+        currentCardIndex++;
         
         // Reset to beginning seamlessly when we reach the duplicate section
-        if (scrollPosition >= resetPoint) {
+        if (currentCardIndex >= originalCards) {
           // Instantly reset to the beginning (no animation)
           useCaseCards.scrollTo({
             left: 0,
             behavior: 'instant'
           });
-          scrollPosition = cardWidth; // Start from the second card to continue smoothly
+          currentCardIndex = 1; // Start from the second card to continue smoothly
         }
         
+        // Get actual card dimensions from DOM
+        const firstCard = useCaseCards.children[0] as HTMLElement;
+        if (!firstCard) return;
+        
+        const cardRect = firstCard.getBoundingClientRect();
+        const containerRect = useCaseCards.getBoundingClientRect();
+        const cardWidth = cardRect.width;
+        
+        // Get the computed gap between cards
+        const computedStyle = window.getComputedStyle(useCaseCards);
+        const gap = parseFloat(computedStyle.gap) || 16; // Default to 16px if gap not found
+        
+        const cardWithGap = cardWidth + gap;
+        const containerWidth = containerRect.width;
+        
+        // Calculate scroll position to center the card in viewport
+        const targetCardPosition = currentCardIndex * cardWithGap;
+        const scrollPosition = targetCardPosition - (containerWidth / 2) + (cardWidth / 2);
+        
+        // Clamp to prevent overflow
+        const maxScroll = useCaseCards.scrollWidth - containerWidth;
+        const clampedPosition = Math.max(0, Math.min(scrollPosition, maxScroll));
+        
         useCaseCards.scrollTo({
-          left: scrollPosition,
+          left: clampedPosition,
           behavior: 'smooth'
         });
       }

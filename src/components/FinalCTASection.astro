@@ -21,7 +21,7 @@ const { title, text, buttonText, buttonLink, buttonType = 'primary' } = Astro.pr
 
 <style>
 .final-cta {
-    padding: var(--spacing-xxl) 0;
+    padding: var(--spacing-xl) 0;
     background: linear-gradient(135deg, #111111 0%, #0a0a0a 100%);
     position: relative;
     overflow: hidden;
@@ -44,7 +44,7 @@ const { title, text, buttonText, buttonLink, buttonType = 'primary' } = Astro.pr
         rgba(255, 255, 255, 0.03) 50%,
         rgba(0, 0, 0, 0.1) 100%);
     border-radius: 20px;
-    padding: var(--spacing-xxl) var(--spacing-xl);
+    padding: var(--spacing-lg) var(--spacing-md);
     max-width: 1100px;
     margin: 0 auto;
     text-align: center;
@@ -55,18 +55,7 @@ const { title, text, buttonText, buttonLink, buttonType = 'primary' } = Astro.pr
     z-index: 1;
 }
 
-.cta-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, 
-        transparent 0%, 
-        rgba(255, 255, 255, 0.3) 50%, 
-        transparent 100%);
-}
+
 
 .cta-card h2 {
     color: var(--color-white);
@@ -88,11 +77,6 @@ const { title, text, buttonText, buttonLink, buttonType = 'primary' } = Astro.pr
 
 .cta-card .btn {
     margin-bottom: var(--spacing-lg);
-    padding: 16px 32px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
 }
 
 .cta-subtitle {
@@ -104,8 +88,31 @@ const { title, text, buttonText, buttonLink, buttonType = 'primary' } = Astro.pr
 
 /* Mobile responsive styles */
 @media (max-width: 768px) {
+    .final-cta {
+        padding: var(--spacing-md) 0;
+    }
+
+.cta-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.3) 50%, 
+        transparent 100%);
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+    .final-cta {
+        padding: var(--spacing-md) 0;
+    }
+    
     .cta-card {
-        padding: var(--spacing-xl) var(--spacing-lg);
+        padding: var(--spacing-md) var(--spacing-md);
         margin: 0 var(--spacing-md);
     }
     
