@@ -14,7 +14,7 @@ finalCtaSection:
   title: "Ready to predict your content <span class='highlight'>performance</span>?"
   text: "Join the TestFeed waitlist to get early access to our AI audience simulation platform."
   buttonText: "Join the waitlist"
-  buttonLink: "https://testfeed.beehiiv.com/subscribe"
+  buttonLink: "/#get-started"
   buttonType: "primary"
 ---
 

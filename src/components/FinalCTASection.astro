@@ -1,5 +1,5 @@
 ---
-// No props needed - content is hardcoded
+import WaitlistForm from './WaitlistForm.astro';
 ---
 
 <section id="get-started" class="final-cta">
@@ -7,7 +7,9 @@
     <div class="cta-card">
       <h2>Never wonder "how will this land?" again</h2>
       <p>Join the waitlist and get first access. Test any content on any website before you send, post, or publish it.</p>
-      <a href="https://testfeed.beehiiv.com/subscribe" class="btn btn-primary btn-large pulse">JOIN WAITLIST</a>
+      <div class="waitlist-form-container">
+        <WaitlistForm />
+      </div>
       <p class="cta-subtitle">(Because hoping for the best isn't a strategy.)</p>
     </div>
   </div>
@@ -70,6 +72,10 @@
 }
 
 .cta-card .btn {
+    margin-bottom: var(--spacing-lg);
+}
+
+.waitlist-form-container {
     margin-bottom: var(--spacing-lg);
 }
 
