@@ -245,12 +245,6 @@ export const toolSchema = z.object({
  * Each collection uses a schema that enforces content structure.
  */
 
-// Main pages collection 
-const homepageCollection = defineCollection({
-  type: 'content',
-  schema: contentSchema
-});
-
 // Blog collection for articles and blog posts
 const blogCollection = defineCollection({
   type: 'content',
@@ -276,7 +270,6 @@ const toolsCollection = defineCollection({
 
 // Export collections
 export const collections = {
-  'homepage': homepageCollection,
   'blog': blogCollection,
   'legal': legalCollection,
   'tools': toolsCollection,

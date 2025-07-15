@@ -1,25 +1,13 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { Icon } from 'astro-icon/components';
 import HomeHero from '../components/HomeHero.astro'; 
-
-
-
-
 import FinalCTASection from '../components/FinalCTASection.astro';
-import { collections } from '../content/config'; 
-
-// Fetch the content from main.md file
-const homepageEntries = await getCollection('homepage');
-const entry = homepageEntries.find(entry => entry.id === 'main.md') || homepageEntries[0];
-
 ---
 
 <BaseLayout 
-  title={entry.data.pageTitle} 
-  description={entry.data.pageDescription} 
-  entry={entry}
+  title="TestFeed - Audience Reactions, On Demand"
+  description="See how your audience will react before you send. Test emails, posts & messages on virtual audiences who think like your real ones. Join waitlist for early access."
 >
 
   <!-- Hero Section -->
@@ -408,9 +396,7 @@ const entry = homepageEntries.find(entry => entry.id === 'main.md') || homepageE
   }
   </script>
 
-  {entry.data.finalCtaSection && (
-    <FinalCTASection {...entry.data.finalCtaSection} />
-  )}
+  <FinalCTASection />
 </BaseLayout>
 
 <style>
@@ -1034,7 +1020,7 @@ const entry = homepageEntries.find(entry => entry.id === 'main.md') || homepageE
     line-height: 1.4;
     font-weight: 600;
     margin: 0;
-    padding-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
