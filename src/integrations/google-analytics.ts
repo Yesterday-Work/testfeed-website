@@ -36,7 +36,7 @@ export default function googleAnalytics(): AstroIntegration {
             function gtag(){ window.dataLayer.push(arguments); }
             gtag('js', new Date());
             gtag('config', '${gaId}');
-            console.log('GA Integration: Scripts Injected for ID:', '${gaId}'); // For verification
+            ${process.env.NODE_ENV === 'development' ? `console.log('GA Integration: Scripts Injected for ID:', '${gaId}');` : ''}
           })();
         `);
       }
