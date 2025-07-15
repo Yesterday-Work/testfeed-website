@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { Icon } from 'astro-icon/components';
 import HomeHero from '../components/HomeHero.astro'; 
 import FinalCTASection from '../components/FinalCTASection.astro';
+import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
 ---
 
 <BaseLayout 
@@ -248,6 +249,8 @@ import FinalCTASection from '../components/FinalCTASection.astro';
         <div class="main-insight">
           <p class="lead-text">Most communication failures happen in the same place: the gap between what you intended and how it was perceived. The best communicators don't ask "what do I want to say?" - they ask "how will they hear it?" TestFeed helps you get out of your own head and into theirs.</p>
         </div>
+        
+        <IntentionPerceptionViz />
       </div>
     </div>
     
@@ -1333,7 +1336,7 @@ import FinalCTASection from '../components/FinalCTASection.astro';
 .empathy-cursor {
     position: absolute;
     right: 25%;
-    top: 45%;
+    top: 25%;
     z-index: 10;
     pointer-events: none;
     animation: 35s empathy-hovering infinite ease-in-out;
@@ -1345,13 +1348,13 @@ import FinalCTASection from '../components/FinalCTASection.astro';
 
 @keyframes empathy-hovering {
     0% { transform: translate3d(0px, 0px, 0px) rotate(0deg); }
-    12% { transform: translate3d(-150px, 30px, 0px) rotate(1deg); }
-    25% { transform: translate3d(200px, -40px, 0px) rotate(-1deg); }
-    37% { transform: translate3d(-100px, 70px, 0px) rotate(2deg); }
-    50% { transform: translate3d(180px, 50px, 0px) rotate(-1deg); }
-    62% { transform: translate3d(-180px, -20px, 0px) rotate(1deg); }
-    75% { transform: translate3d(120px, 80px, 0px) rotate(-2deg); }
-    87% { transform: translate3d(-80px, 40px, 0px) rotate(1deg); }
+    12% { transform: translate3d(-60px, 15px, 0px) rotate(0.5deg); }
+    25% { transform: translate3d(80px, -20px, 0px) rotate(-0.5deg); }
+    37% { transform: translate3d(-40px, 35px, 0px) rotate(1deg); }
+    50% { transform: translate3d(70px, 25px, 0px) rotate(-0.5deg); }
+    62% { transform: translate3d(-70px, -10px, 0px) rotate(0.5deg); }
+    75% { transform: translate3d(50px, 40px, 0px) rotate(-1deg); }
+    87% { transform: translate3d(-30px, 20px, 0px) rotate(0.5deg); }
     100% { transform: translate3d(0px, 0px, 0px) rotate(0deg); }
 }
 
