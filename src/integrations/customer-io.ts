@@ -5,9 +5,7 @@ export default function customerIoAnalytics(): AstroIntegration {
     name: 'astro-customer-io-analytics-integration',
     hooks: {
       'astro:config:setup': ({ injectScript }) => {
-        // In production, you would use environment variables like this:
-        // const writeKey = process.env.PUBLIC_CUSTOMER_IO_WRITE_KEY;
-        const writeKey = 'c1294a25ce1bdff8d1f7';
+        const writeKey = process.env.PUBLIC_CUSTOMER_IO_WRITE_KEY || '151d38f598ca954096cc';
 
         if (!writeKey) {
           console.warn(
@@ -22,7 +20,7 @@ export default function customerIoAnalytics(): AstroIntegration {
           analytics.load("${writeKey}");
           analytics.page();
           }}();
-          console.log('Customer.io Integration: Scripts Injected for Write Key:', '${writeKey}');
+          ${process.env.NODE_ENV === 'development' ? `console.log('Customer.io Integration: Scripts Injected for Write Key:', '${writeKey}');` : ''}
         `;
 
         injectScript('head-inline', snippet);
