@@ -20,7 +20,6 @@ export default function customerIoAnalytics(): AstroIntegration {
           analytics.load("${writeKey}");
           analytics.page();
           }}();
-          ${process.env.NODE_ENV === 'development' ? `console.log('Customer.io Integration: Scripts Injected for Write Key:', '${writeKey}');` : ''}
         `;
 
         injectScript('head-inline', snippet);

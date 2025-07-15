@@ -24,7 +24,6 @@ export default function posthogAnalytics(): AstroIntegration {
               person_profiles: 'identified_only',
               loaded: function(ph) { ph.capture('$pageview'); }
           });
-          ${process.env.NODE_ENV === 'development' ? `console.log('PostHog Integration: Scripts Injected for API Key:', '${posthogApiKey}', 'at Host:', '${posthogApiHost}');` : ''}
         `;
 
         injectScript('head-inline', snippet);
