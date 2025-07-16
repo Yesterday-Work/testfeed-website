@@ -1,5 +1,5 @@
 ---
-title: LinkedIn Carousel Generator
+title: AI LinkedIn Carousel Generator
 description: Create engaging LinkedIn carousel posts that boost engagement and visibility. Generate professional, eye-catching carousels in minutes with our AI-powered carousel maker.
 icon: presentation
 toolImage: ""
@@ -9,7 +9,7 @@ schemaMarkup:
     name: LinkedIn Carousel Generator
 ---
 
-# LinkedIn Carousel Generator
+# AI LinkedIn Carousel Generator
 
 Create professional, attention-grabbing carousel posts for LinkedIn that drive engagement and showcase your expertise in minutes.
 
@@ -32,7 +32,7 @@ Our LinkedIn Carousel Generator helps you create stunning, professional carousel
 
 Each carousel is automatically optimized for LinkedIn's recommended dimensions, ensuring maximum visual impact and professional appearance.
 
-## Who Needs Carousel LinkedIn Post
+## Who Needs Linkedin Carousel Generator AI?
 
 - **Content Creators**: Transform long-form content into digestible, engaging carousels
 - **Job Seekers**: Showcase your portfolio and skills in an interactive format
