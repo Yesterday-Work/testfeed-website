@@ -1,7 +1,7 @@
 ---
-title: "The Ultimate Empathy Map Template Guide 2025: Free Interactive Builder + PDF Download | TestFeed"
+title: "The Ultimate Empathy Map Template Guide 2025: Free Interactive Builder + PDF Template | TestFeed"
 description: "Create empathy maps instantly with our free interactive builder. Download professional templates and learn advanced techniques used by top UX teams."
-articleTitle: "The Ultimate Empathy Map Template Guide 2025: Free Interactive Builder + Download"
+articleTitle: "The Ultimate Empathy Map Template Guide 2025: Free Interactive Builder + PDF Template"
 publishDate: 2025-07-14
 author: "Millie"
 featuredImage: ""
@@ -15,26 +15,6 @@ schemaMarkup:
     headline: "The Ultimate Empathy Map Template Guide 2025: Free Interactive Builder + Download"
     description: "Create empathy maps instantly with our free interactive builder. Download professional templates and learn advanced techniques used by top UX teams."
     datePublished: "2025-07-14"
-finalCtaSection:
-  title: "Ready to build <span class='highlight'>psychology-based audience profiles</span>?"
-  text: "TestFeed's audience intelligence goes beyond empathy maps - we create comprehensive user profiles grounded in behavioural psychology. Get perspective-tested content that actually resonates."
-  buttonText: "Try TestFeed Free"
-  buttonLink: "https://testfeed.ai"
-  buttonType: "primary"
----
-
-Skip the expensive design tools and complex setup. Create professional empathy maps instantly with our free interactive builder, then download your work as a print-ready PDF.
-
-**Try it now - no signup required:**
-
-## Interactive Empathy Map Builder
-
-**Features:**
-- Click any quadrant to add insights
-- Auto-saves your work as you type
-- Export as image for workshops
-- Clear and reset functionality
-- Works perfectly on desktop and mobile
 
 ---
 

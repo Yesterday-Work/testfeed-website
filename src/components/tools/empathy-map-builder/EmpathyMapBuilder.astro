@@ -3,7 +3,6 @@
 
 <div class="empathy-map-builder">
   <div class="empathy-map-container">
-    <!-- Top Controls -->
     <div class="top-controls">
       <div class="persona-section">
         <label for="persona-name" class="persona-label">User Persona</label>
@@ -22,14 +21,11 @@
       </div>
     </div>
 
-    <!-- Export Header (hidden in display, shown in export) -->
     <div class="export-header">
       <h2 class="export-persona-title" id="export-persona-title">User Persona</h2>
     </div>
 
-    <!-- Empathy Map Grid -->
     <div class="empathy-map">
-      <!-- Says Quadrant -->
       <div class="quadrant says-quadrant" data-quadrant="says">
         <div class="quadrant-header">
           <h3>Says</h3>
@@ -41,7 +37,6 @@
         </div>
       </div>
 
-      <!-- Thinks Quadrant -->
       <div class="quadrant thinks-quadrant" data-quadrant="thinks">
         <div class="quadrant-header">
           <h3>Thinks</h3>
@@ -53,7 +48,6 @@
         </div>
       </div>
 
-      <!-- Does Quadrant -->
       <div class="quadrant does-quadrant" data-quadrant="does">
         <div class="quadrant-header">
           <h3>Does</h3>
@@ -65,7 +59,6 @@
         </div>
       </div>
 
-      <!-- Feels Quadrant -->
       <div class="quadrant feels-quadrant" data-quadrant="feels">
         <div class="quadrant-header">
           <h3>Feels</h3>
@@ -77,6 +70,8 @@
         </div>
       </div>
     </div>
+
+    <button id="mobile-export-map" class="mobile-export-btn" title="Export empathy map as image">Export as Image</button>
   </div>
 </div>
 
@@ -111,7 +106,6 @@
   }
 
   function setupEventListeners(): void {
-    // Make all quadrants clickable
     const quadrants = document.querySelectorAll<HTMLElement>('.quadrant');
     quadrants.forEach(quadrant => {
       quadrant.addEventListener('click', (e) => {
@@ -123,7 +117,6 @@
       });
     });
 
-    // Persona name input
     const personaInput = document.getElementById('persona-name') as HTMLInputElement;
     if (personaInput) {
       personaInput.addEventListener('input', (e) => {
@@ -134,9 +127,9 @@
       });
     }
 
-    // Control buttons
     const clearBtn = document.getElementById('clear-map');
     const exportBtn = document.getElementById('export-map');
+    const mobileExportBtn = document.getElementById('mobile-export-map');
     
     if (clearBtn) {
       clearBtn.addEventListener('click', (e) => {
@@ -152,14 +145,19 @@
       });
     }
 
-    // Close editing when clicking outside
+    if (mobileExportBtn) {
+      mobileExportBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        exportEmpathyMap();
+      });
+    }
+
     document.addEventListener('click', (e) => {
       if (isEditing && currentEditor && !currentEditor.contains(e.target as Node)) {
         stopEditing();
       }
     });
 
-    // Handle keyboard shortcuts
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && isEditing) {
         stopEditing();
@@ -178,12 +176,10 @@
     const quadrant = element.id.replace('-content', '') as keyof EmpathyMapState;
     const content = currentState[quadrant];
 
-    // Make contentEditable and set content
     element.contentEditable = 'true';
     element.textContent = content || '';
     element.focus();
     
-    // Place cursor at end
     const range = document.createRange();
     const selection = window.getSelection();
     range.selectNodeContents(element);
@@ -191,20 +187,16 @@
     selection?.removeAllRanges();
     selection?.addRange(range);
 
-    // Handle saving
     const saveContent = () => {
-      const value = element.textContent?.trim() || '';
+      const value = element.textContent || '';
       saveQuadrantContent(element.id, value);
-      element.contentEditable = 'false';
     };
 
     element.addEventListener('blur', saveContent);
     
-    // Handle Enter key for line breaks
     element.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
         e.preventDefault();
-        // Insert a proper line break
         const selection = window.getSelection();
         if (selection && selection.rangeCount > 0) {
           const range = selection.getRangeAt(0);
@@ -230,8 +222,9 @@
       currentEditor.contentEditable = 'false';
       currentEditor.classList.remove('editing');
       currentEditor.closest('.quadrant')?.classList.remove('editing');
-      updateDisplay(); // Refresh display
+      updateDisplay();
     }
+    
     isEditing = false;
     currentEditor = null;
   }
@@ -245,19 +238,18 @@
   }
 
   function updateDisplay(): void {
-    // Update persona name
     const personaInput = document.getElementById('persona-name') as HTMLInputElement;
     if (personaInput) {
       personaInput.value = currentState.personaName;
     }
     updateExportTitle();
 
-    // Update quadrants
     ['says', 'thinks', 'does', 'feels'].forEach(quadrant => {
       const content = currentState[quadrant as keyof EmpathyMapState];
       const element = document.getElementById(`${quadrant}-content`);
       if (element && !element.classList.contains('editing')) {
-        element.textContent = content || '';
+        const displayContent = content ? content.replace(/\n/g, '<br>') : '';
+        element.innerHTML = displayContent;
       }
     });
   }
@@ -270,32 +262,39 @@
   }
 
   function exportEmpathyMap(): void {
-    // Hide controls and show export header for export
-    const topControls = document.querySelector('.top-controls') as HTMLElement;
-    const exportHeader = document.querySelector('.export-header') as HTMLElement;
-    
-    if (topControls) topControls.style.display = 'none';
-    if (exportHeader) exportHeader.style.display = 'block';
-    
-    // Create export container
     const exportContainer = document.createElement('div');
     exportContainer.className = 'export-container';
     
-    const exportHeaderClone = exportHeader.cloneNode(true) as HTMLElement;
+    const exportHeader = document.createElement('div');
+    exportHeader.className = 'export-header';
+    exportHeader.style.display = 'block';
+    
+    const exportTitle = document.createElement('h2');
+    exportTitle.className = 'export-persona-title';
+    exportTitle.textContent = currentState.personaName || 'User Persona';
+    exportHeader.appendChild(exportTitle);
+    
     const empathyMapClone = document.querySelector('.empathy-map')!.cloneNode(true) as HTMLElement;
     
-    exportContainer.appendChild(exportHeaderClone);
+    const editableAreas = empathyMapClone.querySelectorAll('.editable-area');
+    editableAreas.forEach(area => {
+      const element = area as HTMLElement;
+      if (!element.textContent || element.textContent.trim() === '') {
+        element.innerHTML = '';
+      }
+    });
+    
+    exportContainer.appendChild(exportHeader);
     exportContainer.appendChild(empathyMapClone);
     
-    // Temporarily add to document for export
+    exportContainer.style.position = 'absolute';
+    exportContainer.style.left = '-9999px';
+    exportContainer.style.top = '-9999px';
+    
     document.body.appendChild(exportContainer);
     
-    // Export the combined container
     exportAsImage(exportContainer).then(() => {
-      // Clean up
       document.body.removeChild(exportContainer);
-      if (topControls) topControls.style.display = 'flex';
-      if (exportHeader) exportHeader.style.display = 'none';
     });
   }
 
@@ -332,6 +331,7 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--spacing-md);
+    position: relative;
   }
 
   .top-controls {
@@ -404,11 +404,6 @@
     align-items: center;
   }
 
-  .download-btn:hover {
-    background: #555;
-    border-color: #555;
-  }
-
   .refresh-btn {
     height: 60px;
     width: 60px;
@@ -423,9 +418,16 @@
     justify-content: center;
   }
 
-  .refresh-btn:hover {
-    color: #333;
-    background: #f5f5f5;
+  @media (hover: hover) {
+    .download-btn:hover {
+      background: #555;
+      border-color: #555;
+    }
+
+    .refresh-btn:hover {
+      color: #333;
+      background: #f5f5f5;
+    }
   }
 
   .export-header {
@@ -439,7 +441,7 @@
     font-family: var(--font-heading);
     font-size: 1.8rem;
     font-weight: 700;
-    color: #333;
+    color: white;
     margin: 0;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -552,39 +554,14 @@
     box-shadow: none;
   }
 
-  /* Mobile Responsiveness */
   @media (max-width: 768px) {
-    .empathy-map {
-      grid-template-columns: 1fr;
-      grid-template-rows: auto auto auto auto;
-      aspect-ratio: auto;
+    .empathy-map-container {
+      padding: 0 var(--spacing-sm);
+      position: relative;
     }
 
-    .quadrant {
-      padding: var(--spacing-sm);
-      border: 2px solid #e9ecef !important;
-      margin-bottom: -2px;
-    }
-
-    .quadrant:last-child {
-      margin-bottom: 0;
-    }
-
-    .quadrant-header h3 {
-      font-size: 1.2rem;
-    }
-
-    .editable-area {
-      min-height: 150px;
-    }
-
-    .persona-section {
+    .top-controls {
       margin-bottom: var(--spacing-md);
-    }
-
-    .persona-input {
-      font-size: 1.2rem;
-      margin-bottom: var(--spacing-sm);
     }
 
     .persona-input-row {
@@ -593,18 +570,95 @@
       gap: 0;
     }
 
+    .persona-input {
+      font-size: 1.3rem;
+      height: 60px;
+    }
+
     .action-controls {
-      align-self: stretch;
-      justify-content: center;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 10;
     }
 
     .download-btn {
-      flex: 1;
-      max-width: 200px;
+      display: none;
     }
 
     .refresh-btn {
-      flex-shrink: 0;
+      height: 36px;
+      width: 36px;
+    }
+
+    .empathy-map {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr;
+      aspect-ratio: auto;
+      height: auto;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .quadrant {
+      padding: var(--spacing-sm);
+      border: 2px solid #e9ecef !important;
+      margin-bottom: -2px;
+      min-height: 250px;
+      aspect-ratio: 1;
+    }
+
+    .quadrant:last-child {
+      margin-bottom: 0;
+    }
+
+    .quadrant-header h3 {
+      font-size: 1.1rem;
+    }
+
+    .quadrant-subtitle {
+      font-size: 0.8rem;
+    }
+
+    .editable-area {
+      min-height: 180px;
+      font-size: 0.95rem;
+    }
+
+    .empathy-map-builder::after {
+      content: '';
+      display: block;
+    }
+
+    .mobile-export-btn {
+      display: block;
+      width: 100%;
+      height: 50px;
+      margin-top: var(--spacing-md);
+      padding: 0 var(--spacing-md);
+      border: 2px solid #333;
+      background: #333;
+      color: white;
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    @media (hover: hover) {
+      .mobile-export-btn:hover {
+        background: #555;
+        border-color: #555;
+      }
+    }
+  }
+
+  @media (min-width: 769px) {
+    .mobile-export-btn {
+      display: none;
     }
   }
 </style> 
