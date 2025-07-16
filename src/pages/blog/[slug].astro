@@ -6,6 +6,7 @@ import FinalCTASection from '../../components/FinalCTASection.astro';
 import MarkdownContent from '../../components/MarkdownContent.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import type { BreadcrumbItem } from '../../components/Breadcrumbs.astro';
+import EmpathyMapBuilder from '../../components/tools/empathy-map-builder/EmpathyMapBuilder.astro';
 
 // Get the dynamic route parameter
 export async function getStaticPaths() {
@@ -54,6 +55,11 @@ const { Content } = await entry.render();
   <div class="container">
     <Breadcrumbs items={breadcrumbItems} />
   </div>
+
+  <!-- Conditional empathy map component for empathy map blog post -->
+  {entry.slug === 'empathy-map-template' && (
+    <EmpathyMapBuilder />
+  )}
 
   <!-- Main content section with the blog content -->
   <section class="blog-content">

@@ -1,0 +1,610 @@
+---
+---
+
+<div class="empathy-map-builder">
+  <div class="empathy-map-container">
+    <!-- Top Controls -->
+    <div class="top-controls">
+      <div class="persona-section">
+        <label for="persona-name" class="persona-label">User Persona</label>
+        <div class="persona-input-row">
+          <input type="text" id="persona-name" class="persona-input" placeholder="Enter persona name">
+          <div class="action-controls">
+            <button id="export-map" class="download-btn" title="Export empathy map as image">Export as Image</button>
+            <button id="clear-map" class="refresh-btn" title="Clear all content">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 4v6h6M23 20v-6h-6"/>
+                <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Export Header (hidden in display, shown in export) -->
+    <div class="export-header">
+      <h2 class="export-persona-title" id="export-persona-title">User Persona</h2>
+    </div>
+
+    <!-- Empathy Map Grid -->
+    <div class="empathy-map">
+      <!-- Says Quadrant -->
+      <div class="quadrant says-quadrant" data-quadrant="says">
+        <div class="quadrant-header">
+          <h3>Says</h3>
+          <div class="quadrant-subtitle">quotes & defining words</div>
+        </div>
+        <div class="quadrant-content">
+          <div class="editable-area" id="says-content" data-placeholder="Click box to edit">
+          </div>
+        </div>
+      </div>
+
+      <!-- Thinks Quadrant -->
+      <div class="quadrant thinks-quadrant" data-quadrant="thinks">
+        <div class="quadrant-header">
+          <h3>Thinks</h3>
+          <div class="quadrant-subtitle">thoughts & beliefs</div>
+        </div>
+        <div class="quadrant-content">
+          <div class="editable-area" id="thinks-content" data-placeholder="Click box to edit">
+          </div>
+        </div>
+      </div>
+
+      <!-- Does Quadrant -->
+      <div class="quadrant does-quadrant" data-quadrant="does">
+        <div class="quadrant-header">
+          <h3>Does</h3>
+          <div class="quadrant-subtitle">actions & behaviours</div>
+        </div>
+        <div class="quadrant-content">
+          <div class="editable-area" id="does-content" data-placeholder="Click box to edit">
+          </div>
+        </div>
+      </div>
+
+      <!-- Feels Quadrant -->
+      <div class="quadrant feels-quadrant" data-quadrant="feels">
+        <div class="quadrant-header">
+          <h3>Feels</h3>
+          <div class="quadrant-subtitle">emotions & feelings</div>
+        </div>
+        <div class="quadrant-content">
+          <div class="editable-area" id="feels-content" data-placeholder="Click box to edit">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { saveToLocalStorage, loadFromLocalStorage, exportAsImage } from './utils/empathy-map-utils';
+
+  interface EmpathyMapState {
+    personaName: string;
+    says: string;
+    thinks: string;
+    does: string;
+    feels: string;
+  }
+
+  let currentState: EmpathyMapState = {
+    personaName: '',
+    says: '',
+    thinks: '',
+    does: '',
+    feels: ''
+  };
+
+  let isEditing = false;
+  let currentEditor: HTMLElement | null = null;
+
+  document.addEventListener('DOMContentLoaded', init);
+
+  function init(): void {
+    loadSavedState();
+    setupEventListeners();
+    updateDisplay();
+  }
+
+  function setupEventListeners(): void {
+    // Make all quadrants clickable
+    const quadrants = document.querySelectorAll<HTMLElement>('.quadrant');
+    quadrants.forEach(quadrant => {
+      quadrant.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const editableArea = quadrant.querySelector('.editable-area') as HTMLElement;
+        if (editableArea) {
+          startEditing(editableArea);
+        }
+      });
+    });
+
+    // Persona name input
+    const personaInput = document.getElementById('persona-name') as HTMLInputElement;
+    if (personaInput) {
+      personaInput.addEventListener('input', (e) => {
+        const target = e.target as HTMLInputElement;
+        currentState.personaName = target.value;
+        updateExportTitle();
+        saveToLocalStorage('empathy-map-state', currentState);
+      });
+    }
+
+    // Control buttons
+    const clearBtn = document.getElementById('clear-map');
+    const exportBtn = document.getElementById('export-map');
+    
+    if (clearBtn) {
+      clearBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        clearAllContent();
+      });
+    }
+
+    if (exportBtn) {
+      exportBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        exportEmpathyMap();
+      });
+    }
+
+    // Close editing when clicking outside
+    document.addEventListener('click', (e) => {
+      if (isEditing && currentEditor && !currentEditor.contains(e.target as Node)) {
+        stopEditing();
+      }
+    });
+
+    // Handle keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isEditing) {
+        stopEditing();
+      }
+    });
+  }
+
+  function startEditing(element: HTMLElement): void {
+    if (isEditing && currentEditor === element) return;
+    
+    if (isEditing) stopEditing();
+
+    isEditing = true;
+    currentEditor = element;
+
+    const quadrant = element.id.replace('-content', '') as keyof EmpathyMapState;
+    const content = currentState[quadrant];
+
+    // Make contentEditable and set content
+    element.contentEditable = 'true';
+    element.textContent = content || '';
+    element.focus();
+    
+    // Place cursor at end
+    const range = document.createRange();
+    const selection = window.getSelection();
+    range.selectNodeContents(element);
+    range.collapse(false);
+    selection?.removeAllRanges();
+    selection?.addRange(range);
+
+    // Handle saving
+    const saveContent = () => {
+      const value = element.textContent?.trim() || '';
+      saveQuadrantContent(element.id, value);
+      element.contentEditable = 'false';
+    };
+
+    element.addEventListener('blur', saveContent);
+    
+    // Handle Enter key for line breaks
+    element.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        // Insert a proper line break
+        const selection = window.getSelection();
+        if (selection && selection.rangeCount > 0) {
+          const range = selection.getRangeAt(0);
+          const br = document.createElement('br');
+          range.deleteContents();
+          range.insertNode(br);
+          range.setStartAfter(br);
+          range.collapse(true);
+          selection.removeAllRanges();
+          selection.addRange(range);
+        }
+      } else if (e.key === 'Escape') {
+        stopEditing();
+      }
+    });
+
+    element.classList.add('editing');
+    element.closest('.quadrant')?.classList.add('editing');
+  }
+
+  function stopEditing(): void {
+    if (currentEditor) {
+      currentEditor.contentEditable = 'false';
+      currentEditor.classList.remove('editing');
+      currentEditor.closest('.quadrant')?.classList.remove('editing');
+      updateDisplay(); // Refresh display
+    }
+    isEditing = false;
+    currentEditor = null;
+  }
+
+  function saveQuadrantContent(elementId: string, value: string): void {
+    const quadrant = elementId.replace('-content', '') as keyof EmpathyMapState;
+    currentState[quadrant] = value;
+    updateDisplay();
+    saveToLocalStorage('empathy-map-state', currentState);
+    stopEditing();
+  }
+
+  function updateDisplay(): void {
+    // Update persona name
+    const personaInput = document.getElementById('persona-name') as HTMLInputElement;
+    if (personaInput) {
+      personaInput.value = currentState.personaName;
+    }
+    updateExportTitle();
+
+    // Update quadrants
+    ['says', 'thinks', 'does', 'feels'].forEach(quadrant => {
+      const content = currentState[quadrant as keyof EmpathyMapState];
+      const element = document.getElementById(`${quadrant}-content`);
+      if (element && !element.classList.contains('editing')) {
+        element.textContent = content || '';
+      }
+    });
+  }
+
+  function updateExportTitle(): void {
+    const exportTitle = document.getElementById('export-persona-title');
+    if (exportTitle) {
+      exportTitle.textContent = currentState.personaName || 'User Persona';
+    }
+  }
+
+  function exportEmpathyMap(): void {
+    // Hide controls and show export header for export
+    const topControls = document.querySelector('.top-controls') as HTMLElement;
+    const exportHeader = document.querySelector('.export-header') as HTMLElement;
+    
+    if (topControls) topControls.style.display = 'none';
+    if (exportHeader) exportHeader.style.display = 'block';
+    
+    // Create export container
+    const exportContainer = document.createElement('div');
+    exportContainer.className = 'export-container';
+    
+    const exportHeaderClone = exportHeader.cloneNode(true) as HTMLElement;
+    const empathyMapClone = document.querySelector('.empathy-map')!.cloneNode(true) as HTMLElement;
+    
+    exportContainer.appendChild(exportHeaderClone);
+    exportContainer.appendChild(empathyMapClone);
+    
+    // Temporarily add to document for export
+    document.body.appendChild(exportContainer);
+    
+    // Export the combined container
+    exportAsImage(exportContainer).then(() => {
+      // Clean up
+      document.body.removeChild(exportContainer);
+      if (topControls) topControls.style.display = 'flex';
+      if (exportHeader) exportHeader.style.display = 'none';
+    });
+  }
+
+  function clearAllContent(): void {
+    if (confirm('Clear all content? This cannot be undone.')) {
+      currentState = {
+        personaName: '',
+        says: '',
+        thinks: '',
+        does: '',
+        feels: ''
+      };
+      updateDisplay();
+      saveToLocalStorage('empathy-map-state', currentState);
+    }
+  }
+
+  function loadSavedState(): void {
+    const saved = loadFromLocalStorage<EmpathyMapState>('empathy-map-state');
+    if (saved) {
+      currentState = { ...currentState, ...saved };
+    }
+  }
+</script>
+
+<style>
+  .empathy-map-builder {
+    width: 100%;
+    margin: var(--spacing-md) 0 var(--spacing-xl) 0;
+    font-family: var(--font-primary);
+  }
+
+  .empathy-map-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .top-controls {
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-sm) 0;
+  }
+
+  .persona-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+
+  .persona-label {
+    font-family: var(--font-primary);
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .persona-input-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+  }
+
+  .persona-input {
+    flex: 1;
+    height: 60px;
+    padding: 0 var(--spacing-md);
+    border: 2px solid #ddd;
+    background: white;
+    color: #333;
+    border-radius: 6px;
+    font-size: 1.6rem;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    transition: border-color 0.2s ease;
+  }
+
+  .persona-input:focus {
+    outline: none;
+    border-color: #333;
+  }
+
+  .action-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    flex-shrink: 0;
+  }
+
+  .download-btn {
+    height: 60px;
+    padding: 0 var(--spacing-md);
+    border: 2px solid #333;
+    background: #333;
+    color: white;
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+  }
+
+  .download-btn:hover {
+    background: #555;
+    border-color: #555;
+  }
+
+  .refresh-btn {
+    height: 60px;
+    width: 60px;
+    border: 2px solid transparent;
+    background: transparent;
+    color: #666;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .refresh-btn:hover {
+    color: #333;
+    background: #f5f5f5;
+  }
+
+  .export-header {
+    display: none;
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-md) 0;
+  }
+
+  .export-persona-title {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .empathy-map {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    aspect-ratio: 1;
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+  }
+
+  .quadrant {
+    padding: var(--spacing-sm);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border: 2px solid #e9ecef;
+  }
+
+  .says-quadrant {
+    border-right: 1px solid #dee2e6;
+    border-bottom: 1px solid #dee2e6;
+  }
+
+  .thinks-quadrant {
+    border-left: 1px solid #dee2e6;
+    border-bottom: 1px solid #dee2e6;
+  }
+
+  .does-quadrant {
+    border-right: 1px solid #dee2e6;
+    border-top: 1px solid #dee2e6;
+  }
+
+  .feels-quadrant {
+    border-left: 1px solid #dee2e6;
+    border-top: 1px solid #dee2e6;
+  }
+
+  .quadrant-header {
+    margin-bottom: var(--spacing-sm);
+    padding-bottom: var(--spacing-xs);
+    border-bottom: 1px solid #e9ecef;
+  }
+
+  .quadrant-header h3 {
+    margin: 0;
+    color: #333;
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: var(--font-heading);
+  }
+
+  .quadrant-subtitle {
+    color: #6c757d;
+    font-size: 0.85rem;
+    margin-top: 4px;
+    font-style: italic;
+  }
+
+  .quadrant-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .editable-area {
+    flex: 1;
+    color: #333;
+    line-height: 1.6;
+    font-size: 1rem;
+    padding: var(--spacing-xs);
+    border-radius: 4px;
+    min-height: 200px;
+  }
+
+  .editable-area:focus {
+    outline: none;
+  }
+
+  .editable-area[contenteditable="true"] {
+    outline: none;
+  }
+
+  .editable-area:empty::before {
+    content: attr(data-placeholder);
+    color: #adb5bd;
+    font-style: italic;
+  }
+
+  .editable-area[contenteditable="true"]:empty::before {
+    content: '';
+  }
+
+  .export-container {
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
+  }
+
+  .export-container .empathy-map {
+    box-shadow: none;
+  }
+
+  /* Mobile Responsiveness */
+  @media (max-width: 768px) {
+    .empathy-map {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto auto;
+      aspect-ratio: auto;
+    }
+
+    .quadrant {
+      padding: var(--spacing-sm);
+      border: 2px solid #e9ecef !important;
+      margin-bottom: -2px;
+    }
+
+    .quadrant:last-child {
+      margin-bottom: 0;
+    }
+
+    .quadrant-header h3 {
+      font-size: 1.2rem;
+    }
+
+    .editable-area {
+      min-height: 150px;
+    }
+
+    .persona-section {
+      margin-bottom: var(--spacing-md);
+    }
+
+    .persona-input {
+      font-size: 1.2rem;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .persona-input-row {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+    }
+
+    .action-controls {
+      align-self: stretch;
+      justify-content: center;
+    }
+
+    .download-btn {
+      flex: 1;
+      max-width: 200px;
+    }
+
+    .refresh-btn {
+      flex-shrink: 0;
+    }
+  }
+</style> 

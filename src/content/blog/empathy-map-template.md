@@ -29,14 +29,12 @@ Skip the expensive design tools and complex setup. Create professional empathy m
 
 ## Interactive Empathy Map Builder
 
-*[INTERACTIVE COMPONENT GOES HERE]*
-
 **Features:**
 - Click any quadrant to add insights
 - Auto-saves your work as you type
-- Export as PDF for workshops
-- Share links with your team
-- Works on desktop and mobile
+- Export as image for workshops
+- Clear and reset functionality
+- Works perfectly on desktop and mobile
 
 ---
 
