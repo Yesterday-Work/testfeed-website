@@ -276,6 +276,39 @@
     
     const empathyMapClone = document.querySelector('.empathy-map')!.cloneNode(true) as HTMLElement;
     
+    // Force 2x2 grid layout for export (override mobile styles)
+    empathyMapClone.style.display = 'grid';
+    empathyMapClone.style.gridTemplateColumns = '1fr 1fr';
+    empathyMapClone.style.gridTemplateRows = '1fr 1fr';
+    empathyMapClone.style.aspectRatio = '1';
+    empathyMapClone.style.width = '600px';
+    empathyMapClone.style.height = '600px';
+    
+    // Reset quadrant styles for export grid
+    const quadrants = empathyMapClone.querySelectorAll('.quadrant');
+    quadrants.forEach((quadrant, index) => {
+      const quad = quadrant as HTMLElement;
+      quad.style.marginBottom = '0';
+      quad.style.minHeight = 'auto';
+      quad.style.aspectRatio = 'auto';
+      quad.style.border = '2px solid #e9ecef';
+      
+      // Apply proper borders for 2x2 grid
+      if (index === 0) { // Says - top left
+        quad.style.borderRight = '1px solid #dee2e6';
+        quad.style.borderBottom = '1px solid #dee2e6';
+      } else if (index === 1) { // Thinks - top right
+        quad.style.borderLeft = '1px solid #dee2e6';
+        quad.style.borderBottom = '1px solid #dee2e6';
+      } else if (index === 2) { // Does - bottom left
+        quad.style.borderRight = '1px solid #dee2e6';
+        quad.style.borderTop = '1px solid #dee2e6';
+      } else if (index === 3) { // Feels - bottom right
+        quad.style.borderLeft = '1px solid #dee2e6';
+        quad.style.borderTop = '1px solid #dee2e6';
+      }
+    });
+    
     const editableAreas = empathyMapClone.querySelectorAll('.editable-area');
     editableAreas.forEach(area => {
       const element = area as HTMLElement;
