@@ -233,6 +233,9 @@ export const toolSchema = z.object({
     properties: z.record(z.any()).optional().describe("Additional schema properties as key-value pairs")
   }).optional().describe("Structured data for rich search results"),
 
+  // FAQ section for tools
+  faqSection: faqSectionSchema.optional().describe("FAQ section with schema.org markup"),
+
   // Note: The actual tool content is written in Markdown in the body of the file.
   // Sections like "How It Works", "Key Benefits", "Features", etc. are automatically styled
   // based on their heading names. No additional frontmatter configuration is needed.

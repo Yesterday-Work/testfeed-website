@@ -9,6 +9,7 @@ import DemoVideoSection from '../../components/DemoVideoSection.astro';
 import MarkdownContent from '../../components/MarkdownContent.astro';
 import LinkedInTool from '../../components/tools/linkedin-preview-tool/LinkedInTool.astro';
 import LinkedInFormatter from '../../components/tools/linkedin-formatter/LinkedInFormatter.astro';
+import FAQsSection from '../../components/FAQsSection.astro';
 
 // Hardcoded video data (no longer using homepage collection)
 const videoId = "Ic-OcghxCuk";
@@ -90,6 +91,11 @@ const breadcrumbItems: BreadcrumbItem[] = [
             <Content />
           </MarkdownContent>
         </article>
+
+        <!-- FAQ Section -->
+        {entry.data.faqSection && (
+          <FAQsSection {...entry.data.faqSection} />
+        )}
 
         <!-- Other Tools Section -->
         {otherTools.length > 0 && (
