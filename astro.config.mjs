@@ -6,6 +6,7 @@ import googleAnalytics from './src/integrations/google-analytics';
 import posthogAnalytics from './src/integrations/posthog';
 import customerIoAnalytics from './src/integrations/customer-io';
 import icon from 'astro-icon';
+import rehypeExternalLinks from 'rehype-external-links';
 
 dotenv.config();
 
@@ -14,6 +15,14 @@ export default defineConfig({
   site: 'https://testfeed.ai',
   vite: {
     envPrefix: 'PUBLIC_'
+  },
+  markdown: {
+    rehypePlugins: [
+      [rehypeExternalLinks, { 
+        target: '_blank', 
+        rel: ['noopener', 'noreferrer'] 
+      }]
+    ]
   },
   integrations: [
     sitemap({
