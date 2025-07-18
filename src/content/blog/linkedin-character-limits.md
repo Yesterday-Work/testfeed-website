@@ -15,17 +15,16 @@ schemaMarkup:
   properties:
     headline: "The Ultimate Guide to LinkedIn Character Limits in 2025: Maximize Your Impact!"
     description: "Learn the essential LinkedIn character limits for posts, headlines, and messages to optimize your professional presence and engagement in 2025."
-    author:
-      - "@type": "Person"
-        name: "Millie"
     datePublished: "2025-05-09"
-    # image: "" # Add URL of featuredImage if available
+    author:
+      "@type": "Person"
+      name: "Millie"
+    publisher:
+      "@type": "Organization"
+      name: "TestFeed"
 finalCtaSection:
-  title: "Ready to predict your content <span class='highlight'>performance</span>?"
-  text: "Join the TestFeed waitlist to get early access to our AI audience simulation platform and publish with confidence."
-  buttonText: "JOIN WAITLIST"
-  buttonLink: "/#get-started"
-  buttonType: "primary"
+  title: "See how your LinkedIn posts will <span class='highlight'>perform</span> before you publish"
+  text: "Join the TestFeed waitlist to test your content on virtual audiences who think like your real connections."
 ---
 
 Navigating the professional world of LinkedIn requires more than just great content; it demands an understanding of the platform's nuances. One crucial aspect often overlooked is LinkedIn's various character limits. Why do they matter? Exceeding them can mean your carefully crafted message gets cut off, and staying well within them strategically can actually boost your engagement!

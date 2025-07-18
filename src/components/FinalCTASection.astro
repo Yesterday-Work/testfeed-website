@@ -1,14 +1,41 @@
 ---
 import WaitlistForm from './WaitlistForm.astro';
+
+// Define the interface for props
+export interface Props {
+  title?: string;
+  text?: string;
+  buttonText?: string;
+  buttonLink?: string;
+  buttonType?: 'primary' | 'secondary';
+}
+
+// Extract props with fallbacks to current hardcoded content
+const {
+  title = "Never wonder \"how will this land?\" again",
+  text = "Join the waitlist and get first access. Test any content on any website before you send, post, or publish it.",
+  buttonText = "JOIN WAITLIST",
+  buttonLink = "#get-started",
+  buttonType = "primary"
+} = Astro.props;
+
+// Determine if we should show the waitlist form or a custom button
+const showWaitlistForm = !buttonLink || buttonLink === "#get-started" || !buttonText;
 ---
 
 <section id="get-started" class="final-cta">
   <div class="container">
     <div class="cta-card">
-      <h2>Never wonder "how will this land?" again</h2>
-      <p>Join the waitlist and get first access. Test any content on any website before you send, post, or publish it.</p>
+      <h2 set:html={title}></h2>
+      <p>{text}</p>
       <div class="waitlist-form-container">
-        <WaitlistForm />
+        {showWaitlistForm ? (
+          <WaitlistForm />
+        ) : (
+          <a href={buttonLink} class={`btn btn-${buttonType}`}>
+            {buttonText}
+          </a>
+        )}
       </div>
       <p class="cta-subtitle">(Because hoping for the best isn't a strategy.)</p>
     </div>

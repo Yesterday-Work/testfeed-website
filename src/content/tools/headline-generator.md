@@ -7,6 +7,11 @@ schemaMarkup:
   type: WebPage
   properties:
     name: LinkedIn Headline Generator
+    description: Create attention-grabbing LinkedIn headlines that boost profile visibility. Generate professional, AI-powered headlines tailored for job seekers, recruiters, and businesses.
+    url: "/tools/headline-generator"
+finalCtaSection:
+  title: "Perfect headlines, then <span class='highlight'>test</span> them"
+  text: "Join the TestFeed waitlist to see how recruiters and connections will react to your headlines."
 ---
 
 # LinkedIn Headline Generator

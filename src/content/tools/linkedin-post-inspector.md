@@ -1,12 +1,17 @@
 ---
 title: LinkedIn Post Inspector
-description: Validate and optimize your LinkedIn posts before publishing. Preview link appearances, debug issues, and ensure your content displays perfectly every time.
+description: Analyze your LinkedIn posts for optimization opportunities. Free post inspector tool to improve engagement and reach.
 icon: search
 toolImage: ""
 schemaMarkup:
   type: WebPage
   properties:
     name: LinkedIn Post Inspector
+    description: Analyze your LinkedIn posts for optimization opportunities. Free post inspector tool to improve engagement and reach.
+    url: "/tools/linkedin-post-inspector"
+finalCtaSection:
+  title: "Inspect your posts, then <span class='highlight'>test</span> them"
+  text: "Join the TestFeed waitlist to see how your audience will react before you publish your next post."
 ---
 
 # LinkedIn Post Inspector

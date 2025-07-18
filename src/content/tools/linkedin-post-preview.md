@@ -7,6 +7,11 @@ schemaMarkup:
   type: WebPage
   properties:
     name: LinkedIn Post Preview - TestFeed
+    description: Free LinkedIn post preview tool to test formatting, bold text, bullet points, and see exactly how your posts appear on desktop and mobile before publishing.
+    url: "/tools/linkedin-post-preview"
+finalCtaSection:
+  title: "See how your posts look <span class='highlight'>and</span> how they'll perform"
+  text: "Join the TestFeed waitlist to test your content on virtual audiences before you publish."
 faqSection:
   title: "Frequently Asked Questions"
   faqs:
@@ -28,12 +33,6 @@ faqSection:
       answer: "Yes! Our preview tool shows exactly where LinkedIn adds the \"see more\" link, which typically occurs around 140 characters or 3 lines of text. This helps you optimize your opening lines to capture attention and encourage users to expand your full post."
     - question: "What formatting options does LinkedIn support?"
       answer: "LinkedIn supports bold text, italic text, bullet points, numbered lists, line breaks, emojis, and special characters. Our preview tool accurately simulates all these formatting options so you can test different combinations and choose the most effective presentation for your content."
-    - question: "How do I export my LinkedIn post preview?"
-      answer: "Use the \"Export as Image\" button in our tool to save your post preview as a high-quality image file. This is perfect for content planning, team approvals, or keeping a record of your post formatting for future reference."
-    - question: "Can I test different engagement levels?"
-      answer: "Yes! Our tool allows you to simulate different like counts, comment numbers, and repost amounts to see how various engagement levels affect the appearance and social proof of your posts. This helps you understand how successful posts will display to your audience."
-    - question: "Does the preview tool work for LinkedIn company pages?"
-      answer: "While our tool primarily simulates personal LinkedIn profiles, the formatting and display principles apply equally to company page posts. The preview gives you an accurate representation of how professional content will appear regardless of the posting account type."
 ---
 
 # LinkedIn Post Preview
