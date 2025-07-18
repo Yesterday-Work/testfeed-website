@@ -15,16 +15,20 @@ import FAQsSection from '../../../components/FAQsSection.astro';
 import FinalCTASection from '../../../components/FinalCTASection.astro';
 
 // Fetch this specific page content - CHANGE 'landing-page-template.md' TO YOUR FILENAME
-const homepageEntries = await getCollection('homepage');
-const entry = homepageEntries.find(entry => entry.id === 'landing-page-template.md');
+const landingPageEntries = await getCollection('landing-pages');
+const entry = landingPageEntries.find(entry => entry.id === 'template.md');
 
 // Error handling if content file not found
 if (!entry) {
   return new Response('Content not found', { status: 404 });
 }
+
+// Extract title and description from the content schema
+const pageTitle = entry.data.pageTitle || 'TestFeed | AI Audience Simulation';
+const pageDescription = entry.data.pageDescription || 'AI-powered audience simulation tool';
 ---
 
-<BaseLayout title={entry.data.pageTitle} description={entry.data.pageDescription} entry={entry}>
+<BaseLayout title={pageTitle} description={pageDescription} entry={entry}>
   {/* Only renders components that exist in your content file */}
   {entry.data.landingPageHero && (<LandingPageHero {...entry.data.landingPageHero} />)}
   {entry.data.featuresSection && (<FeaturesSection {...entry.data.featuresSection} />)}

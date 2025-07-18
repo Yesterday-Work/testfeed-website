@@ -15,17 +15,16 @@ schemaMarkup:
   properties:
     headline: "Understanding LinkedIn Impressions: The Foundation of Visibility"
     description: "A comprehensive guide to understanding and maximizing LinkedIn impressions."
-    author:
-      - "@type": "Person"
-        name: "Millie"
     datePublished: "2025-05-07"
-    # image: "" # Add URL of featuredImage if available
+    author:
+      "@type": "Person"
+      name: "Millie"
+    publisher:
+      "@type": "Organization"
+      name: "TestFeed"
 finalCtaSection:
-  title: "Ready to predict your content <span class='highlight'>performance</span>?"
-  text: "Join the TestFeed waitlist to get early access to our AI audience simulation platform and publish with confidence."
-  buttonText: "JOIN WAITLIST"
-  buttonLink: "https://testfeed.beehiiv.com/subscribe"
-  buttonType: "primary"
+  title: "Know how your posts will <span class='highlight'>land</span> before you hit publish"
+  text: "Join the TestFeed waitlist to test your content on virtual audiences and eliminate guesswork."
 ---
 
 LinkedIn impressions are the number of times your content appears on users' screens for at least 300 milliseconds with at least 50% in view. Unlike views or engagements that require user action, impressions simply measure visibility, making them the foundation of all other LinkedIn metrics. This visibility metric is essential because it represents your potential audience reach and directly impacts your professional brand awareness. LinkedIn's algorithm has evolved significantly in recent years, now prioritizing knowledge-sharing content over viral posts, with multi-image posts and native documents generating the highest engagement rates. Maximizing impressions requires strategic content formatting, consistent posting during peak hours (Tuesday-Thursday mornings), and active engagement with commenters, while common misconceptions about impressions can lead marketers astray.

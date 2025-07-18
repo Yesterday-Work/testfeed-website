@@ -1,12 +1,17 @@
 ---
-title: Trending Topics on LinkedIn
-description: Discover what's trending on LinkedIn with real-time topic insights. Track trending hashtags, popular content, and industry conversations to boost your engagement and visibility.
+title: LinkedIn Trending Topics Generator
+description: Discover trending topics on LinkedIn to boost your content engagement. AI-powered trending topics generator for professional social media content.
 icon: trending-up
 toolImage: ""
 schemaMarkup:
   type: WebPage
   properties:
-    name: LinkedIn Trending Topics
+    name: LinkedIn Trending Topics Generator
+    description: Discover trending topics on LinkedIn to boost your content engagement. AI-powered trending topics generator for professional social media content.
+    url: "/tools/trending-topics"
+finalCtaSection:
+  title: "Find trending topics, then <span class='highlight'>test</span> your angle"
+  text: "Join the TestFeed waitlist to see how your take on trending topics will resonate with your audience."
 ---
 
 # Trending Topics

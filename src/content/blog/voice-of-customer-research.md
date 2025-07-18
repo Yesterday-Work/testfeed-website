@@ -14,6 +14,15 @@ schemaMarkup:
     headline: "The Complete Voice of Customer Research Guide 2025: Methodologies, Implementation & ROI That Actually Works"
     description: "Master voice of customer research with proven methodologies that drive real business results. From data collection to ROI measurement - everything you need to transform customer feedback into competitive advantage."
     datePublished: "2025-07-17"
+    author:
+      "@type": "Person"
+      name: "Millie"
+    publisher:
+      "@type": "Organization"
+      name: "TestFeed"
+finalCtaSection:
+  title: "Test your content on virtual audiences <span class='highlight'>before</span> you send it"
+  text: "Join the TestFeed waitlist to get early access to audience simulation that shows how people will react to your messages."
 ---
 
 ## Why Voice of Customer Research Is Your Secret Weapon (And Why Most Teams Botch It)

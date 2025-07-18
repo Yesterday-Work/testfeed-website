@@ -1,12 +1,17 @@
 ---
 title: LinkedIn Text Formatter
-description: Create eye-catching LinkedIn posts with bold text, custom fonts, and professional formatting. Boost engagement with perfectly formatted content.
-icon: type
+description: Format your LinkedIn posts with bold, italic text and bullet points. Free LinkedIn text formatting tool for professional posts.
+icon: format-text
 toolImage: ""
 schemaMarkup:
   type: WebPage
   properties:
     name: LinkedIn Text Formatter
+    description: Format your LinkedIn posts with bold, italic text and bullet points. Free LinkedIn text formatting tool for professional posts.
+    url: "/tools/linkedin-text-formatter"
+finalCtaSection:
+  title: "Format perfectly, then <span class='highlight'>test</span> the response"
+  text: "Join the TestFeed waitlist to see how your formatted content will land with your audience."
 ---
 
 # LinkedIn Text Formatter

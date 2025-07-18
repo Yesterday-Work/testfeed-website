@@ -138,8 +138,8 @@ export const faqSectionSchema = z.object({
 export const finalCtaSectionSchema = z.object({
   title: z.string().describe("CTA heading, allows HTML formatting"),
   text: z.string().describe("Supporting text below the heading"),
-  buttonText: z.string().describe("Call-to-action button text"),
-  buttonLink: z.string().describe("URL or anchor link for the button"),
+  buttonText: z.string().optional().describe("Call-to-action button text (optional - if not provided, shows waitlist form)"),
+  buttonLink: z.string().optional().describe("URL or anchor link for the button (optional - if not provided, shows waitlist form)"),
   buttonType: z.enum(['primary', 'secondary']).default('primary').optional()
     .describe("Button style - defaults to primary if not specified"),
 });

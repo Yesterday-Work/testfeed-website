@@ -15,17 +15,16 @@ schemaMarkup:
   properties:
     headline: "The Ultimate Guide to LinkedIn Headline Examples That Get You Noticed in 2025"
     description: "Learn how to craft compelling LinkedIn headlines that attract recruiters and opportunities with proven formulas and examples."
-    author:
-      - "@type": "Person"
-        name: "Millie"
     datePublished: "2025-05-05"
-    # image: "" # Add URL of featuredImage if available
+    author:
+      "@type": "Person"
+      name: "Millie"
+    publisher:
+      "@type": "Organization"
+      name: "TestFeed"
 finalCtaSection:
-  title: "Ready to predict your content <span class='highlight'>performance</span>?"
-  text: "Join the TestFeed waitlist to get early access to our AI audience simulation platform and publish with confidence."
-  buttonText: "JOIN WAITLIST"
-  buttonLink: "https://testfeed.beehiiv.com/subscribe"
-  buttonType: "primary"
+  title: "Test your headlines on your virtual audience before you go live"
+  text: "Join the TestFeed waitlist for early access to audience simulation that shows how someone will respond."
 ---
 
 In the bustling digital arena of professional networking, your LinkedIn headline serves as a critical beacon, guiding opportunities and connections your way. It's more than just a job title; it's a compact, powerful statement of your professional identity and value. This guide will delve into the art and science of crafting compelling LinkedIn headlines, complete with numerous examples tailored for 2025, ensuring your profile doesn't just exist, but actively works for you.

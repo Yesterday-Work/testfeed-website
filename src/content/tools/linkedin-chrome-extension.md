@@ -1,12 +1,17 @@
 ---
 title: LinkedIn Chrome Extension
-description: Enhance your LinkedIn experience with our powerful Chrome extension. Automate tasks, gain insights, and boost your profile visibility with tools designed for professionals.
+description: Enhance your LinkedIn experience with our powerful Chrome extension. Get advanced LinkedIn tools and analytics right in your browser.
 icon: chrome
 toolImage: ""
 schemaMarkup:
   type: WebPage
   properties:
     name: LinkedIn Chrome Extension
+    description: Enhance your LinkedIn experience with our powerful Chrome extension. Get advanced LinkedIn tools and analytics right in your browser.
+    url: "/tools/linkedin-chrome-extension"
+finalCtaSection:
+  title: "Better tools <span class='highlight'>plus</span> audience testing"
+  text: "Join the TestFeed waitlist for the Chrome extension that lets you test any content, anywhere on the web."
 ---
 
 # LinkedIn Chrome Extension

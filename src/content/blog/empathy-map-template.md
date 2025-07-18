@@ -12,10 +12,18 @@ draft: false
 schemaMarkup:
   type: "BlogPosting"
   properties:
-    headline: "The Ultimate Empathy Map Template Guide 2025: Free Interactive Builder + Download"
+    headline: "The Ultimate Empathy Map Template Guide 2025: Free Interactive Builder + PDF Template"
     description: "Create empathy maps instantly with our free interactive builder. Download professional templates and learn advanced techniques used by top UX teams."
     datePublished: "2025-07-14"
-
+    author:
+      "@type": "Person"
+      name: "Millie"
+    publisher:
+      "@type": "Organization"
+      name: "TestFeed"
+finalCtaSection:
+  title: "From static maps to living audiences"
+  text: "Join the TestFeed waitlist for early access to virtual audiences that respond to your content like real people."
 ---
 
 ## Why Empathy Maps Are Essential (And Why Most Teams Get Them Wrong)

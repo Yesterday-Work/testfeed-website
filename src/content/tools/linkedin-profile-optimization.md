@@ -1,12 +1,17 @@
 ---
-title: LinkedIn Profile Analysis
-description: Get expert analysis and optimization for your LinkedIn profile. Our AI-powered tool rates your profile, provides personalized improvement suggestions, and helps you stand out to recruiters.
+title: LinkedIn Profile Optimization Tool
+description: Optimize your LinkedIn profile for maximum visibility and opportunities. Free profile analyzer and optimization recommendations.
 icon: user-check
 toolImage: ""
 schemaMarkup:
   type: WebPage
   properties:
-    name: LinkedIn Profile Analysis
+    name: LinkedIn Profile Optimization Tool
+    description: Optimize your LinkedIn profile for maximum visibility and opportunities. Free profile analyzer and optimization recommendations.
+    url: "/tools/linkedin-profile-optimization"
+finalCtaSection:
+  title: "Optimize your profile, then <span class='highlight'>test</span> the impact"
+  text: "Join the TestFeed waitlist to see how recruiters and connections will respond to your profile updates."
 ---
 
 # LinkedIn Profile Analysis
