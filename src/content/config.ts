@@ -275,9 +275,5 @@ const toolsCollection = defineCollection({
 export const collections = {
   'blog': blogCollection,
   'legal': legalCollection,
-  'tools': toolsCollection,
-  'landing-pages': defineCollection({
-    type: 'content',
-    schema: contentSchema
-  })
+  'tools': toolsCollection
 }; 

@@ -13,6 +13,7 @@ dotenv.config();
 // https://astro.build/config
 export default defineConfig({
   site: 'https://testfeed.ai',
+  trailingSlash: 'always',
   vite: {
     envPrefix: 'PUBLIC_'
   },
@@ -32,12 +33,7 @@ export default defineConfig({
       filter: (page) => {
         // Include all pages except draft blog posts
         return !page.includes('draft');
-      },
-      customPages: [
-        'https://testfeed.ai/features',
-        'https://testfeed.ai/privacy-policy',
-        'https://testfeed.ai/terms-of-service'
-      ]
+      }
     }),
     googleAnalytics(),
     posthogAnalytics(),

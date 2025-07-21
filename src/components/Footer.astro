@@ -1,6 +1,7 @@
 ---
 const currentYear = new Date().getFullYear();
 ---
+
 <footer>
   <div class="container">
     <div class="footer-content">
@@ -12,21 +13,21 @@ const currentYear = new Date().getFullYear();
           <div class="footer-section">
             <h4>Product</h4>
             <ul>
-              <li><a href="/tools">Tools</a></li>
-              <li><a href="/about">About</a></li>
+              <li><a href="/tools/">Tools</a></li>
+              <li><a href="/about/">About</a></li>
             </ul>
           </div>
           <div class="footer-section">
             <h4>Resources</h4>
             <ul>
-              <li><a href="/blog">Blog</a></li>
+              <li><a href="/blog/">Blog</a></li>
             </ul>
           </div>
           <div class="footer-section">
             <h4>Legal</h4>
             <ul>
-              <li><a href="/privacy-policy">Privacy Policy</a></li>
-              <li><a href="/terms-of-service">Terms of Service</a></li>
+              <li><a href="/privacy-policy/">Privacy Policy</a></li>
+              <li><a href="/terms-of-service/">Terms of Service</a></li>
             </ul>
           </div>
         </div>
@@ -36,7 +37,11 @@ const currentYear = new Date().getFullYear();
           <p>&copy; {currentYear} testfeed. All rights reserved.</p>
         </div>
         <div class="made-by">
-          <p>Made by <a href="https://yesterday.work" target="_blank">yesterday</a></p>
+          <p>
+            Made by <a href="https://yesterday.work" target="_blank"
+              >yesterday</a
+            >
+          </p>
         </div>
       </div>
     </div>
@@ -44,126 +49,126 @@ const currentYear = new Date().getFullYear();
 </footer>
 
 <style>
-footer {
-    background-color: #0A0A0A;
+  footer {
+    background-color: #0a0a0a;
     padding: var(--spacing-xl) 0 var(--spacing-lg);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
+  }
 
-.footer-content {
+  .footer-content {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-xl);
-}
+  }
 
-.footer-top {
+  .footer-top {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     gap: var(--spacing-xl);
-}
+  }
 
-.footer-logo {
+  .footer-logo {
     flex-shrink: 0;
-}
+  }
 
-.footer-logo .testfeed-font {
+  .footer-logo .testfeed-font {
     font-size: 1.8rem;
     font-weight: 600;
     color: var(--color-white);
-}
+  }
 
-.footer-links {
+  .footer-links {
     display: flex;
     gap: var(--spacing-xl);
     flex-wrap: wrap;
-}
+  }
 
-.footer-section h4 {
+  .footer-section h4 {
     color: var(--color-white);
     font-size: 0.9rem;
     font-weight: 600;
     margin-bottom: var(--spacing-sm);
-    font-family: 'Space Mono', monospace;
-}
+    font-family: "Space Mono", monospace;
+  }
 
-.footer-section ul {
+  .footer-section ul {
     list-style: none;
     padding: 0;
     margin: 0;
-}
+  }
 
-.footer-section li {
+  .footer-section li {
     margin-bottom: var(--spacing-xs);
-}
+  }
 
-.footer-section a {
+  .footer-section a {
     color: var(--color-text-light);
     text-decoration: none;
     font-size: 0.9rem;
     transition: var(--transition);
-}
+  }
 
-.footer-section a:hover {
+  .footer-section a:hover {
     color: var(--color-primary);
-}
+  }
 
-.footer-bottom {
+  .footer-bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-top: var(--spacing-lg);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
+  }
 
-.copyright p,
-.made-by p {
+  .copyright p,
+  .made-by p {
     color: var(--color-text-light);
     margin: 0;
     font-size: 0.85rem;
-}
+  }
 
-.made-by a {
+  .made-by a {
     color: var(--color-text-light);
     text-decoration: underline;
     transition: var(--transition);
-}
+  }
 
-.made-by a:hover {
+  .made-by a:hover {
     color: var(--color-white);
-}
+  }
 
-@media (max-width: 768px) {
+  @media (max-width: 768px) {
     .footer-top {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: var(--spacing-lg);
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: var(--spacing-lg);
     }
-    
-    .footer-links {
-        gap: var(--spacing-lg);
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .footer-section {
-        flex: 1;
-        min-width: 120px;
-        text-align: center;
-    }
-}
 
-@media (max-width: 480px) {
     .footer-links {
-        flex-direction: column;
-        gap: var(--spacing-md);
+      gap: var(--spacing-lg);
+      width: 100%;
+      justify-content: center;
     }
-    
+
+    .footer-section {
+      flex: 1;
+      min-width: 120px;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer-links {
+      flex-direction: column;
+      gap: var(--spacing-md);
+    }
+
     .footer-bottom {
-        flex-direction: column;
-        gap: var(--spacing-sm);
-        text-align: center;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+      text-align: center;
     }
-}
+  }
 </style>

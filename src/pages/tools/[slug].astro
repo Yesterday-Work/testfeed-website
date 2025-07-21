@@ -1,15 +1,15 @@
 ---
-import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import FinalCTASection from '../../components/FinalCTASection.astro';
-import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import type { BreadcrumbItem } from '../../components/Breadcrumbs.astro';
-import { Icon } from 'astro-icon/components';
-import DemoVideoSection from '../../components/DemoVideoSection.astro';
-import MarkdownContent from '../../components/MarkdownContent.astro';
-import LinkedInTool from '../../components/tools/linkedin-preview-tool/LinkedInTool.astro';
-import LinkedInFormatter from '../../components/tools/linkedin-formatter/LinkedInFormatter.astro';
-import FAQsSection from '../../components/FAQsSection.astro';
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import FinalCTASection from "../../components/FinalCTASection.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import type { BreadcrumbItem } from "../../components/Breadcrumbs.astro";
+import { Icon } from "astro-icon/components";
+import DemoVideoSection from "../../components/DemoVideoSection.astro";
+import MarkdownContent from "../../components/MarkdownContent.astro";
+import LinkedInTool from "../../components/tools/linkedin-preview-tool/LinkedInTool.astro";
+import LinkedInFormatter from "../../components/tools/linkedin-formatter/LinkedInFormatter.astro";
+import FAQsSection from "../../components/FAQsSection.astro";
 
 // Hardcoded video data (no longer using homepage collection)
 const videoId = "Ic-OcghxCuk";
@@ -17,16 +17,16 @@ const videoTitle = "See TestFeed in action";
 
 // Get all tool entries for static paths and "other tools" section
 export async function getStaticPaths() {
-  const toolEntries = await getCollection('tools');
-  return toolEntries.map(entry => ({
+  const toolEntries = await getCollection("tools");
+  return toolEntries.map((entry) => ({
     params: { slug: entry.slug },
-    props: { entry, allTools: toolEntries }, 
+    props: { entry, allTools: toolEntries },
   }));
 }
 
 // Get the tool entry and all tools from props
 const { entry, allTools } = Astro.props;
-const otherTools = allTools.filter(tool => tool.slug !== entry.slug);
+const otherTools = allTools.filter((tool) => tool.slug !== entry.slug);
 
 // Render the markdown content
 const { Content } = await entry.render();
@@ -34,12 +34,12 @@ const { Content } = await entry.render();
 // Prepare breadcrumb items
 const breadcrumbItems: BreadcrumbItem[] = [
   { label: "home", href: "/" },
-  { label: "tools", href: "/tools" },
-  { label: entry.data.title.toLowerCase() }
+  { label: "tools", href: "/tools/" },
+  { label: entry.data.title.toLowerCase() },
 ];
 ---
 
-<BaseLayout 
+<BaseLayout
   title={`${entry.data.title} - TestFeed`}
   description={entry.data.description}
 >
@@ -47,11 +47,13 @@ const breadcrumbItems: BreadcrumbItem[] = [
   <section class="tool-page-hero">
     <div class="container">
       <div class="hero-content">
-        {entry.data.icon && (
-          <div class="hero-icon-wrapper">
-            <Icon name={`lucide:${entry.data.icon}`} class="hero-icon" />
-          </div>
-        )}
+        {
+          entry.data.icon && (
+            <div class="hero-icon-wrapper">
+              <Icon name={`lucide:${entry.data.icon}`} class="hero-icon" />
+            </div>
+          )
+        }
         <h1 class="hero-title">{entry.data.title}</h1>
         <p class="hero-description">{entry.data.description}</p>
         <div class="hero-cta">
@@ -65,22 +67,21 @@ const breadcrumbItems: BreadcrumbItem[] = [
   </section>
 
   <div class="container breadcrumbs-container">
-    <Breadcrumbs items={breadcrumbItems} /> 
+    <Breadcrumbs items={breadcrumbItems} />
   </div>
 
   <!-- Conditionally rendering of tools -->
-  {entry.slug === 'linkedin-post-preview' ? (
-    <LinkedInTool />
-  ) : entry.slug === 'linkedin-text-formatter' ? (
-    <LinkedInFormatter />
-  ) : (
-    <div class="demo-video-wrapper">
-      <DemoVideoSection
-        title=""
-        videoId={videoId}
-      />
-    </div>
-  )}
+  {
+    entry.slug === "linkedin-post-preview" ? (
+      <LinkedInTool />
+    ) : entry.slug === "linkedin-text-formatter" ? (
+      <LinkedInFormatter />
+    ) : (
+      <div class="demo-video-wrapper">
+        <DemoVideoSection title="" videoId={videoId} />
+      </div>
+    )
+  }
 
   <!-- Tool Content Area -->
   <div class="tool-content-area">
@@ -93,33 +94,36 @@ const breadcrumbItems: BreadcrumbItem[] = [
         </article>
 
         <!-- FAQ Section -->
-        {entry.data.faqSection && (
-          <FAQsSection {...entry.data.faqSection} />
-        )}
+        {entry.data.faqSection && <FAQsSection {...entry.data.faqSection} />}
 
         <!-- Other Tools Section -->
-        {otherTools.length > 0 && (
-          <div class="other-tools"> 
-            <h2 class="other-tools-title">Explore Other Tools</h2>
-            <div class="tools-grid">
-              {otherTools.map((tool) => (
-                <a href={`/tools/${tool.slug}`} class="tool-card"> 
-                  <div class="tool-card-inner">
-                    {tool.data.icon && (
-                      <div class="tool-card-icon-container"> 
-                        <Icon name={`lucide:${tool.data.icon}`} class="tool-nav-icon" />
+        {
+          otherTools.length > 0 && (
+            <div class="other-tools">
+              <h2 class="other-tools-title">Explore Other Tools</h2>
+              <div class="tools-grid">
+                {otherTools.map((tool) => (
+                  <a href={`/tools/${tool.slug}/`} class="tool-card">
+                    <div class="tool-card-inner">
+                      {tool.data.icon && (
+                        <div class="tool-card-icon-container">
+                          <Icon
+                            name={`lucide:${tool.data.icon}`}
+                            class="tool-nav-icon"
+                          />
+                        </div>
+                      )}
+                      <div class="tool-card-content">
+                        <h3>{tool.data.title}</h3>
+                        <p>{tool.data.description}</p>
                       </div>
-                    )}
-                    <div class="tool-card-content">
-                      <h3>{tool.data.title}</h3>
-                      <p>{tool.data.description}</p>
                     </div>
-                  </div>
-                </a>
-              ))}
+                  </a>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )
+        }
       </div>
     </div>
   </div>
@@ -134,7 +138,7 @@ const breadcrumbItems: BreadcrumbItem[] = [
     background-color: var(--color-background-offset, #1a1a1a);
     padding: var(--spacing-xl) 0 var(--spacing-lg) 0;
     text-align: center;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .tool-page-hero .container {
@@ -144,7 +148,7 @@ const breadcrumbItems: BreadcrumbItem[] = [
     padding-left: var(--spacing-md);
     padding-right: var(--spacing-md);
   }
-  
+
   .hero-content {
     display: flex;
     flex-direction: column;
@@ -183,7 +187,7 @@ const breadcrumbItems: BreadcrumbItem[] = [
   .hero-cta {
     margin-bottom: var(--spacing-sm);
   }
-  
+
   .hero-cta .btn {
     display: inline-block;
     background-color: var(--color-primary);
@@ -194,7 +198,7 @@ const breadcrumbItems: BreadcrumbItem[] = [
     transition: all 0.3s ease;
     text-decoration: none;
   }
-  
+
   .hero-cta .btn:hover {
     filter: brightness(110%);
   }
@@ -204,7 +208,7 @@ const breadcrumbItems: BreadcrumbItem[] = [
     font-size: 0.875rem;
     color: var(--color-white);
   }
-  
+
   .breadcrumbs-container {
     padding-top: var(--spacing-sm);
     padding-bottom: 0;
@@ -214,7 +218,7 @@ const breadcrumbItems: BreadcrumbItem[] = [
   .demo-video-wrapper :global(.demo-video) {
     padding: var(--spacing-xs) 0 var(--spacing-lg);
   }
-  
+
   @media (min-width: 768px) {
     .demo-video-wrapper :global(.demo-video) {
       padding: var(--spacing-md) 0 var(--spacing-lg);
@@ -234,7 +238,8 @@ const breadcrumbItems: BreadcrumbItem[] = [
   .tool-content {
     background-color: var(--color-card-bg);
     border-radius: var(--border-radius);
-    padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-md) var(--spacing-lg);
+    padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-md)
+      var(--spacing-lg);
     margin-bottom: var(--spacing-lg);
     box-shadow: var(--shadow);
     border: 1px solid rgba(255, 255, 255, 0.05);
@@ -338,5 +343,3 @@ const breadcrumbItems: BreadcrumbItem[] = [
     }
   }
 </style>
-
-</BaseLayout> 

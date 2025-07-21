@@ -1,18 +1,18 @@
 ---
-import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import BlogHero from '../../components/BlogHero.astro';
-import FinalCTASection from '../../components/FinalCTASection.astro';
-import MarkdownContent from '../../components/MarkdownContent.astro';
-import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import type { BreadcrumbItem } from '../../components/Breadcrumbs.astro';
-import EmpathyMapBuilder from '../../components/tools/empathy-map-builder/EmpathyMapBuilder.astro';
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BlogHero from "../../components/BlogHero.astro";
+import FinalCTASection from "../../components/FinalCTASection.astro";
+import MarkdownContent from "../../components/MarkdownContent.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import type { BreadcrumbItem } from "../../components/Breadcrumbs.astro";
+import EmpathyMapBuilder from "../../components/tools/empathy-map-builder/EmpathyMapBuilder.astro";
 
 // Get the dynamic route parameter
 export async function getStaticPaths() {
-  const blogEntries = await getCollection('blog');
-  
-  return blogEntries.map(entry => ({
+  const blogEntries = await getCollection("blog");
+
+  return blogEntries.map((entry) => ({
     params: { slug: entry.slug },
     props: { entry },
   }));
@@ -24,42 +24,40 @@ const { entry } = Astro.props;
 // Prepare breadcrumb items
 const breadcrumbItems: BreadcrumbItem[] = [
   { label: "home", href: "/" },
-  { label: "blog", href: "/blog" },
-  { label: entry.slug }
+  { label: "blog", href: "/blog/" },
+  { label: entry.slug },
 ];
 
 // Extract necessary data for BlogHero
 const articleDisplayTitle = entry.data.articleTitle;
-const author = entry.data.author || 'TestFeed Team';
-const publishDate = entry.data.publishDate || new Date(); 
-const featuredImage = entry.data.featuredImage; 
+const author = entry.data.author || "TestFeed Team";
+const publishDate = entry.data.publishDate || new Date();
+const featuredImage = entry.data.featuredImage;
 const tags = entry.data.tags;
 
 // Render the markdown content
 const { Content } = await entry.render();
 ---
 
-<BaseLayout 
-  title={entry.data.title} 
+<BaseLayout
+  title={entry.data.title}
   description={entry.data.description}
   entry={entry}
 >
-  <BlogHero 
+  <BlogHero
     title={articleDisplayTitle}
     author={author}
     publishDate={publishDate}
     featuredImage={featuredImage}
-    tags={tags} 
+    tags={tags}
   />
-  
+
   <div class="container">
     <Breadcrumbs items={breadcrumbItems} />
   </div>
 
   <!-- Conditional empathy map component for empathy map blog post -->
-  {entry.slug === 'empathy-map-template' && (
-    <EmpathyMapBuilder />
-  )}
+  {entry.slug === "empathy-map-template" && <EmpathyMapBuilder />}
 
   <!-- Main content section with the blog content -->
   <section class="blog-content">
@@ -73,9 +71,11 @@ const { Content } = await entry.render();
   </section>
 
   <!-- Final CTA section if available -->
-  {entry.data.finalCtaSection && (
-    <FinalCTASection {...entry.data.finalCtaSection} />
-  )}
+  {
+    entry.data.finalCtaSection && (
+      <FinalCTASection {...entry.data.finalCtaSection} />
+    )
+  }
 </BaseLayout>
 
 <style>
@@ -118,9 +118,9 @@ const { Content } = await entry.render();
     .blog-content {
       padding: var(--spacing-lg) 0;
     }
-    
+
     .content-wrapper {
       padding: var(--spacing-md);
     }
   }
-</style> 
+</style>
