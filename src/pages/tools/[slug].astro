@@ -9,6 +9,7 @@ import DemoVideoSection from "../../components/DemoVideoSection.astro";
 import MarkdownContent from "../../components/MarkdownContent.astro";
 import LinkedInTool from "../../components/tools/linkedin-preview-tool/LinkedInTool.astro";
 import LinkedInFormatter from "../../components/tools/linkedin-formatter/LinkedInFormatter.astro";
+import LinkedInProfileOptimizer from "../../components/tools/linkedin-profile-optimizer/LinkedInProfileOptimizer.astro";
 import FAQsSection from "../../components/FAQsSection.astro";
 
 // Hardcoded video data (no longer using homepage collection)
@@ -56,12 +57,6 @@ const breadcrumbItems: BreadcrumbItem[] = [
         }
         <h1 class="hero-title">{entry.data.title}</h1>
         <p class="hero-description">{entry.data.description}</p>
-        <div class="hero-cta">
-          <a href="/#get-started" class="btn btn-primary pulse">
-            Sign Up Free
-          </a>
-          <p class="cta-subtext">Trusted by 10,000+ people worldwide</p>
-        </div>
       </div>
     </div>
   </section>
@@ -76,6 +71,8 @@ const breadcrumbItems: BreadcrumbItem[] = [
       <LinkedInTool />
     ) : entry.slug === "linkedin-text-formatter" ? (
       <LinkedInFormatter />
+    ) : entry.slug === "linkedin-profile-optimization" ? (
+      <LinkedInProfileOptimizer />
     ) : (
       <div class="demo-video-wrapper">
         <DemoVideoSection title="" videoId={videoId} />
@@ -182,31 +179,6 @@ const breadcrumbItems: BreadcrumbItem[] = [
     max-width: 600px;
     margin: 0 auto var(--spacing-lg) auto;
     line-height: 1.6;
-  }
-
-  .hero-cta {
-    margin-bottom: var(--spacing-sm);
-  }
-
-  .hero-cta .btn {
-    display: inline-block;
-    background-color: var(--color-primary);
-    color: var(--color-secondary);
-    font-weight: 700;
-    padding: 0.75rem 2rem;
-    border-radius: var(--border-radius);
-    transition: all 0.3s ease;
-    text-decoration: none;
-  }
-
-  .hero-cta .btn:hover {
-    filter: brightness(110%);
-  }
-
-  .cta-subtext {
-    margin-top: var(--spacing-md);
-    font-size: 0.875rem;
-    color: var(--color-white);
   }
 
   .breadcrumbs-container {

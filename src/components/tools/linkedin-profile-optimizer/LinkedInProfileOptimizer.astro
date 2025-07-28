@@ -1,0 +1,447 @@
+---
+// LinkedIn Profile Optimizer Component
+---
+
+<div class="linkedin-profile-optimizer">
+  <div class="optimizer-container">
+    <div class="linkedin-profile-analyzer">
+      <div class="analyzer-header">
+        <div class="profile-info">
+          <div class="profile-pic avatar">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+          <div class="user-info">
+            <div class="user-name">Profile Analysis Tool</div>
+            <div class="user-title">AI-Powered LinkedIn Optimization</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="analyzer-content">
+        <h3>AI Profile Analysis + Expert Human Review</h3>
+        <p>
+          Submit your LinkedIn profile for AI analysis through our optimization
+          engine, then manually reviewed by our human team with years of
+          corporate headhunting experience.
+        </p>
+
+        <form id="profile-analysis-form" class="profile-analysis-form">
+          <div class="form-group">
+            <input
+              type="url"
+              name="linkedin_url"
+              placeholder="https://linkedin.com/in/yourprofile"
+              required
+              class="profile-url-input"
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Your email address"
+              required
+              class="email-input"
+            />
+            <input
+              type="text"
+              name="website"
+              style="display: none"
+              tabindex="-1"
+              autocomplete="off"
+            />
+          </div>
+          <div class="form-message" style="display: none;"></div>
+        </form>
+      </div>
+
+      <div class="analyzer-footer">
+        <div class="analysis-badges">
+          <span class="analysis-badge">100% free</span>
+          <span class="analysis-badge">50-point analysis</span>
+          <span class="analysis-badge">24-hour delivery</span>
+        </div>
+        <button
+          type="submit"
+          form="profile-analysis-form"
+          class="get-analysis-btn"
+        >
+          <span class="btn-text">ANALYZE PROFILE</span>
+          <span class="btn-loading" style="display: none;">SUBMITTING...</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // @ts-ignore - Customer.io global variable
+  declare const cioanalytics: any;
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("profile-analysis-form");
+    if (!form) return;
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const form = e.target as HTMLFormElement;
+      const linkedinUrl = (form.linkedin_url as HTMLInputElement).value;
+      const email = (form.email as HTMLInputElement).value;
+      const honeypot = (form.website as HTMLInputElement).value;
+      const button = form.querySelector(
+        'button[type="submit"]',
+      ) as HTMLButtonElement;
+      const btnText = button.querySelector(".btn-text") as HTMLSpanElement;
+      const btnLoading = button.querySelector(
+        ".btn-loading",
+      ) as HTMLSpanElement;
+      const message = form.querySelector(".form-message") as HTMLDivElement;
+
+      // Show loading state
+      btnText.style.display = "none";
+      btnLoading.style.display = "inline";
+      button.disabled = true;
+
+      if (honeypot) {
+        setTimeout(() => {
+          message.textContent =
+            "Thanks! We'll analyze your profile and send results soon.";
+          message.className = "form-message success";
+          message.style.display = "block";
+
+          form.reset();
+          btnText.style.display = "inline";
+          btnLoading.style.display = "none";
+          button.disabled = false;
+        }, 1000);
+        return;
+      }
+
+      // Basic validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        message.textContent = "Please enter a valid email address";
+        message.className = "form-message error";
+        message.style.display = "block";
+
+        btnText.style.display = "inline";
+        btnLoading.style.display = "none";
+        button.disabled = false;
+        return;
+      }
+
+      const urlRegex =
+        /^https:\/\/(www\.)?linkedin\.com\/in\/[a-zA-Z0-9-]+\/?$/;
+      if (!urlRegex.test(linkedinUrl)) {
+        message.textContent =
+          "Please enter a valid LinkedIn profile URL (e.g., https://linkedin.com/in/yourname)";
+        message.className = "form-message error";
+        message.style.display = "block";
+
+        btnText.style.display = "inline";
+        btnLoading.style.display = "none";
+        button.disabled = false;
+        return;
+      }
+
+      try {
+        // Check if Customer.io is loaded
+        if (typeof cioanalytics === "undefined") {
+          throw new Error("Customer.io not loaded");
+        }
+
+        // Send to Customer.io
+        cioanalytics.identify(email, {
+          email: email,
+          linkedin_profile_url: linkedinUrl,
+          submitted_profile_analysis_at: new Date().toISOString(),
+          source: "linkedin_profile_optimization",
+        });
+
+        cioanalytics.track("submitted_profile_analysis", {
+          source: "linkedin_profile_optimization",
+          page: window.location.pathname,
+          linkedin_url: linkedinUrl,
+        });
+
+        // Hide the form and show success message
+        (form.querySelector(".form-group") as HTMLElement).style.display =
+          "none";
+        message.textContent =
+          "Thanks! We'll analyze your profile and send detailed results to your email within 24-48 hours.";
+        message.className = "form-message success";
+        message.style.display = "block";
+      } catch (error) {
+        console.error("Error submitting to Customer.io:", error);
+        message.textContent = "Something went wrong. Please try again.";
+        message.className = "form-message error";
+        message.style.display = "block";
+
+        btnText.style.display = "inline";
+        btnLoading.style.display = "none";
+        button.disabled = false;
+      }
+    });
+  });
+</script>
+
+<style>
+  .linkedin-profile-optimizer {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: var(--color-background);
+    padding: var(--spacing-lg) 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .optimizer-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .linkedin-profile-analyzer {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+  }
+
+  .analyzer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .profile-info {
+    display: flex;
+    align-items: center;
+  }
+
+  .profile-pic {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 0.75rem;
+    background-color: #444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .profile-pic.avatar svg {
+    width: 2rem;
+    height: 2rem;
+    color: #777;
+  }
+
+  .user-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .user-name {
+    font-weight: 600;
+    color: var(--color-text);
+    font-size: 1rem;
+  }
+
+  .user-title {
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+  }
+
+  .analyzer-content {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .analyzer-content h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+  }
+
+  .analyzer-content p {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .profile-url-input,
+  .email-input {
+    padding: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--color-text);
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    font-family: var(--font-primary);
+  }
+
+  .profile-url-input::placeholder,
+  .email-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+    font-style: italic;
+    opacity: 0.7;
+  }
+
+  .profile-url-input:focus,
+  .email-input:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  .profile-url-input:focus::placeholder,
+  .email-input:focus::placeholder {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .analyzer-footer {
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .analysis-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .analysis-badge {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-text-light);
+    font-family: var(--font-mono, "Space Mono", monospace);
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 0.25rem;
+    padding: 0.5rem 0.75rem;
+    letter-spacing: 0.5px;
+  }
+
+  .get-analysis-btn {
+    background-color: #ffffff;
+    color: #000000;
+    font-family: var(--font-mono, "Space Mono", monospace);
+    font-size: 0.875rem;
+    font-weight: 700;
+    border-radius: 0.25rem;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    letter-spacing: 0.5px;
+    min-width: 140px;
+  }
+
+  .get-analysis-btn:hover:not(:disabled) {
+    background-color: #f0f0f0;
+    transform: translateY(-1px);
+  }
+
+  .get-analysis-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .form-message {
+    text-align: center;
+    padding: 0.75rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    margin-top: 0.75rem;
+    line-height: 1.5;
+  }
+
+  .form-message.success {
+    background: rgba(34, 197, 94, 0.1);
+    color: #22c55e;
+    border: 1px solid rgba(34, 197, 94, 0.3);
+  }
+
+  .form-message.error {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .linkedin-profile-optimizer {
+      padding: var(--spacing-md) var(--spacing-sm);
+    }
+
+    .analyzer-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .profile-info {
+      width: 100%;
+    }
+
+    .analyzer-badge {
+      align-self: flex-end;
+    }
+
+    .analyzer-footer {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .analysis-badges {
+      width: 100%;
+      margin-bottom: 0.5rem;
+    }
+
+    .get-analysis-btn {
+      width: 100%;
+      text-align: center;
+    }
+
+    .profile-url-input,
+    .email-input {
+      font-size: 16px; /* Prevents zoom on iOS */
+    }
+  }
+
+  @media (max-width: 480px) {
+    .linkedin-profile-optimizer {
+      padding: var(--spacing-sm) var(--spacing-xs);
+    }
+  }
+</style>
