@@ -16,153 +16,162 @@
 </div>
 
 <style>
-.intention-perception-visualization {
-  margin: var(--spacing-xl) 0;
-}
+  .intention-perception-visualization {
+    margin: var(--spacing-xl) 0;
+  }
 
-.venn-container {
-  position: relative;
-  height: 22rem;
-  margin: 1.5rem 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-.venn-stage {
-  position: relative;
-  width: 100%;
-  height: 22rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.venn-circle {
-  width: 20rem;
-  height: 20rem;
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  opacity: 1;
-  transition: transform 3s cubic-bezier(0.4, 0.0, 0.2, 1);
-  border: 2px solid;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(20px);
-}
-
-.venn-circle.intention {
-  background: rgba(109, 40, 217, 0.3);
-  border-color: rgba(109, 40, 217, 1);
-  box-shadow: 0 0 2rem rgba(109, 40, 217, 0.4);
-  transform: translate(-21rem, -50%);
-}
-
-.venn-circle.perception {
-  background: rgba(20, 184, 166, 0.2);
-  border-color: rgba(20, 184, 166, 0.8);
-  box-shadow: 0 0 2rem rgba(20, 184, 166, 0.3);
-  transform: translate(1rem, -50%);
-}
-
-.intention-perception-visualization.animate .venn-circle.intention {
-  transform: translate(-19rem, -50%);
-}
-
-.intention-perception-visualization.animate .venn-circle.perception {
-  transform: translate(-1rem, -50%);
-}
-
-.venn-circle.intention .circle-text,
-.venn-circle.perception .circle-text {
-  color: #ffffff;
-  font-size: 0.8rem;
-  font-weight: 300;
-  text-align: center;
-  line-height: 1.4;
-  padding: 0 1rem;
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
-  letter-spacing: 0.6px;
-  font-family: 'Inter', sans-serif;
-  text-transform: uppercase;
-}
-
-@media (max-width: 768px) {
   .venn-container {
-    height: 18rem;
+    position: relative;
+    height: 22rem;
+    margin: 1.5rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
   }
-  
+
   .venn-stage {
-    height: 18rem;
+    position: relative;
+    width: 100%;
+    height: 22rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  
+
   .venn-circle {
-    width: 16rem;
-    height: 16rem;
+    width: 20rem;
+    height: 20rem;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    opacity: 1;
+    transition: transform 3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(20px);
   }
-  
+
   .venn-circle.intention {
-    transform: translate(-17rem, -50%);
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow:
+      0 0 3rem rgba(255, 255, 255, 0.4),
+      0 0 6rem rgba(255, 255, 255, 0.2);
+    transform: translate(-21rem, -50%);
   }
-  
+
   .venn-circle.perception {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 2rem rgba(255, 255, 255, 0.12);
     transform: translate(1rem, -50%);
   }
-  
+
   .intention-perception-visualization.animate .venn-circle.intention {
-    transform: translate(-15rem, -50%);
+    transform: translate(-19rem, -50%);
   }
 
   .intention-perception-visualization.animate .venn-circle.perception {
     transform: translate(-1rem, -50%);
   }
-  
+
   .venn-circle.intention .circle-text,
   .venn-circle.perception .circle-text {
-    font-size: 0.7rem;
-    padding: 0 0.75rem;
-    letter-spacing: 0.5px;
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 300;
+    text-align: center;
+    line-height: 1.4;
+    padding: 0 1rem;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.6px;
+    font-family: "Inter", sans-serif;
+    text-transform: uppercase;
   }
-}
 
-@media (prefers-reduced-motion: reduce) {
-  .venn-circle {
-    transition: none;
+  @media (max-width: 768px) {
+    .venn-container {
+      height: 18rem;
+    }
+
+    .venn-stage {
+      height: 18rem;
+    }
+
+    .venn-circle {
+      width: 16rem;
+      height: 16rem;
+    }
+
+    .venn-circle.intention {
+      transform: translate(-17rem, -50%);
+    }
+
+    .venn-circle.perception {
+      transform: translate(1rem, -50%);
+    }
+
+    .intention-perception-visualization.animate .venn-circle.intention {
+      transform: translate(-15rem, -50%);
+    }
+
+    .intention-perception-visualization.animate .venn-circle.perception {
+      transform: translate(-1rem, -50%);
+    }
+
+    .venn-circle.intention .circle-text,
+    .venn-circle.perception .circle-text {
+      font-size: 0.7rem;
+      padding: 0 0.75rem;
+      letter-spacing: 0.5px;
+    }
   }
-  
-  .venn-circle.intention {
-    transform: translate(-19rem, -50%);
+
+  @media (prefers-reduced-motion: reduce) {
+    .venn-circle {
+      transition: none;
+    }
+
+    .venn-circle.intention {
+      transform: translate(-19rem, -50%);
+    }
+
+    .venn-circle.perception {
+      transform: translate(-1rem, -50%);
+    }
   }
-  
-  .venn-circle.perception {
-    transform: translate(-1rem, -50%);
-  }
-}
 </style>
 
 <script>
   // Trigger animation when component comes into view
-  document.addEventListener('DOMContentLoaded', function() {
-    const vizElement = document.querySelector('.intention-perception-visualization');
+  document.addEventListener("DOMContentLoaded", function () {
+    const vizElement = document.querySelector(
+      ".intention-perception-visualization",
+    );
     if (vizElement) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting && !entry.target.classList.contains('animate')) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (
+              entry.isIntersecting &&
+              !entry.target.classList.contains("animate")
+            ) {
+              setTimeout(() => {
+                entry.target.classList.add("animate");
+              }, 500);
+            }
+          });
+        },
+        {
+          threshold: 0.5,
+        },
+      );
 
-            setTimeout(() => {
-              entry.target.classList.add('animate');
-            }, 500);
-          }
-        });
-      }, {
-        threshold: 0.5
-      });
-      
       observer.observe(vizElement);
     }
   });
-</script> 
+</script>
