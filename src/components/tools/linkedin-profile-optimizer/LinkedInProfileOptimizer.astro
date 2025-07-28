@@ -98,14 +98,19 @@
       const linkedinUrl = (form.linkedin_url as HTMLInputElement).value;
       const email = (form.email as HTMLInputElement).value;
       const honeypot = (form.website as HTMLInputElement).value;
-      const button = form.querySelector(
-        'button[type="submit"]',
+      const button = document.querySelector(
+        ".get-analysis-btn",
       ) as HTMLButtonElement;
-      const btnText = button.querySelector(".btn-text") as HTMLSpanElement;
-      const btnLoading = button.querySelector(
+      const btnText = button?.querySelector(".btn-text") as HTMLSpanElement;
+      const btnLoading = button?.querySelector(
         ".btn-loading",
       ) as HTMLSpanElement;
       const message = form.querySelector(".form-message") as HTMLDivElement;
+
+      if (!button || !btnText || !btnLoading || !message) {
+        console.error("Form elements not found");
+        return;
+      }
 
       // Show loading state
       btnText.style.display = "none";
@@ -177,8 +182,9 @@
         // Hide the form and show success message
         (form.querySelector(".form-group") as HTMLElement).style.display =
           "none";
+        button.style.display = "none";
         message.textContent =
-          "Thanks! We'll analyze your profile and send detailed results to your email within 24-48 hours.";
+          "Thanks! We'll analyze your profile and send detailed results to your email within 24 hours.";
         message.className = "form-message success";
         message.style.display = "block";
       } catch (error) {
