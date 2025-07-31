@@ -197,6 +197,7 @@ export const blogSchema = z.object({
   tags: z.array(z.string()).optional().describe("Categories or tags for the blog post"),
   minutesRead: z.number().optional().describe("Estimated time to read the article in minutes"),
   draft: z.boolean().default(false).describe("Set to true to hide post from production builds"),
+  relatedPosts: z.array(z.string()).optional().describe("Array of blog slugs for related posts to display at bottom"),
   
   // Schema.org markup for rich results
   schemaMarkup: z.object({

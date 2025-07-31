@@ -9,6 +9,7 @@ excerpt: "Traditional AI market research analyzes past communications. TestFeed 
 tags: ["ai market research", "market research ai", "audience intelligence", "predictive analytics", "communication testing"]
 minutesRead: 15
 draft: false
+relatedPosts: ["voice-of-customer-research", "voice-of-customer-tools"]
 schemaMarkup:
   type: "BlogPosting"
   properties:

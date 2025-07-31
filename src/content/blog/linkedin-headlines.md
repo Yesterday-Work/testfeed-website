@@ -10,6 +10,7 @@ excerpt: "Learn how to craft compelling LinkedIn headlines that attract recruite
 tags: ["linkedin", "career", "personal branding", "job search"]
 minutesRead: 15
 draft: false
+relatedPosts: ["linkedin-character-limits", "linkedin-impressions"]
 schemaMarkup:
   type: "BlogPosting"
   properties:

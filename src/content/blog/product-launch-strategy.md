@@ -11,6 +11,7 @@ excerpt: "95% of product launches fail, and over half fail due to communication 
 tags: ["product launch", "communication strategy", "message testing", "launch strategy", "audience intelligence"]
 minutesRead: 12
 draft: false
+relatedPosts: ["test-audience", "potentially-sensitive-language"]
 
 # Schema.org structured data
 schemaMarkup:

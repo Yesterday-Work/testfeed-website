@@ -14,12 +14,17 @@ export async function getStaticPaths() {
 
   return blogEntries.map((entry) => ({
     params: { slug: entry.slug },
-    props: { entry },
+    props: { entry, allBlogs: blogEntries },
   }));
 }
 
-// Get the entry from the params
-const { entry } = Astro.props;
+// Get the entry and all blogs from the params
+const { entry, allBlogs } = Astro.props;
+
+// Get related posts based on frontmatter
+const relatedPosts = entry.data.relatedPosts
+  ? allBlogs.filter((blog) => entry.data.relatedPosts!.includes(blog.slug))
+  : [];
 
 // Prepare breadcrumb items
 const breadcrumbItems: BreadcrumbItem[] = [
@@ -67,6 +72,25 @@ const { Content } = await entry.render();
           <Content />
         </MarkdownContent>
       </article>
+
+      <!-- Related Posts Section -->
+      {
+        relatedPosts.length > 0 && (
+          <div class="related-posts">
+            <h2 class="related-posts-title">More blogs you might like</h2>
+            <div class="posts-grid">
+              {relatedPosts.map((post) => (
+                <a href={`/blog/${post.slug}/`} class="post-card">
+                  <div class="post-card-content">
+                    <h3>{post.data.articleTitle}</h3>
+                    <p>{post.data.excerpt}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        )
+      }
     </div>
   </section>
 
@@ -107,6 +131,65 @@ const { Content } = await entry.render();
     text-align: left !important;
   }
 
+  /* Related Posts Section */
+  .related-posts {
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-md);
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .related-posts-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-white);
+    text-align: center;
+  }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-md);
+  }
+
+  .post-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    transition: var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .post-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .post-card-content h3 {
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-white);
+    line-height: 1.3;
+  }
+
+  .post-card-content p {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 0;
+    line-height: 1.4;
+  }
+
   /* Responsive adjustments */
   @media (max-width: 992px) {
     .content-wrapper {
@@ -121,6 +204,14 @@ const { Content } = await entry.render();
 
     .content-wrapper {
       padding: var(--spacing-md);
+    }
+
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .related-posts-title {
+      font-size: 1.3rem;
     }
   }
 </style>

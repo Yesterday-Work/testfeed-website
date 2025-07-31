@@ -9,6 +9,7 @@ excerpt: "Learn what potentially sensitive language means, how to identify it, a
 tags: ["potentially sensitive language", "inclusive communication", "language sensitivity", "professional communication", "communication testing"]
 minutesRead: 12
 draft: false
+relatedPosts: ["test-audience", "product-launch-strategy"]
 schemaMarkup:
   type: "BlogPosting"
   properties:

@@ -10,6 +10,7 @@ excerpt: "A comprehensive guide to understanding and maximizing LinkedIn impress
 tags: ["linkedin", "social media", "analytics", "marketing"]
 minutesRead: 14
 draft: false
+relatedPosts: ["linkedin-headlines", "linkedin-character-limits"]
 schemaMarkup:
   type: "BlogPosting"
   properties:

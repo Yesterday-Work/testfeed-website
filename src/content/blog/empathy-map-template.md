@@ -9,6 +9,7 @@ excerpt: "Create empathy maps instantly with our free interactive builder. Downl
 tags: ["empathy mapping", "ux design", "user research", "templates", "customer insights"]
 minutesRead: 12
 draft: false
+relatedPosts: ["voice-of-customer-research", "test-audience"]
 schemaMarkup:
   type: "BlogPosting"
   properties:

@@ -9,6 +9,7 @@ excerpt: "Compare top VoC tools like Medallia, Qualtrics & InMoment. Learn limit
 tags: ["voice of customer tools", "voc tools", "customer feedback", "audience intelligence", "customer experience"]
 minutesRead: 18
 draft: false
+relatedPosts: ["voice-of-customer-research", "ai-market-research-guide"]
 schemaMarkup:
   type: "BlogPosting"
   properties:

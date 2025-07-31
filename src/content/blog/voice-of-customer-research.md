@@ -8,6 +8,7 @@ excerpt: "Master voice of customer research with proven methodologies that drive
 tags: ["voice of customer", "customer research", "voc methodology", "customer feedback", "business intelligence", "customer experience"]
 minutesRead: 15
 draft: false
+relatedPosts: ["voice-of-customer-tools", "ai-market-research-guide"]
 schemaMarkup:
   type: "BlogPosting"
   properties:

@@ -10,6 +10,7 @@ excerpt: "Learn the essential LinkedIn character limits for posts, headlines, an
 tags: ["linkedin", "career", "personal branding", "social media"]
 minutesRead: 10
 draft: false
+relatedPosts: ["linkedin-headlines", "linkedin-impressions"]
 schemaMarkup:
   type: "BlogPosting"
   properties:
