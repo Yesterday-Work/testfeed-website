@@ -1,47 +1,151 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { Icon } from 'astro-icon/components';
-import HomeHero from '../components/HomeHero.astro'; 
-import FinalCTASection from '../components/FinalCTASection.astro';
-import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Icon } from "astro-icon/components";
+import HomeHero from "../components/HomeHero.astro";
+import FinalCTASection from "../components/FinalCTASection.astro";
+import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
 ---
 
-<BaseLayout 
+<BaseLayout
   title="TestFeed - Audience Reactions, On Demand"
   description="See how your audience will react before you send. Test emails, posts & messages on virtual audiences who think like your real ones. Join waitlist for early access."
 >
-
   <!-- Hero Section -->
   <section class="hero">
     <div class="container">
       <div class="hero-content">
         <h1>
-          See <span class="react-emphasis">reactions</span> from your audience, <span class="before-fade">before</span> <span class="rotating-text">sending</span>
+          See <span class="react-emphasis">reactions</span> from your audience, <span
+            class="before-fade">before</span
+          >
+          <span class="rotating-text">sending</span>
         </h1>
         <p class="hero-description">
-          Test your content on virtual audiences who think and react like your real ones. Before your customer says 'I don't get it.' Before your prospect ghosts you. Before you waste another hour rewording the same email with ChatGPT.
+          Test your content on virtual audiences who think and react like your
+          real ones. Before your customer says 'I don't get it.' Before your
+          prospect ghosts you. Before you waste another hour rewording the same
+          email with ChatGPT.
         </p>
         <div class="cta-buttons">
           <a href="#get-started" class="btn btn-primary pulse">JOIN WAITLIST</a>
         </div>
       </div>
     </div>
-    
+
     <!-- Floating Cursors -->
     <div class="floating-cursor" id="cursor-1">
-        <svg width="26" height="30" fill="none" xmlns="http://www.w3.org/2000/svg"><g filter="url(#a)"><path d="m8.5 19.5-2-12 10 6L11 15l-2.5 4.5Z" fill="#0080FE" rx="2"></path><path d="m6.757 7.071-.928-.557.178 1.068 2 12 .235 1.412.695-1.251 2.398-4.316 5.297-1.445 1.13-.308-1.005-.603-10-6Z" stroke="#fff" stroke-width="1.5"></path></g><defs><filter id="a" x=".158" y=".528" width="23.866" height="26.959" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix><feOffset dy="2"></feOffset><feGaussianBlur stdDeviation="3"></feGaussianBlur><feComposite in2="hardAlpha" operator="out"></feComposite><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"></feColorMatrix><feBlend in2="BackgroundImageFix" result="effect1_dropShadow_1_4"></feBlend><feBlend in="SourceGraphic" in2="effect1_dropShadow_1_4" result="shape"></feBlend></filter></defs></svg>
+      <svg width="26" height="30" fill="none" xmlns="http://www.w3.org/2000/svg"
+        ><g filter="url(#a)"
+          ><path d="m8.5 19.5-2-12 10 6L11 15l-2.5 4.5Z" fill="#0080FE" rx="2"
+          ></path><path
+            d="m6.757 7.071-.928-.557.178 1.068 2 12 .235 1.412.695-1.251 2.398-4.316 5.297-1.445 1.13-.308-1.005-.603-10-6Z"
+            stroke="#fff"
+            stroke-width="1.5"></path></g
+        ><defs
+          ><filter
+            id="a"
+            x=".158"
+            y=".528"
+            width="23.866"
+            height="26.959"
+            filterUnits="userSpaceOnUse"
+            color-interpolation-filters="sRGB"
+            ><feFlood flood-opacity="0" result="BackgroundImageFix"
+            ></feFlood><feColorMatrix
+              in="SourceAlpha"
+              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+              result="hardAlpha"></feColorMatrix><feOffset dy="2"
+            ></feOffset><feGaussianBlur stdDeviation="3"
+            ></feGaussianBlur><feComposite in2="hardAlpha" operator="out"
+            ></feComposite><feColorMatrix
+              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"
+            ></feColorMatrix><feBlend
+              in2="BackgroundImageFix"
+              result="effect1_dropShadow_1_4"></feBlend><feBlend
+              in="SourceGraphic"
+              in2="effect1_dropShadow_1_4"
+              result="shape"></feBlend></filter
+          ></defs
+        ></svg
+      >
       <span class="cursor-name">Startup Founders</span>
       <div class="cursor-comment" id="comment-1"></div>
     </div>
-    
+
     <div class="floating-cursor-2" id="cursor-2">
-        <svg width="26" height="30" fill="none" xmlns="http://www.w3.org/2000/svg"><g filter="url(#a)"><path d="m8.5 19.5-2-12 10 6L11 15l-2.5 4.5Z" fill="#8B5CF6" rx="2"></path><path d="m6.757 7.071-.928-.557.178 1.068 2 12 .235 1.412.695-1.251 2.398-4.316 5.297-1.445 1.13-.308-1.005-.603-10-6Z" stroke="#fff" stroke-width="1.5"></path></g><defs><filter id="a" x=".158" y=".528" width="23.866" height="26.959" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix><feOffset dy="2"></feOffset><feGaussianBlur stdDeviation="3"></feGaussianBlur><feComposite in2="hardAlpha" operator="out"></feComposite><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"></feColorMatrix><feBlend in2="BackgroundImageFix" result="effect1_dropShadow_1_4"></feBlend><feBlend in="SourceGraphic" in2="effect1_dropShadow_1_4" result="shape"></feBlend></filter></defs></svg>
+      <svg width="26" height="30" fill="none" xmlns="http://www.w3.org/2000/svg"
+        ><g filter="url(#a)"
+          ><path d="m8.5 19.5-2-12 10 6L11 15l-2.5 4.5Z" fill="#8B5CF6" rx="2"
+          ></path><path
+            d="m6.757 7.071-.928-.557.178 1.068 2 12 .235 1.412.695-1.251 2.398-4.316 5.297-1.445 1.13-.308-1.005-.603-10-6Z"
+            stroke="#fff"
+            stroke-width="1.5"></path></g
+        ><defs
+          ><filter
+            id="a"
+            x=".158"
+            y=".528"
+            width="23.866"
+            height="26.959"
+            filterUnits="userSpaceOnUse"
+            color-interpolation-filters="sRGB"
+            ><feFlood flood-opacity="0" result="BackgroundImageFix"
+            ></feFlood><feColorMatrix
+              in="SourceAlpha"
+              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+              result="hardAlpha"></feColorMatrix><feOffset dy="2"
+            ></feOffset><feGaussianBlur stdDeviation="3"
+            ></feGaussianBlur><feComposite in2="hardAlpha" operator="out"
+            ></feComposite><feColorMatrix
+              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"
+            ></feColorMatrix><feBlend
+              in2="BackgroundImageFix"
+              result="effect1_dropShadow_1_4"></feBlend><feBlend
+              in="SourceGraphic"
+              in2="effect1_dropShadow_1_4"
+              result="shape"></feBlend></filter
+          ></defs
+        ></svg
+      >
       <span class="cursor-name">Greg from Finance</span>
       <div class="cursor-comment" id="comment-2"></div>
     </div>
-    
+
     <div class="floating-cursor-3" id="cursor-3">
-        <svg width="26" height="30" fill="none" xmlns="http://www.w3.org/2000/svg"><g filter="url(#a)"><path d="m8.5 19.5-2-12 10 6L11 15l-2.5 4.5Z" fill="#F59E0B" rx="2"></path><path d="m6.757 7.071-.928-.557.178 1.068 2 12 .235 1.412.695-1.251 2.398-4.316 5.297-1.445 1.13-.308-1.005-.603-10-6Z" stroke="#fff" stroke-width="1.5"></path></g><defs><filter id="a" x=".158" y=".528" width="23.866" height="26.959" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix><feOffset dy="2"></feOffset><feGaussianBlur stdDeviation="3"></feGaussianBlur><feComposite in2="hardAlpha" operator="out"></feComposite><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"></feColorMatrix><feBlend in2="BackgroundImageFix" result="effect1_dropShadow_1_4"></feBlend><feBlend in="SourceGraphic" in2="effect1_dropShadow_1_4" result="shape"></feBlend></filter></defs></svg>
+      <svg width="26" height="30" fill="none" xmlns="http://www.w3.org/2000/svg"
+        ><g filter="url(#a)"
+          ><path d="m8.5 19.5-2-12 10 6L11 15l-2.5 4.5Z" fill="#F59E0B" rx="2"
+          ></path><path
+            d="m6.757 7.071-.928-.557.178 1.068 2 12 .235 1.412.695-1.251 2.398-4.316 5.297-1.445 1.13-.308-1.005-.603-10-6Z"
+            stroke="#fff"
+            stroke-width="1.5"></path></g
+        ><defs
+          ><filter
+            id="a"
+            x=".158"
+            y=".528"
+            width="23.866"
+            height="26.959"
+            filterUnits="userSpaceOnUse"
+            color-interpolation-filters="sRGB"
+            ><feFlood flood-opacity="0" result="BackgroundImageFix"
+            ></feFlood><feColorMatrix
+              in="SourceAlpha"
+              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+              result="hardAlpha"></feColorMatrix><feOffset dy="2"
+            ></feOffset><feGaussianBlur stdDeviation="3"
+            ></feGaussianBlur><feComposite in2="hardAlpha" operator="out"
+            ></feComposite><feColorMatrix
+              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"
+            ></feColorMatrix><feBlend
+              in2="BackgroundImageFix"
+              result="effect1_dropShadow_1_4"></feBlend><feBlend
+              in="SourceGraphic"
+              in2="effect1_dropShadow_1_4"
+              result="shape"></feBlend></filter
+          ></defs
+        ></svg
+      >
       <span class="cursor-name">Gen Z Creators</span>
       <div class="cursor-comment" id="comment-3"></div>
     </div>
@@ -58,7 +162,10 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
           </div>
           <h3>You only get one shot at it</h3>
           <p>
-            That sales email to your dream client? One shot. The proposal that could make your business? One shot. Most communication is binary - it either works or it doesn't. No A/B tests, no practice runs. You get one chance to communicate correctly.
+            That sales email to your dream client? One shot. The proposal that
+            could make your business? One shot. Most communication is binary -
+            it either works or it doesn't. No A/B tests, no practice runs. You
+            get one chance to communicate correctly.
           </p>
         </div>
 
@@ -68,7 +175,10 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
           </div>
           <h3>You waste hours second-guessing</h3>
           <p>
-            When something really matters, you second-guess everything. You know what you want to say, but have no idea if your auidence will get it. So you keep tweaking, editing, rewriting - burning hours on messages that should take minutes.
+            When something really matters, you second-guess everything. You know
+            what you want to say, but have no idea if your auidence will get it.
+            So you keep tweaking, editing, rewriting - burning hours on messages
+            that should take minutes.
           </p>
         </div>
 
@@ -78,7 +188,10 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
           </div>
           <h3>You rarely get any feedback</h3>
           <p>
-            You send that carefully crafted email and get... nothing. Radio silence. Was it too pushy? Not compelling enough? Did they take that joke the wrong way? You have no idea. When communication fails, you rarely find out why.
+            You send that carefully crafted email and get... nothing. Radio
+            silence. Was it too pushy? Not compelling enough? Did they take that
+            joke the wrong way? You have no idea. When communication fails, you
+            rarely find out why.
           </p>
         </div>
       </div>
@@ -98,14 +211,18 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
           <div class="step-content">
             <h3>Create virtual audiences</h3>
             <p>
-              Describe who you're communicating with and we'll build a virtual version of them. Build them once, use them everywhere. Plus they get smarter as you collect real reactions.
+              Describe who you're communicating with and we'll build a virtual
+              version of them. Build them once, use them everywhere. Plus they
+              get smarter as you collect real reactions.
             </p>
             <div class="step-demo">
               <div class="dropdown-mockup" id="audience-dropdown">
                 <div class="dropdown-menu">
                   <div class="dropdown-item">Gen Z Creators</div>
                   <div class="dropdown-item">Greg from Finance</div>
-                  <div class="dropdown-item" id="startup-founders-item">Startup Founders</div>
+                  <div class="dropdown-item" id="startup-founders-item">
+                    Startup Founders
+                  </div>
                 </div>
               </div>
             </div>
@@ -120,12 +237,57 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
           <div class="step-content">
             <h3>Test any content</h3>
             <p>
-              Right-click any content on any website - emails in Gmail, posts on LinkedIn, replies in Slack, sales proposals, website copy. Select the audience, get their reactions instantly.
+              Right-click any content on any website - emails in Gmail, posts on
+              LinkedIn, replies in Slack, sales proposals, website copy. Select
+              the audience, get their reactions instantly.
             </p>
             <div class="step-demo">
-              <div class="content-text highlighted-text">Hey there! I wanted to follow up about our conversation last week...</div>
+              <div class="content-text highlighted-text">
+                Hey there! I wanted to follow up about our conversation last
+                week...
+              </div>
               <div class="static-cursor">
-                <svg width="26" height="30" fill="none" xmlns="http://www.w3.org/2000/svg"><g filter="url(#a)"><path d="m8.5 19.5-2-12 10 6L11 15l-2.5 4.5Z" fill="#0080FE" rx="2"></path><path d="m6.757 7.071-.928-.557.178 1.068 2 12 .235 1.412.695-1.251 2.398-4.316 5.297-1.445 1.13-.308-1.005-.603-10-6Z" stroke="#fff" stroke-width="1.5"></path></g><defs><filter id="a" x=".158" y=".528" width="23.866" height="26.959" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix><feOffset dy="2"></feOffset><feGaussianBlur stdDeviation="3"></feGaussianBlur><feComposite in2="hardAlpha" operator="out"></feComposite><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"></feColorMatrix><feBlend in2="BackgroundImageFix" result="effect1_dropShadow_1_4"></feBlend><feBlend in="SourceGraphic" in2="effect1_dropShadow_1_4" result="shape"></feBlend></filter></defs></svg>
+                <svg
+                  width="26"
+                  height="30"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  ><g filter="url(#a)"
+                    ><path
+                      d="m8.5 19.5-2-12 10 6L11 15l-2.5 4.5Z"
+                      fill="#0080FE"
+                      rx="2"></path><path
+                      d="m6.757 7.071-.928-.557.178 1.068 2 12 .235 1.412.695-1.251 2.398-4.316 5.297-1.445 1.13-.308-1.005-.603-10-6Z"
+                      stroke="#fff"
+                      stroke-width="1.5"></path></g
+                  ><defs
+                    ><filter
+                      id="a"
+                      x=".158"
+                      y=".528"
+                      width="23.866"
+                      height="26.959"
+                      filterUnits="userSpaceOnUse"
+                      color-interpolation-filters="sRGB"
+                      ><feFlood flood-opacity="0" result="BackgroundImageFix"
+                      ></feFlood><feColorMatrix
+                        in="SourceAlpha"
+                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                        result="hardAlpha"></feColorMatrix><feOffset dy="2"
+                      ></feOffset><feGaussianBlur stdDeviation="3"
+                      ></feGaussianBlur><feComposite
+                        in2="hardAlpha"
+                        operator="out"></feComposite><feColorMatrix
+                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"
+                      ></feColorMatrix><feBlend
+                        in2="BackgroundImageFix"
+                        result="effect1_dropShadow_1_4"></feBlend><feBlend
+                        in="SourceGraphic"
+                        in2="effect1_dropShadow_1_4"
+                        result="shape"></feBlend></filter
+                    ></defs
+                  ></svg
+                >
                 <span class="static-cursor-name">Startup Founders</span>
                 <div class="cursor-comment" id="greg-step2-comment"></div>
               </div>
@@ -141,7 +303,9 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
           <div class="step-content">
             <h3>Improve and send</h3>
             <p>
-              Spot the issues. Get suggestions to make it better. Fix what's not working. Share knowing it'll land the way you actually intended with your real audience.
+              Spot the issues. Get suggestions to make it better. Fix what's not
+              working. Share knowing it'll land the way you actually intended
+              with your real audience.
             </p>
             <div class="step-demo">
               <div class="reaction-preview">
@@ -150,8 +314,12 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
                     <Icon name="lucide:check" />
                   </div>
                   <div class="suggestion-content">
-                    <div class="suggestion-header">Lead with the specific case study</div>
-                    <div class="suggestion-insight">They want proof before investing time</div>
+                    <div class="suggestion-header">
+                      Lead with the specific case study
+                    </div>
+                    <div class="suggestion-insight">
+                      They want proof before investing time
+                    </div>
                   </div>
                 </div>
               </div>
@@ -162,8 +330,6 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
     </div>
   </section>
 
-
-
   <!-- Use Cases Section -->
   <section class="use-cases">
     <div class="container">
@@ -171,92 +337,179 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
         <h2>Use <span class="space-mono">TestFeed</span> for...</h2>
       </div>
     </div>
-        <div class="use-case-cards">
+    <div class="use-case-cards">
       <div class="use-case-card">
         <div class="channel-tag">Email</div>
-        <p>Testing whether your "following up" message sounds persistent instead of stalker-ish</p>
+        <p>
+          Testing whether your "following up" message sounds persistent instead
+          of stalker-ish
+        </p>
       </div>
       <div class="use-case-card">
         <div class="channel-tag">Google Slides</div>
-        <p>Making sure that joke in your presentation lands as hilarious instead of getting you called into HR</p>
+        <p>
+          Making sure that joke in your presentation lands as hilarious instead
+          of getting you called into HR
+        </p>
       </div>
       <div class="use-case-card">
         <div class="channel-tag">Website</div>
-        <p>Checking if your website copy actually makes sense or just sounds like you let ChatGPT loose</p>
+        <p>
+          Checking if your website copy actually makes sense or just sounds like
+          you let ChatGPT loose
+        </p>
       </div>
       <div class="use-case-card">
         <div class="channel-tag">Slack</div>
-        <p>Making sure your feedback to Dave sounds constructive instead of soul-crushing</p>
+        <p>
+          Making sure your feedback to Dave sounds constructive instead of
+          soul-crushing
+        </p>
       </div>
       <div class="use-case-card">
         <div class="channel-tag">Google Docs</div>
-        <p>Seeing if your proposal comes across as "shut up and take my money" instead of "this smells like a scam"</p>
+        <p>
+          Seeing if your proposal comes across as "shut up and take my money"
+          instead of "this smells like a scam"
+        </p>
       </div>
       <div class="use-case-card">
         <div class="channel-tag">LinkedIn</div>
-        <p>Testing whether your LinkedIn post sounds witty or just makes everyone cringe</p>
+        <p>
+          Testing whether your LinkedIn post sounds witty or just makes everyone
+          cringe
+        </p>
       </div>
       <div class="use-case-card">
         <div class="channel-tag">Email</div>
-        <p>Checking if your fundraising email comes across as "invest in the future" instead of "please save our dying startup"</p>
+        <p>
+          Checking if your fundraising email comes across as "invest in the
+          future" instead of "please save our dying startup"
+        </p>
       </div>
       <div class="use-case-card">
         <div class="channel-tag">Website</div>
-        <p>Making sure your price increase announcement feels "value upgrade" rather than "we're squeezing you dry"</p>
+        <p>
+          Making sure your price increase announcement feels "value upgrade"
+          rather than "we're squeezing you dry"
+        </p>
       </div>
       <!-- Duplicate cards for infinite scroll -->
       <div class="use-case-card">
         <div class="channel-tag">Email</div>
-        <p>Testing whether your "following up" message sounds persistent instead of stalker-ish</p>
+        <p>
+          Testing whether your "following up" message sounds persistent instead
+          of stalker-ish
+        </p>
       </div>
       <div class="use-case-card">
         <div class="channel-tag">Google Slides</div>
-        <p>Making sure that joke in your presentation lands as hilarious instead of getting you called into HR</p>
+        <p>
+          Making sure that joke in your presentation lands as hilarious instead
+          of getting you called into HR
+        </p>
       </div>
       <div class="use-case-card">
         <div class="channel-tag">Website</div>
-        <p>Checking if your website copy actually makes sense or just sounds like you let ChatGPT loose</p>
+        <p>
+          Checking if your website copy actually makes sense or just sounds like
+          you let ChatGPT loose
+        </p>
       </div>
       <div class="use-case-card">
         <div class="channel-tag">Slack</div>
-        <p>Making sure your feedback to Dave sounds constructive instead of soul-crushing</p>
+        <p>
+          Making sure your feedback to Dave sounds constructive instead of
+          soul-crushing
+        </p>
       </div>
       <div class="use-case-card">
         <div class="channel-tag">Google Docs</div>
-        <p>Seeing if your proposal comes across as "shut up and take my money" instead of "this smells like a scam"</p>
+        <p>
+          Seeing if your proposal comes across as "shut up and take my money"
+          instead of "this smells like a scam"
+        </p>
       </div>
       <div class="use-case-card">
         <div class="channel-tag">LinkedIn</div>
-        <p>Testing whether your LinkedIn post sounds witty or just makes everyone cringe</p>
+        <p>
+          Testing whether your LinkedIn post sounds witty or just makes everyone
+          cringe
+        </p>
       </div>
       <div class="use-case-card">
         <div class="channel-tag">Email</div>
-        <p>Checking if your fundraising email comes across as "invest in the future" instead of "please save our dying startup"</p>
+        <p>
+          Checking if your fundraising email comes across as "invest in the
+          future" instead of "please save our dying startup"
+        </p>
       </div>
       <div class="use-case-card">
         <div class="channel-tag">Website</div>
-        <p>Making sure your price increase announcement feels "value upgrade" rather than "we're squeezing you dry"</p>
+        <p>
+          Making sure your price increase announcement feels "value upgrade"
+          rather than "we're squeezing you dry"
+        </p>
       </div>
     </div>
-   </section>
+  </section>
 
   <!-- Empathy Section -->
   <section class="empathy-section">
     <div class="container">
       <div class="empathy-content">
         <h2>The <span class="power-emphasis">power</span> of perspective</h2>
-        
+
         <div class="main-insight">
-          <p class="lead-text">Most communication failures happen in the same place: the gap between what you intended and how it was perceived. The best communicators don't ask "what do I want to say?" - they ask "how will they hear it?" TestFeed helps you get out of your own head and into theirs.</p>
+          <p class="lead-text">
+            Most communication failures happen in the same place: the gap
+            between what you intended and how it was perceived. The best
+            communicators don't ask "what do I want to say?" - they ask "how
+            will they hear it?" TestFeed helps you get out of your own head and
+            into theirs.
+          </p>
         </div>
-        
+
         <IntentionPerceptionViz />
       </div>
     </div>
-    
+
     <!-- Gen Z Creator Cursor -->
     <div class="empathy-cursor" id="empathy-cursor">
-      <svg width="26" height="30" fill="none" xmlns="http://www.w3.org/2000/svg"><g filter="url(#a)"><path d="m8.5 19.5-2-12 10 6L11 15l-2.5 4.5Z" fill="#F59E0B" rx="2"></path><path d="m6.757 7.071-.928-.557.178 1.068 2 12 .235 1.412.695-1.251 2.398-4.316 5.297-1.445 1.13-.308-1.005-.603-10-6Z" stroke="#fff" stroke-width="1.5"></path></g><defs><filter id="a" x=".158" y=".528" width="23.866" height="26.959" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix><feOffset dy="2"></feOffset><feGaussianBlur stdDeviation="3"></feGaussianBlur><feComposite in2="hardAlpha" operator="out"></feComposite><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"></feColorMatrix><feBlend in2="BackgroundImageFix" result="effect1_dropShadow_1_4"></feBlend><feBlend in="SourceGraphic" in2="effect1_dropShadow_1_4" result="shape"></feBlend></filter></defs></svg>
+      <svg width="26" height="30" fill="none" xmlns="http://www.w3.org/2000/svg"
+        ><g filter="url(#a)"
+          ><path d="m8.5 19.5-2-12 10 6L11 15l-2.5 4.5Z" fill="#F59E0B" rx="2"
+          ></path><path
+            d="m6.757 7.071-.928-.557.178 1.068 2 12 .235 1.412.695-1.251 2.398-4.316 5.297-1.445 1.13-.308-1.005-.603-10-6Z"
+            stroke="#fff"
+            stroke-width="1.5"></path></g
+        ><defs
+          ><filter
+            id="a"
+            x=".158"
+            y=".528"
+            width="23.866"
+            height="26.959"
+            filterUnits="userSpaceOnUse"
+            color-interpolation-filters="sRGB"
+            ><feFlood flood-opacity="0" result="BackgroundImageFix"
+            ></feFlood><feColorMatrix
+              in="SourceAlpha"
+              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+              result="hardAlpha"></feColorMatrix><feOffset dy="2"
+            ></feOffset><feGaussianBlur stdDeviation="3"
+            ></feGaussianBlur><feComposite in2="hardAlpha" operator="out"
+            ></feComposite><feColorMatrix
+              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"
+            ></feColorMatrix><feBlend
+              in2="BackgroundImageFix"
+              result="effect1_dropShadow_1_4"></feBlend><feBlend
+              in="SourceGraphic"
+              in2="effect1_dropShadow_1_4"
+              result="shape"></feBlend></filter
+          ></defs
+        ></svg
+      >
       <span class="cursor-name">Gen Z Creator</span>
       <div class="cursor-comment" id="empathy-comment"></div>
     </div>
@@ -270,46 +523,91 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
       <div class="faq-container">
         <div class="faq-item">
           <button class="faq-question" type="button">
-            <span class="question-text">How is this different from just using ChatGPT or Claude?</span>
+            <span class="question-text"
+              >How is this different from just using ChatGPT or Claude?</span
+            >
           </button>
           <div class="faq-answer">
-            <p>Those tools help you write better, but they don't help you understand your audience better. They're stuck in your perspective, not your audience's perspective. TestFeed shows you exactly how your specific audience will react to your message, not just how to improve your writing.</p>
+            <p>
+              Those tools help you write better, but they don't help you
+              understand your audience better. They're stuck in your
+              perspective, not your audience's perspective. TestFeed shows you
+              exactly how your specific audience will react to your message, not
+              just how to improve your writing.
+            </p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" type="button">
-            <span class="question-text">How do I know the virtual audiences are actually accurate?</span>
+            <span class="question-text"
+              >How do I know the virtual audiences are actually accurate?</span
+            >
           </button>
           <div class="faq-answer">
-            <p>We create psychology-based profiles from your inputs about your audience. You can see exactly how your virtual audience thinks and sees the world, and you can make suggestions and updates to improve their profile over time. Plus, you can add real reactions from your actual audience to help your virtual audience match how your real audience speaks and responds. While no virtual audience can perfectly replicate the human mind, our alpha users find this gives them useful directional guidance that helps them communicate better and avoid mistakes they would have made otherwise.</p>
+            <p>
+              We create psychology-based profiles from your inputs about your
+              audience. You can see exactly how your virtual audience thinks and
+              sees the world, and you can make suggestions and updates to
+              improve their profile over time. Plus, you can add real reactions
+              from your actual audience to help your virtual audience match how
+              your real audience speaks and responds. While no virtual audience
+              can perfectly replicate the human mind, our alpha users find this
+              gives them useful directional guidance that helps them communicate
+              better and avoid mistakes they would have made otherwise.
+            </p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" type="button">
-            <span class="question-text">Is this just for marketers and salespeople?</span>
+            <span class="question-text"
+              >Is this just for marketers and salespeople?</span
+            >
           </button>
           <div class="faq-answer">
-            <p>Not at all. Anyone who sends important messages can use TestFeed. We've had founders test investor emails, employees test messages to their boss, and people test replies to difficult customers. If the message matters to you, TestFeed can help.</p>
+            <p>
+              Not at all. Anyone who sends important messages can use TestFeed.
+              We've had founders test investor emails, employees test messages
+              to their boss, and people test replies to difficult customers. If
+              the message matters to you, TestFeed can help.
+            </p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" type="button">
-            <span class="question-text">What sort of audiences can I create?</span>
+            <span class="question-text"
+              >What sort of audiences can I create?</span
+            >
           </button>
           <div class="faq-answer">
-            <p>You can create any audience you need to communicate with. Go specific with individual people like "Difficult client who's always pushing back." Go broad with groups like "US based Gen Z gamers." Create professional audiences like "CTOs at fintech startups" or "Marketing managers at agencies." Basically, if you need to communicate with them, you can create a virtual version of them. The more specific you get with your audience description, the more targeted and useful the reactions will be.</p>
+            <p>
+              You can create any audience you need to communicate with. Go
+              specific with individual people like "Difficult client who's
+              always pushing back." Go broad with groups like "US based Gen Z
+              gamers." Create professional audiences like "CTOs at fintech
+              startups" or "Marketing managers at agencies." Basically, if you
+              need to communicate with them, you can create a virtual version of
+              them. The more specific you get with your audience description,
+              the more targeted and useful the reactions will be.
+            </p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" type="button">
-            <span class="question-text">I already understand my audience pretty well...</span>
+            <span class="question-text"
+              >I already understand my audience pretty well...</span
+            >
           </button>
           <div class="faq-answer">
-            <p>You might understand what they care about, but do you understand how you sound to them? There's a big difference between knowing your audience and knowing how your message lands with your audience. That's the gap TestFeed fills.</p>
+            <p>
+              You might understand what they care about, but do you understand
+              how you sound to them? There's a big difference between knowing
+              your audience and knowing how your message lands with your
+              audience. That's the gap TestFeed fills.
+            </p>
           </div>
         </div>
 
@@ -318,16 +616,33 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
             <span class="question-text">How can I use TestFeed?</span>
           </button>
           <div class="faq-answer">
-            <p>TestFeed works on any content you're about to share. Test sales emails before sending to prospects, check your LinkedIn posts before publishing, vibe-check your replies to difficult customers, test website copy before it goes live, validate product ideas with your target users, check your Intercom responses before hitting send, test your proposals before presenting them. Basically, if you're about to communicate something important and you want to know how it'll land, TestFeed can help.</p>
+            <p>
+              TestFeed works on any content you're about to share. Test sales
+              emails before sending to prospects, check your LinkedIn posts
+              before publishing, vibe-check your replies to difficult customers,
+              test website copy before it goes live, validate product ideas with
+              your target users, check your Intercom responses before hitting
+              send, test your proposals before presenting them. Basically, if
+              you're about to communicate something important and you want to
+              know how it'll land, TestFeed can help.
+            </p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" type="button">
-            <span class="question-text">When will this actually be available?</span>
+            <span class="question-text"
+              >When will this actually be available?</span
+            >
           </button>
           <div class="faq-answer">
-            <p>We're in alpha testing right now. We launched v1 back in May, but we're rolling out v2 with a completely new approach - Chrome extension first so you can test content anywhere on the internet, not just in our web app. Our waitlist gets first access to the new version.</p>
+            <p>
+              We're in alpha testing right now. We launched v1 back in May, but
+              we're rolling out v2 with a completely new approach - Chrome
+              extension first so you can test content anywhere on the internet,
+              not just in our web app. Our waitlist gets first access to the new
+              version.
+            </p>
           </div>
         </div>
       </div>
@@ -335,137 +650,151 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
   </section>
 
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "How is this different from just using ChatGPT or Claude?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Those tools help you write better, but they don't help you understand your audience better. They're stuck in your perspective, not your audience's perspective. TestFeed shows you exactly how your specific audience will react to your message, not just how to improve your writing."
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How is this different from just using ChatGPT or Claude?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Those tools help you write better, but they don't help you understand your audience better. They're stuck in your perspective, not your audience's perspective. TestFeed shows you exactly how your specific audience will react to your message, not just how to improve your writing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I know the virtual audiences are actually accurate?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We create psychology-based profiles from your inputs about your audience. You can see exactly how your virtual audience thinks and sees the world, and you can make suggestions and updates to improve their profile over time. Plus, you can add real reactions from your actual audience to help your virtual audience match how your real audience speaks and responds. While no virtual audience can perfectly replicate the human mind, our alpha users find this gives them useful directional guidance that helps them communicate better and avoid mistakes they would have made otherwise."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is this just for marketers and salespeople?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not at all. Anyone who sends important messages can use TestFeed. We've had founders test investor emails, employees test messages to their boss, and people test replies to difficult customers. If the message matters to you, TestFeed can help."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What sort of audiences can I create?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can create any audience you need to communicate with. Go specific with individual people like 'Difficult client who's always pushing back.' Go broad with groups like 'US based Gen Z gamers.' Create professional audiences like 'CTOs at fintech startups' or 'Marketing managers at agencies.' Basically, if you need to communicate with them, you can create a virtual version of them. The more specific you get with your audience description, the more targeted and useful the reactions will be."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "I already understand my audience pretty well...",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You might understand what they care about, but do you understand how you sound to them? There's a big difference between knowing your audience and knowing how your message lands with your audience. That's the gap TestFeed fills."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can I use TestFeed?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "TestFeed works on any content you're about to share. Test sales emails before sending to prospects, check your LinkedIn posts before publishing, vibe-check your replies to difficult customers, test website copy before it goes live, validate product ideas with your target users, check your Intercom responses before hitting send, test your proposals before presenting them. Basically, if you're about to communicate something important and you want to know how it'll land, TestFeed can help."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When will this actually be available?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We're in alpha testing right now. We launched v1 back in May, but we're rolling out v2 with a completely new approach - Chrome extension first so you can test content anywhere on the internet, not just in our web app. Our waitlist gets first access to the new version."
+          }
         }
-      },
-      {
-        "@type": "Question",
-        "name": "How do I know the virtual audiences are actually accurate?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "We create psychology-based profiles from your inputs about your audience. You can see exactly how your virtual audience thinks and sees the world, and you can make suggestions and updates to improve their profile over time. Plus, you can add real reactions from your actual audience to help your virtual audience match how your real audience speaks and responds. While no virtual audience can perfectly replicate the human mind, our alpha users find this gives them useful directional guidance that helps them communicate better and avoid mistakes they would have made otherwise."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Is this just for marketers and salespeople?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Not at all. Anyone who sends important messages can use TestFeed. We've had founders test investor emails, employees test messages to their boss, and people test replies to difficult customers. If the message matters to you, TestFeed can help."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What sort of audiences can I create?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "You can create any audience you need to communicate with. Go specific with individual people like 'Difficult client who's always pushing back.' Go broad with groups like 'US based Gen Z gamers.' Create professional audiences like 'CTOs at fintech startups' or 'Marketing managers at agencies.' Basically, if you need to communicate with them, you can create a virtual version of them. The more specific you get with your audience description, the more targeted and useful the reactions will be."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "I already understand my audience pretty well...",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "You might understand what they care about, but do you understand how you sound to them? There's a big difference between knowing your audience and knowing how your message lands with your audience. That's the gap TestFeed fills."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How can I use TestFeed?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "TestFeed works on any content you're about to share. Test sales emails before sending to prospects, check your LinkedIn posts before publishing, vibe-check your replies to difficult customers, test website copy before it goes live, validate product ideas with your target users, check your Intercom responses before hitting send, test your proposals before presenting them. Basically, if you're about to communicate something important and you want to know how it'll land, TestFeed can help."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "When will this actually be available?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "We're in alpha testing right now. We launched v1 back in May, but we're rolling out v2 with a completely new approach - Chrome extension first so you can test content anywhere on the internet, not just in our web app. Our waitlist gets first access to the new version."
-        }
-      }
-    ]
-  }
+      ]
+    }
   </script>
 
   <FinalCTASection />
 </BaseLayout>
 
 <style>
-/* Hero Section */
-.hero {
+  /* Hero Section */
+  .hero {
     padding: var(--spacing-xxl) 0;
     position: relative;
     overflow: hidden;
-}
+  }
 
-.hero::before {
-    content: '';
+  .hero::before {
+    content: "";
     position: absolute;
     top: -50%;
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+    background: radial-gradient(
+      circle at center,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(0, 0, 0, 0) 70%
+    );
     z-index: -1;
     animation: pulse-bg 15s infinite;
-}
+  }
 
-@keyframes pulse-bg {
-    0% { opacity: 0.5; }
-    50% { opacity: 1; }
-    100% { opacity: 0.5; }
-}
+  @keyframes pulse-bg {
+    0% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.5;
+    }
+  }
 
-.hero-content {
+  .hero-content {
     text-align: center;
     max-width: 800px;
     margin: 0 auto;
-}
+  }
 
-.hero h1 {
+  .hero h1 {
     font-size: 3.5rem;
     font-weight: 800;
     line-height: 1.1;
     margin-bottom: var(--spacing-lg);
     color: var(--color-text);
-}
+  }
 
-.hero-description {
+  .hero-description {
     font-size: 1.2rem;
     margin-bottom: var(--spacing-lg);
     color: var(--color-text-light);
     line-height: 1.6;
-}
+  }
 
-.cta-buttons {
+  .cta-buttons {
     display: flex;
     justify-content: center;
     gap: var(--spacing-md);
     margin-bottom: var(--spacing-md);
-}
+  }
 
-.rotating-text {
+  .rotating-text {
     color: var(--color-text);
     position: relative;
     display: inline-block;
     min-width: 140px;
     text-align: left;
-}
+  }
 
-.react-emphasis {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%);
+  .react-emphasis {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0.04) 100%
+    );
     padding: 2px 12px;
     border-radius: 6px;
     border: 1px solid rgba(255, 255, 255, 0.15);
@@ -475,23 +804,25 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
     display: inline-block;
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-}
+  }
 
-.before-fade {
+  .before-fade {
     color: var(--color-text-light);
     opacity: 0.6;
     font-weight: 800;
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3), 0 0 16px rgba(255, 255, 255, 0.2);
+    text-shadow:
+      0 0 8px rgba(255, 255, 255, 0.3),
+      0 0 16px rgba(255, 255, 255, 0.2);
     filter: blur(0.3px);
     position: relative;
     display: inline-block;
     letter-spacing: 0.5px;
-}
+  }
 
-/* Floating Cursors */
-.cursor-name {
+  /* Floating Cursors */
+  .cursor-name {
     padding: 2px 6px;
-    color: #FFF;
+    color: #fff;
     font-size: 11px;
     display: inline-block;
     position: absolute;
@@ -500,45 +831,47 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
     border-radius: 4px;
     font-weight: 500;
     white-space: nowrap;
-}
+  }
 
-.floating-cursor, .floating-cursor-2, .floating-cursor-3 {
+  .floating-cursor,
+  .floating-cursor-2,
+  .floating-cursor-3 {
     position: absolute;
     z-index: 10;
     pointer-events: none;
-}
+  }
 
-.floating-cursor {
+  .floating-cursor {
     right: 20%;
     top: 40%;
     animation: 28s hovering-1 infinite ease-in-out;
-}
+  }
 
-.floating-cursor-2 {
+  .floating-cursor-2 {
     left: 15%;
     top: 55%;
     animation: 33s hovering-2 infinite ease-in-out;
-}
+  }
 
-.floating-cursor-3 {
+  .floating-cursor-3 {
     right: 40%;
     top: 65%;
     animation: 41s hovering-3 infinite ease-in-out;
-}
+  }
 
-.floating-cursor .cursor-name {
-    background-color: #0080FE;
-}
+  .floating-cursor .cursor-name {
+    background-color: #0080fe;
+  }
 
-.floating-cursor-2 .cursor-name {
-    background-color: #8B5CF6;
-}
+  .floating-cursor-2 .cursor-name {
+    background-color: #8b5cf6;
+  }
 
-.floating-cursor-3 .cursor-name {
-    background-color: #F59E0B;
-}
+  .floating-cursor-3 .cursor-name {
+    background-color: #f59e0b;
+  }
 
-.cursor-comment {
+  .cursor-comment {
     position: absolute;
     top: -45px;
     left: 25px;
@@ -550,19 +883,21 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
     white-space: nowrap;
     opacity: 0;
     transform: translateY(10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
     pointer-events: none;
     border: 1px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-}
+  }
 
-.cursor-comment.show {
+  .cursor-comment.show {
     opacity: 1;
     transform: translateY(0);
-}
+  }
 
-.cursor-comment::after {
-    content: '';
+  .cursor-comment::after {
+    content: "";
     position: absolute;
     bottom: -6px;
     left: 15px;
@@ -571,101 +906,187 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
     border-top: 6px solid rgba(0, 0, 0, 0.9);
-}
+  }
 
-@keyframes hovering-1 {
-    0% { transform: translate3d(0px, 0px, 0px) rotate(0deg); }
-    8% { transform: translate3d(-45px, 25px, 0px) rotate(2deg); }
-    16% { transform: translate3d(70px, -30px, 0px) rotate(-1deg); }
-    24% { transform: translate3d(-25px, 45px, 0px) rotate(3deg); }
-    32% { transform: translate3d(90px, 10px, 0px) rotate(0deg); }
-    40% { transform: translate3d(-70px, -35px, 0px) rotate(-2deg); }
-    48% { transform: translate3d(30px, 60px, 0px) rotate(1deg); }
-    56% { transform: translate3d(-50px, 20px, 0px) rotate(-1deg); }
-    64% { transform: translate3d(80px, -45px, 0px) rotate(2deg); }
-    72% { transform: translate3d(-35px, 30px, 0px) rotate(0deg); }
-    80% { transform: translate3d(55px, -15px, 0px) rotate(-3deg); }
-    88% { transform: translate3d(-20px, 50px, 0px) rotate(1deg); }
-    96% { transform: translate3d(15px, -25px, 0px) rotate(0deg); }
-    100% { transform: translate3d(0px, 0px, 0px) rotate(0deg); }
-}
-
-@keyframes hovering-2 {
-    0% { transform: translate3d(0px, 0px, 0px) rotate(0deg); }
-    12% { transform: translate3d(85px, -40px, 0px) rotate(-2deg); }
-    18% { transform: translate3d(-60px, 35px, 0px) rotate(1deg); }
-    28% { transform: translate3d(45px, 55px, 0px) rotate(3deg); }
-    36% { transform: translate3d(-80px, -20px, 0px) rotate(-1deg); }
-    44% { transform: translate3d(25px, 70px, 0px) rotate(2deg); }
-    52% { transform: translate3d(-45px, -50px, 0px) rotate(0deg); }
-    60% { transform: translate3d(95px, 15px, 0px) rotate(-3deg); }
-    68% { transform: translate3d(-30px, 40px, 0px) rotate(1deg); }
-    76% { transform: translate3d(65px, -25px, 0px) rotate(2deg); }
-    84% { transform: translate3d(-55px, 60px, 0px) rotate(-1deg); }
-    92% { transform: translate3d(40px, -35px, 0px) rotate(0deg); }
-    100% { transform: translate3d(0px, 0px, 0px) rotate(0deg); }
-}
-
-@keyframes hovering-3 {
-    0% { transform: translate3d(0px, 0px, 0px) rotate(0deg); }
-    9% { transform: translate3d(-75px, 45px, 0px) rotate(1deg); }
-    17% { transform: translate3d(50px, -55px, 0px) rotate(-2deg); }
-    26% { transform: translate3d(-40px, 30px, 0px) rotate(3deg); }
-    34% { transform: translate3d(100px, 20px, 0px) rotate(0deg); }
-    43% { transform: translate3d(-85px, -30px, 0px) rotate(-1deg); }
-    51% { transform: translate3d(35px, 65px, 0px) rotate(2deg); }
-    60% { transform: translate3d(-55px, -40px, 0px) rotate(-3deg); }
-    68% { transform: translate3d(80px, 50px, 0px) rotate(1deg); }
-    77% { transform: translate3d(-25px, 10px, 0px) rotate(0deg); }
-    85% { transform: translate3d(60px, -30px, 0px) rotate(-1deg); }
-    93% { transform: translate3d(-70px, 35px, 0px) rotate(2deg); }
-    100% { transform: translate3d(0px, 0px, 0px) rotate(0deg); }
-}
-
-@media (max-width: 768px) {
-    .floating-cursor, .floating-cursor-2, .floating-cursor-3 {
-        display: none;
+  @keyframes hovering-1 {
+    0% {
+      transform: translate3d(0px, 0px, 0px) rotate(0deg);
     }
-    
+    8% {
+      transform: translate3d(-45px, 25px, 0px) rotate(2deg);
+    }
+    16% {
+      transform: translate3d(70px, -30px, 0px) rotate(-1deg);
+    }
+    24% {
+      transform: translate3d(-25px, 45px, 0px) rotate(3deg);
+    }
+    32% {
+      transform: translate3d(90px, 10px, 0px) rotate(0deg);
+    }
+    40% {
+      transform: translate3d(-70px, -35px, 0px) rotate(-2deg);
+    }
+    48% {
+      transform: translate3d(30px, 60px, 0px) rotate(1deg);
+    }
+    56% {
+      transform: translate3d(-50px, 20px, 0px) rotate(-1deg);
+    }
+    64% {
+      transform: translate3d(80px, -45px, 0px) rotate(2deg);
+    }
+    72% {
+      transform: translate3d(-35px, 30px, 0px) rotate(0deg);
+    }
+    80% {
+      transform: translate3d(55px, -15px, 0px) rotate(-3deg);
+    }
+    88% {
+      transform: translate3d(-20px, 50px, 0px) rotate(1deg);
+    }
+    96% {
+      transform: translate3d(15px, -25px, 0px) rotate(0deg);
+    }
+    100% {
+      transform: translate3d(0px, 0px, 0px) rotate(0deg);
+    }
+  }
+
+  @keyframes hovering-2 {
+    0% {
+      transform: translate3d(0px, 0px, 0px) rotate(0deg);
+    }
+    12% {
+      transform: translate3d(85px, -40px, 0px) rotate(-2deg);
+    }
+    18% {
+      transform: translate3d(-60px, 35px, 0px) rotate(1deg);
+    }
+    28% {
+      transform: translate3d(45px, 55px, 0px) rotate(3deg);
+    }
+    36% {
+      transform: translate3d(-80px, -20px, 0px) rotate(-1deg);
+    }
+    44% {
+      transform: translate3d(25px, 70px, 0px) rotate(2deg);
+    }
+    52% {
+      transform: translate3d(-45px, -50px, 0px) rotate(0deg);
+    }
+    60% {
+      transform: translate3d(95px, 15px, 0px) rotate(-3deg);
+    }
+    68% {
+      transform: translate3d(-30px, 40px, 0px) rotate(1deg);
+    }
+    76% {
+      transform: translate3d(65px, -25px, 0px) rotate(2deg);
+    }
+    84% {
+      transform: translate3d(-55px, 60px, 0px) rotate(-1deg);
+    }
+    92% {
+      transform: translate3d(40px, -35px, 0px) rotate(0deg);
+    }
+    100% {
+      transform: translate3d(0px, 0px, 0px) rotate(0deg);
+    }
+  }
+
+  @keyframes hovering-3 {
+    0% {
+      transform: translate3d(0px, 0px, 0px) rotate(0deg);
+    }
+    9% {
+      transform: translate3d(-75px, 45px, 0px) rotate(1deg);
+    }
+    17% {
+      transform: translate3d(50px, -55px, 0px) rotate(-2deg);
+    }
+    26% {
+      transform: translate3d(-40px, 30px, 0px) rotate(3deg);
+    }
+    34% {
+      transform: translate3d(100px, 20px, 0px) rotate(0deg);
+    }
+    43% {
+      transform: translate3d(-85px, -30px, 0px) rotate(-1deg);
+    }
+    51% {
+      transform: translate3d(35px, 65px, 0px) rotate(2deg);
+    }
+    60% {
+      transform: translate3d(-55px, -40px, 0px) rotate(-3deg);
+    }
+    68% {
+      transform: translate3d(80px, 50px, 0px) rotate(1deg);
+    }
+    77% {
+      transform: translate3d(-25px, 10px, 0px) rotate(0deg);
+    }
+    85% {
+      transform: translate3d(60px, -30px, 0px) rotate(-1deg);
+    }
+    93% {
+      transform: translate3d(-70px, 35px, 0px) rotate(2deg);
+    }
+    100% {
+      transform: translate3d(0px, 0px, 0px) rotate(0deg);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .floating-cursor,
+    .floating-cursor-2,
+    .floating-cursor-3 {
+      display: none;
+    }
+
     .cursor-comment {
-        display: none !important;
+      display: none !important;
     }
-}
+  }
 
-/* Problem Section */
-.problem {
+  /* Problem Section */
+  .problem {
     background-color: #151515;
     padding: var(--spacing-xxl) 0;
-}
+  }
 
-.problem-grid {
+  .problem-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: var(--spacing-lg);
-}
+  }
 
-.problem-card {
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.06) 0%, 
-        rgba(255, 255, 255, 0.02) 100%);
+  .problem-card {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.06) 0%,
+      rgba(255, 255, 255, 0.02) 100%
+    );
     padding: var(--spacing-lg);
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.08);
     transition: all 0.3s ease;
     height: 100%;
     position: relative;
-}
+  }
 
-.problem-card:hover {
+  .problem-card:hover {
     transform: translateY(-2px);
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.08) 0%, 
-        rgba(255, 255, 255, 0.03) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.03) 100%
+    );
     border: 1px solid rgba(255, 255, 255, 0.15);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-}
+  }
 
-.problem-icon {
+  .problem-icon {
     margin-bottom: var(--spacing-lg);
     display: flex;
     align-items: center;
@@ -677,77 +1098,81 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
     border: 1px solid rgba(255, 255, 255, 0.12);
     color: var(--color-white);
     transition: all 0.3s ease;
-}
+  }
 
-.problem-card:hover .problem-icon {
+  .problem-card:hover .problem-icon {
     background: rgba(255, 255, 255, 0.12);
     border: 1px solid rgba(255, 255, 255, 0.2);
-}
+  }
 
-.problem-icon :global(svg) {
+  .problem-icon :global(svg) {
     width: 24px;
     height: 24px;
     transition: transform 0.3s ease;
-}
+  }
 
-.problem-card:hover .problem-icon :global(svg) {
+  .problem-card:hover .problem-icon :global(svg) {
     transform: scale(1.05);
-}
+  }
 
-.problem-card h3 {
+  .problem-card h3 {
     color: var(--color-white);
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: var(--spacing-md);
     line-height: 1.3;
     transition: color 0.3s ease;
-}
+  }
 
-.problem-card p {
+  .problem-card p {
     color: var(--color-text-light);
     line-height: 1.6;
     font-size: 0.95rem;
     transition: color 0.3s ease;
-}
+  }
 
-.problem-card:hover p {
+  .problem-card:hover p {
     color: rgba(255, 255, 255, 0.8);
-}
+  }
 
-/* How it works Section */
-.how-it-works {
+  /* How it works Section */
+  .how-it-works {
     background-color: var(--color-background);
     padding: var(--spacing-xxl) 0;
-}
+  }
 
-.steps-vertical {
+  .steps-vertical {
     max-width: 800px;
     margin: 0 auto;
     padding: var(--spacing-xl) 0;
-}
+  }
 
-.step-item {
+  .step-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: var(--spacing-xxl);
     position: relative;
-}
+  }
 
-.step-item:last-child {
+  .step-item:last-child {
     margin-bottom: 0;
-}
+  }
 
-.step-visual {
+  .step-visual {
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
     z-index: 2;
-}
+  }
 
-.step-number {
-    background: linear-gradient(135deg, var(--color-highlight), rgba(255, 255, 255, 0.8));
+  .step-number {
+    background: linear-gradient(
+      135deg,
+      var(--color-highlight),
+      rgba(255, 255, 255, 0.8)
+    );
     color: var(--color-background);
     font-weight: 800;
     font-size: 1.5rem;
@@ -760,18 +1185,20 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
     box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
     z-index: 2;
     position: relative;
-}
+  }
 
-.step-connector {
+  .step-connector {
     width: 2px;
     height: 80px;
-    background: linear-gradient(to bottom, 
-        rgba(255, 255, 255, 1) 0%, 
-        rgba(255, 255, 255, 0) 100%);
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
     margin-top: var(--spacing-md);
-}
+  }
 
-.step-content {
+  .step-content {
     width: 100%;
     max-width: 600px;
     background-color: var(--color-card-bg);
@@ -782,56 +1209,58 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
     transition: var(--transition);
     position: relative;
     margin-top: var(--spacing-md);
-}
+  }
 
-.step-content:hover {
+  .step-content:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
     border: 1px solid rgba(255, 255, 255, 0.2);
-}
+  }
 
-.step-content h3 {
+  .step-content h3 {
     color: var(--color-white);
     font-size: 1.5rem;
     margin-bottom: var(--spacing-md);
     font-weight: 700;
-}
+  }
 
-.step-content p {
+  .step-content p {
     color: var(--color-text-light);
     line-height: 1.6;
     margin-bottom: var(--spacing-md);
-}
+  }
 
-.step-demo {
+  .step-demo {
     margin-top: var(--spacing-md);
     padding: var(--spacing-md);
     background-color: rgba(255, 255, 255, 0.02);
     border-radius: var(--border-radius);
     border: 1px solid rgba(255, 255, 255, 0.05);
     position: relative;
-}
+  }
 
-.dropdown-mockup {
+  .dropdown-mockup {
     position: relative;
     width: 100%;
-}
+  }
 
-.dropdown-menu {
-    background: linear-gradient(135deg, 
-        rgba(0, 0, 0, 0.95) 0%, 
-        rgba(20, 20, 20, 0.9) 100%);
+  .dropdown-menu {
+    background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(20, 20, 20, 0.9) 100%
+    );
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
     backdrop-filter: blur(20px);
     overflow: hidden;
-    box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.6),
-        0 4px 16px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.6),
+      0 4px 16px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
 
-.dropdown-item {
+  .dropdown-item {
     padding: 16px 20px;
     color: rgba(255, 255, 255, 0.8);
     font-size: 1rem;
@@ -841,68 +1270,70 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     text-align: left;
     position: relative;
-}
+  }
 
-.dropdown-item:last-child {
+  .dropdown-item:last-child {
     border-bottom: none;
-}
+  }
 
-.dropdown-item:first-child {
+  .dropdown-item:first-child {
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
-}
+  }
 
-.dropdown-item:last-child {
+  .dropdown-item:last-child {
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
-}
+  }
 
-.dropdown-item.selected {
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.15) 0%, 
-        rgba(255, 255, 255, 0.08) 100%);
+  .dropdown-item.selected {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(255, 255, 255, 0.08) 100%
+    );
     color: #ffffff;
     font-weight: 600;
-    box-shadow: 
-        inset 0 1px 0 rgba(255, 255, 255, 0.2),
-        0 2px 8px rgba(0, 0, 0, 0.3);
-}
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      0 2px 8px rgba(0, 0, 0, 0.3);
+  }
 
-.dropdown-item.animate-selection {
+  .dropdown-item.animate-selection {
     animation: selectItem 0.5s ease-out forwards;
-}
+  }
 
-@keyframes selectItem {
+  @keyframes selectItem {
     0% {
-        background: transparent;
-        color: rgba(255, 255, 255, 0.8);
-        transform: translateX(0);
+      background: transparent;
+      color: rgba(255, 255, 255, 0.8);
+      transform: translateX(0);
     }
     50% {
-        transform: translateX(4px);
+      transform: translateX(4px);
     }
     100% {
-        background: linear-gradient(135deg, 
-            rgba(255, 255, 255, 0.15) 0%, 
-            rgba(255, 255, 255, 0.08) 100%);
-        color: #ffffff;
-        transform: translateX(0);
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.15) 0%,
+        rgba(255, 255, 255, 0.08) 100%
+      );
+      color: #ffffff;
+      transform: translateX(0);
     }
-}
+  }
 
-
-
-.static-cursor {
+  .static-cursor {
     position: absolute;
     bottom: 10px;
     right: 80px;
     z-index: 2;
     pointer-events: none;
-}
+  }
 
-.static-cursor-name {
+  .static-cursor-name {
     padding: 2px 6px;
-    color: #FFF;
+    color: #fff;
     font-size: 11px;
     display: inline-block;
     position: absolute;
@@ -911,49 +1342,53 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
     border-radius: 4px;
     font-weight: 500;
     white-space: nowrap;
-    background-color: #0080FE;
-}
+    background-color: #0080fe;
+  }
 
-/* Use Cases Section */
-.use-cases {
+  /* Use Cases Section */
+  .use-cases {
     background: linear-gradient(135deg, #151515 0%, #0f0f0f 100%);
     padding: var(--spacing-xxl) 0;
     position: relative;
     overflow: hidden;
-}
+  }
 
-.use-cases::before {
-    content: '';
+  .use-cases::before {
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.02) 0%, transparent 70%);
+    background: radial-gradient(
+      circle at 50% 50%,
+      rgba(255, 255, 255, 0.02) 0%,
+      transparent 70%
+    );
     pointer-events: none;
-}
+  }
 
-.use-cases-content {
+  .use-cases-content {
     position: relative;
     z-index: 1;
-}
+  }
 
-.use-cases h2 {
+  .use-cases h2 {
     color: var(--color-white);
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: var(--spacing-xl);
     text-align: center;
     line-height: 1.2;
-}
+  }
 
-.space-mono {
-    font-family: 'Space Mono', monospace;
+  .space-mono {
+    font-family: "Space Mono", monospace;
     font-weight: 700;
     letter-spacing: 0.5px;
-}
+  }
 
-.use-case-cards {
+  .use-case-cards {
     display: flex;
     gap: var(--spacing-lg);
     overflow-x: auto;
@@ -967,21 +1402,23 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
-}
+  }
 
-.use-case-cards::-webkit-scrollbar {
+  .use-case-cards::-webkit-scrollbar {
     display: none;
-}
+  }
 
-.use-case-cards {
+  .use-case-cards {
     -ms-overflow-style: none;
     scrollbar-width: none;
-}
+  }
 
-.use-case-card {
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.06) 0%, 
-        rgba(255, 255, 255, 0.02) 100%);
+  .use-case-card {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.06) 0%,
+      rgba(255, 255, 255, 0.02) 100%
+    );
     border-radius: 16px;
     border: 1px solid rgba(255, 255, 255, 0.08);
     padding: var(--spacing-lg);
@@ -990,18 +1427,20 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
     position: relative;
     backdrop-filter: blur(20px);
     transition: all 0.3s ease;
-}
+  }
 
-.use-case-card:hover {
+  .use-case-card:hover {
     transform: translateY(-4px);
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.08) 0%, 
-        rgba(255, 255, 255, 0.03) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.03) 100%
+    );
     border: 1px solid rgba(255, 255, 255, 0.15);
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-}
+  }
 
-.channel-tag {
+  .channel-tag {
     position: absolute;
     top: var(--spacing-md);
     right: var(--spacing-md);
@@ -1015,9 +1454,9 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
     letter-spacing: 0.5px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
-}
+  }
 
-.use-case-card p {
+  .use-case-card p {
     color: var(--color-white);
     font-size: 1.5rem;
     line-height: 1.4;
@@ -1025,16 +1464,16 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
     margin: 0;
     padding-top: var(--spacing-lg);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
+  }
 
-.content-text {
+  .content-text {
     color: var(--color-white);
     font-size: 0.875rem;
     margin-bottom: var(--spacing-sm);
     font-style: italic;
-}
+  }
 
-.highlighted-text {
+  .highlighted-text {
     background: var(--color-white);
     color: var(--color-background);
     font-size: 1rem;
@@ -1043,22 +1482,22 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
     display: inline;
-}
+  }
 
-.step2-badge {
+  .step2-badge {
     position: absolute;
     top: -8px;
     right: var(--spacing-md);
     margin: 0;
-}
+  }
 
-.reaction-preview {
+  .reaction-preview {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-sm);
-}
+  }
 
-.reaction {
+  .reaction {
     padding: var(--spacing-md);
     border-radius: 8px;
     background-color: rgba(255, 255, 255, 0.08);
@@ -1067,9 +1506,9 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
     display: flex;
     align-items: flex-start;
     gap: var(--spacing-sm);
-}
+  }
 
-.suggestion-checkbox {
+  .suggestion-checkbox {
     flex-shrink: 0;
     width: 16px;
     height: 16px;
@@ -1081,161 +1520,159 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
     justify-content: center;
     margin-top: 2px;
     transition: all 0.3s ease;
-}
+  }
 
-.suggestion-checkbox :global(svg) {
+  .suggestion-checkbox :global(svg) {
     width: 12px;
     height: 12px;
     color: var(--color-background);
     opacity: 0;
     transform: scale(0);
     transition: all 0.3s ease;
-}
+  }
 
-.suggestion-checkbox.animate {
+  .suggestion-checkbox.animate {
     animation: checkboxFill 1.5s ease-out forwards;
-}
+  }
 
-.suggestion-checkbox.animate :global(svg) {
+  .suggestion-checkbox.animate :global(svg) {
     animation: checkAppear 1.5s ease-out forwards;
-}
+  }
 
-@keyframes checkboxFill {
+  @keyframes checkboxFill {
     0% {
-        background-color: transparent;
-        border-color: rgba(255, 255, 255, 0.3);
+      background-color: transparent;
+      border-color: rgba(255, 255, 255, 0.3);
     }
     60% {
-        background-color: transparent;
-        border-color: rgba(255, 255, 255, 0.3);
+      background-color: transparent;
+      border-color: rgba(255, 255, 255, 0.3);
     }
     70% {
-        background-color: var(--color-white);
-        border-color: var(--color-white);
+      background-color: var(--color-white);
+      border-color: var(--color-white);
     }
     100% {
-        background-color: var(--color-white);
-        border-color: var(--color-white);
+      background-color: var(--color-white);
+      border-color: var(--color-white);
     }
-}
+  }
 
-@keyframes checkAppear {
+  @keyframes checkAppear {
     0% {
-        opacity: 0;
-        transform: scale(0);
+      opacity: 0;
+      transform: scale(0);
     }
     60% {
-        opacity: 0;
-        transform: scale(0);
+      opacity: 0;
+      transform: scale(0);
     }
     70% {
-        opacity: 1;
-        transform: scale(1.2);
+      opacity: 1;
+      transform: scale(1.2);
     }
     100% {
-        opacity: 1;
-        transform: scale(1);
+      opacity: 1;
+      transform: scale(1);
     }
-}
+  }
 
-.suggestion-content {
+  .suggestion-content {
     flex: 1;
-}
+  }
 
-.suggestion-header {
+  .suggestion-header {
     color: var(--color-white);
     font-size: 1rem;
     font-weight: 600;
     margin-bottom: 4px;
     line-height: 1.3;
-}
+  }
 
-.suggestion-insight {
+  .suggestion-insight {
     color: var(--color-text-light);
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.4;
     font-style: italic;
-}
+  }
 
-
-
-@media (max-width: 768px) {
+  @media (max-width: 768px) {
     .hero h1 {
-        font-size: 2.5rem;
+      font-size: 2.5rem;
     }
-    
+
     .hero-description {
-        font-size: 1.1rem;
+      font-size: 1.1rem;
     }
-    
+
     .cta-buttons {
-        flex-direction: column;
-        align-items: center;
+      flex-direction: column;
+      align-items: center;
     }
-    
+
     .steps-vertical {
-        padding: var(--spacing-md) 0;
+      padding: var(--spacing-md) 0;
     }
-    
+
     .step-item {
-        margin-bottom: var(--spacing-xl);
+      margin-bottom: var(--spacing-xl);
     }
-    
+
     .step-content {
-        padding: var(--spacing-md);
+      padding: var(--spacing-md);
     }
-    
+
     .step-content h3 {
-        font-size: 1.25rem;
+      font-size: 1.25rem;
     }
-    
+
     .use-cases h2 {
-        font-size: 2rem;
-        margin-bottom: var(--spacing-lg);
+      font-size: 2rem;
+      margin-bottom: var(--spacing-lg);
     }
-    
+
     .use-case-cards {
-        padding-left: var(--spacing-md);
-        padding-right: var(--spacing-md);
+      padding-left: var(--spacing-md);
+      padding-right: var(--spacing-md);
     }
-    
+
     .use-case-card {
-        min-width: 300px;
-        max-width: 300px;
-        padding: var(--spacing-md);
+      min-width: 300px;
+      max-width: 300px;
+      padding: var(--spacing-md);
     }
-    
+
     .use-case-card p {
-        font-size: 1.25rem;
-        line-height: 1.4;
-        padding-top: var(--spacing-lg);
+      font-size: 1.25rem;
+      line-height: 1.4;
+      padding-top: var(--spacing-lg);
     }
-    
+
     .channel-tag {
-        top: var(--spacing-sm);
-        right: var(--spacing-sm);
-        padding: 3px 8px;
-        font-size: 0.7rem;
+      top: var(--spacing-sm);
+      right: var(--spacing-sm);
+      padding: 3px 8px;
+      font-size: 0.7rem;
     }
-}
+  }
 
-/* FAQ Section */
-.faq {
+  /* FAQ Section */
+  .faq {
     background-color: #151515;
-}
+  }
 
-.faq-container {
+  .faq-container {
     max-width: 800px;
     margin: 0 auto;
-}
+  }
 
-.faq-item {
+  .faq-item {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     margin-bottom: var(--spacing-md);
-}
+  }
 
-.faq-question {
+  .faq-question {
     position: relative;
     padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) 0;
     cursor: pointer;
@@ -1252,63 +1689,69 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
     font-family: var(--font-heading);
     margin-bottom: var(--spacing-sm);
     line-height: 1.2;
-}
+  }
 
-.question-text {
+  .question-text {
     flex: 1;
-}
+  }
 
-.faq-question::after {
-    content: '+';
+  .faq-question::after {
+    content: "+";
     font-size: 1.5rem;
     color: var(--color-primary);
     transition: transform 0.3s ease;
-}
+  }
 
-.faq-item.active .faq-question::after {
-    content: '−';
+  .faq-item.active .faq-question::after {
+    content: "−";
     transform: rotate(0deg);
-}
+  }
 
-.faq-answer {
+  .faq-answer {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease, padding 0.3s ease;
+    transition:
+      max-height 0.3s ease,
+      padding 0.3s ease;
     padding: 0 var(--spacing-md) 0 0;
-}
+  }
 
-.faq-item.active .faq-answer {
+  .faq-item.active .faq-answer {
     max-height: 500px;
     padding: 0 var(--spacing-md) var(--spacing-md) 0;
-}
+  }
 
-/* Empathy Section */
-.empathy-section {
+  /* Empathy Section */
+  .empathy-section {
     background-color: var(--color-background);
     padding: var(--spacing-xxl) 0;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
     overflow: hidden;
-}
+  }
 
-.empathy-content {
+  .empathy-content {
     max-width: 900px;
     margin: 0 auto;
     text-align: center;
-}
+  }
 
-.empathy-content h2 {
+  .empathy-content h2 {
     font-size: 2.5rem;
     margin-bottom: var(--spacing-xl);
     line-height: 1.2;
     color: var(--color-white);
-}
+  }
 
-.power-emphasis {
+  .power-emphasis {
     font-size: 3rem;
     font-weight: 800;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
     padding: 8px 20px;
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -1316,185 +1759,216 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
     position: relative;
     display: inline-block;
     backdrop-filter: blur(15px);
-    box-shadow: 
-        0 8px 32px rgba(255, 255, 255, 0.1),
-        0 0 20px rgba(255, 255, 255, 0.05),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    box-shadow:
+      0 8px 32px rgba(255, 255, 255, 0.1),
+      0 0 20px rgba(255, 255, 255, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-}
+  }
 
-.lead-text {
+  .lead-text {
     font-size: 1.5rem;
     font-weight: 400;
     line-height: 1.6;
     color: var(--color-text-light);
     max-width: 800px;
     margin: 0 auto;
-}
+  }
 
-/* Empathy Cursor */
-.empathy-cursor {
+  /* Empathy Cursor */
+  .empathy-cursor {
     position: absolute;
     right: 25%;
     top: 25%;
     z-index: 10;
     pointer-events: none;
     animation: 35s empathy-hovering infinite ease-in-out;
-}
+  }
 
-.empathy-cursor .cursor-name {
-    background-color: #F59E0B;
-}
+  .empathy-cursor .cursor-name {
+    background-color: #f59e0b;
+  }
 
-@keyframes empathy-hovering {
-    0% { transform: translate3d(0px, 0px, 0px) rotate(0deg); }
-    12% { transform: translate3d(-60px, 15px, 0px) rotate(0.5deg); }
-    25% { transform: translate3d(80px, -20px, 0px) rotate(-0.5deg); }
-    37% { transform: translate3d(-40px, 35px, 0px) rotate(1deg); }
-    50% { transform: translate3d(70px, 25px, 0px) rotate(-0.5deg); }
-    62% { transform: translate3d(-70px, -10px, 0px) rotate(0.5deg); }
-    75% { transform: translate3d(50px, 40px, 0px) rotate(-1deg); }
-    87% { transform: translate3d(-30px, 20px, 0px) rotate(0.5deg); }
-    100% { transform: translate3d(0px, 0px, 0px) rotate(0deg); }
-}
+  @keyframes empathy-hovering {
+    0% {
+      transform: translate3d(0px, 0px, 0px) rotate(0deg);
+    }
+    12% {
+      transform: translate3d(-60px, 15px, 0px) rotate(0.5deg);
+    }
+    25% {
+      transform: translate3d(80px, -20px, 0px) rotate(-0.5deg);
+    }
+    37% {
+      transform: translate3d(-40px, 35px, 0px) rotate(1deg);
+    }
+    50% {
+      transform: translate3d(70px, 25px, 0px) rotate(-0.5deg);
+    }
+    62% {
+      transform: translate3d(-70px, -10px, 0px) rotate(0.5deg);
+    }
+    75% {
+      transform: translate3d(50px, 40px, 0px) rotate(-1deg);
+    }
+    87% {
+      transform: translate3d(-30px, 20px, 0px) rotate(0.5deg);
+    }
+    100% {
+      transform: translate3d(0px, 0px, 0px) rotate(0deg);
+    }
+  }
 
-@media (max-width: 768px) {
+  @media (max-width: 768px) {
     .empathy-cursor {
-        display: none;
+      display: none;
     }
-    
+
     .empathy-section {
-        padding: var(--spacing-xl) 0;
+      padding: var(--spacing-xl) 0;
     }
-    
+
     .empathy-content h2 {
-        font-size: 2rem;
+      font-size: 2rem;
     }
-    
+
     .power-emphasis {
-        font-size: 2.25rem;
-        padding: 6px 16px;
+      font-size: 2.25rem;
+      padding: 6px 16px;
     }
-    
+
     .lead-text {
-        font-size: 1.25rem;
+      font-size: 1.25rem;
     }
-}
+  }
 </style>
 
 <script>
   // Rotating text functionality
-  document.addEventListener('DOMContentLoaded', function() {
-    const rotatingText = document.querySelector('.rotating-text') as HTMLElement;
+  document.addEventListener("DOMContentLoaded", function () {
+    const rotatingText = document.querySelector(
+      ".rotating-text",
+    ) as HTMLElement;
     if (rotatingText) {
-      const words = ['sending', 'posting', 'sharing'];
+      const words = ["sending", "posting", "sharing"];
       let currentIndex = 0;
-      
+
       function rotateText() {
         currentIndex = (currentIndex + 1) % words.length;
         rotatingText.textContent = words[currentIndex];
       }
-      
+
       // Change word every 2 seconds
       setInterval(rotateText, 2000);
     }
-    
+
     // Auto-scroll use case cards with infinite scroll
-    const useCaseCards = document.querySelector('.use-case-cards') as HTMLElement;
+    const useCaseCards = document.querySelector(
+      ".use-case-cards",
+    ) as HTMLElement;
     if (useCaseCards) {
       let currentCardIndex = 0;
       const totalCards = useCaseCards.children.length;
       const originalCards = totalCards / 2; // Half are duplicates
-      
+
       function autoScroll() {
         currentCardIndex++;
-        
+
         // Reset to beginning seamlessly when we reach the duplicate section
         if (currentCardIndex >= originalCards) {
           // Instantly reset to the beginning (no animation)
           useCaseCards.scrollTo({
             left: 0,
-            behavior: 'instant'
+            behavior: "instant",
           });
           currentCardIndex = 1; // Start from the second card to continue smoothly
         }
-        
+
         // Get actual card dimensions from DOM
         const firstCard = useCaseCards.children[0] as HTMLElement;
         if (!firstCard) return;
-        
+
         const cardRect = firstCard.getBoundingClientRect();
         const containerRect = useCaseCards.getBoundingClientRect();
         const cardWidth = cardRect.width;
-        
+
         // Get the computed gap between cards
         const computedStyle = window.getComputedStyle(useCaseCards);
         const gap = parseFloat(computedStyle.gap) || 16; // Default to 16px if gap not found
-        
+
         const cardWithGap = cardWidth + gap;
         const containerWidth = containerRect.width;
-        
+
         // Calculate scroll position to center the card in viewport
         const targetCardPosition = currentCardIndex * cardWithGap;
-        const scrollPosition = targetCardPosition - (containerWidth / 2) + (cardWidth / 2);
-        
+        const scrollPosition =
+          targetCardPosition - containerWidth / 2 + cardWidth / 2;
+
         // Clamp to prevent overflow
         const maxScroll = useCaseCards.scrollWidth - containerWidth;
-        const clampedPosition = Math.max(0, Math.min(scrollPosition, maxScroll));
-        
+        const clampedPosition = Math.max(
+          0,
+          Math.min(scrollPosition, maxScroll),
+        );
+
         useCaseCards.scrollTo({
           left: clampedPosition,
-          behavior: 'smooth'
+          behavior: "smooth",
         });
       }
-      
+
       // Auto-scroll every 4 seconds
       setInterval(autoScroll, 4000);
     }
-    
+
     // FAQ functionality
-    const faqContainer = document.getElementById('faq');
+    const faqContainer = document.getElementById("faq");
     if (faqContainer) {
-      const faqItems = faqContainer.querySelectorAll('.faq-item');
+      const faqItems = faqContainer.querySelectorAll(".faq-item");
       if (faqItems.length > 0) {
-        faqItems.forEach(item => {
-          const question = item.querySelector('.faq-question');
+        faqItems.forEach((item) => {
+          const question = item.querySelector(".faq-question");
           if (!question) return;
 
-          question.setAttribute('aria-expanded', 'false');
+          question.setAttribute("aria-expanded", "false");
 
-          const answer = item.querySelector('.faq-answer');
+          const answer = item.querySelector(".faq-answer");
           if (!answer) return;
-          
+
           // Associate question with answer for screen readers
           const answerId = `faq-answer-${Math.random().toString(36).substring(2, 15)}`;
-          answer.setAttribute('id', answerId);
-          question.setAttribute('aria-controls', answerId);
-          answer.setAttribute('aria-hidden', 'true');
+          answer.setAttribute("id", answerId);
+          question.setAttribute("aria-controls", answerId);
+          answer.setAttribute("aria-hidden", "true");
 
           const clickHandler = () => {
-              const expanded = item.classList.contains('active');
-              question.setAttribute('aria-expanded', String(!expanded));
-              answer.setAttribute('aria-hidden', String(expanded));
-              item.classList.toggle('active');
+            const expanded = item.classList.contains("active");
+            question.setAttribute("aria-expanded", String(!expanded));
+            answer.setAttribute("aria-hidden", String(expanded));
+            item.classList.toggle("active");
 
-              // Close other items (accordion style)
-              faqItems.forEach(otherItem => {
-                if (otherItem !== item && otherItem.classList.contains('active')) {
-                  otherItem.classList.remove('active');
-                  const otherQuestion = otherItem.querySelector('.faq-question');
-                  const otherAnswer = otherItem.querySelector('.faq-answer');
-                  if(otherQuestion) otherQuestion.setAttribute('aria-expanded', 'false');
-                  if(otherAnswer) otherAnswer.setAttribute('aria-hidden', 'true');
-                }
-              });
+            // Close other items (accordion style)
+            faqItems.forEach((otherItem) => {
+              if (
+                otherItem !== item &&
+                otherItem.classList.contains("active")
+              ) {
+                otherItem.classList.remove("active");
+                const otherQuestion = otherItem.querySelector(".faq-question");
+                const otherAnswer = otherItem.querySelector(".faq-answer");
+                if (otherQuestion)
+                  otherQuestion.setAttribute("aria-expanded", "false");
+                if (otherAnswer)
+                  otherAnswer.setAttribute("aria-hidden", "true");
+              }
+            });
           };
 
-          question.addEventListener('click', clickHandler);
+          question.addEventListener("click", clickHandler);
         });
       }
     }
-    
+
     // Floating cursors with random comments
     const startupComments = [
       "Obviously we're building this already",
@@ -1511,9 +1985,9 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
       "This is what we pivoted from",
       "We should just acquihire them",
       "Cute MVP but not enterprise-ready",
-      "Our Series A pitch deck had this"
+      "Our Series A pitch deck had this",
     ];
-    
+
     const gregComments = [
       "I need to update my spreadsheet",
       "This goes in Q3 expenses",
@@ -1529,9 +2003,9 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
       "Are there any hidden fees?",
       "We should table this until next year",
       "I'll add it to the review queue",
-      "Does this integrate with QuickBooks?"
+      "Does this integrate with QuickBooks?",
     ];
-    
+
     const genzComments = [
       "This is actually genius ngl",
       "Virtual audiences hit different",
@@ -1547,103 +2021,121 @@ import IntentionPerceptionViz from '../components/IntentionPerceptionViz.astro';
       "This could change the game",
       "Need this for my brand",
       "Audience insight is chef's kiss",
-      "Why am I not using this yet"
+      "Why am I not using this yet",
     ];
-    
+
     const empathyComments = [
       "Wait what's perspective taking?",
       "So like... I just think about other people?",
       "This sounds exhausting tbh",
       "I don't get it do I pretend to be them?",
-      "My brain hurts reading this"
+      "My brain hurts reading this",
     ];
-    
+
     const founderFollowUpComments = [
       "This sounds too desperate",
       "What's the business impact here?",
       "This guy's got no business sense",
       "I don't want to be followed up on",
     ];
-    
-              function showRandomComment(commentId: string) {
-       const commentElement = document.getElementById(commentId);
-       if (!commentElement) return;
-       
-       let comments;
-       if (commentId === 'comment-1') comments = startupComments;
-       else if (commentId === 'comment-2') comments = gregComments;
-       else if (commentId === 'comment-3') comments = genzComments;
-       else if (commentId === 'greg-step2-comment') comments = founderFollowUpComments;
-       else if (commentId === 'empathy-comment') comments = empathyComments;
-       else return;
-       
-       const randomComment = comments[Math.floor(Math.random() * comments.length)];
-       commentElement.textContent = randomComment;
-       commentElement.classList.add('show');
-       
-       setTimeout(() => {
-         commentElement.classList.remove('show');
-       }, 3000);
-     }
-    
+
+    function showRandomComment(commentId: string) {
+      const commentElement = document.getElementById(commentId);
+      if (!commentElement) return;
+
+      let comments;
+      if (commentId === "comment-1") comments = startupComments;
+      else if (commentId === "comment-2") comments = gregComments;
+      else if (commentId === "comment-3") comments = genzComments;
+      else if (commentId === "greg-step2-comment")
+        comments = founderFollowUpComments;
+      else if (commentId === "empathy-comment") comments = empathyComments;
+      else return;
+
+      const randomComment =
+        comments[Math.floor(Math.random() * comments.length)];
+      commentElement.textContent = randomComment;
+      commentElement.classList.add("show");
+
+      setTimeout(() => {
+        commentElement.classList.remove("show");
+      }, 3000);
+    }
+
     // Show random comments at intervals
-    setInterval(() => showRandomComment('comment-1'), 8000);
-    setInterval(() => showRandomComment('comment-2'), 12000);
-    setInterval(() => showRandomComment('comment-3'), 15000);
-    setInterval(() => showRandomComment('greg-step2-comment'), 5000);
-    setInterval(() => showRandomComment('empathy-comment'), 10000);
-    
+    setInterval(() => showRandomComment("comment-1"), 8000);
+    setInterval(() => showRandomComment("comment-2"), 12000);
+    setInterval(() => showRandomComment("comment-3"), 15000);
+    setInterval(() => showRandomComment("greg-step2-comment"), 5000);
+    setInterval(() => showRandomComment("empathy-comment"), 10000);
+
     // Initial comments after page load
-    setTimeout(() => showRandomComment('comment-1'), 3000);
-    setTimeout(() => showRandomComment('comment-2'), 6000);
-    setTimeout(() => showRandomComment('comment-3'), 9000);
-    setTimeout(() => showRandomComment('greg-step2-comment'), 2000);
-    setTimeout(() => showRandomComment('empathy-comment'), 4000);
-    
+    setTimeout(() => showRandomComment("comment-1"), 3000);
+    setTimeout(() => showRandomComment("comment-2"), 6000);
+    setTimeout(() => showRandomComment("comment-3"), 9000);
+    setTimeout(() => showRandomComment("greg-step2-comment"), 2000);
+    setTimeout(() => showRandomComment("empathy-comment"), 4000);
+
     // Checkbox animation on scroll into view
-    const checkboxElement = document.querySelector('.suggestion-checkbox') as HTMLElement;
+    const checkboxElement = document.querySelector(
+      ".suggestion-checkbox",
+    ) as HTMLElement;
     if (checkboxElement) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting && !entry.target.classList.contains('animate')) {
-            entry.target.classList.add('animate');
-          }
-        });
-      }, {
-        threshold: 0.5 // Trigger when 50% of the element is visible
-      });
-      
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (
+              entry.isIntersecting &&
+              !entry.target.classList.contains("animate")
+            ) {
+              entry.target.classList.add("animate");
+            }
+          });
+        },
+        {
+          threshold: 0.5, // Trigger when 50% of the element is visible
+        },
+      );
+
       observer.observe(checkboxElement);
     }
-    
+
     // Dropdown animation on scroll into view
-    const dropdownElement = document.getElementById('audience-dropdown');
+    const dropdownElement = document.getElementById("audience-dropdown");
     if (dropdownElement) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
-            entry.target.classList.add('animated');
-            
-            // Animate the selection after a short delay
-            setTimeout(() => {
-              const startupItem = document.getElementById('startup-founders-item');
-              
-              if (startupItem) {
-                // Add selection animation to the item
-                startupItem.classList.add('animate-selection');
-                
-                // After animation completes, add the final selected state
-                setTimeout(() => {
-                  startupItem.classList.add('selected');
-                }, 500);
-              }
-            }, 500);
-          }
-        });
-      }, {
-        threshold: 0.4 // Trigger when 40% of the element is visible
-      });
-      
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (
+              entry.isIntersecting &&
+              !entry.target.classList.contains("animated")
+            ) {
+              entry.target.classList.add("animated");
+
+              // Animate the selection after a short delay
+              setTimeout(() => {
+                const startupItem = document.getElementById(
+                  "startup-founders-item",
+                );
+
+                if (startupItem) {
+                  // Add selection animation to the item
+                  startupItem.classList.add("animate-selection");
+
+                  // After animation completes, add the final selected state
+                  setTimeout(() => {
+                    startupItem.classList.add("selected");
+                  }, 500);
+                }
+              }, 500);
+            }
+          });
+        },
+        {
+          threshold: 0.4, // Trigger when 40% of the element is visible
+        },
+      );
+
       observer.observe(dropdownElement);
     }
   });

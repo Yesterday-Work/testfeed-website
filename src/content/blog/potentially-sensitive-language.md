@@ -6,7 +6,7 @@ publishDate: 2025-07-26
 author: "Millie"
 featuredImage: ""
 excerpt: "Learn what potentially sensitive language means, how to identify it, and tools to test your communications before sending. Complete professional guide 2025."
-tags: ["potentially sensitive language", "inclusive communication", "language sensitivity", "professional communication", "communication testing"]
+tags: ["potentially sensitive language", "inclusive communication", "professional communication"]
 minutesRead: 12
 draft: false
 relatedPosts: ["test-audience", "product-launch-strategy"]

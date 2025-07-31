@@ -6,7 +6,7 @@ publishDate: 2025-07-25
 author: "Millie"
 featuredImage: ""
 excerpt: "Traditional AI market research analyzes past communications. TestFeed predicts how audiences will react before you send. Compare tools and discover the future."
-tags: ["ai market research", "market research ai", "audience intelligence", "predictive analytics", "communication testing"]
+tags: ["ai market research", "audience intelligence", "communication testing"]
 minutesRead: 15
 draft: false
 relatedPosts: ["voice-of-customer-research", "voice-of-customer-tools"]

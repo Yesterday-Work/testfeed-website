@@ -1,14 +1,14 @@
 ---
-# SEO fields (critical for search visibility)
+# SEO fields
 title: "New Product Launch Strategy: Communication Intelligence Guide | TestFeed"
-description: "Master product launch strategy with communication intelligence. Learn how to test launch messages, predict audience reactions, and achieve Message-Market Fit before launch."
+description: "Master product launch strategy with communication intelligence. Test launch messages and predict audience reactions before launch."
 
 # Blog Post Display Content
 articleTitle: "New Product Launch Strategy: The Communication Intelligence Guide to Success"
 publishDate: 2025-07-18
 author: "Millie"
 excerpt: "95% of product launches fail, and over half fail due to communication problems. Discover the missing communication intelligence step that transforms launch success rates."
-tags: ["product launch", "communication strategy", "message testing", "launch strategy", "audience intelligence"]
+tags: ["product launch", "communication strategy", "message testing"]
 minutesRead: 12
 draft: false
 relatedPosts: ["test-audience", "potentially-sensitive-language"]

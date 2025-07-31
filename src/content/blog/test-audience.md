@@ -6,7 +6,7 @@ publishDate: 2025-07-22
 author: "Millie"
 featuredImage: ""
 excerpt: "Master audience testing before publishing content. Learn proven methods from film industry to AI-powered testing. Free templates + advanced techniques."
-tags: ["test audience", "audience testing", "content testing", "user research", "pre-publication testing"]
+tags: ["test audience", "audience testing", "content testing"]
 minutesRead: 15
 draft: false
 relatedPosts: ["potentially-sensitive-language", "product-launch-strategy"]

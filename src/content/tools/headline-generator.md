@@ -1,13 +1,13 @@
 ---
 title: LinkedIn Headline Generator
-description: Create attention-grabbing LinkedIn headlines that boost profile visibility. Generate professional, AI-powered headlines tailored for job seekers, recruiters, and businesses.
+description: Create attention-grabbing LinkedIn headlines that boost profile visibility. Generate professional, AI-powered headlines for job seekers.
 icon: type
 toolImage: ""
 schemaMarkup:
   type: WebPage
   properties:
     name: LinkedIn Headline Generator
-    description: Create attention-grabbing LinkedIn headlines that boost profile visibility. Generate professional, AI-powered headlines tailored for job seekers, recruiters, and businesses.
+    description: Create attention-grabbing LinkedIn headlines that boost profile visibility. Generate professional, AI-powered headlines for job seekers.
     url: "/tools/headline-generator"
 finalCtaSection:
   title: "Perfect headlines, then <span class='highlight'>test</span> them"

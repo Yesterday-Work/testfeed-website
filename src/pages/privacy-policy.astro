@@ -1,32 +1,36 @@
 ---
-import { getCollection } from 'astro:content';
-import LegalLayout from '../layouts/LegalLayout.astro';
-import LegalPageContent from '../components/LegalPageContent.astro';
+import { getCollection } from "astro:content";
+import LegalLayout from "../layouts/LegalLayout.astro";
+import LegalPageContent from "../components/LegalPageContent.astro";
 
 // Get the legal content from markdown
-const legalEntries = await getCollection('legal');
-const entry = legalEntries.find(entry => entry.id === 'privacy-policy.md');
+const legalEntries = await getCollection("legal");
+const entry = legalEntries.find((entry) => entry.id === "privacy-policy.md");
 
 // Default values in case entry is missing
 const defaultTitle = "Privacy Policy | testfeed";
-const defaultDescription = "Learn how testfeed handles your data and protects your privacy.";
+const defaultDescription =
+  "Learn how TestFeed handles your data, protects your privacy, and maintains security for virtual audience simulation and content testing.";
 
 // Get frontmatter data with fallbacks
 const title = entry?.data.title || defaultTitle;
 const description = entry?.data.description || defaultDescription;
 
 // Render the markdown content
-const { Content } = await entry?.render() || { Content: () => null };
+const { Content } = (await entry?.render()) || { Content: () => null };
 ---
+
 <LegalLayout title={title} description={description} pageSlug="privacy-policy">
   <LegalPageContent>
-    {entry ? (
-      <Content />
-    ) : (
-      <div>
-        <h1>Privacy Policy</h1>
-        <p>Content not found. Please check back later.</p>
-      </div>
-    )}
+    {
+      entry ? (
+        <Content />
+      ) : (
+        <div>
+          <h1>Privacy Policy</h1>
+          <p>Content not found. Please check back later.</p>
+        </div>
+      )
+    }
   </LegalPageContent>
-</LegalLayout> 
+</LegalLayout>

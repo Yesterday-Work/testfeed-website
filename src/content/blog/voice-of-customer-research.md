@@ -1,11 +1,12 @@
 ---
-title: "The Complete Voice of Customer Research Guide 2025: Methodologies, Implementation & ROI That Actually Works"
-description: "Master voice of customer research with proven methodologies that drive real business results. From data collection to ROI measurement - everything you need to transform customer feedback into competitive advantage."
-articleTitle: "The Complete Voice of Customer Research Guide 2025: Methodologies, Implementation & ROI That Actually Works"
+title: "Voice of Customer Research Guide 2025: Complete Methods | TestFeed"
+description: "Master voice of customer research with proven methodologies that drive real business results. Transform customer feedback into competitive advantage."
+articleTitle: "Voice of Customer Research Guide 2025: Complete Methods"
 publishDate: 2025-07-17
+updatedDate: 2025-07-31
 author: "Millie"
 excerpt: "Master voice of customer research with proven methodologies that drive real business results. From data collection to ROI measurement - everything you need to transform customer feedback into competitive advantage."
-tags: ["voice of customer", "customer research", "voc methodology", "customer feedback", "business intelligence", "customer experience"]
+tags: ["voice of customer", "customer research", "voc methodology"]
 minutesRead: 15
 draft: false
 relatedPosts: ["voice-of-customer-tools", "ai-market-research-guide"]

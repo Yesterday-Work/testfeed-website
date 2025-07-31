@@ -1,12 +1,13 @@
 ---
-title: "The Ultimate Empathy Map Template Guide 2025: Free Interactive Builder + PDF Template | TestFeed"
+title: "Empathy Map Template 2025: Free Interactive Builder | TestFeed"
 description: "Create empathy maps instantly with our free interactive builder. Download professional templates and learn advanced techniques used by top UX teams."
 articleTitle: "The Ultimate Empathy Map Template Guide 2025: Free Interactive Builder + PDF Template"
 publishDate: 2025-07-14
+updatedDate: 2025-07-31
 author: "Millie"
 featuredImage: ""
 excerpt: "Create empathy maps instantly with our free interactive builder. Download professional templates and learn advanced techniques used by top UX teams."
-tags: ["empathy mapping", "ux design", "user research", "templates", "customer insights"]
+tags: ["empathy mapping", "ux design", "user research"]
 minutesRead: 12
 draft: false
 relatedPosts: ["voice-of-customer-research", "test-audience"]

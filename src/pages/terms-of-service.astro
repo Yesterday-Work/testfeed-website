@@ -1,32 +1,40 @@
 ---
-import { getCollection } from 'astro:content';
-import LegalLayout from '../layouts/LegalLayout.astro';
-import LegalPageContent from '../components/LegalPageContent.astro';
+import { getCollection } from "astro:content";
+import LegalLayout from "../layouts/LegalLayout.astro";
+import LegalPageContent from "../components/LegalPageContent.astro";
 
 // Get the legal content from markdown
-const legalEntries = await getCollection('legal');
-const entry = legalEntries.find(entry => entry.id === 'terms-of-service.md');
+const legalEntries = await getCollection("legal");
+const entry = legalEntries.find((entry) => entry.id === "terms-of-service.md");
 
 // Default values in case entry is missing
 const defaultTitle = "Terms of Service | testfeed";
-const defaultDescription = "Read the terms and conditions that govern your use of testfeed's audience simulation platform.";
+const defaultDescription =
+  "Read the terms and conditions that govern your use of TestFeed's audience simulation, virtual testing platform, and content analysis tools.";
 
 // Get frontmatter data with fallbacks
 const title = entry?.data.title || defaultTitle;
 const description = entry?.data.description || defaultDescription;
 
 // Render the markdown content
-const { Content } = await entry?.render() || { Content: () => null };
+const { Content } = (await entry?.render()) || { Content: () => null };
 ---
-<LegalLayout title={title} description={description} pageSlug="terms-of-service">
+
+<LegalLayout
+  title={title}
+  description={description}
+  pageSlug="terms-of-service"
+>
   <LegalPageContent>
-    {entry ? (
-      <Content />
-    ) : (
-      <div>
-        <h1>Terms of Service</h1>
-        <p>Content not found. Please check back later.</p>
-      </div>
-    )}
+    {
+      entry ? (
+        <Content />
+      ) : (
+        <div>
+          <h1>Terms of Service</h1>
+          <p>Content not found. Please check back later.</p>
+        </div>
+      )
+    }
   </LegalPageContent>
-</LegalLayout> 
+</LegalLayout>
