@@ -1,0 +1,129 @@
+---
+description: SEO best practices and schema requirements for TestFeed blog posts and tools
+globs: ["src/content/blog/**", "src/content/tools/**"]
+alwaysApply: false
+---
+
+# TestFeed SEO & Content Creation Rules
+
+## Critical SEO Requirements
+
+### Frontmatter Schema for Blogs
+```yaml
+---
+title: "SEO Title with Primary Keyword | TestFeed"  # Under 60 chars
+description: "140-160 character meta description with primary keyword and compelling CTA"
+articleTitle: "Display H1 Title (can be longer/different from SEO title)"
+publishDate: 2025-MM-DD
+updatedDate: 2025-MM-DD  # Add when making content updates
+author: "Author Name"
+excerpt: "Brief summary for previews and social sharing"
+tags: ["primary-keyword", "secondary-keyword", "tertiary-keyword"]  # MAX 3 tags
+minutesRead: XX
+draft: false
+relatedPosts: ["slug-1", "slug-2"]  # Exactly 2 related post slugs
+schemaMarkup:
+  type: "BlogPosting"
+  properties:
+    headline: "Same as articleTitle"
+    description: "Same as meta description"
+    datePublished: "2025-MM-DD"
+    author:
+      "@type": "Person"
+      name: "Author Name"
+    publisher:
+      "@type": "Organization"
+      name: "TestFeed"
+---
+```
+
+### Frontmatter Schema for Tools
+```yaml
+---
+title: "Tool Name - TestFeed"
+description: "140-160 character description with primary keywords and tool benefits"
+icon: "lucide-icon-name"
+schemaMarkup:
+  type: "WebPage"
+  properties:
+    name: "Tool Name"
+    description: "Same as meta description"
+    url: "/tools/tool-slug"
+---
+```
+
+## Content Structure Rules
+
+### ❌ NEVER use H1 in markdown content
+- Do NOT use `# Title` in markdown content
+- The `articleTitle` from frontmatter automatically becomes the H1
+- Start content with H2 (`## Section Title`) or body text
+- This prevents duplicate H1 SEO issues
+
+### ✅ Proper Heading Hierarchy
+```markdown
+## Main Section (H2)
+### Subsection (H3)
+#### Detail Section (H4)
+```
+
+## SEO Optimization
+
+### Meta Descriptions
+- **Length**: 140-160 characters (optimal for search snippets)
+- **Include**: Primary keyword, compelling benefit, subtle CTA
+- **Test**: Count characters including spaces
+
+### Tags Strategy
+- **Maximum**: 3 tags per post/tool
+- **Format**: lowercase, hyphen-separated
+- **Focus**: Primary keyword, secondary keyword, category
+
+### Slug Guidelines
+- **Format**: lowercase, hyphen-separated
+- **Include**: Primary keyword
+- **Length**: 3-5 words maximum
+
+### Internal Linking
+- **Related Posts**: Every blog must have exactly 2 related posts
+- **Strategic**: Link to complementary content, not similar content
+
+## Content Writing
+
+### Hyperlinks
+- **External links**: Use normal markdown syntax `[text](url)`
+- **Internal links**: Use relative paths `/blog/slug/` or `/tools/slug/`
+- **Note**: External links automatically open in new tabs (no need for `target="_blank"`)
+
+### Formatting
+- **Bold**: `**important text**` for key concepts
+- **Italic**: `*emphasis*` for subtle emphasis
+- **Code**: `` `inline code` `` for technical terms
+- **Highlights**: `<span class='highlight'>text</span>` for key phrases
+
+## Quality Checklist
+
+Before publishing, verify:
+- [ ] No `# H1` used in markdown content
+- [ ] SEO title under 60 characters with primary keyword
+- [ ] Meta description 140-160 characters with keyword
+- [ ] Exactly 3 relevant tags
+- [ ] Related posts specified (2 posts for blogs)
+- [ ] All schema fields completed
+- [ ] Updated date added if editing existing content
+
+## Common Mistakes to Avoid
+
+### ❌ SEO Anti-Patterns
+- Using `# H1` in markdown content
+- Meta descriptions over 160 or under 140 characters
+- More than 3 tags per post
+- Duplicate H1s between title and content
+- Missing related posts for blogs
+
+### ❌ Content Anti-Patterns
+- Starting with generic introductions
+- Missing internal links to related content
+- No clear value proposition in first paragraph
+
+Remember: These rules ensure consistency, SEO optimization, and user value. When in doubt, prioritize user experience while maintaining technical SEO requirements.
