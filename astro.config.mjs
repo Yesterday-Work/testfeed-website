@@ -16,9 +16,7 @@ export default defineConfig({
   trailingSlash: 'always',
   redirects: {
     '/blog/ai_market_research_guide': '/blog/ai-market-research-guide',
-    '/blog/ai_market_research_guide/': '/blog/ai-market-research-guide/',
     '/blog/potentially_sensitive_language': '/blog/potentially-sensitive-language',
-    '/blog/potentially_sensitive_language/': '/blog/potentially-sensitive-language/',
   },
   vite: {
     envPrefix: 'PUBLIC_'
