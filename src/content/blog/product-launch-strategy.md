@@ -60,7 +60,7 @@ The [Productboard guide](https://www.productboard.com/blog/product-launch-strate
 
 ### Why Validation Matters: The Psychology of Launch Anxiety
 
-Launch anxiety represents a [well-documented phenomenon](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5555482/) where teams become increasingly resistant to launching as deadlines approach. This anxiety stems from fundamental uncertainty about market reception—*will audiences understand our value proposition? Will our messaging resonate?*
+Launch anxiety represents a [well-documented phenomenon](https://pubmed.ncbi.nlm.nih.gov/static-page/down_bethesda.html) where teams become increasingly resistant to launching as deadlines approach. This anxiety stems from fundamental uncertainty about market reception—*will audiences understand our value proposition? Will our messaging resonate?*
 
 Traditional frameworks address this anxiety through more planning, more features, or more preparation. But these solutions miss the root cause: **communication uncertainty**. Teams delay launches not because products aren't ready, but because they lack confidence in their ability to communicate product value effectively.
 
@@ -92,7 +92,7 @@ Beyond basic message testing, sophisticated organizations require enterprise-lev
 
 ### Communication Cascade Models
 
-Information dilution—the "broken telephone effect"—means messages transform as they flow through organizational levels. Manager bottlenecks create delays and inconsistencies. [Edelman research shows employees trust direct managers three times more than senior leadership](https://www.edelman.com/trust-barometer), making middle management the critical communication layer most frameworks ignore.
+Information dilution—the "broken telephone effect"—means messages transform as they flow through organizational levels. Manager bottlenecks create delays and inconsistencies. [Edelman research shows employees trust direct managers three times more than senior leadership](https://www.edelman.com/), making middle management the critical communication layer most frameworks ignore.
 
 ### Cross-Functional Challenges
 

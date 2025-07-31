@@ -198,7 +198,7 @@ Think of it this way:
 ### Quantitative Research Methods
 
 **Survey Optimisation**
-[Drive Research data](https://www.driveresearch.com/market-research-company-blog/5-reasons-we-love-voice-of-customer-voc-research-and-you-should-too/) shows email surveys achieve 15-20% response rates when properly designed:
+[Drive Research data](https://www.driveresearch.com/category/market-research-company-blog/) shows email surveys achieve 15-20% response rates when properly designed:
 - Limit surveys to 15 questions maximum
 - Use validated scales (NPS, CSAT, Customer Effort Score)
 - Implement smart survey logic for personalised question paths

@@ -173,7 +173,7 @@ Company page admins can access more comprehensive analytics by:
 2. Selecting "Visitors," "Updates," or "Followers" for different metrics
 3. Analyzing impression trends over time
 
-According to [Social Insider](https://www.socialinsider.io/blog/linkedin-metrics/), tracking impressions over time rather than looking at isolated posts provides better insights into your content strategy effectiveness. Look for patterns in high-performing content and track how algorithm changes affect your impression metrics.
+According to [Social Insider](https://www.socialinsider.io/blog/linkedin-metrics), tracking impressions over time rather than looking at isolated posts provides better insights into your content strategy effectiveness. Look for patterns in high-performing content and track how algorithm changes affect your impression metrics.
 
 ## Industry Benchmarks for LinkedIn Impressions
 
