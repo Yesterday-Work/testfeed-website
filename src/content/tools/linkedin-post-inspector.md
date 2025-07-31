@@ -14,8 +14,6 @@ finalCtaSection:
   text: "Join the TestFeed waitlist to see how your audience will react before you publish your next post."
 ---
 
-# LinkedIn Post Inspector
-
 Instantly preview and validate how your LinkedIn posts will appear before publishing to ensure perfect formatting and link previews.
 
 - Link Validation

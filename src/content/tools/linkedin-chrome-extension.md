@@ -14,8 +14,6 @@ finalCtaSection:
   text: "Join the TestFeed waitlist for the Chrome extension that lets you test any content, anywhere on the web."
 ---
 
-# LinkedIn Chrome Extension
-
 Supercharge your LinkedIn workflow with a powerful browser extension that automates repetitive tasks, provides analytical insights, and helps you engage with your network more effectively.
 
 - Network Growth Automation

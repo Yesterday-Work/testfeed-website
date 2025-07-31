@@ -35,8 +35,6 @@ faqSection:
       answer: "LinkedIn supports bold text, italic text, bullet points, numbered lists, line breaks, emojis, and special characters. Our preview tool accurately simulates all these formatting options so you can test different combinations and choose the most effective presentation for your content."
 ---
 
-# LinkedIn Post Preview
-
 See exactly how your LinkedIn posts will appear before publishing with our free preview tool. Test formatting, check visual elements, and perfect your content across desktop and mobile devices to maximize engagement and maintain professional credibility.
 
 - **Instant Preview** - Real-time post simulation

@@ -14,8 +14,6 @@ finalCtaSection:
   text: "Join the TestFeed waitlist to see how your formatted content will land with your audience."
 ---
 
-# LinkedIn Text Formatter
-
 Transform plain LinkedIn posts into professionally formatted content with custom fonts and bold text.
 
 - Instant Formatting

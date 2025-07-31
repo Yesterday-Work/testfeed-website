@@ -14,8 +14,6 @@ finalCtaSection:
   text: "Join the TestFeed waitlist to see how recruiters and connections will react to your headlines."
 ---
 
-# LinkedIn Headline Generator
-
 Create powerful, attention-grabbing LinkedIn profile headlines that instantly showcase your value and expertise to recruiters and connections.
 
 - AI-Powered Suggestions

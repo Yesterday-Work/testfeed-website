@@ -14,8 +14,6 @@ finalCtaSection:
   text: "Join the TestFeed waitlist to see how your take on trending topics will resonate with your audience."
 ---
 
-# Trending Topics
-
 Stay ahead of conversations by identifying real-time trending topics on LinkedIn to create timely, relevant content that drives engagement and expands your network.
 
 - Real-Time Topic Analysis

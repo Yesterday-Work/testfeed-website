@@ -31,8 +31,6 @@ finalCtaSection:
   text: "Join the TestFeed waitlist to see how recruiters and connections will respond to your profile updates."
 ---
 
-# LinkedIn Profile Analysis
-
 Get your LinkedIn profile analyzed by our AI-powered optimization engine, built by our founder's years of experience as an expert headhunter at some of the fastest-growing companies. Our system has been refined through analysis of thousands of high-performing profiles and shows you exactly what hiring managers, founders, and recruiters are looking for.
 
 ## 50-Point Profile Analysis Algorithm

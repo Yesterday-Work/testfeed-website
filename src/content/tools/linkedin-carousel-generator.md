@@ -14,8 +14,6 @@ finalCtaSection:
   text: "Join the TestFeed waitlist to see how your audience will respond to each slide before you publish."
 ---
 
-# AI LinkedIn Carousel Generator
-
 Create professional, attention-grabbing carousel posts for LinkedIn that drive engagement and showcase your expertise in minutes.
 
 - AI-Powered Designs
