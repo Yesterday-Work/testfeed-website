@@ -1,37 +1,38 @@
 ---
-import { getCollection } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
-import FormattedDate from '../../components/FormattedDate.astro';
-import BlogPostPreview from '../../components/BlogPostPreview.astro';
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import FormattedDate from "../../components/FormattedDate.astro";
+import BlogPostPreview from "../../components/BlogPostPreview.astro";
 
-const posts = await getCollection('blog', ({ data }) => {
-    return true; // Temporarily fetch all posts
+const posts = await getCollection("blog", ({ data }) => {
+  return true; // Temporarily fetch all posts
 });
 
-posts.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+posts.sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
+);
 
 // SEO metadata
 const title = "Blog | TestFeed | AI Audience Simulation";
-const description = "Explore the latest insights on content performance, audience simulation, and LinkedIn optimization from the TestFeed team.";
+const description =
+  "Explore the latest insights on content performance, audience simulation, and LinkedIn optimization from the TestFeed team.";
 ---
 
 <Layout title={title} description={description}>
-    <main class="py-12 md:py-16 lg:py-20">
-        <div class="container">
-            <div class="blog-header">
-                <h1>Blog <span class="highlight">Posts</span></h1>
-                <p class="subtitle">Insights and strategies for optimizing your content performance</p>
-            </div>
-            
-            <div class="blog-grid">
-                {
-                    posts.map((post) => (
-                        <BlogPostPreview post={post} />
-                    ))
-                }
-            </div>
-        </div>
-    </main>
+  <main class="py-12 md:py-16 lg:py-20">
+    <div class="container">
+      <div class="blog-header">
+        <h1>Blog <span class="highlight">Posts</span></h1>
+        <p class="subtitle">
+          Insights and strategies for optimizing your content performance
+        </p>
+      </div>
+
+      <div class="blog-grid">
+        {posts.map((post) => <BlogPostPreview post={post} />)}
+      </div>
+    </div>
+  </main>
 </Layout>
 
 <style>
@@ -43,12 +44,12 @@ const description = "Explore the latest insights on content performance, audienc
     margin-left: auto;
     margin-right: auto;
   }
-  
+
   .blog-header h1 {
     margin-bottom: var(--spacing-md);
     font-size: 3.5rem;
   }
-  
+
   .subtitle {
     font-size: 1.2rem;
     color: var(--color-text-light);
@@ -56,30 +57,33 @@ const description = "Explore the latest insights on content performance, audienc
     margin: 0 auto;
     line-height: 1.6;
   }
-  
+
   .blog-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
   }
-  
+
   @media (max-width: 768px) {
     .blog-grid {
       grid-template-columns: 1fr;
     }
-    
+
     .blog-header h1 {
       font-size: 2.5rem;
     }
   }
-  
+
   /* Animation for cards */
   .animate-on-scroll {
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
   }
-  
+
   .animate-on-scroll.show {
     opacity: 1;
     transform: translateY(0);
@@ -87,33 +91,31 @@ const description = "Explore the latest insights on content performance, audienc
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const animateElements = document.querySelectorAll('.animate-on-scroll');
-    
+  document.addEventListener("DOMContentLoaded", () => {
+    const animateElements = document.querySelectorAll(".animate-on-scroll");
+
     // Function to check if element is in viewport
     function isInViewport(element: HTMLElement) {
       const rect = element.getBoundingClientRect();
-      return (
-        rect.top <= window.innerHeight - 100
-      );
+      return rect.top <= window.innerHeight - 100;
     }
-    
+
     // Function to handle scroll animation
     function handleScroll() {
       animateElements.forEach((element, index) => {
         if (isInViewport(element as HTMLElement)) {
           // Add delay based on index for staggered animation
           setTimeout(() => {
-            element.classList.add('show');
+            element.classList.add("show");
           }, index * 100);
         }
       });
     }
-    
+
     // Run once on load
     handleScroll();
-    
+
     // Add scroll listener
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
   });
-</script> 
+</script>
