@@ -1,84 +1,72 @@
 ---
 title: "Privacy Policy | testfeed"
 description: "Learn how testfeed handles your data and protects your privacy."
-lastUpdated: 2025-03-14
+lastUpdated: 2025-08-12
 ---
 
-# Privacy Policy
-*Last Updated: 14 March 2025*
+At TestFeed, we're building audience intelligence that helps you communicate better. Here's exactly what information we collect and how we use it.
 
-At testfeed, we're committed to protecting your privacy and being transparent about how we use your data. This privacy policy explains what information we collect, how we use it, and the steps we take to ensure it remains secure.
+## What We Collect (Only What You Choose to Share)
 
-## 1. Information We Collect
+### Your Account Information
+- Name and email address for your account
+- Authentication details to keep your account secure
 
-### 1.1 Account Information
-When you create an account or join our waitlist, we collect:
-- Your name and email address
-- Job title and industry (optional)
-- Company name (optional)
+### Content You Test
+You control everything. We only process information when you actively use TestFeed:
 
-### 1.2 Content Data
-When you use our service to test content, we collect:
-- The content you submit for testing
-- Your target audience parameters
-- Content performance metrics and test results
+- Text content you select to test with your audiences
+- Audience profiles you create and refine
+- Chat conversations with your AI audiences
+- Website context (page titles, URLs, content) when you're testing content
 
-### 1.3 Usage Data
-We automatically collect information about how you interact with our service:
-- Log data (IP address, browser type, pages visited)
-- Device information (device type, operating system)
-- Usage patterns and feature engagement
+### Screen Sharing for Live Conversations
+When you choose to share your screen with your audiences:
 
-### 1.4 Cookies and Similar Technologies
-We use cookies and similar tracking technologies to enhance your experience and collect information about how you use our service. You can control cookies through your browser settings.
+- We do NOT store screenshots, videos, or recordings
+- We do NOT store audio
+- Your chat conversation history with audiences are saved so you can reference feedback later
 
-## 2. How We Use Your Information
-We use the information we collect to:
-- Provide and improve our audience simulation service
-- Generate accurate prediction results for your content
-- Personalize your experience based on your usage patterns
-- Send important product updates and communications
-- Analyze usage patterns to improve our features
-- Maintain the security of our platform
+### Technical Information
+- Basic usage data to improve the extension
+- Error logs to fix bugs
+- Performance metrics (via PostHog analytics)
 
-## 3. How We Share Your Information
-We only share your information in the following circumstances:
-- **Service Providers:** We work with trusted third-party services that help us operate our business (hosting, analytics, payment processing).
-- **Business Transfers:** If testfeed is involved in a merger, acquisition, or sale of assets, your information may be transferred as part of that transaction.
-- **Legal Requirements:** We may disclose information if required by law, regulation, or legal process.
+## How We Use Your Information
 
-We never sell your personal information to third parties.
+- **Audience Intelligence:** Process your content through AI models to generate authentic audience reactions
+- **Profile Enhancement:** Improve your audience profiles based on your feedback
+- **Product Improvement:** Understand which features work best
+- **Account Security:** Keep your TestFeed account protected
 
-## 4. AI Processing and Data Security
-Our service uses artificial intelligence to process your content and generate predictions:
-- Content you submit is processed by our AI systems to generate audience simulations.
-- We implement appropriate security measures to protect your data during processing.
-- We may use anonymized data to improve our AI models and prediction accuracy.
+## Where Your Data Lives
 
-We implement industry-standard security measures to protect your information, including encryption, access controls, and regular security assessments.
+- **Primary Storage:** Secure cloud infrastructure 
+- **AI Processing:** Your content is processed by various AI providers (primarily in the US)
+- **Local Storage:** Your browser stores temporary extension data
+- **Analytics:** Basic usage patterns via PostHog and Google Analytics
 
-## 5. Your Rights and Choices
-Depending on your location, you may have certain rights regarding your personal information:
-- Access, correct, or delete your personal information
-- Object to or restrict certain processing activities
-- Data portability (receiving your data in a structured format)
-- Withdraw consent for optional processing
+**Important:** Your content may be processed overseas by AI providers, but we only send the specific content you choose to test.
 
-To exercise these rights, please contact us at privacy@testfeed.ai
+## Your Privacy Controls
 
-## 6. Data Retention
-We retain your information for as long as your account is active or as needed to provide you services. We will delete or anonymize your information upon request or after an extended period of inactivity, except where we need to retain certain information for legitimate business or legal purposes.
+- You decide what content to test or share
+- You can delete audiences, conversations, and your entire account anytime
+- You can stop any feature (screen sharing, testing) instantly
+- Chrome Extension Security: Only works on your computer - no remote access to your browsing
 
-## 7. International Data Transfers
-We may transfer, process, and store your information on servers located outside of your country of residence, including in Australia, the United States, and other countries. We ensure appropriate safeguards are in place to protect your information when transferred internationally.
+## Who We Work With
 
-## 8. Children's Privacy
-Our services are not directed to children under 16. We do not knowingly collect personal information from children under 16. If you believe we have collected information from a child under 16, please contact us.
+We only share data with trusted service providers:
 
-## 9. Changes to This Privacy Policy
-We may update this privacy policy from time to time to reflect changes in our practices or for legal, operational, or regulatory reasons. We will notify you of any material changes by posting the updated policy on our website or by email.
+- AI providers for audience creation and responses
+- Authentication services for account security
+- Analytics providers for basic usage insights
 
-## 10. Contact Us
-If you have questions or concerns about this privacy policy or our data practices, please contact us at:
+**We never sell your personal information. Ever.**
 
-Email: privacy@testfeed.ai 
+## Questions or Data Deletion?
+
+Email us: privacy@testfeed.ai
+
+We'll update this policy as we grow and will notify you of any significant changes. 

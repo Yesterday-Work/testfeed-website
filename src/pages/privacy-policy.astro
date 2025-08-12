@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import LegalLayout from "../layouts/LegalLayout.astro";
 import LegalPageContent from "../components/LegalPageContent.astro";
+import FormattedDate from "../components/FormattedDate.astro";
 
 // Get the legal content from markdown
 const legalEntries = await getCollection("legal");
@@ -15,6 +16,7 @@ const defaultDescription =
 // Get frontmatter data with fallbacks
 const title = entry?.data.title || defaultTitle;
 const description = entry?.data.description || defaultDescription;
+const lastUpdated = entry?.data.lastUpdated;
 
 // Render the markdown content
 const { Content } = (await entry?.render()) || { Content: () => null };
@@ -24,7 +26,15 @@ const { Content } = (await entry?.render()) || { Content: () => null };
   <LegalPageContent>
     {
       entry ? (
-        <Content />
+        <div>
+          <h1>TestFeed Privacy Policy</h1>
+          {lastUpdated && (
+            <p style="font-style: italic; margin-bottom: 2rem; color: #666; text-align: center;">
+              Last Updated: <FormattedDate date={new Date(lastUpdated)} />
+            </p>
+          )}
+          <Content />
+        </div>
       ) : (
         <div>
           <h1>Privacy Policy</h1>
