@@ -1,9 +1,7 @@
 ---
 description: SEO best practices and schema requirements for TestFeed blog posts and tools
-globs: ["src/content/blog/**", "src/content/tools/**"]
 alwaysApply: false
 ---
-
 # TestFeed SEO & Content Creation Rules
 
 ## Critical SEO Requirements
