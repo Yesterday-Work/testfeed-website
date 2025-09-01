@@ -26,27 +26,6 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
           prospect ghosts you. Before you waste another hour rewording the same
           email with ChatGPT.
         </p>
-        <div class="launch-countdown">
-          <div class="countdown-label">LAUNCHING</div>
-          <div class="countdown-timer" id="countdown-timer">
-            <div class="time-unit">
-              <span class="time-value" id="days">--</span>
-              <span class="time-label">days</span>
-            </div>
-            <div class="time-unit">
-              <span class="time-value" id="hours">--</span>
-              <span class="time-label">hours</span>
-            </div>
-            <div class="time-unit">
-              <span class="time-value" id="minutes">--</span>
-              <span class="time-label">minutes</span>
-            </div>
-            <div class="time-unit">
-              <span class="time-value" id="seconds">--</span>
-              <span class="time-label">seconds</span>
-            </div>
-          </div>
-        </div>
         <div class="cta-buttons">
           <a href="#get-started" class="btn btn-primary pulse">JOIN WAITLIST</a>
         </div>
@@ -795,53 +774,7 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
     line-height: 1.6;
   }
 
-  /* Launch Countdown */
-  .launch-countdown {
-    margin-bottom: var(--spacing-lg);
-    text-align: center;
-  }
 
-  .countdown-label {
-    font-size: 0.875rem;
-    color: var(--color-white);
-    margin-bottom: var(--spacing-sm);
-    font-weight: 700;
-    font-family: "Space Mono", monospace;
-    letter-spacing: 2px;
-  }
-
-  .countdown-timer {
-    display: flex;
-    justify-content: center;
-    gap: var(--spacing-md);
-    margin-bottom: var(--spacing-md);
-  }
-
-  .time-unit {
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.08) 0%,
-      rgba(255, 255, 255, 0.03) 100%
-    );
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 12px;
-    padding: var(--spacing-md) var(--spacing-sm);
-    min-width: 80px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  }
-
-  .time-value {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--color-white);
-    font-family: "Space Mono", monospace;
-    line-height: 1;
-    margin-bottom: 4px;
-  }
 
   .time-label {
     font-size: 0.75rem;
@@ -1699,22 +1632,8 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
       font-size: 1.1rem;
     }
 
-    .countdown-timer {
-      gap: var(--spacing-sm);
-    }
 
-    .time-unit {
-      min-width: 70px;
-      padding: var(--spacing-sm) var(--spacing-xs);
-    }
 
-    .time-value {
-      font-size: 1.5rem;
-    }
-
-    .time-label {
-      font-size: 0.7rem;
-    }
 
     .cta-buttons {
       flex-direction: column;
@@ -1954,46 +1873,7 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
 </style>
 
 <script>
-  // Countdown timer functionality
   document.addEventListener("DOMContentLoaded", function () {
-    const launchDate = new Date("2025-09-01T00:00:00").getTime();
-
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const timeLeft = launchDate - now;
-
-      if (timeLeft > 0) {
-        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-        const hours = Math.floor(
-          (timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
-        );
-        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-        const daysEl = document.getElementById("days");
-        const hoursEl = document.getElementById("hours");
-        const minutesEl = document.getElementById("minutes");
-        const secondsEl = document.getElementById("seconds");
-
-        if (daysEl) daysEl.textContent = days.toString().padStart(2, "0");
-        if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, "0");
-        if (minutesEl)
-          minutesEl.textContent = minutes.toString().padStart(2, "0");
-        if (secondsEl)
-          secondsEl.textContent = seconds.toString().padStart(2, "0");
-      } else {
-        // Launch date has passed
-        const countdownTimer = document.getElementById("countdown-timer");
-        if (countdownTimer) {
-          countdownTimer.innerHTML =
-            '<div class="launched-message">🎉 We\'re Live! 🎉</div>';
-        }
-      }
-    }
-
-    // Update countdown immediately and then every second
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
 
     // Rotating text functionality
     const rotatingText = document.querySelector(
