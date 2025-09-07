@@ -4,7 +4,7 @@
 
 <div class="linkedin-profile-optimizer">
   <div class="optimizer-container">
-    <div class="linkedin-profile-analyzer">
+    <div class="linkedin-profile-analyzer disabled-overlay-container">
       <div class="analyzer-header">
         <div class="profile-info">
           <div class="profile-pic avatar">
@@ -36,32 +36,44 @@
           corporate headhunting experience.
         </p>
 
-        <form id="profile-analysis-form" class="profile-analysis-form">
-          <div class="form-group">
-            <input
-              type="url"
-              name="linkedin_url"
-              placeholder="https://linkedin.com/in/yourprofile"
-              required
-              class="profile-url-input"
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Your email address"
-              required
-              class="email-input"
-            />
-            <input
-              type="text"
-              name="website"
-              style="display: none"
-              tabindex="-1"
-              autocomplete="off"
-            />
+        <div class="form-container">
+          <form id="profile-analysis-form" class="profile-analysis-form blurred-content">
+            <div class="form-group">
+              <input
+                type="url"
+                name="linkedin_url"
+                placeholder="https://linkedin.com/in/yourprofile"
+                required
+                class="profile-url-input"
+                disabled
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Your email address"
+                required
+                class="email-input"
+                disabled
+              />
+              <input
+                type="text"
+                name="website"
+                style="display: none"
+                tabindex="-1"
+                autocomplete="off"
+              />
+            </div>
+            <div class="form-message" style="display: none;"></div>
+          </form>
+          
+          <div class="overlay-message">
+            <div class="overlay-content">
+              <h4>Tool Too Popular</h4>
+              <p>Unfortunately we've had to take it offline as we build an automated version.</p>
+              <p><strong>Check back soon!</strong></p>
+            </div>
           </div>
-          <div class="form-message" style="display: none;"></div>
-        </form>
+        </div>
       </div>
 
       <div class="analyzer-footer">
@@ -73,7 +85,8 @@
         <button
           type="submit"
           form="profile-analysis-form"
-          class="get-analysis-btn"
+          class="get-analysis-btn blurred-content"
+          disabled
         >
           <span class="btn-text">ANALYZE PROFILE</span>
           <span class="btn-loading" style="display: none;">SUBMITTING...</span>
@@ -226,6 +239,57 @@
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--border-radius);
+  }
+
+  .disabled-overlay-container {
+    position: relative;
+  }
+
+  .form-container {
+    position: relative;
+  }
+
+  .blurred-content {
+    filter: blur(3px);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .overlay-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  }
+
+  .overlay-content h4 {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    font-family: var(--font-mono, "Space Mono", monospace);
+    letter-spacing: 0.5px;
+  }
+
+  .overlay-content p {
+    color: var(--color-text);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+
+  .overlay-content p:last-child {
+    margin-bottom: 0;
+    color: white;
+    font-weight: 600;
   }
 
   .analyzer-header {
