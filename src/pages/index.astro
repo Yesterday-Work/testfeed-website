@@ -7,24 +7,22 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
 ---
 
 <BaseLayout
-  title="TestFeed - AI Audiences"
-  description="Create virtual AI audiences that think and act like your real customers, mentors, consultants, and stakeholders. It's like having them sitting next to you while you work."
+  title="TestFeed - AI Personas"
+  description="Create AI personas that think and act like your real customers, mentors, consultants, and stakeholders. It's like having them sitting next to you while you work."
 >
   <!-- Hero Section -->
   <section class="hero">
     <div class="container">
       <div class="hero-content">
         <h1>
-          See <span class="react-emphasis">reactions</span> from your audience, <span
-            class="before-fade">before</span
+          Create with <span class="react-emphasis">confidence</span>, not <span
+            class="before-fade">crossed fingers</span
           >
-          <span class="rotating-text">sending</span>
         </h1>
         <p class="hero-description">
-          Test your content on virtual audiences who think and react like your
-          real ones. Before your customer says 'I don't get it.' Before your
-          prospect ghosts you. Before you waste another hour rewording the same
-          email with ChatGPT.
+          Never wonder if that new feature will confuse users, if that campaign
+          will resonate, if that pricing page makes sense. Get instant feedback
+          from AI versions of your customers, users, and prospects.
         </p>
         <div class="cta-buttons">
           <a href="#get-started" class="btn btn-primary pulse">JOIN WAITLIST</a>
@@ -68,7 +66,7 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
           ></defs
         ></svg
       >
-      <span class="cursor-name">Startup Founders</span>
+      <span class="cursor-name">Startup Founder</span>
       <div class="cursor-comment" id="comment-1"></div>
     </div>
 
@@ -107,7 +105,7 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
           ></defs
         ></svg
       >
-      <span class="cursor-name">Greg from Finance</span>
+      <span class="cursor-name">Enterprise CFO</span>
       <div class="cursor-comment" id="comment-2"></div>
     </div>
 
@@ -146,7 +144,7 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
           ></defs
         ></svg
       >
-      <span class="cursor-name">Gen Z Creators</span>
+      <span class="cursor-name">Gen Z College Student</span>
       <div class="cursor-comment" id="comment-3"></div>
     </div>
   </section>
@@ -218,10 +216,10 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
             <div class="step-demo">
               <div class="dropdown-mockup" id="audience-dropdown">
                 <div class="dropdown-menu">
-                  <div class="dropdown-item">Gen Z Creators</div>
-                  <div class="dropdown-item">Greg from Finance</div>
+                  <div class="dropdown-item">Gen Z College Student</div>
+                  <div class="dropdown-item">Enterprise CFO</div>
                   <div class="dropdown-item" id="startup-founders-item">
-                    Startup Founders
+                    Startup Founder
                   </div>
                 </div>
               </div>
@@ -288,8 +286,8 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
                     ></defs
                   ></svg
                 >
-                <span class="static-cursor-name">Startup Founders</span>
-                <div class="cursor-comment" id="greg-step2-comment"></div>
+                <span class="static-cursor-name">Startup Founder</span>
+                <div class="cursor-comment" id="founder-step2-comment"></div>
               </div>
             </div>
           </div>
@@ -474,7 +472,7 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
       </div>
     </div>
 
-    <!-- Gen Z Creator Cursor -->
+    <!-- Gen Z College Student Cursor -->
     <div class="empathy-cursor" id="empathy-cursor">
       <svg width="26" height="30" fill="none" xmlns="http://www.w3.org/2000/svg"
         ><g filter="url(#a)"
@@ -510,7 +508,7 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
           ></defs
         ></svg
       >
-      <span class="cursor-name">Gen Z Creator</span>
+      <span class="cursor-name">Gen Z College Student</span>
       <div class="cursor-comment" id="empathy-comment"></div>
     </div>
   </section>
@@ -755,7 +753,7 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
 
   .hero-content {
     text-align: center;
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
   }
 
@@ -773,8 +771,6 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
     color: var(--color-text-light);
     line-height: 1.6;
   }
-
-
 
   .time-label {
     font-size: 0.75rem;
@@ -805,14 +801,6 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
     justify-content: center;
     gap: var(--spacing-md);
     margin-bottom: var(--spacing-md);
-  }
-
-  .rotating-text {
-    color: var(--color-text);
-    position: relative;
-    display: inline-block;
-    min-width: 140px;
-    text-align: left;
   }
 
   .react-emphasis {
@@ -1632,9 +1620,6 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
       font-size: 1.1rem;
     }
 
-
-
-
     .cta-buttons {
       flex-direction: column;
       align-items: center;
@@ -1874,24 +1859,6 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-
-    // Rotating text functionality
-    const rotatingText = document.querySelector(
-      ".rotating-text",
-    ) as HTMLElement;
-    if (rotatingText) {
-      const words = ["sending", "posting", "sharing"];
-      let currentIndex = 0;
-
-      function rotateText() {
-        currentIndex = (currentIndex + 1) % words.length;
-        rotatingText.textContent = words[currentIndex];
-      }
-
-      // Change word every 2 seconds
-      setInterval(rotateText, 2000);
-    }
-
     // Auto-scroll use case cards with infinite scroll
     const useCaseCards = document.querySelector(
       ".use-case-cards",
@@ -2018,22 +1985,22 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
       "Our Series A pitch deck had this",
     ];
 
-    const gregComments = [
-      "I need to update my spreadsheet",
-      "This goes in Q3 expenses",
-      "Is this tax deductible?",
-      "We already have email for this",
-      "Can't we just use what we have?",
-      "I'll need to see the receipt",
-      "This needs approval from Janet",
-      "What's the cancellation policy?",
-      "We're over budget this quarter",
-      "Did you submit the expense report?",
-      "This looks like marketing spend",
-      "Are there any hidden fees?",
-      "We should table this until next year",
-      "I'll add it to the review queue",
-      "Does this integrate with QuickBooks?",
+    const cfoComments = [
+      "Can Marketing pay for half?",
+      "We're already over on software spend",
+      "Budget freeze until next quarter",
+      "Show me the cost per employee",
+      "Where's the business justification form?",
+      "Is this compliant with policy 4.2?",
+      "I need three vendor comparisons",
+      "This requires committee approval",
+      "Did you follow proper channels?",
+      "I'll need Legal's sign-off first",
+      "This wasn't in our approved budget",
+      "We need quarterly usage reports",
+      "Is there a volume discount available?",
+      "I'll add this to next month's review",
+      "This needs board notification",
     ];
 
     const genzComments = [
@@ -2075,9 +2042,9 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
 
       let comments;
       if (commentId === "comment-1") comments = startupComments;
-      else if (commentId === "comment-2") comments = gregComments;
+      else if (commentId === "comment-2") comments = cfoComments;
       else if (commentId === "comment-3") comments = genzComments;
-      else if (commentId === "greg-step2-comment")
+      else if (commentId === "founder-step2-comment")
         comments = founderFollowUpComments;
       else if (commentId === "empathy-comment") comments = empathyComments;
       else return;
@@ -2096,14 +2063,14 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
     setInterval(() => showRandomComment("comment-1"), 8000);
     setInterval(() => showRandomComment("comment-2"), 12000);
     setInterval(() => showRandomComment("comment-3"), 15000);
-    setInterval(() => showRandomComment("greg-step2-comment"), 5000);
+    setInterval(() => showRandomComment("founder-step2-comment"), 5000);
     setInterval(() => showRandomComment("empathy-comment"), 10000);
 
     // Initial comments after page load
     setTimeout(() => showRandomComment("comment-1"), 3000);
     setTimeout(() => showRandomComment("comment-2"), 6000);
     setTimeout(() => showRandomComment("comment-3"), 9000);
-    setTimeout(() => showRandomComment("greg-step2-comment"), 2000);
+    setTimeout(() => showRandomComment("founder-step2-comment"), 2000);
     setTimeout(() => showRandomComment("empathy-comment"), 4000);
 
     // Checkbox animation on scroll into view
