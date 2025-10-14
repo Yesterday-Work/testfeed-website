@@ -9,7 +9,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <main class="about-page">
     <div class="container">
       <header class="about-header">
-        <h1>Why I built TestFeed</h1>
+        <h1>Why I built <span class="testfeed-font">testfeed</span></h1>
       </header>
 
       <article class="about-content">
@@ -181,6 +181,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     margin-bottom: var(--spacing-md);
     line-height: 1.2;
     text-align: left;
+  }
+
+  .about-header h1 .testfeed-font {
+    display: inline-block;
+    transform: translateY(-0.11em);
   }
 
   .about-content {
