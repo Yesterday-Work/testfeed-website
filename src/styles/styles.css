@@ -149,7 +149,7 @@ section {
 
 /* Buttons */
 .btn {
-    font-family: var(--font-heading);
+    font-family: 'Space Mono', monospace;
     display: inline-block;
     padding: 12px 24px;
     border-radius: var(--border-radius);
@@ -158,6 +158,8 @@ section {
     cursor: pointer;
     transition: var(--transition);
     text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .btn-primary {

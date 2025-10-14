@@ -20,9 +20,7 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
           >
         </h1>
         <p class="hero-description">
-          Never wonder if that new feature will confuse users, if that campaign
-          will resonate, if that pricing page makes sense. Get instant feedback
-          from AI versions of your customers, users, and prospects.
+          AI personas that think and act like your real customers, users, and stakeholders. Chat with them while you work, share your screen, get the feedback you need before you ship to real users.
         </p>
         <div class="cta-buttons">
           <a href="#get-started" class="btn btn-primary pulse">JOIN WAITLIST</a>
@@ -149,34 +147,28 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
     </div>
   </section>
 
-  <!-- Communication Trap Section -->
+  <!-- Creation Trap Section -->
   <section class="problem">
     <div class="container">
-      <h2>The communication <span class="trap-door">trap</span></h2>
+      <h2>The creation <span class="trap-door">trap</span></h2>
       <div class="problem-grid">
         <div class="problem-card">
           <div class="problem-icon">
-            <Icon name="lucide:target" />
+            <Icon name="lucide:eye-off" />
           </div>
-          <h3>You only get one shot at it</h3>
+          <h3>You're building in the dark</h3>
           <p>
-            That sales email to your dream client? One shot. The proposal that
-            could make your business? One shot. Most communication is binary -
-            it either works or it doesn't. No A/B tests, no practice runs. You
-            get one chance to communicate correctly.
+            Should you build this feature or that one? Will this design confuse users? Is this campaign going to work? You're making critical decisions without real feedback, hoping you're building the right thing.
           </p>
         </div>
 
         <div class="problem-card">
           <div class="problem-icon">
-            <Icon name="lucide:clock" />
+            <Icon name="lucide:hourglass" />
           </div>
           <h3>You waste hours second-guessing</h3>
           <p>
-            When something really matters, you second-guess everything. You know
-            what you want to say, but have no idea if your auidence will get it.
-            So you keep tweaking, editing, rewriting - burning hours on messages
-            that should take minutes.
+            When something really matters, you second-guess everything. You know what you want to build, but have no idea if your users will get it. So you keep tweaking, redesigning, rethinking - burning hours on decisions that should take minutes.
           </p>
         </div>
 
@@ -184,12 +176,9 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
           <div class="problem-icon">
             <Icon name="lucide:message-circle-x" />
           </div>
-          <h3>You rarely get any feedback</h3>
+          <h3>Real feedback comes too late</h3>
           <p>
-            You send that carefully crafted email and get... nothing. Radio
-            silence. Was it too pushy? Not compelling enough? Did they take that
-            joke the wrong way? You have no idea. When communication fails, you
-            rarely find out why.
+            You ship the feature and users are confused. You launch the campaign and it flops. You publish the design and nobody gets it. By the time you get real feedback, you've already wasted weeks building the wrong thing.
           </p>
         </div>
       </div>
@@ -723,33 +712,6 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
     overflow: hidden;
   }
 
-  .hero::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(
-      circle at center,
-      rgba(255, 255, 255, 0.1) 0%,
-      rgba(0, 0, 0, 0) 70%
-    );
-    z-index: -1;
-    animation: pulse-bg 15s infinite;
-  }
-
-  @keyframes pulse-bg {
-    0% {
-      opacity: 0.5;
-    }
-    50% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0.5;
-    }
-  }
 
   .hero-content {
     text-align: center;
@@ -1065,7 +1027,6 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
 
   /* Problem Section */
   .problem {
-    background-color: #151515;
     padding: var(--spacing-xxl) 0;
   }
 
