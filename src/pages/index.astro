@@ -25,7 +25,7 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
           the feedback you need before you ship to real users.
         </p>
         <div class="cta-buttons">
-          <a href="#get-started" class="btn btn-primary pulse">JOIN WAITLIST</a>
+          <a href="#get-started" class="btn btn-primary">Join Waitlist</a>
         </div>
       </div>
     </div>
@@ -449,29 +449,44 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
           </button>
           <div class="faq-answer">
             <p>
-              Yes, the Chrome extension works everywhere you work - Figma designs, localhost development environment, social media planning tools, Google Slides presentations, anywhere. The personas can see what's on your screen regardless of which site or tool you're using.
+              Yes, the Chrome extension works everywhere you work - Figma
+              designs, localhost development environment, social media planning
+              tools, Google Slides presentations, anywhere. The personas can see
+              what's on your screen regardless of which site or tool you're
+              using.
             </p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" type="button">
-            <span class="question-text">How do I make personas more accurate?</span>
+            <span class="question-text"
+              >How do I make personas more accurate?</span
+            >
           </button>
           <div class="faq-answer">
             <p>
-              Upload real examples - customer feedback, user research, meeting notes, support tickets. The more real-world data you give them, the better they understand how your actual customers or stakeholders think and respond.
+              Upload real examples - customer feedback, user research, meeting
+              notes, support tickets. The more real-world data you give them,
+              the better they understand how your actual customers or
+              stakeholders think and respond.
             </p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" type="button">
-            <span class="question-text">Can personas see what I'm working on?</span>
+            <span class="question-text"
+              >Can personas see what I'm working on?</span
+            >
           </button>
           <div class="faq-answer">
             <p>
-              Yes, they can see your screen and give contextual feedback. Building a feature on localhost? They see your interface. Designing in Figma? They see your mockups. Creating a pitch deck in Google Slides? They see your slides and can give feedback on what's working.
+              Yes, they can see your screen and give contextual feedback.
+              Building a feature on localhost? They see your interface.
+              Designing in Figma? They see your mockups. Creating a pitch deck
+              in Google Slides? They see your slides and can give feedback on
+              what's working.
             </p>
           </div>
         </div>
@@ -482,7 +497,10 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
           </button>
           <div class="faq-answer">
             <p>
-              Pre-built specialist personas you can use immediately - VCs for pitch feedback, UX designers for interface reviews, marketing strategists for campaign planning. No setup required, just start chatting when you need expert perspective.
+              Pre-built specialist personas you can use immediately - VCs for
+              pitch feedback, UX designers for interface reviews, marketing
+              strategists for campaign planning. No setup required, just start
+              chatting when you need expert perspective.
             </p>
           </div>
         </div>
@@ -493,7 +511,8 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
           </button>
           <div class="faq-answer">
             <p>
-              We're in alpha testing. Join the waitlist to get early access to the Chrome extension.
+              We're in alpha testing. Join the waitlist to get early access to
+              the Chrome extension.
             </p>
           </div>
         </div>
@@ -1723,8 +1742,8 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
     background: none;
     border: none;
     color: inherit;
-    font-size: 1.5rem;
-    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-family: 'Poppins', sans-serif;
     margin-bottom: var(--spacing-sm);
     line-height: 1.2;
   }
@@ -1966,10 +1985,10 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
         // Show new message with animation
         feedbackMessageEl.style.display = "block";
         feedbackMessageEl.style.animation = "none";
-        
+
         // Force reflow to restart animation
         void feedbackMessageEl.offsetWidth;
-        
+
         feedbackMessageEl.style.animation =
           "fadeInMessage 0.5s ease-out forwards";
       }, 1500); // Loading duration
@@ -1980,7 +1999,7 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
       loadingMessageEl.style.display = "none";
       feedbackMessageEl.style.display = "block";
       feedbackMessageEl.style.opacity = "1";
-      
+
       // Start rotation
       setInterval(rotateFeedbackMessage, 4000); // Rotate every 4 seconds
     }
@@ -2102,12 +2121,12 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
 
     const genzComments = [
       "This is actually genius ngl",
-      "Virtual audiences hit different",
+      "Virtual personas hit different",
       "No cap this slaps",
       "Why didn't I think of this",
       "This would save my content",
       "My posts need this fr",
-      "Audience reactions = everything",
+      "People's reactions = everything",
       "Testing before posting? Valid",
       "This is so necessary bestie",
       "My content flops need this",
