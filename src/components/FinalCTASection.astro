@@ -12,8 +12,8 @@ export interface Props {
 
 // Extract props with fallbacks to current hardcoded content
 const {
-  title = "Never wonder \"how will this land?\" again",
-  text = "Join the waitlist and get first access. Test any content on any website before you send, post, or publish it.",
+  title = "Never work alone again",
+  text = "AI personas that see what you're working on and give you feedback in real-time. Join the waitlist for early access to the Chrome extension.",
   buttonText = "JOIN WAITLIST",
   buttonLink = "#get-started",
   buttonType = "primary"
@@ -45,20 +45,9 @@ const showWaitlistForm = !buttonLink || buttonLink === "#get-started" || !button
 <style>
 .final-cta {
     padding: var(--spacing-xl) 0;
-    background: linear-gradient(135deg, #111111 0%, #0a0a0a 100%);
+    background-color: var(--color-background);
     position: relative;
     overflow: hidden;
-}
-
-.final-cta::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
-    pointer-events: none;
 }
 
 .cta-card {

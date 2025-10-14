@@ -1,64 +1,159 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout 
+<BaseLayout
   title="About TestFeed - Why I Built This"
   description="The story behind TestFeed - from send-button anxiety to building virtual audiences that help you communicate with confidence."
 >
   <main class="about-page">
     <div class="container">
       <header class="about-header">
-        <h1>Why I built TestFeed</h1>
+        <h1>Why I built <span class="testfeed-font">testfeed</span></h1>
       </header>
 
       <article class="about-content">
         <div class="story-flow">
-          <p class="opener">Hi, I'm Millie, founder of TestFeed.</p>
-          
-          <p>I've fortunately, or unfortunately (depending how you look at it), spent most of my adult life running my own businesses. There've been a few successes but plenty more failures.</p>
-          
-          <p>And throughout that process, one recurring theme keeps showing up: <strong>send-button anxiety</strong>.</p>
-          
-          <p>You know that feeling? You've crafted what you think is the perfect email to a potential client, and you're hovering over send, thinking: "Does this sound confident or desperate? Professional or boring? Will they think I'm brilliant or completely unhinged?"</p>
-          
-          <h2>The LinkedIn post that changed everything</h2>
-          
-          <p>So there I was, building my previous startup, when I decided to use Claude to help write a LinkedIn post. Nothing fancy, just wanted to share some thoughts about the industry. Claude did its thing, I thought "yeah, this looks good," and hit publish.</p>
-          
-          <p>The reactions were... not what I expected.</p>
-          
-          <p>People were interpreting it in ways I never imagined, and they were all the wrong ways. Without getting into specifics, let's just say I missed the mark. That's when it hit me: I was caught in my own bubble. I had blind spots. <strong>Not everyone thinks and sees the world like I do.</strong></p>
-          
-          <h2>The daily reality</h2>
-          
-          <p>Like most of us, I spend the majority of my time communicating. Emails to prospects. Social media posts to build credibility. Tricky customer support responses. Sales proposals that need to strike just the right tone. <strong>Each one tailored to a different audience, each one carrying real stakes.</strong></p>
-          
-          <p>And the anxiety? Oh, the anxiety is real.</p>
-          
-          <p>I'd write a DM to the owner of a women's fashion boutique, then immediately Slack it to Jack (my co-founder) with "does this sound too pushy?" He'd read it, shrug, and say "seems fine to me." But safe to say he isn't the 'demo'. Or I'd run fundraising emails past my Mum - "you're amazing they're going to love you." Sweet but not exactly the investor perspective I needed.</p>
-          
-          <h2>The broken feedback loop</h2>
-          
-          <p>Here's the thing about getting feedback from colleagues or friends: unless they ARE your audience, <strong>their opinion is basically guesswork</strong>. Your sales co-founder can't tell you how your email will land with content creators. Your designer friend can't predict how VCs will react to your pitch deck.</p>
-          
-          <p>But we do it anyway, because the alternative is sending important communication into the void and hoping for the best. (Spoiler alert: hoping for the best isn't a strategy.)</p>
-          
-          <h2>So I built what I needed</h2>
-          
-          <p>TestFeed started as a desperate attempt to solve my own communication anxiety. I wanted to test how my words would actually land with different audiences <strong>before I sent them</strong>. Not after. Not through painful trial and error. Before.</p>
-          
-          <p>We've built virtual audiences based on real psychology, not personality quizzes or generic demographics, but actual theory of mind research. They react like real people because they're built on how real people actually think and make decisions.</p>
-          
-          <p>No more running emails past Kevin from accounting when you're writing to CTOs. No more second-guessing whether your LinkedIn post sounds authentic or like you've been possessed by a corporate communications bot.</p>
-          
-          <h2>Want to follow the journey?</h2>
-          
-          <p>I'm building TestFeed in public because honestly, the alternative is suffering in silence, and I've done enough of that. You can find me on <a href="https://www.linkedin.com/in/millie-marconi/" target="_blank" rel="noopener noreferrer">LinkedIn</a> or <a href="https://x.com/yesterday_work_" target="_blank" rel="noopener noreferrer">X</a> sharing the real, unfiltered journey - the wins, the cringe moments, and everything in between.</p>
-          
-          <p>If this story resonates with you, if you've ever felt that pit in your stomach before important comms, <a href="/#get-started" class="inline-cta">join our waitlist</a>. We're building something that could genuinely change how confidently you communicate. Because life's too short for communication anxiety.</p>
-          
-          <p>And if nothing else, you'll get to watch a founder either build a great product or spectacularly fail in public. Either way, it should be entertaining.</p>
+          <p class="opener">Hi, I'm Millie.</p>
+
+          <p>
+            TestFeed started on a completely different path. My company
+            yesterday was building a product in HR tech, and we were seeing some
+            promising signals. I'd done everything by the book - spoke to over
+            100 prospective customers before we even started building, validated
+            the problem, got great initial momentum.
+          </p>
+
+          <p>
+            But then things started to wane. The early excitement faded,
+            traction slowed, and I couldn't figure out why.
+          </p>
+
+          <p>
+            Here's the thing about customer research: it's brilliant, but it's
+            also a snapshot in time. I couldn't realistically talk to 10
+            customers every day about every product decision. And the gap
+            between those formal research sessions? That's where I was making
+            hundreds of small choices that ultimately shaped how people
+            experienced what we were building.
+          </p>
+
+          <h2>The LinkedIn post that started it all</h2>
+
+          <p>
+            As any founder has to be these days, you're also expected to be a
+            content creator. So I was batching out LinkedIn posts, trying to
+            build our brand and share industry insights. One day, I quickly
+            wrote something up, didn't give it a second thought, and hit
+            publish.
+          </p>
+
+          <p>
+            The reactions were brutal. People completely misinterpreted what I
+            was trying to say, and not in good ways.
+          </p>
+
+          <p>
+            I sat there reading the comments thinking "how did I get this so
+            wrong?" That's when it hit me like a truck: I was creating
+            everything - posts, features, messaging, product decisions -
+            completely trapped in my own bubble.
+          </p>
+
+          <h2>The epiphany</h2>
+
+          <p>
+            That LinkedIn disaster made me realize something bigger. All those
+            customer conversations I'd had were incredibly valuable, but they
+            couldn't be with me every day when I was making the thousands of
+            micro-decisions that shape a product.
+          </p>
+
+          <p>
+            Should I word this feature description this way or that way? Will
+            users understand this interface flow? Is this pricing page going to
+            make sense to them? Every single day, I needed that customer
+            perspective, but I couldn't exactly fire off Calendly invites for
+            every small decision.
+          </p>
+
+          <p>
+            I started thinking: what if I could have AI versions of those
+            customers I'd interviewed? Personas that thought like them, reacted
+            like them, and could give me their perspective in real-time while
+            I'm building?
+          </p>
+
+          <p>
+            Not generic AI that helps you write better. AI personas that
+            actually think like your real customers and can see what you're
+            working on - whether that's code, designs, presentations, or
+            campaigns.
+          </p>
+
+          <h2>Building TestFeed</h2>
+
+          <p>
+            That's what became TestFeed. I started building it as an internal
+            tool, honestly just trying to regain some confidence in my own
+            decision-making. A prototype that could give me other perspectives
+            when I needed them most.
+          </p>
+
+          <p>
+            And then something unexpected happened - it actually worked. Like,
+            really worked.
+          </p>
+
+          <p>
+            Now I use it every single day. When we're working in features and
+            wondering if the flow makes sense. When I'm reviewing designs and
+            need a user's honest take. When I'm writing a LinkedIn post and want
+            to know if I won't get cancelled. When I'm prepping pitch decks and
+            need to stress-test my messaging.
+          </p>
+
+          <p>
+            Our early users are the same. They've built it into their daily
+            workflow - developers getting customer feedback on localhost,
+            designers pressure-testing interfaces in Figma, marketers validating
+            campaign ideas, founders rehearsing investor presentations. They're
+            getting multiple perspectives from AI personas across every part of
+            building their products.
+          </p>
+
+          <p>
+            I genuinely love what we've built. Not in a "proud founder" way, but
+            in a "holy shit this actually solves the problem I had" way.
+          </p>
+
+          <h2>The journey continues</h2>
+
+          <p>
+            I'm building this in public because I've learned that building in
+            isolation leads to products nobody wants. You can follow along on <a
+              href="https://www.linkedin.com/in/millie-marconi/"
+              target="_blank"
+              rel="noopener noreferrer">LinkedIn</a
+            > or <a
+              href="https://x.com/yesterday_work_"
+              target="_blank"
+              rel="noopener noreferrer">X</a
+            > for the real, unfiltered journey.
+          </p>
+
+          <p>
+            If you've ever felt like you're making decisions in your own head,
+            wondering what your customers would actually think, <a
+              href="/#get-started"
+              class="inline-cta">join our waitlist</a
+            >.
+          </p>
+
+          <p>
+            Because having customer perspective available 24/7 isn't just nice
+            to have - it's how you build things people actually want.
+          </p>
         </div>
       </article>
     </div>
@@ -88,7 +183,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     text-align: left;
   }
 
-
+  .about-header h1 .testfeed-font {
+    display: inline-block;
+    transform: translateY(-0.11em);
+  }
 
   .about-content {
     max-width: 700px;
@@ -172,4 +270,4 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       font-size: 1.125rem !important;
     }
   }
-</style> 
+</style>
