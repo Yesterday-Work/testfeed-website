@@ -4,6 +4,7 @@ import { Icon } from "astro-icon/components";
 import HomeHero from "../components/HomeHero.astro";
 import FinalCTASection from "../components/FinalCTASection.astro";
 import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
+import DemoVideoSection from "../components/DemoVideoSection.astro";
 ---
 
 <BaseLayout
@@ -24,8 +25,31 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
           stakeholders. Chat with them while you work, share your screen, get
           the feedback you need before you ship to real users.
         </p>
-        <div class="cta-buttons">
-          <a href="#get-started" class="btn btn-primary">Join Waitlist</a>
+        <div class="demo-video-container">
+          <div class="video-wrapper">
+            <div
+              class="video-placeholder"
+              id="hero-video-placeholder"
+              role="button"
+              tabindex="0"
+              aria-label="Play demo video"
+            >
+              <img
+                src="https://img.youtube.com/vi/j6SDj67J5fM/maxresdefault.jpg"
+                alt="TestFeed Demo Video"
+                loading="eager"
+              />
+              <div class="play-button">
+                <svg
+                  class="play-icon"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                  ><path d="M8 5V19L19 12L8 5Z"></path></svg
+                >
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -315,7 +339,10 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
           <div class="use-case-category">Design</div>
           <h3>Validating interfaces before development starts</h3>
           <div class="use-case-image">
-            <img src="/images/testfeed-design.jpg" alt="Figma design feedback" />
+            <img
+              src="/images/testfeed-design.jpg"
+              alt="Figma design feedback"
+            />
           </div>
           <p>
             Get real user reactions on your designs while you're still in Figma.
@@ -328,7 +355,10 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
           <div class="use-case-category">Development</div>
           <h3>Building features with your users watching</h3>
           <div class="use-case-image">
-            <img src="/images/testfeed-development.jpg" alt="Development feedback" />
+            <img
+              src="/images/testfeed-development.jpg"
+              alt="Development feedback"
+            />
           </div>
           <p>
             Test features on localhost with personas who think like your real
@@ -612,9 +642,97 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
 
   .hero-description {
     font-size: 1.2rem;
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
     color: var(--color-text-light);
     line-height: 1.6;
+  }
+
+  .demo-video-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .video-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  }
+
+  .video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .video-placeholder {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .video-placeholder:hover {
+    transform: scale(1.02);
+  }
+
+  .video-placeholder img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-placeholder::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    transition: background 0.3s ease;
+  }
+
+  .video-placeholder:hover::before {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .video-placeholder .play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
+  }
+
+  .video-placeholder:hover .play-button {
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: 0 6px 30px rgba(255, 255, 255, 0.4);
+  }
+
+  .play-icon {
+    width: 30px;
+    height: 30px;
+    color: var(--color-secondary);
   }
 
   .time-label {
@@ -713,8 +831,8 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
   }
 
   .floating-cursor-3 {
-    right: 40%;
-    top: 65%;
+    right: 45%;
+    top: 40%;
     animation: 41s hovering-3 infinite ease-in-out;
   }
 
@@ -1743,7 +1861,7 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
     border: none;
     color: inherit;
     font-size: 1.25rem;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     margin-bottom: var(--spacing-sm);
     line-height: 1.2;
   }
@@ -1946,6 +2064,45 @@ import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
+    // Hero video player
+    const heroVideoPlaceholder = document.getElementById(
+      "hero-video-placeholder",
+    );
+    if (heroVideoPlaceholder) {
+      const videoWrapper = heroVideoPlaceholder.closest(".video-wrapper");
+
+      heroVideoPlaceholder.addEventListener("click", loadHeroVideo);
+      heroVideoPlaceholder.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          loadHeroVideo();
+        }
+      });
+
+      function loadHeroVideo() {
+        if (!videoWrapper) return;
+
+        const iframe = document.createElement("iframe");
+        iframe.setAttribute("width", "100%");
+        iframe.setAttribute("height", "100%");
+        iframe.setAttribute(
+          "src",
+          "https://www.youtube.com/embed/j6SDj67J5fM?autoplay=1&rel=0",
+        );
+        iframe.setAttribute("title", "TestFeed Demo Video");
+        iframe.setAttribute(
+          "allow",
+          "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
+        );
+        iframe.setAttribute("allowfullscreen", "");
+        iframe.style.borderRadius = "12px";
+        iframe.style.display = "block";
+
+        videoWrapper.innerHTML = "";
+        videoWrapper.appendChild(iframe);
+      }
+    }
+
     // Chat feedback message rotation
     const feedbackMessages = [
       "I don't get it",
