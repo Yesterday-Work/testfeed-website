@@ -1017,9 +1017,16 @@ import DemoVideoSection from "../components/DemoVideoSection.astro";
   }
 
   .narrative-content {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
     text-align: center;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: var(--spacing-xl);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   }
 
   .gut-feel-section h2 {
@@ -1057,6 +1064,11 @@ import DemoVideoSection from "../components/DemoVideoSection.astro";
   }
 
   @media (max-width: 768px) {
+    .narrative-content {
+      padding: var(--spacing-lg);
+      border-radius: 16px;
+    }
+
     .gut-feel-section h2 {
       font-size: 2rem;
     }
