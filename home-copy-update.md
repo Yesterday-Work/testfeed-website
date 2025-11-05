@@ -4,18 +4,18 @@ Always-on user feedback
 Subheadline
 Get instant feedback from AI personas that think and react like your real users anywhere you build.
 
-The Problem
 99% of Decisions Are Made on Gut Feel
 Even the best teams - the ones with dedicated researchers, the ones running strategic user studies, the ones that religiously test their big launches - can't research everything. User research is reserved for the major stuff. New product launches. Big feature releases. Critical campaign rollouts.
 But everything else? Every interface tweak, every copy change, every design iteration, every feature decision - that's gut feel territory.
+
 And Gut Feel Is... Inconsistent
 Sometimes you nail it. The feature lands perfectly. Users get it immediately. The campaign resonates. You look like a genius.
 Other times? Not so much. Users are confused. The interface doesn't make sense. The messaging falls flat. You shipped the wrong thing.
+
 When Gut Feel Doesn't Land, You Scramble
 Dig into the analytics. Schedule user interviews. Run post-launch surveys. Figure out what went wrong, why users are bouncing, what you missed. Then iterate. Adjust. Test again. Eventually, you get it right.
 But that cycle - ship, realize it's wrong, research why, fix it - burns time, money, and momentum.
 
-The Solution
 What if you could get directionally right quicker?
 TestFeed fills the space between gut feel and formal research.
 Most decisions are too small for formal research but too important for pure guesswork. TestFeed lives in that gap.
