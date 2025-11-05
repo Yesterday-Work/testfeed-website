@@ -128,18 +128,6 @@ section {
     background-color: var(--color-primary);
 }
 
-.trap-door {
-    position: relative;
-    display: inline-block;
-    transform: rotate(-8deg);
-    transform-origin: center bottom;
-    transition: transform 0.3s ease;
-}
-
-.trap-door:hover {
-    transform: rotate(-12deg);
-}
-
 .testfeed-font {
     font-family: var(--font-logo);
     font-size: 120%;

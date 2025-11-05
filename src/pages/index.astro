@@ -15,15 +15,9 @@ import DemoVideoSection from "../components/DemoVideoSection.astro";
   <section class="hero">
     <div class="container">
       <div class="hero-content">
-        <h1>
-          Create with <span class="react-emphasis">confidence</span>, not <span
-            class="before-fade">crossed fingers</span
-          >
-        </h1>
+        <h1>Always-on user feedback</h1>
         <p class="hero-description">
-          AI personas that think and act like your real customers, users, and
-          stakeholders. Chat with them while you work, share your screen, get
-          the feedback you need before you ship to real users.
+          Get instant feedback from AI personas that think and react like your real users anywhere you build.
         </p>
         <div class="demo-video-container">
           <div class="video-wrapper">
@@ -173,49 +167,39 @@ import DemoVideoSection from "../components/DemoVideoSection.astro";
     </div>
   </section>
 
-  <!-- Creation Trap Section -->
-  <section class="problem">
+  <!-- Gut Feel Section -->
+  <section class="gut-feel-section">
     <div class="container">
-      <h2>The creation <span class="trap-door">trap</span></h2>
-      <div class="problem-grid">
-        <div class="problem-card">
-          <div class="problem-icon">
-            <Icon name="lucide:eye-off" />
-          </div>
-          <h3>You're building in the dark</h3>
-          <p>
-            Should you build this feature or that one? Will this design confuse
-            users? Is this campaign going to work? You're making critical
-            decisions without real feedback, hoping you're building the right
-            thing.
-          </p>
-        </div>
+      <div class="narrative-content">
+        <h2>99% of decisions are made on gut feel</h2>
+        
+        <p class="narrative-text">
+          Even the best teams - the ones with dedicated researchers, the ones running strategic user studies, the ones that religiously test their big launches - can't research everything. User research is reserved for the major stuff. New product launches. Big feature releases. Critical campaign rollouts.
+        </p>
+        
+        <p class="narrative-text emphasis">
+          But everything else? Every interface tweak, every copy change, every design iteration, every feature decision - that's gut feel territory.
+        </p>
 
-        <div class="problem-card">
-          <div class="problem-icon">
-            <Icon name="lucide:hourglass" />
-          </div>
-          <h3>You waste hours second-guessing</h3>
-          <p>
-            When something really matters, you second-guess everything. You know
-            what you want to build, but have no idea if your users will get it.
-            So you keep tweaking, redesigning, rethinking - burning hours on
-            decisions that should take minutes.
-          </p>
-        </div>
+        <h3 class="narrative-heading">And gut feel is... inconsistent</h3>
 
-        <div class="problem-card">
-          <div class="problem-icon">
-            <Icon name="lucide:message-circle-x" />
-          </div>
-          <h3>Real feedback comes too late</h3>
-          <p>
-            You ship the feature and users are confused. You launch the campaign
-            and it flops. You publish the design and nobody gets it. By the time
-            you get real feedback, you've already wasted weeks building the
-            wrong thing.
-          </p>
-        </div>
+        <p class="narrative-text">
+          Sometimes you nail it. The feature lands perfectly. Users get it immediately. The campaign resonates. You look like a genius.
+        </p>
+        
+        <p class="narrative-text">
+          Other times? Not so much. Users are confused. The interface doesn't make sense. The messaging falls flat. You shipped the wrong thing.
+        </p>
+
+        <h3 class="narrative-heading">When gut feel doesn't land, you scramble</h3>
+
+        <p class="narrative-text">
+          Dig into the analytics. Schedule user interviews. Run post-launch surveys. Figure out what went wrong, why users are bouncing, what you missed. Then iterate. Adjust. Test again. Eventually, you get it right.
+        </p>
+        
+        <p class="narrative-text final">
+          But that cycle - ship, realize it's wrong, research why, fix it - burns time, money, and momentum.
+        </p>
       </div>
     </div>
   </section>
@@ -1026,89 +1010,64 @@ import DemoVideoSection from "../components/DemoVideoSection.astro";
     }
   }
 
-  /* Problem Section */
-  .problem {
+  /* Gut Feel Section */
+  .gut-feel-section {
     padding: var(--spacing-xxl) 0;
-  }
-
-  .problem-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--spacing-lg);
-  }
-
-  .problem-card {
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.06) 0%,
-      rgba(255, 255, 255, 0.02) 100%
-    );
-    padding: var(--spacing-lg);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    transition: all 0.3s ease;
-    height: 100%;
     position: relative;
   }
 
-  .problem-card:hover {
-    transform: translateY(-2px);
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.08) 0%,
-      rgba(255, 255, 255, 0.03) 100%
-    );
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  .narrative-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
   }
 
-  .problem-icon {
-    margin-bottom: var(--spacing-lg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    color: var(--color-white);
-    transition: all 0.3s ease;
-  }
-
-  .problem-card:hover .problem-icon {
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-  }
-
-  .problem-icon :global(svg) {
-    width: 24px;
-    height: 24px;
-    transition: transform 0.3s ease;
-  }
-
-  .problem-card:hover .problem-icon :global(svg) {
-    transform: scale(1.05);
-  }
-
-  .problem-card h3 {
-    color: var(--color-white);
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: var(--spacing-md);
+  .gut-feel-section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-xl);
     line-height: 1.3;
-    transition: color 0.3s ease;
+    color: var(--color-white);
   }
 
-  .problem-card p {
+  .narrative-heading {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-white);
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.3;
+  }
+
+  .narrative-text {
+    font-size: 1.125rem;
+    line-height: 1.8;
     color: var(--color-text-light);
-    line-height: 1.6;
-    font-size: 0.95rem;
-    transition: color 0.3s ease;
+    margin-bottom: var(--spacing-lg);
   }
 
-  .problem-card:hover p {
-    color: rgba(255, 255, 255, 0.8);
+  .narrative-text.emphasis {
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .narrative-text.final {
+    font-weight: 500;
+    color: var(--color-white);
+  }
+
+  @media (max-width: 768px) {
+    .gut-feel-section h2 {
+      font-size: 2rem;
+    }
+
+    .narrative-heading {
+      font-size: 1.5rem;
+    }
+
+    .narrative-text {
+      font-size: 1rem;
+    }
   }
 
   /* How it works Section */
