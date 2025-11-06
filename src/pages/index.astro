@@ -309,6 +309,46 @@ import DemoVideoSection from "../components/DemoVideoSection.astro";
                   </div>
                 </div>
               </div>
+              
+              <!-- Gen Z College Student Cursor -->
+              <div class="empathy-cursor" id="empathy-cursor">
+                <svg width="26" height="30" fill="none" xmlns="http://www.w3.org/2000/svg"
+                  ><g filter="url(#a)"
+                    ><path d="m8.5 19.5-2-12 10 6L11 15l-2.5 4.5Z" fill="#F59E0B" rx="2"
+                    ></path><path
+                      d="m6.757 7.071-.928-.557.178 1.068 2 12 .235 1.412.695-1.251 2.398-4.316 5.297-1.445 1.13-.308-1.005-.603-10-6Z"
+                      stroke="#fff"
+                      stroke-width="1.5"></path></g
+                  ><defs
+                    ><filter
+                      id="a"
+                      x=".158"
+                      y=".528"
+                      width="23.866"
+                      height="26.959"
+                      filterUnits="userSpaceOnUse"
+                      color-interpolation-filters="sRGB"
+                      ><feFlood flood-opacity="0" result="BackgroundImageFix"
+                      ></feFlood><feColorMatrix
+                        in="SourceAlpha"
+                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                        result="hardAlpha"></feColorMatrix><feOffset dy="2"
+                      ></feOffset><feGaussianBlur stdDeviation="3"
+                      ></feGaussianBlur><feComposite in2="hardAlpha" operator="out"
+                      ></feComposite><feColorMatrix
+                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"
+                      ></feColorMatrix><feBlend
+                        in2="BackgroundImageFix"
+                        result="effect1_dropShadow_1_4"></feBlend><feBlend
+                        in="SourceGraphic"
+                        in2="effect1_dropShadow_1_4"
+                        result="shape"></feBlend></filter
+                    ></defs
+                  ></svg
+                >
+                <span class="cursor-name">Gen Z College Student</span>
+                <div class="cursor-comment" id="empathy-comment"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -499,46 +539,6 @@ import DemoVideoSection from "../components/DemoVideoSection.astro";
           </p>
         </div>
       </div>
-    </div>
-
-    <!-- Gen Z College Student Cursor -->
-    <div class="empathy-cursor" id="empathy-cursor">
-      <svg width="26" height="30" fill="none" xmlns="http://www.w3.org/2000/svg"
-        ><g filter="url(#a)"
-          ><path d="m8.5 19.5-2-12 10 6L11 15l-2.5 4.5Z" fill="#F59E0B" rx="2"
-          ></path><path
-            d="m6.757 7.071-.928-.557.178 1.068 2 12 .235 1.412.695-1.251 2.398-4.316 5.297-1.445 1.13-.308-1.005-.603-10-6Z"
-            stroke="#fff"
-            stroke-width="1.5"></path></g
-        ><defs
-          ><filter
-            id="a"
-            x=".158"
-            y=".528"
-            width="23.866"
-            height="26.959"
-            filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
-            ><feFlood flood-opacity="0" result="BackgroundImageFix"
-            ></feFlood><feColorMatrix
-              in="SourceAlpha"
-              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-              result="hardAlpha"></feColorMatrix><feOffset dy="2"
-            ></feOffset><feGaussianBlur stdDeviation="3"
-            ></feGaussianBlur><feComposite in2="hardAlpha" operator="out"
-            ></feComposite><feColorMatrix
-              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"
-            ></feColorMatrix><feBlend
-              in2="BackgroundImageFix"
-              result="effect1_dropShadow_1_4"></feBlend><feBlend
-              in="SourceGraphic"
-              in2="effect1_dropShadow_1_4"
-              result="shape"></feBlend></filter
-          ></defs
-        ></svg
-      >
-      <span class="cursor-name">Gen Z College Student</span>
-      <div class="cursor-comment" id="empathy-comment"></div>
     </div>
   </section>
 
@@ -2480,8 +2480,8 @@ import DemoVideoSection from "../components/DemoVideoSection.astro";
   /* Empathy Cursor */
   .empathy-cursor {
     position: absolute;
-    right: 25%;
-    top: 25%;
+    right: 15%;
+    top: 15%;
     z-index: 10;
     pointer-events: none;
     animation: 35s empathy-hovering infinite ease-in-out;
