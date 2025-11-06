@@ -1611,15 +1611,20 @@ import WhoUsesSection from "../components/WhoUsesSection.astro";
 
   /* Chat Feedback Animation */
   .chat-feedback-container {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     max-width: 300px;
-    min-height: 48px;
+    min-height: 60px;
     margin: 0 auto;
   }
 
   .chat-message {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     background: #ffffff;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 16px;
@@ -1627,12 +1632,22 @@ import WhoUsesSection from "../components/WhoUsesSection.astro";
     color: #000000;
     font-size: 0.95rem;
     line-height: 1.4;
+    white-space: nowrap;
   }
 
   .loading-message {
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 12px 20px;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .loading-message.show {
+    opacity: 1;
+    visibility: visible;
   }
 
   .typing-indicator {
@@ -1672,7 +1687,19 @@ import WhoUsesSection from "../components/WhoUsesSection.astro";
 
   .feedback-message {
     opacity: 0;
-    animation: fadeInMessage 0.5s ease-out forwards;
+    visibility: hidden;
+    z-index: 2;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+  }
+
+  .feedback-message.hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .feedback-message.show {
+    opacity: 1;
+    visibility: visible;
   }
 
   @keyframes fadeInMessage {
@@ -2209,42 +2236,41 @@ import WhoUsesSection from "../components/WhoUsesSection.astro";
     function rotateFeedbackMessage() {
       if (!feedbackMessageEl || !loadingMessageEl) return;
 
-      // Hide current message completely
-      feedbackMessageEl.style.display = "none";
-      feedbackMessageEl.style.opacity = "0";
+      // Hide current message with animation
+      feedbackMessageEl.classList.add("hidden");
+      feedbackMessageEl.classList.remove("show");
 
-      // Show loading
-      loadingMessageEl.style.display = "block";
-
+      // Wait for fade out, then show loading
       setTimeout(() => {
+        loadingMessageEl.classList.add("show");
+
         // Update message while loading is showing
-        currentMessageIndex =
-          (currentMessageIndex + 1) % feedbackMessages.length;
-        feedbackMessageEl.textContent = feedbackMessages[currentMessageIndex];
+        setTimeout(() => {
+          currentMessageIndex =
+            (currentMessageIndex + 1) % feedbackMessages.length;
+          feedbackMessageEl.textContent = feedbackMessages[currentMessageIndex];
 
-        // Hide loading
-        loadingMessageEl.style.display = "none";
+          // Hide loading
+          loadingMessageEl.classList.remove("show");
 
-        // Show new message with animation
-        feedbackMessageEl.style.display = "block";
-        feedbackMessageEl.style.animation = "none";
-
-        // Force reflow to restart animation
-        void feedbackMessageEl.offsetWidth;
-
-        feedbackMessageEl.style.animation =
-          "fadeInMessage 0.5s ease-out forwards";
-      }, 1500); // Loading duration
+          // Show new message with animation after a brief delay
+          setTimeout(() => {
+            feedbackMessageEl.classList.remove("hidden");
+            feedbackMessageEl.classList.add("show");
+          }, 100);
+        }, 1200); // Loading duration
+      }, 500); // Wait for message fade out
     }
 
-    // Initialize - hide loading, show first message
+    // Initialize - show first message after a brief delay
     if (feedbackMessageEl && loadingMessageEl) {
-      loadingMessageEl.style.display = "none";
-      feedbackMessageEl.style.display = "block";
-      feedbackMessageEl.style.opacity = "1";
+      // Set initial state
+      feedbackMessageEl.classList.add("show");
 
-      // Start rotation
-      setInterval(rotateFeedbackMessage, 4000); // Rotate every 4 seconds
+      // Start rotation after initial display
+      setTimeout(() => {
+        setInterval(rotateFeedbackMessage, 5000); // Rotate every 5 seconds
+      }, 2000); // Wait 2 seconds before first rotation
     }
 
     // Use cases carousel
