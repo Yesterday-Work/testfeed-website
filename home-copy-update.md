@@ -26,9 +26,10 @@ Most teams cycle between formal research (slow, expensive) and gut feel (fast, r
 
 Who TestFeed Is For
 Every team building for users who makes decisions faster than formal research allows.
-Marketing teams launching campaigns. Developers shipping features. Designers creating interfaces. Product teams building flows. Anyone who asks "what will users think?" more than once a week.
+Marketing teams launching campaigns. 
+Developers shipping features. Designers creating interfaces. Product teams building flows. Anyone who asks "what will users think?" more than once a week.
 
-How Teams Work: Traditional vs TestFeed
+Traditional vs TestFeed
 Traditional Approach: Test at the Gates
 Design → [Test] → Build → Ship → Market → [Test] → Iterate
 You test before big launches. You test after features ship. But everything in between? Pure gut feel.
