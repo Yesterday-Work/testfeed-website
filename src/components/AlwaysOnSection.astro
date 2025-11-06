@@ -1,0 +1,369 @@
+---
+// User icon SVG as HTML string
+const userIconHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M18 20a6 6 0 0 0-12 0"></path>
+  <circle cx="12" cy="10" r="4"></circle>
+  <circle cx="12" cy="12" r="10"></circle>
+</svg>`;
+---
+
+<section class="comparison-section">
+  <div class="container">
+    <div class="comparison-header">
+      <h2>What always-on feedback looks like</h2>
+      <p class="section-subtitle">
+        User feedback for every decision, not just the big ones.
+      </p>
+    </div>
+
+    <div class="comparison-visual">
+      <!-- Traditional: Testing at Milestones -->
+      <div class="approach-column">
+        <div class="approach-header">
+          <h3>Traditional testing</h3>
+          <p>Testing at milestones</p>
+        </div>
+
+        <div class="vertical-flow">
+          <div class="flow-stage dimmed">
+            <div class="stage-circle"><span>Plan</span></div>
+            <div class="flow-connector"></div>
+          </div>
+
+          <div class="flow-stage dimmed">
+            <div class="stage-circle"><span>Design</span></div>
+            <div class="flow-connector"></div>
+          </div>
+
+          <div class="flow-stage dimmed">
+            <div class="stage-circle"><span>Build</span></div>
+            <div class="flow-connector"></div>
+          </div>
+
+          <div class="flow-stage bright">
+            <div class="stage-circle-with-orbit">
+              <div class="static-users">
+                {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map(angle => (
+                  <div class="static-user" style={`transform: rotate(${angle}deg);`} set:html={userIconHTML} />
+                ))}
+              </div>
+              <div class="stage-circle"><span>Test</span></div>
+            </div>
+            <div class="flow-connector"></div>
+          </div>
+
+          <div class="flow-stage dimmed">
+            <div class="stage-circle"><span>Market</span></div>
+            <div class="flow-connector"></div>
+          </div>
+
+          <div class="flow-stage bright">
+            <div class="stage-circle-with-orbit">
+              <div class="static-users">
+                {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map(angle => (
+                  <div class="static-user" style={`transform: rotate(${angle}deg);`} set:html={userIconHTML} />
+                ))}
+              </div>
+              <div class="stage-circle"><span>Test</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TestFeed: Feedback in Flow of Work -->
+      <div class="approach-column">
+        <div class="approach-header">
+          <h3>With TestFeed</h3>
+          <p>Feedback in the flow of work</p>
+        </div>
+
+        <div class="vertical-flow">
+          <div class="flow-stage bright">
+            <div class="stage-circle-with-orbit">
+              <div class="orbiting-users">
+                {[0, -0.67, -1.33, -2.0, -2.67, -3.33, -4.0, -4.67, -5.33, -6.0, -6.67, -7.33].map(delay => (
+                  <div class="user-satellite" style={`animation-delay: ${delay}s;`} set:html={userIconHTML} />
+                ))}
+              </div>
+              <div class="stage-circle"><span>Plan</span></div>
+            </div>
+            <div class="flow-connector"></div>
+          </div>
+
+          <div class="flow-stage bright">
+            <div class="stage-circle-with-orbit">
+              <div class="orbiting-users">
+                {[0, -0.67, -1.33, -2.0, -2.67, -3.33, -4.0, -4.67, -5.33, -6.0, -6.67, -7.33].map(delay => (
+                  <div class="user-satellite" style={`animation-delay: ${delay}s;`} set:html={userIconHTML} />
+                ))}
+              </div>
+              <div class="stage-circle"><span>Design</span></div>
+            </div>
+            <div class="flow-connector"></div>
+          </div>
+
+          <div class="flow-stage bright">
+            <div class="stage-circle-with-orbit">
+              <div class="orbiting-users">
+                {[0, -0.67, -1.33, -2.0, -2.67, -3.33, -4.0, -4.67, -5.33, -6.0, -6.67, -7.33].map(delay => (
+                  <div class="user-satellite" style={`animation-delay: ${delay}s;`} set:html={userIconHTML} />
+                ))}
+              </div>
+              <div class="stage-circle"><span>Build</span></div>
+            </div>
+            <div class="flow-connector"></div>
+          </div>
+
+          <div class="flow-stage bright">
+            <div class="stage-circle-with-orbit">
+              <div class="static-users">
+                {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map(angle => (
+                  <div class="static-user" style={`transform: rotate(${angle}deg);`} set:html={userIconHTML} />
+                ))}
+              </div>
+              <div class="stage-circle"><span>Test</span></div>
+            </div>
+            <div class="flow-connector"></div>
+          </div>
+
+          <div class="flow-stage bright">
+            <div class="stage-circle-with-orbit">
+              <div class="orbiting-users">
+                {[0, -0.67, -1.33, -2.0, -2.67, -3.33, -4.0, -4.67, -5.33, -6.0, -6.67, -7.33].map(delay => (
+                  <div class="user-satellite" style={`animation-delay: ${delay}s;`} set:html={userIconHTML} />
+                ))}
+              </div>
+              <div class="stage-circle"><span>Market</span></div>
+            </div>
+            <div class="flow-connector"></div>
+          </div>
+
+          <div class="flow-stage bright">
+            <div class="stage-circle-with-orbit">
+              <div class="static-users">
+                {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map(angle => (
+                  <div class="static-user" style={`transform: rotate(${angle}deg);`} set:html={userIconHTML} />
+                ))}
+              </div>
+              <div class="stage-circle"><span>Test</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  /* Comparison Section */
+  .comparison-section {
+    background: var(--color-background);
+    padding: var(--spacing-xxl) 0;
+  }
+
+  .comparison-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xxl);
+  }
+
+  .comparison-header h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--color-white);
+    line-height: 1.2;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section-subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+  }
+
+  .comparison-visual {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-xxl);
+    max-width: 1100px;
+    margin: 0 auto var(--spacing-xxl);
+  }
+
+  .approach-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .approach-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .approach-header h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-white);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .approach-header p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.4);
+    margin: 0;
+  }
+
+  .vertical-flow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .flow-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .stage-circle {
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.125rem;
+    font-weight: 500;
+    position: relative;
+    z-index: 2;
+  }
+
+  .flow-stage.dimmed .stage-circle {
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .flow-stage.bright .stage-circle {
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--color-white);
+    font-weight: 600;
+  }
+
+  .flow-connector {
+    width: 2px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .stage-circle-with-orbit {
+    position: relative;
+    width: 128px;
+    height: 128px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .orbiting-users {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .user-satellite {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    animation: orbit 8s linear infinite;
+  }
+
+  .user-satellite svg {
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.4);
+    filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.1));
+  }
+
+  @keyframes orbit {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .static-users {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .static-user {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  .static-user svg {
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 1);
+    filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.3));
+  }
+
+  @media (max-width: 968px) {
+    .comparison-header h2 {
+      font-size: 2rem;
+    }
+
+    .section-subtitle {
+      font-size: 1.05rem;
+    }
+
+    .comparison-visual {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-xxl);
+    }
+
+    .approach-header h3 {
+      font-size: 1.25rem;
+    }
+
+    .stage-circle {
+      width: 100px;
+      height: 100px;
+      font-size: 1rem;
+    }
+
+    .stage-circle-with-orbit {
+      width: 100px;
+      height: 100px;
+    }
+
+    .orbiting-users {
+      width: 125px;
+      height: 125px;
+    }
+
+    .static-users {
+      width: 125px;
+      height: 125px;
+    }
+
+    .flow-connector {
+      height: 36px;
+    }
+  }
+</style>
