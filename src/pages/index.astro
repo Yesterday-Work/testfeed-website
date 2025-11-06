@@ -397,15 +397,17 @@ import DemoVideoSection from "../components/DemoVideoSection.astro";
     <div class="container">
       <div class="section-header">
         <h2>Who uses TestFeed</h2>
-        <p class="section-intro">Anyone who asks "what will users think?" more than once a week.</p>
+        <p class="section-intro">
+          Anyone who asks "what will users think?" more than once a week.
+        </p>
       </div>
 
       <div class="use-case-grid">
         <!-- Product Managers -->
         <div class="use-case-row">
-          <div class="use-case-image">
+          <div class="transparent-image">
             <img
-              src="/images/testfeed-product.jpg"
+              src="/images/TestFeed-Product.png"
               alt="Product managers using TestFeed"
             />
           </div>
@@ -413,16 +415,18 @@ import DemoVideoSection from "../components/DemoVideoSection.astro";
             <div class="use-case-label">Product Managers</div>
             <h3>Ideating features</h3>
             <p>
-              Three features on the roadmap. Limited dev time. Which one actually solves user problems? Get reactions to concepts before you commit the quarter.
+              Three features on the roadmap. Limited dev time. Which one
+              actually solves user problems? Get reactions to concepts before
+              you commit the quarter.
             </p>
           </div>
         </div>
 
         <!-- Designers -->
         <div class="use-case-row reverse">
-          <div class="use-case-image">
+          <div class="transparent-image">
             <img
-              src="/images/testfeed-design.jpg"
+              src="/images/TestFeed-Design.png"
               alt="Designers using TestFeed"
             />
           </div>
@@ -430,16 +434,18 @@ import DemoVideoSection from "../components/DemoVideoSection.astro";
             <div class="use-case-label">Designers</div>
             <h3>Creating interfaces</h3>
             <p>
-              Testing navigation flows. Checkout interactions. Onboarding steps. Get reactions while you're still moving pixels, not after it's in production.
+              Testing navigation flows. Checkout interactions. Onboarding steps.
+              Get reactions while you're still moving pixels, not after it's in
+              production.
             </p>
           </div>
         </div>
 
         <!-- Developers -->
         <div class="use-case-row">
-          <div class="use-case-image">
+          <div class="transparent-image">
             <img
-              src="/images/testfeed-development.jpg"
+              src="/images/TestFeed-Development.png"
               alt="Developers using TestFeed"
             />
           </div>
@@ -447,16 +453,17 @@ import DemoVideoSection from "../components/DemoVideoSection.astro";
             <div class="use-case-label">Developers</div>
             <h3>Deploying code</h3>
             <p>
-              Built a new authentication flow. Refactored the dashboard. Added a settings panel. Does it make sense to someone seeing it fresh?
+              Built a new authentication flow. Refactored the dashboard. Added a
+              settings panel. Does it make sense to someone seeing it fresh?
             </p>
           </div>
         </div>
 
         <!-- Marketers -->
         <div class="use-case-row reverse">
-          <div class="use-case-image">
+          <div class="transparent-image">
             <img
-              src="/images/testfeed-marketing.jpg"
+              src="/images/TestFeed-Marketing.png"
               alt="Marketers using TestFeed"
             />
           </div>
@@ -464,7 +471,9 @@ import DemoVideoSection from "../components/DemoVideoSection.astro";
             <div class="use-case-label">Marketers</div>
             <h3>Launching campaigns</h3>
             <p>
-              Five headline options. Three value props. Two completely different creative directions. Know which one lands before budget's on the line.
+              Five headline options. Three value props. Two completely different
+              creative directions. Know which one lands before budget's on the
+              line.
             </p>
           </div>
         </div>
@@ -1801,12 +1810,32 @@ import DemoVideoSection from "../components/DemoVideoSection.astro";
   /* Who TestFeed Is For Section */
   .who-its-for {
     padding: var(--spacing-xxl) 0;
-    background: var(--color-background);
+    position: relative;
+    background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+    overflow: hidden;
+  }
+
+  .who-its-for::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(255, 255, 255, 0.05) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
   }
 
   .who-its-for .section-header {
     text-align: center;
     margin-bottom: var(--spacing-xxl);
+    position: relative;
+    z-index: 1;
   }
 
   .who-its-for .section-header h2 {
@@ -1827,6 +1856,8 @@ import DemoVideoSection from "../components/DemoVideoSection.astro";
   .use-case-grid {
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
   }
 
   .use-case-row {
@@ -1861,6 +1892,23 @@ import DemoVideoSection from "../components/DemoVideoSection.astro";
   .use-case-row:hover .use-case-image {
     transform: scale(1.02);
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  }
+
+  .transparent-image {
+    position: relative;
+    transition: all 0.4s ease;
+    filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.4));
+  }
+
+  .transparent-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .use-case-row:hover .transparent-image {
+    transform: scale(1.02);
+    filter: drop-shadow(0 30px 80px rgba(0, 0, 0, 0.5));
   }
 
   .use-case-image img {
@@ -1916,12 +1964,17 @@ import DemoVideoSection from "../components/DemoVideoSection.astro";
   @media (max-width: 968px) {
     .use-case-row {
       grid-template-columns: 1fr;
-      gap: var(--spacing-lg);
-      padding: var(--spacing-lg) 0;
+      gap: var(--spacing-md);
+      padding: var(--spacing-sm) 0;
+      margin-bottom: var(--spacing-md);
     }
 
     .use-case-row.reverse {
       direction: ltr;
+    }
+
+    .use-case-content {
+      padding: var(--spacing-md);
     }
 
     .use-case-content h3 {
