@@ -581,9 +581,9 @@ import WhoUsesSection from "../components/WhoUsesSection.astro";
     }
   </script>
 
-  <FinalCTASection 
+  <FinalCTASection
     title="Ship with confidence"
-    text="We invite new users every day. Get early access to the Chrome extension."
+    text="Join the waitlist for early access. We invite new users every day."
   />
 </BaseLayout>
 
@@ -1600,6 +1600,13 @@ import WhoUsesSection from "../components/WhoUsesSection.astro";
     width: 20px;
     height: 20px;
     color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* Hide browser actions on small mobile screens to prevent overflow */
+  @media (max-width: 430px) {
+    .browser-actions {
+      display: none;
+    }
   }
 
   /* Chat Feedback Animation */
