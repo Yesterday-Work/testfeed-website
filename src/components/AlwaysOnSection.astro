@@ -21,7 +21,7 @@ const userIconHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none
       <div class="approach-column">
         <div class="approach-header">
           <h3>Traditional testing</h3>
-          <p>Testing at milestones</p>
+          <p>Testing at key milestones</p>
         </div>
 
         <div class="vertical-flow">
@@ -35,6 +35,26 @@ const userIconHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none
             <div class="flow-connector"></div>
           </div>
 
+          <div class="flow-stage bright">
+            <div class="stage-circle-with-orbit">
+              <div class="static-users">
+                {
+                  [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map(
+                    (angle) => (
+                      <div
+                        class="static-user"
+                        style={`transform: rotate(${angle}deg);`}
+                        set:html={userIconHTML}
+                      />
+                    ),
+                  )
+                }
+              </div>
+              <div class="stage-circle"><span>Test</span></div>
+            </div>
+            <div class="flow-connector"></div>
+          </div>
+
           <div class="flow-stage dimmed">
             <div class="stage-circle"><span>Build</span></div>
             <div class="flow-connector"></div>
@@ -43,9 +63,17 @@ const userIconHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none
           <div class="flow-stage bright">
             <div class="stage-circle-with-orbit">
               <div class="static-users">
-                {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map(angle => (
-                  <div class="static-user" style={`transform: rotate(${angle}deg);`} set:html={userIconHTML} />
-                ))}
+                {
+                  [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map(
+                    (angle) => (
+                      <div
+                        class="static-user"
+                        style={`transform: rotate(${angle}deg);`}
+                        set:html={userIconHTML}
+                      />
+                    ),
+                  )
+                }
               </div>
               <div class="stage-circle"><span>Test</span></div>
             </div>
@@ -54,18 +82,6 @@ const userIconHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none
 
           <div class="flow-stage dimmed">
             <div class="stage-circle"><span>Market</span></div>
-            <div class="flow-connector"></div>
-          </div>
-
-          <div class="flow-stage bright">
-            <div class="stage-circle-with-orbit">
-              <div class="static-users">
-                {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map(angle => (
-                  <div class="static-user" style={`transform: rotate(${angle}deg);`} set:html={userIconHTML} />
-                ))}
-              </div>
-              <div class="stage-circle"><span>Test</span></div>
-            </div>
           </div>
         </div>
       </div>
@@ -81,9 +97,18 @@ const userIconHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none
           <div class="flow-stage bright">
             <div class="stage-circle-with-orbit">
               <div class="orbiting-users">
-                {[0, -0.67, -1.33, -2.0, -2.67, -3.33, -4.0, -4.67, -5.33, -6.0, -6.67, -7.33].map(delay => (
-                  <div class="user-satellite" style={`animation-delay: ${delay}s;`} set:html={userIconHTML} />
-                ))}
+                {
+                  [
+                    0, -0.67, -1.33, -2.0, -2.67, -3.33, -4.0, -4.67, -5.33,
+                    -6.0, -6.67, -7.33,
+                  ].map((delay) => (
+                    <div
+                      class="user-satellite"
+                      style={`animation-delay: ${delay}s;`}
+                      set:html={userIconHTML}
+                    />
+                  ))
+                }
               </div>
               <div class="stage-circle"><span>Plan</span></div>
             </div>
@@ -93,9 +118,18 @@ const userIconHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none
           <div class="flow-stage bright">
             <div class="stage-circle-with-orbit">
               <div class="orbiting-users">
-                {[0, -0.67, -1.33, -2.0, -2.67, -3.33, -4.0, -4.67, -5.33, -6.0, -6.67, -7.33].map(delay => (
-                  <div class="user-satellite" style={`animation-delay: ${delay}s;`} set:html={userIconHTML} />
-                ))}
+                {
+                  [
+                    0, -0.67, -1.33, -2.0, -2.67, -3.33, -4.0, -4.67, -5.33,
+                    -6.0, -6.67, -7.33,
+                  ].map((delay) => (
+                    <div
+                      class="user-satellite"
+                      style={`animation-delay: ${delay}s;`}
+                      set:html={userIconHTML}
+                    />
+                  ))
+                }
               </div>
               <div class="stage-circle"><span>Design</span></div>
             </div>
@@ -104,10 +138,39 @@ const userIconHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none
 
           <div class="flow-stage bright">
             <div class="stage-circle-with-orbit">
+              <div class="static-users">
+                {
+                  [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map(
+                    (angle) => (
+                      <div
+                        class="static-user"
+                        style={`transform: rotate(${angle}deg);`}
+                        set:html={userIconHTML}
+                      />
+                    ),
+                  )
+                }
+              </div>
+              <div class="stage-circle"><span>Test</span></div>
+            </div>
+            <div class="flow-connector"></div>
+          </div>
+
+          <div class="flow-stage bright">
+            <div class="stage-circle-with-orbit">
               <div class="orbiting-users">
-                {[0, -0.67, -1.33, -2.0, -2.67, -3.33, -4.0, -4.67, -5.33, -6.0, -6.67, -7.33].map(delay => (
-                  <div class="user-satellite" style={`animation-delay: ${delay}s;`} set:html={userIconHTML} />
-                ))}
+                {
+                  [
+                    0, -0.67, -1.33, -2.0, -2.67, -3.33, -4.0, -4.67, -5.33,
+                    -6.0, -6.67, -7.33,
+                  ].map((delay) => (
+                    <div
+                      class="user-satellite"
+                      style={`animation-delay: ${delay}s;`}
+                      set:html={userIconHTML}
+                    />
+                  ))
+                }
               </div>
               <div class="stage-circle"><span>Build</span></div>
             </div>
@@ -117,9 +180,17 @@ const userIconHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none
           <div class="flow-stage bright">
             <div class="stage-circle-with-orbit">
               <div class="static-users">
-                {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map(angle => (
-                  <div class="static-user" style={`transform: rotate(${angle}deg);`} set:html={userIconHTML} />
-                ))}
+                {
+                  [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map(
+                    (angle) => (
+                      <div
+                        class="static-user"
+                        style={`transform: rotate(${angle}deg);`}
+                        set:html={userIconHTML}
+                      />
+                    ),
+                  )
+                }
               </div>
               <div class="stage-circle"><span>Test</span></div>
             </div>
@@ -129,23 +200,20 @@ const userIconHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none
           <div class="flow-stage bright">
             <div class="stage-circle-with-orbit">
               <div class="orbiting-users">
-                {[0, -0.67, -1.33, -2.0, -2.67, -3.33, -4.0, -4.67, -5.33, -6.0, -6.67, -7.33].map(delay => (
-                  <div class="user-satellite" style={`animation-delay: ${delay}s;`} set:html={userIconHTML} />
-                ))}
+                {
+                  [
+                    0, -0.67, -1.33, -2.0, -2.67, -3.33, -4.0, -4.67, -5.33,
+                    -6.0, -6.67, -7.33,
+                  ].map((delay) => (
+                    <div
+                      class="user-satellite"
+                      style={`animation-delay: ${delay}s;`}
+                      set:html={userIconHTML}
+                    />
+                  ))
+                }
               </div>
               <div class="stage-circle"><span>Market</span></div>
-            </div>
-            <div class="flow-connector"></div>
-          </div>
-
-          <div class="flow-stage bright">
-            <div class="stage-circle-with-orbit">
-              <div class="static-users">
-                {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map(angle => (
-                  <div class="static-user" style={`transform: rotate(${angle}deg);`} set:html={userIconHTML} />
-                ))}
-              </div>
-              <div class="stage-circle"><span>Test</span></div>
             </div>
           </div>
         </div>
@@ -158,7 +226,7 @@ const userIconHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none
   /* Comparison Section */
   .comparison-section {
     background: var(--color-background);
-    padding: var(--spacing-xxl) 0;
+    padding: var(--spacing-xxl) 0 var(--spacing-xl) 0;
   }
 
   .comparison-header {
