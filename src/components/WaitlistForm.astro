@@ -41,59 +41,15 @@
     const form = document.getElementById("waitlist-form");
     if (!form) return;
 
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
+    // Let forms.js handle the submission — only add UI feedback
+    form.addEventListener("submit", function () {
+      const formEl = form as HTMLFormElement;
+      const formGroup = formEl.querySelector(".form-group") as HTMLElement;
+      const message = formEl.querySelector(".form-message") as HTMLDivElement;
 
-      const form = e.target as HTMLFormElement;
-      const email = (form.email as HTMLInputElement).value;
-      const websiteEl = document.getElementById("website-url") as HTMLInputElement;
-      const websiteVal = websiteEl ? websiteEl.value : "";
-      const button = form.querySelector(
-        'button[type="submit"]',
-      ) as HTMLButtonElement;
-      const btnText = button.querySelector(".btn-text") as HTMLSpanElement;
-      const btnLoading = button.querySelector(
-        ".btn-loading",
-      ) as HTMLSpanElement;
-      const message = form.querySelector(".form-message") as HTMLDivElement;
-
-      // Show loading state
-      btnText.style.display = "none";
-      btnLoading.style.display = "inline";
-      button.disabled = true;
-
-      if (websiteVal) {
-        setTimeout(() => {
-          message.textContent = "Thanks for joining!";
-          message.className = "form-message success";
-          message.style.display = "block";
-
-          form.reset();
-          btnText.style.display = "inline";
-          btnLoading.style.display = "none";
-          button.disabled = false;
-        }, 1000);
-        return;
-      }
-
-      // Basic email validation
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        message.textContent = "Please enter a valid email address";
-        message.className = "form-message error";
-        message.style.display = "block";
-
-        btnText.style.display = "inline";
-        btnLoading.style.display = "none";
-        button.disabled = false;
-        return;
-      }
-
-      // Customer.io Forms handler handles the data submission.
-      // Show success state after a short delay to allow forms.js to process.
+      // Show success after a short delay to let forms.js process
       setTimeout(() => {
-        (form.querySelector(".form-group") as HTMLElement).style.display =
-          "none";
+        formGroup.style.display = "none";
         message.textContent = "Thanks for joining! We'll be in touch soon.";
         message.className = "form-message success";
         message.style.display = "block";
