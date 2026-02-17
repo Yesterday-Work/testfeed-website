@@ -41,8 +41,9 @@
     const form = document.getElementById("waitlist-form");
     if (!form) return;
 
-    // Let forms.js handle the submission — only add UI feedback
-    form.addEventListener("submit", function () {
+    // Let forms.js capture the data — prevent native GET submission
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
       const formEl = form as HTMLFormElement;
       const formGroup = formEl.querySelector(".form-group") as HTMLElement;
       const message = formEl.querySelector(".form-message") as HTMLDivElement;
