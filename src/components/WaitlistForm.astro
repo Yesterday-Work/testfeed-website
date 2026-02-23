@@ -13,6 +13,12 @@
         class="name-input"
       />
       <input
+        type="text"
+        name="company"
+        placeholder="Company"
+        class="company-input"
+      />
+      <input
         type="email"
         name="email"
         placeholder="Email"
@@ -78,6 +84,7 @@
   }
 
   .name-input,
+  .company-input,
   .email-input {
     flex: 1;
     padding: var(--spacing-sm) var(--spacing-md);
@@ -90,11 +97,13 @@
   }
 
   .name-input::placeholder,
+  .company-input::placeholder,
   .email-input::placeholder {
     color: rgba(255, 255, 255, 0.6);
   }
 
   .name-input:focus,
+  .company-input:focus,
   .email-input:focus {
     outline: none;
     border-color: var(--color-white);
