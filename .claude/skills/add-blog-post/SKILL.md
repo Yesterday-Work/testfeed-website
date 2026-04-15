@@ -1,6 +1,7 @@
 ---
 name: add-blog-post
 description: Add a new blog post to the testfeed-website. Use when the user wants to publish a markdown file as a blog post. Accepts a file path or pasted markdown content, validates frontmatter, writes the file to the blog directory, commits, and pushes.
+model: claude-haiku-4-5-20251001
 ---
 
 # Add Blog Post Skill
