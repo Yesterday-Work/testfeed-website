@@ -69,7 +69,7 @@ If a file with that slug already exists, **warn the user** and ask whether to ov
 cd /home/user/testfeed-website
 git add src/content/blog/[slug].md
 git commit -m "add blog post: [slug]"
-git push -u origin claude/add-blog-posts-wgToW
+git push -u origin claude/markdown-blog-publish-skill-2t7n1
 ```
 
 If the push fails due to a network error, retry up to 4 times with exponential backoff (2s, 4s, 8s, 16s).
@@ -86,4 +86,4 @@ Report back to the user with:
 
 - **Blog directory**: `/home/user/testfeed-website/src/content/blog/`
 - **Content schema**: `/home/user/testfeed-website/src/content/config.ts`
-- **Development branch**: `claude/add-blog-posts-wgToW`
+- **Development branch**: `claude/markdown-blog-publish-skill-2t7n1`
