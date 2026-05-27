@@ -983,6 +983,60 @@ import WhoUsesSection from "../components/WhoUsesSection.astro";
     }
   }
 
+  /* Mobile responsiveness: 375px and below */
+  @media (max-width: 375px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .hero h1 {
+      font-size: 1.8rem;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .hero-description {
+      font-size: 0.95rem;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+
+    .demo-video-container {
+      max-width: 100%;
+      padding: 0 var(--spacing-md);
+    }
+  }
+
+  /* Mobile responsiveness: 376px to 768px */
+  @media (min-width: 376px) and (max-width: 768px) {
+    .hero {
+      padding: var(--spacing-xl) 0;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .hero-description {
+      font-size: 1rem;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+
+    .demo-video-container {
+      max-width: 100%;
+      padding: 0 var(--spacing-md);
+    }
+  }
+
   @media (max-width: 768px) {
     .floating-cursor,
     .floating-cursor-2,
