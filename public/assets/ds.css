@@ -1,0 +1,198 @@
+/* =====================================================================
+   TestFeed — Colors & Type
+   Source: TestFeed Quick Brand Guide (Jorgen Agency, 09-04-2026)
+   ===================================================================== */
+
+/* --- Webfonts -------------------------------------------------------- */
+/* Design-system typefaces:
+   Playfair Display (Bold) — headlines/display
+   Inter (Regular/Medium/Semibold/Bold) — body & UI */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* ============================== COLORS ============================ */
+
+  /* Brand primaries — aligned to TestFeed design-system tokens */
+  --tf-black:        #111111;   /* PRIMARY (ink / dark surface) */
+  --tf-red:          #E6392E;   /* ACCENT            */
+  --tf-yellow:       #FEB800;   /* VIVID YELLOW      */
+  --tf-blue:         #0248AA;   /* BRIGHT BLUE       */
+  --tf-white:        #FEFEFE;   /* BRILLIANCE        */
+
+  /* Working neutrals (derived for UI surfaces) */
+  --tf-ink:          #111111;   /* primary text */
+  --tf-charcoal:     #1A1A1A;   /* deep surface */
+  --tf-graphite:     #2A2A2A;   /* card on black */
+  --tf-stone:        #5F5F5F;   /* secondary / muted body */
+  --tf-fog:          #B5B5B5;   /* hairlines / disabled */
+  --tf-mist:         #E8E1DA;   /* border / dividers */
+  --tf-paper:        #F1EDE7;   /* warm paper background */
+  --tf-cream:        #F8F5F1;   /* lightest background */
+
+  /* Semantic — foreground */
+  --fg-1:            var(--tf-ink);     /* primary text */
+  --fg-2:            var(--tf-stone);   /* secondary text */
+  --fg-3:            var(--tf-fog);     /* tertiary text */
+  --fg-inverse:      var(--tf-white);   /* text on dark/colored */
+
+  /* Semantic — background */
+  --bg-1:            var(--tf-cream);   /* default page background */
+  --bg-2:            var(--tf-paper);   /* alternate / cards on cream */
+  --bg-3:            var(--tf-mist);    /* deepest light surface */
+  --bg-inverse:      var(--tf-black);   /* dark sections */
+  --bg-feature:      var(--tf-red);     /* the loudest brand surface */
+
+  /* Semantic — accents (mapped onto brand triad) */
+  --accent-primary:  var(--tf-red);     /* primary CTAs, hero blocks */
+  --accent-info:     var(--tf-blue);    /* links / informational */
+  --accent-attention:var(--tf-yellow);  /* highlights / callouts */
+
+  /* Semantic — states */
+  --link:            var(--tf-blue);
+  --link-hover:      #013A8A;
+  --success:         #1E7A3C;
+  --warning:         var(--tf-yellow);
+  --danger:          var(--tf-red);
+
+  /* Borders */
+  --border-1:        rgba(0,0,0,0.12);
+  --border-2:        rgba(0,0,0,0.06);
+  --border-strong:   var(--tf-black);
+
+  /* ============================== TYPE ============================== */
+
+  /* Families */
+  --font-display:    'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body:       'Inter', ui-sans-serif, system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono:       ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, monospace;
+
+  /* Weights (Switzer carries the body; display is single-weight) */
+  --w-light:         300;
+  --w-regular:       400;
+  --w-medium:        500;
+  --w-semibold:      600;
+  --w-bold:          700;
+
+  /* Scale — design-system spec (size / line-height) */
+  --fs-display-xl:   clamp(64px, 9vw, 144px);
+  --fs-display-lg:   clamp(48px, 6vw, 96px);
+  --fs-h1:           clamp(40px, 5vw, 72px);   /* Hero 72/80 */
+  --fs-h2:           clamp(32px, 3.6vw, 48px); /* H2 48/56 */
+  --fs-h3:           clamp(26px, 2.4vw, 32px); /* H3 32/40 */
+  --fs-h4:           24px;                     /* H4 24/32 */
+  --fs-body-lg:      18px;                      /* Body 18/28 */
+  --fs-body:         18px;
+  --fs-body-sm:      16px;                      /* Small 16/24 */
+  --fs-caption:      14px;                      /* Caption 14/20 */
+  --fs-eyebrow:      12px;
+
+  /* Line-heights */
+  --lh-tight:        0.95;
+  --lh-snug:         1.1;
+  --lh-normal:       1.45;
+  --lh-loose:        1.6;
+
+  /* Letter-spacing — small caps eyebrows are common in TestFeed system */
+  --ls-eyebrow:      0.14em;
+  --ls-button:       0.04em;
+  --ls-tight:        -0.02em;
+
+  /* ============================== SHAPE ============================= */
+  --radius-0:        0px;        /* the brand leans hard-edged */
+  --radius-1:        2px;
+  --radius-2:        6px;
+  --radius-pill:     999px;
+
+  /* ============================== SPACE ============================= */
+  --space-1:         4px;
+  --space-2:         8px;
+  --space-3:         12px;
+  --space-4:         16px;
+  --space-5:         24px;
+  --space-6:         32px;
+  --space-7:         48px;
+  --space-8:         64px;
+  --space-9:         96px;
+  --space-10:        128px;
+
+  /* ============================== ELEVATION ========================= */
+  --shadow-0:        none;
+  --shadow-1:        0 1px 0 rgba(0,0,0,0.06);
+  --shadow-2:        0 4px 16px rgba(0,0,0,0.08);
+  --shadow-3:        0 12px 40px rgba(0,0,0,0.12);
+  /* Brand uses very flat surfaces; reserve shadows for floating UI */
+
+  /* ============================== MOTION ============================ */
+  --ease-out:        cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out:     cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast:        160ms;
+  --dur-base:        240ms;
+  --dur-slow:        420ms;
+}
+
+/* ====================================================================
+   Semantic element styles (drop-in: include this file and you get base
+   styling for h1..p, button, a out of the box)
+   ==================================================================== */
+
+html, body {
+  font-family: var(--font-body);
+  font-weight: var(--w-regular);
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  color: var(--fg-1);
+  background: var(--bg-1);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: var(--w-bold);   /* display family is single-weight, this just signals intent */
+  letter-spacing: var(--ls-tight);
+  line-height: var(--lh-tight);
+  margin: 0;
+  color: var(--fg-1);
+}
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); line-height: var(--lh-snug); }
+h4 { font-size: var(--fs-h4); line-height: var(--lh-snug); font-family: var(--font-body); font-weight: var(--w-medium); letter-spacing: 0; }
+
+p { margin: 0 0 1em 0; font-weight: var(--w-regular); }
+
+/* Sub-headings: Switzer Medium per the brand guide */
+.subheading, .eyebrow {
+  font-family: var(--font-body);
+  font-weight: var(--w-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-eyebrow);
+  font-size: var(--fs-eyebrow);
+  color: var(--fg-2);
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  font-weight: var(--w-medium);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+a:hover { color: var(--link-hover); }
+
+button, .button {
+  font-family: var(--font-display);
+  font-size: 16px;
+  letter-spacing: var(--ls-button);
+  padding: 14px 24px;
+  background: var(--tf-black);
+  color: var(--fg-inverse);
+  border: 0;
+  border-radius: var(--radius-0);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+button:hover, .button:hover { background: #1a1a1a; }
+button:active, .button:active { transform: translateY(1px); }
+
+code, pre { font-family: var(--font-mono); font-size: 0.9em; }
