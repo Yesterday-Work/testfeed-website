@@ -1,2523 +1,1082 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import { Icon } from "astro-icon/components";
-import HomeHero from "../components/HomeHero.astro";
-import FinalCTASection from "../components/FinalCTASection.astro";
-import IntentionPerceptionViz from "../components/IntentionPerceptionViz.astro";
-import DemoVideoSection from "../components/DemoVideoSection.astro";
-import AlwaysOnSection from "../components/AlwaysOnSection.astro";
-import WhoUsesSection from "../components/WhoUsesSection.astro";
+// TestFeed landing page — ported from the Claude Design handoff bundle
+// ("Landing Page.html"). Self-contained editorial design with its own
+// header/footer/nav, so it intentionally does NOT use BaseLayout.
+const title = "TestFeed — Customer feedback on-demand.";
+const description =
+  "AI respondents built from real audience data. We build an AI panel of your audience, so you can ask them anything, at any time — a score, the quotes, and the next move in under an hour.";
+const bookingUrl = "https://app.usemotion.com/meet/millie-marconi/meeting";
+const siteUrl = Astro.url.origin;
+const ogImage = new URL("/assets/og-image.jpg", siteUrl).href;
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: title,
+  description,
+  url: Astro.url.href,
+  image: ogImage,
+};
 ---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href={Astro.url.href} />
 
-<BaseLayout
-  title="TestFeed - Always-On User Feedback"
-  description="A feed of users on standby, ready whenever you need them. AI personas that see what you're working on and give you instant feedback. Anywhere, anytime."
->
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <h1>Always-on user feedback</h1>
-        <p class="hero-description">
-          Get instant feedback from AI personas that think and react like your
-          real users anywhere you build.
-        </p>
-        <div class="demo-video-container">
-          <div class="video-wrapper">
-            <div
-              class="video-placeholder"
-              id="hero-video-placeholder"
-              role="button"
-              tabindex="0"
-              aria-label="Play demo video"
-            >
-              <img
-                src="https://img.youtube.com/vi/j6SDj67J5fM/maxresdefault.jpg"
-                alt="TestFeed Demo Video"
-                loading="eager"
-              />
-              <div class="play-button">
-                <svg
-                  class="play-icon"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                  ><path d="M8 5V19L19 12L8 5Z"></path></svg
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={Astro.url.href} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="TestFeed" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+<meta name="twitter:site" content="@testfeed" />
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
 
-    <!-- Floating Cursors -->
-    <div class="floating-cursor" id="cursor-1">
-      <svg width="26" height="30" fill="none" xmlns="http://www.w3.org/2000/svg"
-        ><g filter="url(#a)"
-          ><path d="m8.5 19.5-2-12 10 6L11 15l-2.5 4.5Z" fill="#0080FE" rx="2"
-          ></path><path
-            d="m6.757 7.071-.928-.557.178 1.068 2 12 .235 1.412.695-1.251 2.398-4.316 5.297-1.445 1.13-.308-1.005-.603-10-6Z"
-            stroke="#fff"
-            stroke-width="1.5"></path></g
-        ><defs
-          ><filter
-            id="a"
-            x=".158"
-            y=".528"
-            width="23.866"
-            height="26.959"
-            filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
-            ><feFlood flood-opacity="0" result="BackgroundImageFix"
-            ></feFlood><feColorMatrix
-              in="SourceAlpha"
-              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-              result="hardAlpha"></feColorMatrix><feOffset dy="2"
-            ></feOffset><feGaussianBlur stdDeviation="3"
-            ></feGaussianBlur><feComposite in2="hardAlpha" operator="out"
-            ></feComposite><feColorMatrix
-              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"
-            ></feColorMatrix><feBlend
-              in2="BackgroundImageFix"
-              result="effect1_dropShadow_1_4"></feBlend><feBlend
-              in="SourceGraphic"
-              in2="effect1_dropShadow_1_4"
-              result="shape"></feBlend></filter
-          ></defs
-        ></svg
-      >
-      <span class="cursor-name">Startup Founder</span>
-      <div class="cursor-comment" id="comment-1"></div>
-    </div>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
 
-    <div class="floating-cursor-2" id="cursor-2">
-      <svg width="26" height="30" fill="none" xmlns="http://www.w3.org/2000/svg"
-        ><g filter="url(#a)"
-          ><path d="m8.5 19.5-2-12 10 6L11 15l-2.5 4.5Z" fill="#8B5CF6" rx="2"
-          ></path><path
-            d="m6.757 7.071-.928-.557.178 1.068 2 12 .235 1.412.695-1.251 2.398-4.316 5.297-1.445 1.13-.308-1.005-.603-10-6Z"
-            stroke="#fff"
-            stroke-width="1.5"></path></g
-        ><defs
-          ><filter
-            id="a"
-            x=".158"
-            y=".528"
-            width="23.866"
-            height="26.959"
-            filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
-            ><feFlood flood-opacity="0" result="BackgroundImageFix"
-            ></feFlood><feColorMatrix
-              in="SourceAlpha"
-              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-              result="hardAlpha"></feColorMatrix><feOffset dy="2"
-            ></feOffset><feGaussianBlur stdDeviation="3"
-            ></feGaussianBlur><feComposite in2="hardAlpha" operator="out"
-            ></feComposite><feColorMatrix
-              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"
-            ></feColorMatrix><feBlend
-              in2="BackgroundImageFix"
-              result="effect1_dropShadow_1_4"></feBlend><feBlend
-              in="SourceGraphic"
-              in2="effect1_dropShadow_1_4"
-              result="shape"></feBlend></filter
-          ></defs
-        ></svg
-      >
-      <span class="cursor-name">Enterprise CFO</span>
-      <div class="cursor-comment" id="comment-2"></div>
-    </div>
-
-    <div class="floating-cursor-3" id="cursor-3">
-      <svg width="26" height="30" fill="none" xmlns="http://www.w3.org/2000/svg"
-        ><g filter="url(#a)"
-          ><path d="m8.5 19.5-2-12 10 6L11 15l-2.5 4.5Z" fill="#F59E0B" rx="2"
-          ></path><path
-            d="m6.757 7.071-.928-.557.178 1.068 2 12 .235 1.412.695-1.251 2.398-4.316 5.297-1.445 1.13-.308-1.005-.603-10-6Z"
-            stroke="#fff"
-            stroke-width="1.5"></path></g
-        ><defs
-          ><filter
-            id="a"
-            x=".158"
-            y=".528"
-            width="23.866"
-            height="26.959"
-            filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
-            ><feFlood flood-opacity="0" result="BackgroundImageFix"
-            ></feFlood><feColorMatrix
-              in="SourceAlpha"
-              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-              result="hardAlpha"></feColorMatrix><feOffset dy="2"
-            ></feOffset><feGaussianBlur stdDeviation="3"
-            ></feGaussianBlur><feComposite in2="hardAlpha" operator="out"
-            ></feComposite><feColorMatrix
-              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"
-            ></feColorMatrix><feBlend
-              in2="BackgroundImageFix"
-              result="effect1_dropShadow_1_4"></feBlend><feBlend
-              in="SourceGraphic"
-              in2="effect1_dropShadow_1_4"
-              result="shape"></feBlend></filter
-          ></defs
-        ></svg
-      >
-      <span class="cursor-name">Gen Z College Student</span>
-      <div class="cursor-comment" id="comment-3"></div>
-    </div>
-  </section>
-
-  <!-- Gut Feel Section -->
-  <section class="gut-feel-section">
-    <div class="container">
-      <div class="narrative-header">
-        <h2>99% of decisions are made on gut feel</h2>
-      </div>
-
-      <div class="narrative-grid">
-        <div class="narrative-stage stage-1">
-          <h3 class="stage-heading">The reality</h3>
-          <p>
-            Even the best teams - the ones with dedicated researchers, running
-            strategic user studies, religiously testing their big launches -
-            can't research everything.
-          </p>
-          <p class="stage-emphasis">
-            User research is reserved for the major stuff. New product launches.
-            Big feature releases. Critical campaign rollouts.
-          </p>
-          <p class="stage-callout">
-            Everything else? That's gut feel territory.
-          </p>
-        </div>
-
-        <div class="narrative-stage stage-2">
-          <h3 class="stage-heading">And gut feel is... inconsistent</h3>
-          <div class="outcome-split">
-            <div class="outcome good">
-              <div class="outcome-icon">✓</div>
-              <p>
-                Sometimes you nail it. The feature lands perfectly. Users get it
-                immediately. You look like a genius.
-              </p>
-            </div>
-            <div class="outcome bad">
-              <div class="outcome-icon">✗</div>
-              <p>
-                Other times? Users are confused. The interface doesn't make
-                sense. You shipped the wrong thing.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="narrative-stage stage-3">
-          <h3 class="stage-heading">
-            When gut feel doesn't land, you scramble
-          </h3>
-          <p>
-            Dig into analytics → Schedule user interviews → Run post-launch
-            surveys → Figure out what went wrong → Iterate → Adjust → Test again
-            → Eventually get it right
-          </p>
-          <p class="stage-final">
-            But that cycle burns time, money, and momentum.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Solution Section -->
-  <section class="solution-section">
-    <div class="container">
-      <div class="solution-header">
-        <h2>The gap between guessing and knowing</h2>
-      </div>
-
-      <div class="spectrum-container">
-        <div class="spectrum-card left-card">
-          <div class="card-label">Gut Feel</div>
-          <div class="card-description">FAST BUT RISKY</div>
-          <div class="card-detail">
-            This is where +90% of decisions live. Every feature you build, every
-            design you iterate, every campaign you create.<br /><br />
-            Making your best guess based on experience and instinct.
-          </div>
-        </div>
-
-        <div class="spectrum-card center-card">
-          <div class="center-badge">testfeed</div>
-          <div class="card-description">FAST AND DIRECTIONAL</div>
-          <div class="card-detail center-detail">
-            The sweet spot you've been missing. User feedback when you actually
-            need it - not weeks later, not after you've shipped.<br /><br />
-            Get directional confidence in the moment, right as you're making the
-            decision.
-          </div>
-        </div>
-
-        <div class="spectrum-card right-card">
-          <div class="card-label">Formal Research</div>
-          <div class="card-description">DIRECTIONAL BUT SLOW</div>
-          <div class="card-detail">
-            Reserved for the big bets. Major product launches. Strategic pivots.
-            Market expansions.<br /><br />
-            Structured studies with real users. Takes weeks to recruit, run, and
-            analyze.
-          </div>
-        </div>
-      </div>
-
-      <div class="solution-footer">
-        <p>
-          Most decisions are too small for formal research but too important for
-          pure guesswork. <strong>TestFeed lives in that gap.</strong>
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- How it works Section -->
-  <section class="how-it-works">
-    <div class="container">
-      <h2>How it works</h2>
-      <div class="steps-vertical">
-        <div class="step-item">
-          <div class="step-visual">
-            <div class="step-number">1</div>
-            <div class="step-connector"></div>
-          </div>
-          <div class="step-content">
-            <h3>Build your personas</h3>
-            <p>
-              Create AI personas that think like your real users. Give them
-              demographics, behaviors, goals - whoever you're building for.
-            </p>
-            <p>
-              Want a Gen Z student? A busy CFO? A first-time buyer? Build the
-              personas that match your audience.
-            </p>
-            <div class="step-demo">
-              <div class="dropdown-mockup" id="audience-dropdown">
-                <div class="dropdown-menu">
-                  <div class="dropdown-item">Gen Z College Student</div>
-                  <div class="dropdown-item">Enterprise CFO</div>
-                  <div class="dropdown-item" id="startup-founders-item">
-                    Startup Founder
-                  </div>
-                </div>
-              </div>
-
-              <!-- Gen Z College Student Cursor -->
-              <div class="empathy-cursor" id="empathy-cursor">
-                <svg
-                  width="26"
-                  height="30"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  ><g filter="url(#a)"
-                    ><path
-                      d="m8.5 19.5-2-12 10 6L11 15l-2.5 4.5Z"
-                      fill="#F59E0B"
-                      rx="2"></path><path
-                      d="m6.757 7.071-.928-.557.178 1.068 2 12 .235 1.412.695-1.251 2.398-4.316 5.297-1.445 1.13-.308-1.005-.603-10-6Z"
-                      stroke="#fff"
-                      stroke-width="1.5"></path></g
-                  ><defs
-                    ><filter
-                      id="a"
-                      x=".158"
-                      y=".528"
-                      width="23.866"
-                      height="26.959"
-                      filterUnits="userSpaceOnUse"
-                      color-interpolation-filters="sRGB"
-                      ><feFlood flood-opacity="0" result="BackgroundImageFix"
-                      ></feFlood><feColorMatrix
-                        in="SourceAlpha"
-                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                        result="hardAlpha"></feColorMatrix><feOffset dy="2"
-                      ></feOffset><feGaussianBlur stdDeviation="3"
-                      ></feGaussianBlur><feComposite
-                        in2="hardAlpha"
-                        operator="out"></feComposite><feColorMatrix
-                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"
-                      ></feColorMatrix><feBlend
-                        in2="BackgroundImageFix"
-                        result="effect1_dropShadow_1_4"></feBlend><feBlend
-                        in="SourceGraphic"
-                        in2="effect1_dropShadow_1_4"
-                        result="shape"></feBlend></filter
-                    ></defs
-                  ></svg
-                >
-                <span class="cursor-name">Gen Z College Student</span>
-                <div class="cursor-comment" id="empathy-comment"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="step-item">
-          <div class="step-visual">
-            <div class="step-number">2</div>
-            <div class="step-connector"></div>
-          </div>
-          <div class="step-content">
-            <h3>Share your screen</h3>
-            <p>
-              Open the Chrome extension while you work. Share your screen with
-              your personas - whether it's localhost, Figma, Google Slides, or
-              anywhere you build.
-            </p>
-            <p>
-              They see what you're working on. You get reactions in real-time.
-            </p>
-            <div class="step-demo">
-              <div class="browser-mockup">
-                <div class="browser-chrome">
-                  <div class="browser-dots">
-                    <span class="dot red"></span>
-                    <span class="dot yellow"></span>
-                    <span class="dot green"></span>
-                  </div>
-                  <div class="browser-address-bar">
-                    <div class="address-bar-content">
-                      <Icon name="lucide:lock" class="lock-icon" />
-                      <span class="url-text">localhost:3001</span>
-                    </div>
-                  </div>
-                  <div class="browser-actions">
-                    <div class="extension-icon">
-                      <span class="testfeed-icon">t</span>
-                    </div>
-                    <Icon name="lucide:more-vertical" class="more-icon" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="step-item">
-          <div class="step-visual">
-            <div class="step-number">3</div>
-            <div class="step-connector"></div>
-          </div>
-          <div class="step-content">
-            <h3>Get feedback before you ship</h3>
-            <p>
-              Your personas react like real users. They tell you what works and
-              what doesn't.
-            </p>
-            <p>
-              Fix issues before you ship. Build with confidence knowing you've
-              tested it with personas who think like your real users.
-            </p>
-            <div class="step-demo">
-              <div class="chat-feedback-container">
-                <div class="chat-message loading-message">
-                  <div class="typing-indicator">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                  </div>
-                </div>
-                <div
-                  class="chat-message feedback-message"
-                  id="feedback-message"
-                >
-                  I don't get it
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Who Uses TestFeed Section -->
-  <WhoUsesSection />
-
-  <!-- Always-on Feedback Section -->
-  <AlwaysOnSection />
-
-  <!-- FAQ Section -->
-  <section id="faq" class="faq">
-    <div class="container">
-      <h2>Frequently asked questions</h2>
-
-      <div class="faq-container">
-        <div class="faq-item">
-          <button class="faq-question" type="button">
-            <span class="question-text">Does this work on any website?</span>
-          </button>
-          <div class="faq-answer">
-            <p>
-              Yes, the Chrome extension works everywhere you work - Figma
-              designs, localhost development environment, social media planning
-              tools, Google Slides presentations, anywhere. The personas can see
-              what's on your screen regardless of which site or tool you're
-              using.
-            </p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" type="button">
-            <span class="question-text"
-              >How do I make personas more accurate?</span
-            >
-          </button>
-          <div class="faq-answer">
-            <p>
-              Upload real examples - customer feedback, user research, meeting
-              notes, support tickets. The more real-world data you give them,
-              the better they understand how your actual customers or
-              stakeholders think and respond.
-            </p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" type="button">
-            <span class="question-text"
-              >Can personas see what I'm working on?</span
-            >
-          </button>
-          <div class="faq-answer">
-            <p>
-              Yes, they can see your screen and give contextual feedback.
-              Building a feature on localhost? They see your interface.
-              Designing in Figma? They see your mockups. Creating a pitch deck
-              in Google Slides? They see your slides and can give feedback on
-              what's working.
-            </p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" type="button">
-            <span class="question-text">When is this available?</span>
-          </button>
-          <div class="faq-answer">
-            <p>
-              We're in beta testing. Join the beta to get early access to
-              the Chrome extension.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "How is this different from just using ChatGPT or Claude?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Those tools help you write better, but they don't help you understand your audience better. They're stuck in your perspective, not your audience's perspective. TestFeed shows you exactly how your specific audience will react to your message, not just how to improve your writing."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How do I know the virtual audiences are actually accurate?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "We create psychology-based profiles from your inputs about your audience. You can see exactly how your virtual audience thinks and sees the world, and you can make suggestions and updates to improve their profile over time. Plus, you can add real reactions from your actual audience to help your virtual audience match how your real audience speaks and responds. While no virtual audience can perfectly replicate the human mind, our alpha users find this gives them useful directional guidance that helps them communicate better and avoid mistakes they would have made otherwise."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is this just for marketers and salespeople?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Not at all. Anyone who sends important messages can use TestFeed. We've had founders test investor emails, employees test messages to their boss, and people test replies to difficult customers. If the message matters to you, TestFeed can help."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What sort of audiences can I create?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "You can create any audience you need to communicate with. Go specific with individual people like 'Difficult client who's always pushing back.' Go broad with groups like 'US based Gen Z gamers.' Create professional audiences like 'CTOs at fintech startups' or 'Marketing managers at agencies.' Basically, if you need to communicate with them, you can create a virtual version of them. The more specific you get with your audience description, the more targeted and useful the reactions will be."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "I already understand my audience pretty well...",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "You might understand what they care about, but do you understand how you sound to them? There's a big difference between knowing your audience and knowing how your message lands with your audience. That's the gap TestFeed fills."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How can I use TestFeed?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "TestFeed works on any content you're about to share. Test sales emails before sending to prospects, check your LinkedIn posts before publishing, vibe-check your replies to difficult customers, test website copy before it goes live, validate product ideas with your target users, check your Intercom responses before hitting send, test your proposals before presenting them. Basically, if you're about to communicate something important and you want to know how it'll land, TestFeed can help."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "When will this actually be available?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "We're in beta testing right now. We launched v1 back in May, but we're rolling out v2 with a completely new approach - Chrome extension first so you can test content anywhere on the internet, not just in our web app. Join the beta to get first access to the new version."
-          }
-        }
-      ]
-    }
-  </script>
-
-  <FinalCTASection
-    title="Stay in the loop"
-    text="Stay in the loop. We're building the future of market research."
-  />
-</BaseLayout>
-
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="/assets/ds.css" />
+<script src="https://unpkg.com/lucide@0.456.0/dist/umd/lucide.min.js" is:inline></script>
 <style>
-  /* Hero Section */
-  .hero {
-    padding: var(--spacing-xxl) 0;
-    position: relative;
-    overflow: hidden;
+  :root {
+    --page: #F8F5F1;
+    --band: #EFEAE3;
+    --card: #F1EDE7;
+    --line: rgba(0,0,0,0.10);
+    --dash: #161616;
+    --dash-card: #1D1D1D;
+    --dash-line: rgba(255,255,255,0.10);
+    --wrap: 1200px;
   }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body { margin: 0; background: var(--page); overflow-x: hidden; }
+  body { font-family: var(--font-body); color: var(--tf-ink); -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; }
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 40px; }
 
-  .hero-content {
-    text-align: center;
-    max-width: 900px;
+  /* ---- shared ---- */
+  .eyebrow-red {
+    color: var(--tf-red);
+    font-family: var(--font-body);
+    font-weight: var(--w-bold);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .display { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em; line-height: 1.0; color: var(--tf-black); }
+  .dot-red { color: var(--tf-red); }
+
+  /* ============ HEADER ============ */
+  .site-header { padding: 26px 0 18px; position: relative; }
+  .site-header .wrap { display: flex; align-items: center; gap: 28px; }
+  .wordmark {
+    display: inline-flex; align-items: flex-end; gap: 0;
+    line-height: 1; text-decoration: none; border: 0;
+  }
+  .wordmark img { height: 22px; width: auto; display: block; }
+  .logodot { width: 5px; height: 5px; border-radius: 999px; background: var(--tf-red); display: inline-block; margin: 0 0 3px 3px; flex: 0 0 auto; }
+  .nav {
+    display: flex; gap: 34px; align-items: center;
     margin: 0 auto;
   }
-
-  .hero h1 {
-    font-size: 3.5rem;
-    font-weight: 800;
-    line-height: 1.1;
-    margin-bottom: var(--spacing-lg);
-    color: var(--color-text);
-  }
-
-  .hero-description {
-    font-size: 1.2rem;
-    margin-bottom: var(--spacing-xl);
-    color: var(--color-text-light);
-    line-height: 1.6;
-  }
-
-  .demo-video-container {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .video-wrapper {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-  }
-
-  .video-wrapper iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  .video-placeholder {
-    position: relative;
-    width: 100%;
-    height: 100%;
+  .nav a:not(.btn) {
+    color: var(--tf-ink);
+    font-family: var(--font-body);
+    font-weight: var(--w-medium);
+    font-size: 15px;
+    text-decoration: none;
+    border: 0;
     cursor: pointer;
-    transition: transform 0.3s ease;
-  }
-
-  .video-placeholder:hover {
-    transform: scale(1.02);
-  }
-
-  .video-placeholder img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .video-placeholder::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.3);
-    z-index: 1;
-    transition: background 0.3s ease;
-  }
-
-  .video-placeholder:hover::before {
-    background: rgba(0, 0, 0, 0.2);
-  }
-
-  .video-placeholder .play-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    background-color: var(--color-primary);
-    color: var(--color-secondary);
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
-  }
-
-  .video-placeholder:hover .play-button {
-    transform: translate(-50%, -50%) scale(1.1);
-    box-shadow: 0 6px 30px rgba(255, 255, 255, 0.4);
-  }
-
-  .play-icon {
-    width: 30px;
-    height: 30px;
-    color: var(--color-secondary);
-  }
-
-  .time-label {
-    font-size: 0.75rem;
-    color: var(--color-text-light);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 500;
-  }
-
-  .launched-message {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-white);
-    padding: var(--spacing-md);
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.1) 0%,
-      rgba(255, 255, 255, 0.05) 100%
-    );
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 12px;
-    backdrop-filter: blur(10px);
-    text-align: center;
-  }
-
-  .cta-buttons {
-    display: flex;
-    justify-content: center;
-    gap: var(--spacing-md);
-    margin-bottom: var(--spacing-md);
-  }
-
-  .react-emphasis {
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.12) 0%,
-      rgba(255, 255, 255, 0.04) 100%
-    );
-    padding: 2px 12px;
-    border-radius: 6px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    font-weight: 800;
-    letter-spacing: -0.3px;
-    position: relative;
-    display: inline-block;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  }
-
-  .before-fade {
-    color: var(--color-text-light);
-    opacity: 0.6;
-    font-weight: 800;
-    text-shadow:
-      0 0 8px rgba(255, 255, 255, 0.3),
-      0 0 16px rgba(255, 255, 255, 0.2);
-    filter: blur(0.3px);
-    position: relative;
-    display: inline-block;
-    letter-spacing: 0.5px;
-  }
-
-  /* Floating Cursors */
-  .cursor-name {
-    padding: 2px 6px;
-    color: #fff;
-    font-size: 11px;
-    display: inline-block;
-    position: absolute;
-    top: 24px;
-    left: 20px;
-    border-radius: 4px;
-    font-weight: 500;
     white-space: nowrap;
   }
-
-  .floating-cursor,
-  .floating-cursor-2,
-  .floating-cursor-3 {
-    position: absolute;
-    z-index: 10;
-    pointer-events: none;
-  }
-
-  .floating-cursor {
-    right: 20%;
-    top: 40%;
-    animation: 28s hovering-1 infinite ease-in-out;
-  }
-
-  .floating-cursor-2 {
-    left: 15%;
-    top: 55%;
-    animation: 33s hovering-2 infinite ease-in-out;
-  }
-
-  .floating-cursor-3 {
-    right: 45%;
-    top: 40%;
-    animation: 41s hovering-3 infinite ease-in-out;
-  }
-
-  .floating-cursor .cursor-name {
-    background-color: #0080fe;
-  }
-
-  .floating-cursor-2 .cursor-name {
-    background-color: #8b5cf6;
-  }
-
-  .floating-cursor-3 .cursor-name {
-    background-color: #f59e0b;
-  }
-
-  .cursor-comment {
-    position: absolute;
-    top: -45px;
-    left: 25px;
-    background-color: rgba(0, 0, 0, 0.9);
-    color: #fff;
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-size: 12px;
-    white-space: nowrap;
-    opacity: 0;
-    transform: translateY(10px);
-    transition:
-      opacity 0.3s ease,
-      transform 0.3s ease;
-    pointer-events: none;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-  }
-
-  .cursor-comment.show {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .cursor-comment::after {
-    content: "";
-    position: absolute;
-    bottom: -6px;
-    left: 15px;
-    width: 0;
-    height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 6px solid rgba(0, 0, 0, 0.9);
-  }
-
-  @keyframes hovering-1 {
-    0% {
-      transform: translate3d(0px, 0px, 0px) rotate(0deg);
-    }
-    8% {
-      transform: translate3d(-45px, 25px, 0px) rotate(2deg);
-    }
-    16% {
-      transform: translate3d(70px, -30px, 0px) rotate(-1deg);
-    }
-    24% {
-      transform: translate3d(-25px, 45px, 0px) rotate(3deg);
-    }
-    32% {
-      transform: translate3d(90px, 10px, 0px) rotate(0deg);
-    }
-    40% {
-      transform: translate3d(-70px, -35px, 0px) rotate(-2deg);
-    }
-    48% {
-      transform: translate3d(30px, 60px, 0px) rotate(1deg);
-    }
-    56% {
-      transform: translate3d(-50px, 20px, 0px) rotate(-1deg);
-    }
-    64% {
-      transform: translate3d(80px, -45px, 0px) rotate(2deg);
-    }
-    72% {
-      transform: translate3d(-35px, 30px, 0px) rotate(0deg);
-    }
-    80% {
-      transform: translate3d(55px, -15px, 0px) rotate(-3deg);
-    }
-    88% {
-      transform: translate3d(-20px, 50px, 0px) rotate(1deg);
-    }
-    96% {
-      transform: translate3d(15px, -25px, 0px) rotate(0deg);
-    }
-    100% {
-      transform: translate3d(0px, 0px, 0px) rotate(0deg);
-    }
-  }
-
-  @keyframes hovering-2 {
-    0% {
-      transform: translate3d(0px, 0px, 0px) rotate(0deg);
-    }
-    12% {
-      transform: translate3d(85px, -40px, 0px) rotate(-2deg);
-    }
-    18% {
-      transform: translate3d(-60px, 35px, 0px) rotate(1deg);
-    }
-    28% {
-      transform: translate3d(45px, 55px, 0px) rotate(3deg);
-    }
-    36% {
-      transform: translate3d(-80px, -20px, 0px) rotate(-1deg);
-    }
-    44% {
-      transform: translate3d(25px, 70px, 0px) rotate(2deg);
-    }
-    52% {
-      transform: translate3d(-45px, -50px, 0px) rotate(0deg);
-    }
-    60% {
-      transform: translate3d(95px, 15px, 0px) rotate(-3deg);
-    }
-    68% {
-      transform: translate3d(-30px, 40px, 0px) rotate(1deg);
-    }
-    76% {
-      transform: translate3d(65px, -25px, 0px) rotate(2deg);
-    }
-    84% {
-      transform: translate3d(-55px, 60px, 0px) rotate(-1deg);
-    }
-    92% {
-      transform: translate3d(40px, -35px, 0px) rotate(0deg);
-    }
-    100% {
-      transform: translate3d(0px, 0px, 0px) rotate(0deg);
-    }
-  }
-
-  @keyframes hovering-3 {
-    0% {
-      transform: translate3d(0px, 0px, 0px) rotate(0deg);
-    }
-    9% {
-      transform: translate3d(-75px, 45px, 0px) rotate(1deg);
-    }
-    17% {
-      transform: translate3d(50px, -55px, 0px) rotate(-2deg);
-    }
-    26% {
-      transform: translate3d(-40px, 30px, 0px) rotate(3deg);
-    }
-    34% {
-      transform: translate3d(100px, 20px, 0px) rotate(0deg);
-    }
-    43% {
-      transform: translate3d(-85px, -30px, 0px) rotate(-1deg);
-    }
-    51% {
-      transform: translate3d(35px, 65px, 0px) rotate(2deg);
-    }
-    60% {
-      transform: translate3d(-55px, -40px, 0px) rotate(-3deg);
-    }
-    68% {
-      transform: translate3d(80px, 50px, 0px) rotate(1deg);
-    }
-    77% {
-      transform: translate3d(-25px, 10px, 0px) rotate(0deg);
-    }
-    85% {
-      transform: translate3d(60px, -30px, 0px) rotate(-1deg);
-    }
-    93% {
-      transform: translate3d(-70px, 35px, 0px) rotate(2deg);
-    }
-    100% {
-      transform: translate3d(0px, 0px, 0px) rotate(0deg);
-    }
-  }
-
-  @media (max-width: 768px) {
-    .floating-cursor,
-    .floating-cursor-2,
-    .floating-cursor-3 {
-      display: none;
-    }
-
-    .cursor-comment {
-      display: none !important;
-    }
-  }
-
-  /* Gut Feel Section */
-  .gut-feel-section {
-    padding: var(--spacing-xxl) 0;
-    position: relative;
-    background: var(--color-background);
-  }
-
-  .narrative-header {
-    text-align: center;
-    margin-bottom: var(--spacing-xxl);
-  }
-
-  .narrative-header h2 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--color-white);
-    line-height: 1.3;
-  }
-
-  .narrative-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--spacing-lg);
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-
-  .narrative-stage {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    padding: var(--spacing-lg);
-    transition: all 0.3s ease;
-  }
-
-  .narrative-stage:hover {
-    transform: translateY(-4px);
-    border-color: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-  }
-
-  .narrative-stage p {
-    font-size: 1rem;
-    line-height: 1.7;
-    color: var(--color-text-light);
-    margin-bottom: var(--spacing-md);
-  }
-
-  .stage-emphasis {
-    color: rgba(255, 255, 255, 0.8) !important;
-    font-weight: 500;
-  }
-
-  .stage-callout {
-    font-size: 1.125rem !important;
-    color: var(--color-white) !important;
-    font-weight: 600;
-    margin-bottom: 0 !important;
-  }
-
-  .stage-heading {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-white);
-    margin-bottom: var(--spacing-md);
-    line-height: 1.3;
-  }
-
-  .outcome-split {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
-  }
-
-  .outcome {
-    display: flex;
-    gap: var(--spacing-sm);
-    align-items: flex-start;
-  }
-
-  .outcome-icon {
-    flex-shrink: 0;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 1rem;
-  }
-
-  .outcome.good .outcome-icon {
-    background: rgba(34, 197, 94, 0.15);
-    color: rgb(74, 222, 128);
-    border: 1px solid rgba(34, 197, 94, 0.3);
-  }
-
-  .outcome.bad .outcome-icon {
-    background: rgba(239, 68, 68, 0.15);
-    color: rgb(248, 113, 113);
-    border: 1px solid rgba(239, 68, 68, 0.3);
-  }
-
-  .outcome p {
-    margin: 0;
-    flex: 1;
-  }
-
-  .stage-final {
-    font-weight: 600 !important;
-    color: var(--color-white) !important;
-    font-size: 1.125rem !important;
-  }
-
-  @media (max-width: 1024px) {
-    .narrative-header h2 {
-      font-size: 2rem;
-    }
-
-    .stage-heading {
-      font-size: 1.25rem;
-    }
-  }
-
-  /* Solution Section */
-  .solution-section {
-    padding: var(--spacing-xxl) 0;
-    position: relative;
-    background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
-    overflow: hidden;
-  }
-
-  .solution-section::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(
-      ellipse at center,
-      rgba(255, 255, 255, 0.05) 0%,
-      transparent 70%
-    );
-    pointer-events: none;
-  }
-
-  .solution-header {
-    text-align: center;
-    margin-bottom: var(--spacing-xxl);
-  }
-
-  .solution-header h2 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--color-white);
-    line-height: 1.3;
-  }
-
-  .solution-subtitle {
-    font-size: 1.5rem;
-    color: rgba(255, 255, 255, 0.6);
-    font-weight: 400;
-    margin: 0;
-  }
-
-  .spectrum-container {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr 1fr;
-    gap: var(--spacing-lg);
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
-  }
-
-  .spectrum-card {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    padding: var(--spacing-lg);
-    transition: all 0.3s ease;
-    position: relative;
-  }
-
-  .spectrum-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-  }
-
-  .left-card {
-    opacity: 0.7;
-  }
-
-  .right-card {
-    opacity: 0.7;
-  }
-
-  .center-card {
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.1) 0%,
-      rgba(255, 255, 255, 0.05) 100%
-    );
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    transform: scale(1.05);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-  }
-
-  .center-card:hover {
-    transform: scale(1.08) translateY(-4px);
-  }
-
-  .card-label {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: var(--spacing-sm);
-  }
-
-  .card-description {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.5);
-    margin-bottom: var(--spacing-md);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 500;
-  }
-
-  .card-detail {
-    font-size: 0.95rem;
-    line-height: 1.8;
-    color: rgba(255, 255, 255, 0.6);
-  }
-
-  .center-badge {
-    display: inline-block;
-    color: var(--color-white);
-    font-size: 2rem;
-    font-weight: 400;
-    margin-bottom: var(--spacing-sm);
-    font-family: var(--font-logo);
-  }
-
-  .card-highlight {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-white);
-    margin-bottom: var(--spacing-md);
-    line-height: 1.3;
-  }
-
-  .center-detail {
-    color: rgba(255, 255, 255, 0.8);
-    font-weight: 500;
-  }
-
-  .solution-footer {
-    text-align: center;
-    margin-top: var(--spacing-xxl);
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .solution-footer p {
-    font-size: 1.125rem;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.7);
-  }
-
-  .solution-footer strong {
-    color: var(--color-white);
-    font-weight: 600;
-  }
-
-  @media (max-width: 968px) {
-    .spectrum-container {
-      grid-template-columns: 1fr;
-      gap: var(--spacing-md);
-    }
-
-    .center-card {
-      transform: scale(1);
-    }
-
-    .center-card:hover {
-      transform: scale(1) translateY(-4px);
-    }
-
-    .left-card,
-    .right-card {
-      opacity: 1;
-    }
-
-    .solution-header h2 {
-      font-size: 2.25rem;
-    }
-
-    .solution-subtitle {
-      font-size: 1.125rem;
-    }
-  }
-
-  /* How it works Section */
-  .how-it-works {
-    background-color: var(--color-background);
-    padding: var(--spacing-xxl) 0;
-  }
-
-  .steps-vertical {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: var(--spacing-xl) 0;
-  }
-
-  .step-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: var(--spacing-xxl);
-    position: relative;
-  }
-
-  .step-item:last-child {
-    margin-bottom: 0;
-  }
-
-  .step-visual {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    z-index: 2;
-  }
-
-  .step-number {
-    background: linear-gradient(
-      135deg,
-      var(--color-highlight),
-      rgba(255, 255, 255, 0.8)
-    );
-    color: var(--color-background);
-    font-weight: 800;
-    font-size: 1.5rem;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
-    z-index: 2;
-    position: relative;
-  }
-
-  .step-connector {
-    width: 2px;
-    height: 80px;
-    background: linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 1) 0%,
-      rgba(255, 255, 255, 0) 100%
-    );
-    margin-top: var(--spacing-md);
-  }
-
-  .step-content {
-    width: 100%;
-    max-width: 600px;
-    background-color: var(--color-card-bg);
-    padding: var(--spacing-lg);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: var(--transition);
-    position: relative;
-    margin-top: var(--spacing-md);
-  }
-
-  .step-content:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-  }
-
-  .step-content h3 {
-    color: var(--color-white);
-    font-size: 1.5rem;
-    margin-bottom: var(--spacing-md);
-    font-weight: 700;
-  }
-
-  .step-content p {
-    color: var(--color-text-light);
-    line-height: 1.6;
-    margin-bottom: var(--spacing-md);
-  }
-
-  .step-demo {
-    margin-top: var(--spacing-md);
-    padding: var(--spacing-md);
-    background-color: rgba(255, 255, 255, 0.02);
-    border-radius: var(--border-radius);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    position: relative;
-  }
-
-  .dropdown-mockup {
-    position: relative;
-    width: 100%;
-  }
-
-  .dropdown-menu {
-    background: linear-gradient(
-      135deg,
-      rgba(0, 0, 0, 0.95) 0%,
-      rgba(20, 20, 20, 0.9) 100%
-    );
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 12px;
-    backdrop-filter: blur(20px);
-    overflow: hidden;
-    box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.6),
-      0 4px 16px rgba(0, 0, 0, 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  }
-
-  .dropdown-item {
-    padding: 16px 20px;
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: default;
-    transition: all 0.3s ease;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    text-align: left;
-    position: relative;
-  }
-
-  .dropdown-item:last-child {
-    border-bottom: none;
-  }
-
-  .dropdown-item:first-child {
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-  }
-
-  .dropdown-item:last-child {
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
-  }
-
-  .dropdown-item.selected {
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.15) 0%,
-      rgba(255, 255, 255, 0.08) 100%
-    );
-    color: #ffffff;
-    font-weight: 600;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.2),
-      0 2px 8px rgba(0, 0, 0, 0.3);
-  }
-
-  .dropdown-item.animate-selection {
-    animation: selectItem 0.5s ease-out forwards;
-  }
-
-  @keyframes selectItem {
-    0% {
-      background: transparent;
-      color: rgba(255, 255, 255, 0.8);
-      transform: translateX(0);
-    }
-    50% {
-      transform: translateX(4px);
-    }
-    100% {
-      background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.15) 0%,
-        rgba(255, 255, 255, 0.08) 100%
-      );
-      color: #ffffff;
-      transform: translateX(0);
-    }
-  }
-
-  /* Browser Mockup */
-  .browser-mockup {
-    width: 100%;
-    max-width: 500px;
-    margin: 0 auto;
-  }
-
-  .browser-chrome {
-    background: linear-gradient(
-      135deg,
-      rgba(40, 40, 40, 0.95) 0%,
-      rgba(30, 30, 30, 0.9) 100%
-    );
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 8px;
-    padding: 12px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-  }
-
-  .browser-dots {
-    display: flex;
-    gap: 6px;
-    flex-shrink: 0;
-  }
-
-  .dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-  }
-
-  .dot.red {
-    background: #ff5f57;
-  }
-
-  .dot.yellow {
-    background: #ffbd2e;
-  }
-
-  .dot.green {
-    background: #28c840;
-  }
-
-  .browser-address-bar {
-    flex: 1;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 6px;
-    padding: 6px 12px;
-  }
-
-  .address-bar-content {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .lock-icon {
-    width: 14px;
-    height: 14px;
-    color: rgba(255, 255, 255, 0.5);
-  }
-
-  .url-text {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.875rem;
-    font-family: "Space Mono", monospace;
-  }
-
-  .browser-actions {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-shrink: 0;
-  }
-
-  .extension-icon {
-    position: relative;
-    width: 28px;
-    height: 28px;
-    background: #000000;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .testfeed-icon {
-    font-family: var(--font-logo);
-    font-size: 0.875rem;
-    color: var(--color-white);
-    font-weight: 700;
-  }
-
-  .click-cursor {
-    position: absolute;
-    bottom: -10px;
-    right: -10px;
-  }
-
-  .more-icon {
-    width: 20px;
-    height: 20px;
-    color: rgba(255, 255, 255, 0.6);
-  }
-
-  /* Hide browser actions on small mobile screens to prevent overflow */
-  @media (max-width: 430px) {
-    .browser-actions {
-      display: none;
-    }
-  }
-
-  /* Chat Feedback Animation */
-  .chat-feedback-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 300px;
-    min-height: 60px;
-    margin: 0 auto;
-  }
-
-  .chat-message {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 16px;
-    padding: 12px 16px;
-    color: #000000;
-    font-size: 0.95rem;
-    line-height: 1.4;
-    white-space: nowrap;
-  }
-
-  .loading-message {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 12px 20px;
-    opacity: 0;
-    visibility: hidden;
-    z-index: 1;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-  }
-
-  .loading-message.show {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .typing-indicator {
-    display: flex;
-    gap: 6px;
-    align-items: center;
-  }
-
-  .typing-indicator span {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.5);
-    animation: typingDot 1.4s infinite;
-  }
-
-  .typing-indicator span:nth-child(2) {
-    animation-delay: 0.2s;
-  }
-
-  .typing-indicator span:nth-child(3) {
-    animation-delay: 0.4s;
-  }
-
-  @keyframes typingDot {
-    0%,
-    60%,
-    100% {
-      opacity: 0.3;
-      transform: translateY(0);
-    }
-    30% {
-      opacity: 1;
-      transform: translateY(-4px);
-    }
-  }
-
-  .feedback-message {
-    opacity: 0;
-    visibility: hidden;
-    z-index: 2;
-    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
-  }
-
-  .feedback-message.hidden {
-    opacity: 0;
-    visibility: hidden;
-  }
-
-  .feedback-message.show {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  @keyframes fadeInMessage {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .static-cursor {
-    position: absolute;
-    bottom: 10px;
-    right: 80px;
-    z-index: 2;
-    pointer-events: none;
-  }
-
-  .static-cursor-name {
-    padding: 2px 6px;
-    color: #fff;
-    font-size: 11px;
-    display: inline-block;
-    position: absolute;
-    top: 24px;
-    left: 20px;
-    border-radius: 4px;
-    font-weight: 500;
-    white-space: nowrap;
-    background-color: #0080fe;
-  }
-
-  /* Use Cases Section */
-  .use-cases {
-    background-color: var(--color-background);
-    padding: var(--spacing-md) 0 var(--spacing-xxl) 0;
-    position: relative;
-    border-bottom: none;
-  }
-
-  .use-cases-header {
-    position: relative;
-    z-index: 1;
-    margin-bottom: var(--spacing-xl);
-  }
-
-  .use-cases h2 {
-    color: var(--color-white);
-    font-size: 2.5rem;
-    font-weight: 700;
-    text-align: center;
-    line-height: 1.2;
-  }
-
-  .space-mono {
-    font-family: "Space Mono", monospace;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-  }
-
-  .use-cases-carousel {
-    position: relative;
-    max-width: 1100px;
-    margin: 0 auto;
-    overflow: visible;
-  }
-
-  .use-case-slide {
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.06) 0%,
-      rgba(255, 255, 255, 0.02) 100%
-    );
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: var(--spacing-lg);
-    backdrop-filter: blur(20px);
+  .nav a:not(.btn):hover { color: var(--tf-red); }
+  .nav a.nav-cta { display: none; }
+  .nav-toggle {
     display: none;
-    flex-direction: column;
-    gap: var(--spacing-md);
-    text-align: center;
-    position: relative;
+    background: none; border: 0; cursor: pointer;
+    color: var(--tf-black); padding: 6px; margin-left: auto;
+    align-items: center; justify-content: center;
   }
+  .nav-toggle svg { width: 26px; height: 26px; }
 
-  .use-case-slide.active {
-    display: flex;
+  .btn {
+    display: inline-flex; align-items: center; gap: 16px;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 16px;
+    padding: 11px 12px 11px 22px;
+    border-radius: 999px;
+    background: var(--tf-black);
+    color: var(--tf-white);
+    border: 0;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background var(--dur-fast) var(--ease-out);
   }
+  .btn:hover { background: #222; color: var(--tf-white); }
+  .btn .arr {
+    width: 26px; height: 26px; border-radius: 999px;
+    background: rgba(255,255,255,0.18);
+    display: inline-grid; place-items: center;
+  }
+  .btn .arr svg { width: 13px; height: 13px; stroke-width: 2.2; }
+  .btn--light { background: var(--tf-white); color: var(--tf-black); }
+  .btn--light:hover { background: #fff; color: var(--tf-black); }
+  .btn--light .arr { background: var(--tf-black); color: var(--tf-white); }
+  .btn--outline {
+    background: transparent;
+    color: var(--tf-black);
+    border: 1px solid rgba(0,0,0,0.28);
+    padding: 11px 20px;
+    gap: 12px;
+  }
+  .btn--outline:hover { background: transparent; color: var(--tf-black); border-color: var(--tf-black); }
+  .btn--outline svg { width: 15px; height: 15px; stroke-width: 2; }
 
-  .use-case-category {
+  /* ============ HERO ============ */
+  .hero .wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: center;
+    padding-top: 30px;
+    padding-bottom: 0;
+  }
+  .hero-left { max-width: 540px; }
+  .hero .eyebrow-red { margin-bottom: 26px; }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    color: var(--tf-black);
+    margin: 0;
+  }
+  .rotator { display: inline-grid; vertical-align: bottom; }
+  .rotator > span {
+    grid-area: 1 / 1;
+    color: var(--tf-red);
+    opacity: 0;
+    will-change: opacity, transform;
+    animation: tfWordCycle 8s infinite;
+    animation-timing-function: var(--ease-in-out, cubic-bezier(.4,0,.2,1));
+  }
+  .rotator > span:nth-child(1) { animation-delay: 0s; }
+  .rotator > span:nth-child(2) { animation-delay: 2s; }
+  .rotator > span:nth-child(3) { animation-delay: 4s; }
+  .rotator > span:nth-child(4) { animation-delay: 6s; }
+  @keyframes tfWordCycle {
+    0%   { opacity: 0; transform: translateY(0.16em); }
+    8%   { opacity: 1; transform: translateY(0); }
+    25%  { opacity: 1; transform: translateY(0); }
+    33%  { opacity: 0; transform: translateY(-0.16em); }
+    100% { opacity: 0; transform: translateY(-0.16em); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .rotator > span { animation: none; }
+    .rotator > span:nth-child(1) { opacity: 1; }
+    .rotator > span:nth-child(n+2) { display: none; }
+  }
+  .hero p.lede {
+    margin: 26px 0 0;
+    font-size: 17px;
+    font-weight: var(--w-regular);
+    line-height: 1.5;
+    color: var(--tf-ink);
+    max-width: 340px;
+  }
+  .hero p.bench {
+    margin: 22px 0 0;
+    font-size: 17px;
+    font-weight: var(--w-regular);
+    color: var(--tf-ink);
+  }
+  .hero-ctas { margin-top: 34px; display: flex; align-items: center; gap: 26px; }
+  .play-row { display: inline-flex; align-items: center; gap: 12px; cursor: pointer; }
+  .play-row .play {
+    width: 34px; height: 34px; border-radius: 999px;
+    border: 1.5px solid rgba(0,0,0,0.35);
+    display: grid; place-items: center; color: var(--tf-black);
+  }
+  .play-row .play svg { width: 13px; height: 13px; }
+  .play-row span {
+    font-family: var(--font-body); font-weight: var(--w-medium); font-size: 15px; color: var(--tf-ink);
+  }
+  .hero-checks { margin-top: 30px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 28px; }
+  .hcheck {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-family: var(--font-body); font-weight: var(--w-medium); font-size: 14px; color: var(--tf-ink);
+    white-space: nowrap;
+  }
+  .hcheck .ck {
+    width: 18px; height: 18px; flex: 0 0 18px; border-radius: 999px;
+    border: 1.5px solid var(--tf-red); color: var(--tf-red);
+    display: grid; place-items: center;
+  }
+  .hcheck .ck svg { width: 10px; height: 10px; stroke-width: 3; }
+
+  .hero-right { position: relative; height: 720px; }
+  .hero-circle {
     position: absolute;
-    top: 0;
-    right: var(--spacing-md);
-    transform: translateY(-50%);
-    background: #ffffff;
-    color: #000000;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    width: 470px; height: 470px;
+    border-radius: 999px;
+    background: #E8E1DA;
+    top: 56px; left: 50%; transform: translateX(-50%);
+    z-index: 0;
+  }
+  .hero-dots {
+    position: absolute;
+    width: 270px; height: 520px;
+    right: -36px; top: 180px;
+    background-image: radial-gradient(var(--tf-red) 1.5px, transparent 1.7px);
+    background-size: 12px 12px;
+    -webkit-mask-image: radial-gradient(ellipse 60% 45% at 45% 55%, #000 0, #000 30%, transparent 78%);
+            mask-image: radial-gradient(ellipse 60% 45% at 45% 55%, #000 0, #000 30%, transparent 78%);
+    opacity: 0.9;
+    z-index: 1;
+    animation: tfDotsWave 18s ease-in-out infinite;
+    will-change: background-position, filter;
+  }
+  @keyframes tfDotsWave {
+    0%   { background-position: 0 0;      filter: blur(0px);   opacity: 0.92; }
+    20%  { background-position: 12px 6px;  filter: blur(2px);   opacity: 0.6; }
+    40%  { background-position: 0 12px;    filter: blur(0px);   opacity: 0.92; }
+    60%  { background-position: -12px 18px; filter: blur(2px);  opacity: 0.6; }
+    80%  { background-position: 0 30px;    filter: blur(0px);   opacity: 0.92; }
+    100% { background-position: 0 36px;    filter: blur(0px);   opacity: 0.92; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-dots { animation: none; }
+  }
+  .hero-spark {
+    position: absolute;
+    width: 60px; height: 70px;
+    left: 118px; top: 150px;
+    z-index: 3;
+  }
+  .hero-figure {
+    position: absolute;
+    bottom: 0; left: 50%; transform: translateX(-50%);
+    height: 720px; width: auto;
     z-index: 2;
   }
 
-  .use-case-image {
-    width: 80%;
-    margin: 0 auto;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    background: #000000;
+  /* ============ TRUSTED ============ */
+  .trusted { background: var(--band); }
+  .trusted .wrap { padding-top: 58px; padding-bottom: 58px; }
+  .trusted .label {
+    text-align: center;
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    font-weight: var(--w-bold); color: var(--tf-ink);
+    margin-bottom: 18px;
   }
-
-  .use-case-image img {
-    width: 100%;
-    height: auto;
-    display: block;
+  .logos {
+    position: relative; overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 7%, #000 93%, transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0, #000 7%, #000 93%, transparent 100%);
   }
+  .logos-track { display: flex; width: max-content; animation: tfMarquee 32s linear infinite; }
+  .logos:hover .logos-track { animation-play-state: paused; }
+  .logos-set { display: flex; align-items: center; gap: 84px; padding-right: 84px; flex: 0 0 auto; }
+  .logos .logo { flex: 0 0 auto; display: flex; align-items: center; }
+  .logos .logo img { height: 32px; width: auto; object-fit: contain; filter: contrast(1.1); }
+  .logos .logo.baejuice img { height: 40px; }
+  @keyframes tfMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-  .use-case-slide h3 {
-    color: var(--color-white);
-    font-size: 2rem;
-    font-weight: 700;
-    line-height: 1.3;
-    margin: 0;
+  /* ============ PLATFORM ============ */
+  .platform .wrap { padding-top: 70px; padding-bottom: 70px; display: grid; grid-template-columns: 300px 1fr; gap: 60px; align-items: start; }
+  .platform-left { padding-top: 6px; }
+  .platform-left .eyebrow-red { margin-bottom: 22px; }
+  .platform-left h2 {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: 32px; line-height: 1.08; letter-spacing: -0.02em;
+    color: var(--tf-black); margin: 0 0 18px;
   }
-
-  .use-case-slide p {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 1.125rem;
-    line-height: 1.7;
-    margin: 0;
+  .platform-left p:not(.eyebrow-red) {
+    font-size: 15px; line-height: 1.5; color: var(--tf-ink); font-weight: var(--w-regular);
+    margin: 0 0 26px; max-width: 250px;
   }
-
-  .carousel-dots {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: var(--spacing-lg);
+  .feat-list { display: flex; flex-direction: column; gap: 16px; }
+  .feat {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 15px; font-weight: var(--w-medium); color: var(--tf-ink);
   }
-
-  .carousel-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    padding: 0;
+  .feat .ck {
+    width: 20px; height: 20px; flex: 0 0 20px; border-radius: 999px;
+    border: 1.5px solid var(--tf-red); color: var(--tf-red);
+    display: grid; place-items: center;
   }
+  .feat .ck svg { width: 11px; height: 11px; stroke-width: 3; }
 
-  .carousel-dot:hover {
-    background: rgba(255, 255, 255, 0.5);
+  /* ---- dashboard ---- */
+  .dash {
+    background: var(--dash); border-radius: 10px; overflow: hidden;
+    color: #fff; font-family: var(--font-body);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.18);
+    transform: scale(1.15);
+    transform-origin: center;
   }
-
-  .carousel-dot.active {
-    background: var(--color-white);
-    width: 12px;
-    height: 12px;
+  .dash-top {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 18px; border-bottom: 1px solid var(--dash-line);
   }
-
-  .content-text {
-    color: var(--color-white);
-    font-size: 0.875rem;
-    margin-bottom: var(--spacing-sm);
-    font-style: italic;
+  .dash-top .dm { font-family: var(--font-display); font-weight: 700; font-size: 18px; color: #fff; }
+  .dash-top .crumb { font-size: 12.5px; color: rgba(255,255,255,0.62); white-space: nowrap; }
+  .dash-top .crumb b { color: rgba(255,255,255,0.92); font-weight: var(--w-semibold); }
+  .dash-top .spacer { flex: 1; }
+  .dash-top .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; color: rgba(255,255,255,0.8);
+    border: 1px solid var(--dash-line); border-radius: 6px; padding: 6px 10px;
+    white-space: nowrap;
   }
-
-  .highlighted-text {
-    background: var(--color-white);
-    color: var(--color-background);
-    font-size: 1rem;
-    line-height: 1.5;
-    padding: 4px 6px;
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
-    display: inline;
-  }
-
-  .step2-badge {
-    position: absolute;
-    top: -8px;
-    right: var(--spacing-md);
-    margin: 0;
-  }
-
-  .reaction-preview {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-  }
-
-  .reaction {
-    padding: var(--spacing-md);
-    border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: flex-start;
-    gap: var(--spacing-sm);
-  }
-
-  .suggestion-checkbox {
-    flex-shrink: 0;
-    width: 16px;
-    height: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 3px;
-    background-color: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2px;
-    transition: all 0.3s ease;
-  }
-
-  .suggestion-checkbox :global(svg) {
-    width: 12px;
-    height: 12px;
-    color: var(--color-background);
-    opacity: 0;
-    transform: scale(0);
-    transition: all 0.3s ease;
-  }
-
-  .suggestion-checkbox.animate {
-    animation: checkboxFill 1.5s ease-out forwards;
-  }
-
-  .suggestion-checkbox.animate :global(svg) {
-    animation: checkAppear 1.5s ease-out forwards;
-  }
-
-  @keyframes checkboxFill {
-    0% {
-      background-color: transparent;
-      border-color: rgba(255, 255, 255, 0.3);
-    }
-    60% {
-      background-color: transparent;
-      border-color: rgba(255, 255, 255, 0.3);
-    }
-    70% {
-      background-color: var(--color-white);
-      border-color: var(--color-white);
-    }
-    100% {
-      background-color: var(--color-white);
-      border-color: var(--color-white);
-    }
-  }
-
-  @keyframes checkAppear {
-    0% {
-      opacity: 0;
-      transform: scale(0);
-    }
-    60% {
-      opacity: 0;
-      transform: scale(0);
-    }
-    70% {
-      opacity: 1;
-      transform: scale(1.2);
-    }
-    100% {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  .suggestion-content {
-    flex: 1;
-  }
-
-  .suggestion-header {
-    color: var(--color-white);
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 4px;
-    line-height: 1.3;
-  }
-
-  .suggestion-insight {
-    color: var(--color-text-light);
-    font-size: 0.875rem;
-    font-weight: 400;
-    line-height: 1.4;
-    font-style: italic;
-  }
-
-  @media (max-width: 768px) {
-    .hero h1 {
-      font-size: 2.5rem;
-    }
-
-    .hero-description {
-      font-size: 1.1rem;
-    }
-
-    .cta-buttons {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .steps-vertical {
-      padding: var(--spacing-md) 0;
-    }
-
-    .step-item {
-      margin-bottom: var(--spacing-xl);
-    }
-
-    .step-content {
-      padding: var(--spacing-md);
-    }
-
-    .step-content h3 {
-      font-size: 1.25rem;
-    }
-
-    .use-cases h2 {
-      font-size: 2rem;
-      margin-bottom: var(--spacing-lg);
-    }
-
-    .use-case-cards {
-      padding-left: var(--spacing-md);
-      padding-right: var(--spacing-md);
-    }
-
-    .use-case-card {
-      min-width: 300px;
-      max-width: 300px;
-      padding: var(--spacing-md);
-    }
-
-    .use-case-card p {
-      font-size: 1.25rem;
-      line-height: 1.4;
-      padding-top: var(--spacing-lg);
-    }
-
-    .channel-tag {
-      top: var(--spacing-sm);
-      right: var(--spacing-sm);
-      padding: 3px 8px;
-      font-size: 0.7rem;
-    }
-  }
-
-  /* FAQ Section */
-  .faq {
-    background-color: var(--color-background);
-    padding: var(--spacing-xxl) 0;
-    border-top: none;
-    border-bottom: none;
-  }
-
-  .faq-container {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .faq-item {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    margin-bottom: var(--spacing-md);
-  }
-
-  .faq-question {
+  .dash-top .pill svg { width: 13px; height: 13px; }
+  .dash-body { display: grid; grid-template-columns: 120px 1fr; }
+  .dash-side { padding: 16px 10px; border-right: 1px solid var(--dash-line); display: flex; flex-direction: column; gap: 3px; }
+  .dash-side a {
+    display: flex; align-items: center; gap: 9px;
+    font-size: 12.5px; color: rgba(255,255,255,0.55);
+    padding: 7px 9px; border-radius: 6px; text-decoration: none; border: 0;
     position: relative;
-    padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) 0;
-    cursor: pointer;
-    font-weight: 500;
-    display: flex;
-    justify-content: space-between;
+  }
+  .dash-side a svg { width: 14px; height: 14px; }
+  .dash-side a.on { color: var(--tf-red); }
+  .dash-side a.on::before { content:''; position: absolute; left: -10px; top: 6px; bottom: 6px; width: 2px; background: var(--tf-red); }
+  .dash-main { padding: 16px; display: grid; gap: 12px; }
+  .dash-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .dcard { border: 1px solid var(--dash-line); border-radius: 8px; padding: 14px; }
+  .dcard h4 { font-family: var(--font-body); font-weight: var(--w-semibold); font-size: 12px; color: rgba(255,255,255,0.85); margin: 0 0 10px; letter-spacing: 0; }
+  .dscore { display: flex; align-items: flex-start; gap: 16px; }
+  .dscore-num { font-family: var(--font-display); font-weight: 700; font-size: 46px; line-height: 0.9; color: #fff; }
+  .dscore-lbl { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 4px; }
+  .dscore-chart { flex: 1; }
+  .dscore-chart svg { width: 100%; height: 60px; display: block; }
+  .dscore-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
+  .dscore-foot .delta { font-size: 11px; color: var(--tf-red); display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+  .dscore-foot .delta svg { width: 11px; height: 11px; }
+  .dscore-foot .avg { font-size: 11px; color: rgba(255,255,255,0.5); }
+  .dtake { display: flex; flex-direction: column; gap: 12px; }
+  .dtake .row { display: flex; align-items: flex-start; gap: 9px; font-size: 12.5px; color: rgba(255,255,255,0.8); line-height: 1.3; }
+  .dtake .ck { width: 16px; height: 16px; flex: 0 0 16px; border-radius: 999px; border: 1.4px solid rgba(255,255,255,0.4); color: rgba(255,255,255,0.7); display: grid; place-items: center; margin-top: 1px; }
+  .dtake .ck svg { width: 9px; height: 9px; stroke-width: 3; }
+  .dsplit { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .dstat { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+  .dstat .r { display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: rgba(255,255,255,0.65); }
+  .dstat .r span { white-space: nowrap; }
+  .dstat .r b { color: #fff; font-weight: var(--w-semibold); }
+  .ddonut { width: 76px; height: 76px; border-radius: 999px; position: relative; flex: 0 0 76px; }
+  .ddonut::after { content:''; position: absolute; inset: 22px; border-radius: 999px; background: var(--dash-card); }
+
+  /* ---- dashboard reveal animations ---- */
+  @property --donut-sweep { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+  .trendline { stroke-dasharray: 1; stroke-dashoffset: 1; }
+  .dscore-chart circle { opacity: 0; }
+  .ddonut {
+    -webkit-mask-image: conic-gradient(#000 var(--donut-sweep), transparent 0);
+            mask-image: conic-gradient(#000 var(--donut-sweep), transparent 0);
+    --donut-sweep: 0deg;
+  }
+  .dash.in-view .trendline { animation: tfDrawLine 1100ms var(--ease-out) 160ms forwards; }
+  .dash.in-view .dscore-chart circle { animation: tfDotIn 300ms var(--ease-out) forwards; }
+  .dash.in-view .dscore-chart circle:nth-of-type(1) { animation-delay: 360ms; }
+  .dash.in-view .dscore-chart circle:nth-of-type(2) { animation-delay: 460ms; }
+  .dash.in-view .dscore-chart circle:nth-of-type(3) { animation-delay: 560ms; }
+  .dash.in-view .dscore-chart circle:nth-of-type(4) { animation-delay: 660ms; }
+  .dash.in-view .dscore-chart circle:nth-of-type(5) { animation-delay: 760ms; }
+  .dash.in-view .dscore-chart circle:nth-of-type(6) { animation-delay: 860ms; }
+  .dash.in-view .dscore-chart circle:nth-of-type(7) { animation-delay: 960ms; }
+  .dash.in-view .dscore-chart circle:nth-of-type(8) { animation-delay: 1060ms; }
+  .dash.in-view .dscore-chart circle:nth-of-type(9) { animation-delay: 1160ms; }
+  .dash.in-view .ddonut { animation: tfDonutSweep 900ms var(--ease-out) 300ms forwards; }
+  @keyframes tfDrawLine { to { stroke-dashoffset: 0; } }
+  @keyframes tfDotIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes tfDonutSweep { from { --donut-sweep: 0deg; } to { --donut-sweep: 360deg; } }
+  @media (prefers-reduced-motion: reduce) {
+    .trendline { stroke-dashoffset: 0; }
+    .dscore-chart circle { opacity: 1; }
+    .ddonut { --donut-sweep: 360deg; }
+    .dash.in-view .trendline, .dash.in-view .dscore-chart circle, .dash.in-view .ddonut { animation: none; }
+  }
+  .dquote { display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; }
+  .dquote .q { flex: 1; }
+  .dquote .qt { font-family: var(--font-display); font-style: italic; font-size: 17px; line-height: 1.3; color: #fff; display: flex; gap: 6px; }
+  .dquote .qt .mark { color: var(--tf-red); font-size: 22px; line-height: 1; }
+  .dquote .qby { font-size: 11.5px; color: rgba(255,255,255,0.55); margin-top: 10px; display: inline-flex; align-items: center; gap: 6px; }
+  .dquote .qby svg { width: 12px; height: 12px; }
+  .dquote .thumbs { display: flex; align-items: flex-end; gap: 0; position: relative; }
+  .dquote .thumbs .thumb-slot { width: 56px; height: 76px; display: block; border: 1px solid var(--dash-line); background: rgba(255,255,255,0.04); border-radius: 3px; }
+  .dquote .thumbs .thumb-slot:last-child { margin-left: -20px; margin-bottom: 10px; }
+
+  /* ============ WHY TEAMS ============ */
+  .why .wrap { padding-top: 10px; padding-bottom: 70px; }
+  .sec-head-center { text-align: center; }
+  .sec-head-center h2 {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: 44px; letter-spacing: -0.02em; color: var(--tf-black); margin: 0 0 40px;
+  }
+  .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .why-col { padding: 0 28px; }
+  .why-col + .why-col { border-left: 1px solid var(--line); }
+  .why-col .ic { color: var(--tf-red); margin-bottom: 20px; }
+  .why-col .ic svg { width: 30px; height: 30px; stroke-width: 1.6; }
+  .why-col h3 { font-family: var(--font-body); font-weight: var(--w-bold); font-size: 16px; color: var(--tf-black); margin: 0 0 12px; letter-spacing: 0; line-height: 1.2; }
+  .why-col p { font-size: 14px; line-height: 1.5; color: var(--tf-ink); font-weight: var(--w-regular); margin: 0; }
+
+  /* ============ WHAT GETS TESTED ============ */
+  .tested .wrap { padding-bottom: 70px; }
+  .tested-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+  .tested-head h2 { font-family: var(--font-display); font-weight: 700; font-size: 40px; letter-spacing: -0.02em; color: var(--tf-black); margin: 0; }
+  .tested-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .tcard { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 14px; display: flex; gap: 16px; min-height: 192px; }
+  .tcard .pic { width: 124px; flex: 0 0 124px; border-radius: 4px; overflow: hidden; background: transparent; }
+  .tcard .pic img { width: 100%; height: 100%; object-fit: contain; }
+  .tcard .info { flex: 1; display: flex; flex-direction: column; }
+  .tcard .lbl { font-family: var(--font-display); font-weight: 700; font-size: 30px; line-height: 1.02; letter-spacing: -0.02em; color: var(--tf-black); margin-bottom: 10px; }
+  .tcard .desc { font-size: 12.5px; line-height: 1.45; color: var(--tf-ink); font-weight: var(--w-regular); }
+  .tcard .go { margin-top: auto; align-self: flex-end; color: var(--tf-red); }
+  .tcard .go svg { width: 16px; height: 16px; }
+
+  /* ============ CTA BAND ============ */
+  .cta .wrap { padding-bottom: 70px; }
+  .cta-band {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 30px 40px;
+    display: grid;
+    grid-template-columns: 150px 1fr auto;
     align-items: center;
-    width: 100%;
-    text-align: left;
-    background: none;
-    border: none;
-    color: inherit;
-    font-size: 1.25rem;
-    font-family: "Poppins", sans-serif;
-    margin-bottom: var(--spacing-sm);
-    line-height: 1.2;
+    gap: 36px;
   }
-
-  .question-text {
-    flex: 1;
-  }
-
-  .faq-question::after {
-    content: "+";
-    font-size: 1.5rem;
-    color: var(--color-primary);
-    transition: transform 0.3s ease;
-  }
-
-  .faq-item.active .faq-question::after {
-    content: "−";
-    transform: rotate(0deg);
-  }
-
-  .faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition:
-      max-height 0.3s ease,
-      padding 0.3s ease;
-    padding: 0 var(--spacing-md) 0 0;
-  }
-
-  .faq-item.active .faq-answer {
-    max-height: 500px;
-    padding: 0 var(--spacing-md) var(--spacing-md) 0;
-  }
-
-  /* Empathy Cursor */
-  .empathy-cursor {
+  .cta-visual { position: relative; height: 124px; }
+  .cta-circle {
     position: absolute;
-    right: 15%;
-    top: 15%;
-    z-index: 10;
-    pointer-events: none;
-    animation: 35s empathy-hovering infinite ease-in-out;
+    width: 104px; height: 104px; border-radius: 999px;
+    background: var(--tf-red);
+    left: 44px; bottom: -6px; z-index: 0;
   }
-
-  .empathy-cursor .cursor-name {
-    background-color: #f59e0b;
+  .cta-spark { position: absolute; width: 52px; height: 58px; left: -8px; top: 0; z-index: 2; }
+  .cta-visual img { position: absolute; left: 10px; top: 0; height: 124px; width: auto; z-index: 1; transform: rotate(-8deg); }
+  .cta-copy h2 {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: 28px; line-height: 1.1; letter-spacing: -0.02em;
+    color: var(--tf-black); margin: 0 0 8px;
   }
+  .cta-copy p { font-size: 15px; line-height: 1.5; color: var(--tf-stone); font-weight: var(--w-regular); margin: 0; max-width: 420px; }
+  .cta-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 14px; }
 
-  @keyframes empathy-hovering {
-    0% {
-      transform: translate3d(0px, 0px, 0px) rotate(0deg);
-    }
-    12% {
-      transform: translate3d(-60px, 15px, 0px) rotate(0.5deg);
-    }
-    25% {
-      transform: translate3d(80px, -20px, 0px) rotate(-0.5deg);
-    }
-    37% {
-      transform: translate3d(-40px, 35px, 0px) rotate(1deg);
-    }
-    50% {
-      transform: translate3d(70px, 25px, 0px) rotate(-0.5deg);
-    }
-    62% {
-      transform: translate3d(-70px, -10px, 0px) rotate(0.5deg);
-    }
-    75% {
-      transform: translate3d(50px, 40px, 0px) rotate(-1deg);
-    }
-    87% {
-      transform: translate3d(-30px, 20px, 0px) rotate(0.5deg);
-    }
-    100% {
-      transform: translate3d(0px, 0px, 0px) rotate(0deg);
-    }
+  /* ============ HOW IT WORKS ============ */
+  .how .wrap { padding-bottom: 70px; }
+  .how .sec-head-center h2 { margin-bottom: 36px; }
+  .how-grid { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: start; gap: 18px; }
+  .how-step { display: flex; gap: 18px; align-items: flex-start; }
+  .how-step .circ {
+    width: 64px; height: 64px; flex: 0 0 64px; border-radius: 999px;
+    background: var(--band); display: grid; place-items: center; color: var(--tf-black);
   }
+  .how-step .circ svg { width: 26px; height: 26px; stroke-width: 1.6; }
+  .how-step .num { font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--tf-red); margin: 0 0 6px; }
+  .how-step h3 { font-family: var(--font-body); font-weight: var(--w-bold); font-size: 16px; color: var(--tf-black); margin: 0 0 8px; letter-spacing: 0; }
+  .how-step p { font-size: 13.5px; line-height: 1.5; color: var(--tf-ink); font-weight: var(--w-regular); margin: 0; }
+  .chips { display: flex; gap: 6px; margin-top: 12px; }
+  .chips span { font-size: 10px; letter-spacing: 0.06em; font-weight: var(--w-bold); color: var(--tf-stone); background: var(--band); border-radius: 4px; padding: 4px 8px; }
+  .how-arrow { align-self: center; color: var(--tf-fog); padding-top: 14px; }
+  .how-arrow svg { width: 22px; height: 22px; }
 
-  @media (max-width: 768px) {
-    .empathy-cursor {
-      display: none;
+  /* ============ DEMO ============ */
+  .demo .wrap { padding-bottom: 70px; }
+  .demo-panel { background: var(--dash); border-radius: 10px; overflow: hidden; display: grid; grid-template-columns: 320px 1fr; align-items: stretch; }
+  .demo-text { padding: 40px 36px; align-self: center; }
+  .demo-text .eyebrow-red { margin-bottom: 16px; }
+  .demo-text h2 { font-family: var(--font-display); font-weight: 700; font-size: 42px; line-height: 0.98; letter-spacing: -0.02em; color: #fff; margin: 0 0 16px; }
+  .demo-text p { font-size: 14px; color: rgba(255,255,255,0.7); margin: 0 0 26px; }
+  .demo-stage { position: relative; overflow: hidden; display: flex; align-items: center; }
+  .demo-stage img { width: 100%; height: auto; display: block; }
+
+  /* ============ FOOTER ============ */
+  .site-footer { background: var(--dash); color: rgba(255,255,255,0.7); }
+  .site-footer .wrap { padding-top: 44px; padding-bottom: 26px; }
+  .foot-grid { display: grid; grid-template-columns: 1.7fr 1fr 1.2fr; gap: 28px; }
+  .foot-brand .fm { display: inline-flex; align-items: flex-end; margin-bottom: 16px; }
+  .foot-brand .fm img { height: 20px; width: auto; display: block; filter: invert(1); }
+  .foot-brand p { font-size: 13.5px; line-height: 1.4; color: rgba(255,255,255,0.55); margin: 0 0 18px; max-width: 180px; }
+  .foot-social { display: flex; gap: 10px; }
+  .foot-social a { width: 30px; height: 30px; border-radius: 999px; background: rgba(255,255,255,0.08); display: grid; place-items: center; color: #fff; border: 0; }
+  .foot-social a svg { width: 14px; height: 14px; }
+  .foot-social a:hover { background: var(--tf-red); }
+  .foot-nav { display: flex; flex-direction: column; gap: 11px; padding-top: 2px; }
+  .foot-col h4 { font-family: var(--font-body); font-weight: var(--w-bold); font-size: 13px; color: #fff; margin: 0 0 16px; letter-spacing: 0; }
+  .foot-col a { display: block; font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; border: 0; margin-bottom: 11px; }
+  .foot-col a:hover { color: #fff; }
+  .foot-signup h4 { font-family: var(--font-body); font-weight: var(--w-bold); font-size: 13px; color: #fff; margin: 0 0 16px; }
+  .foot-priv { display: block; font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; border: 0; margin-bottom: 11px; }
+  .foot-priv:hover { color: #fff; }
+  .foot-signup .field { display: flex; background: rgba(255,255,255,0.07); border: 1px solid var(--dash-line); border-radius: 6px; overflow: hidden; }
+  .foot-signup input { flex: 1; background: transparent; border: 0; outline: 0; color: #fff; font: inherit; font-size: 13px; padding: 10px 12px; }
+  .foot-signup input::placeholder { color: rgba(255,255,255,0.45); }
+  .foot-signup button { background: transparent; border: 0; color: var(--tf-red); padding: 0 12px; cursor: pointer; display: grid; place-items: center; }
+  .foot-signup button svg { width: 16px; height: 16px; }
+  .foot-signup-msg { margin: 12px 0 0; font-size: 12.5px; line-height: 1.4; display: flex; align-items: center; gap: 7px; }
+  .foot-signup-msg.ok { color: #fff; }
+  .foot-signup-msg.err { color: var(--tf-red); }
+  .foot-signup-msg .mi { display: inline-grid; place-items: center; width: 16px; height: 16px; flex: 0 0 16px; }
+  .foot-signup-msg.ok .mi { color: #4ED07A; }
+  .foot-signup-msg .mi svg { width: 14px; height: 14px; stroke-width: 3; }
+  .foot-signup.done .field { display: none; }
+  .foot-bottom { display: flex; align-items: center; justify-content: flex-end; margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--dash-line); }
+  .foot-bottom .cp { font-size: 11.5px; color: rgba(255,255,255,0.4); white-space: nowrap; }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 1000px) {
+    /* nav -> mobile dropdown */
+    .nav {
+      position: absolute; top: 100%; left: 0; right: 0;
+      flex-direction: column; align-items: stretch; gap: 0;
+      background: var(--page); border-top: 1px solid var(--line);
+      padding: 6px 0 12px; margin: 0; display: none; z-index: 60;
+      box-shadow: 0 24px 40px rgba(0,0,0,0.10);
     }
+    .site-header.open .nav { display: flex; }
+    .nav a:not(.btn) { padding: 14px 40px; font-size: 16px; }
+    .nav a:not(.nav-cta):not(:last-child) { border-bottom: 1px solid var(--line); }
+    .nav a.nav-cta { display: inline-flex; margin: 12px 40px 0; }
+    .site-header .header-btn { display: none; }
+    .nav-toggle { display: inline-grid; }
+
+    .hero .wrap { grid-template-columns: 1fr; gap: 8px; padding-bottom: 0; align-items: start; }
+    .hero-left { max-width: 620px; }
+    .hero-right { height: 460px; }
+    .hero-circle { width: 300px; height: 300px; top: 64px; right: auto; left: 50%; transform: translateX(-56%); }
+    .hero-figure { height: 470px; right: auto; left: 50%; transform: translateX(-50%); }
+    .hero-dots { width: 190px; height: 320px; top: 110px; right: -14px; }
+
+    .platform .wrap { grid-template-columns: 1fr; gap: 28px; }
+    .dash { transform: none; }
+    .platform-left p { max-width: none; }
+    .why-grid { grid-template-columns: 1fr 1fr; gap: 32px 0; }
+    .why-col + .why-col { border-left: 0; }
+    .why-col:nth-child(n+3) { border-top: 1px solid var(--line); padding-top: 32px; }
+    .tested-grid { grid-template-columns: 1fr 1fr; }
+    .how-grid { grid-template-columns: 1fr; gap: 28px; }
+    .how-arrow { display: none; }
+    .demo-panel { grid-template-columns: 1fr; }
+    .demo-stage { display: block; }
+    .cta-band { grid-template-columns: 110px 1fr; gap: 24px 28px; }
+    .cta-actions { grid-column: 2; align-items: flex-start; }
+    .cta-visual { height: 100px; }
+    .cta-visual img { height: 96px; }
+    .cta-circle { width: 80px; height: 80px; left: 18px; }
+    .foot-grid { grid-template-columns: 1fr 1fr; gap: 28px 24px; }
+    .foot-brand, .foot-signup { grid-column: 1 / -1; }
+  }
+  @media (max-width: 600px) {
+    /* phone */
+    .wrap { padding: 0 20px; }
+    .site-header { padding: 18px 0 14px; }
+    .nav a:not(.btn) { padding-left: 20px; padding-right: 20px; }
+    .nav a.nav-cta { margin-left: 20px; margin-right: 20px; }
+
+    .hero .eyebrow-red { margin-bottom: 16px; }
+    .hero h1 { font-size: 44px; }
+    .hero p.lede, .hero p.bench { font-size: 16px; }
+    .hero p.lede { max-width: none; }
+    .hero-ctas { margin-top: 26px; flex-direction: column; align-items: stretch; gap: 12px; }
+    .hero-ctas .btn { width: 100%; justify-content: space-between; }
+    .hero-right { height: 360px; }
+    .hero-circle { width: 230px; height: 230px; top: 44px; }
+    .hero-figure { height: 360px; }
+    .hero-dots { display: none; }
+
+    .platform .wrap { padding-top: 48px; padding-bottom: 48px; }
+    .platform-left h2 { font-size: 28px; }
+    .sec-head-center h2 { font-size: 28px; margin-bottom: 28px; }
+    .why .wrap { padding-bottom: 48px; }
+    .why-grid { grid-template-columns: 1fr; gap: 0; }
+    .why-col { padding: 24px 0 0; }
+    .why-col:first-child { padding-top: 0; }
+    .why-col + .why-col { border-left: 0; border-top: 1px solid var(--line); }
+    .why-col:nth-child(n+3) { padding-top: 24px; }
+    .tested .wrap { padding-bottom: 48px; }
+    .tested-head { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .tested-head h2 { font-size: 28px; }
+    .tested-grid { grid-template-columns: 1fr; }
+    .how .wrap { padding-bottom: 48px; }
+    .demo .wrap { padding-bottom: 48px; }
+    .cta .wrap { padding-bottom: 48px; }
+    .cta-band { grid-template-columns: 1fr; text-align: left; padding: 26px 24px; gap: 20px; }
+    .cta-visual { display: none; }
+    .cta-actions { grid-column: 1; align-items: stretch; }
+    .cta-actions .btn { width: 100%; justify-content: space-between; }
+    .cta-copy p { max-width: none; }
+    .demo-text { padding: 32px 24px; }
+    .demo-text h2 { font-size: 34px; }
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+
+    /* dashboard reflow */
+    .dash-top { flex-wrap: wrap; gap: 8px 10px; }
+    .dash-top .spacer { display: none; }
+    .dash-top .crumb { order: 3; width: 100%; }
+    .dash-top .pill { font-size: 11px; padding: 5px 8px; }
+    .dash-body { grid-template-columns: 1fr; }
+    .dash-side { flex-direction: row; flex-wrap: wrap; border-right: 0; border-bottom: 1px solid var(--dash-line); gap: 2px; }
+    .dash-side a.on::before { display: none; }
+    .dash-row { grid-template-columns: 1fr; }
+    .dscore-num { font-size: 40px; }
   }
 </style>
+</head>
+<body>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Hero video player
-    const heroVideoPlaceholder = document.getElementById(
-      "hero-video-placeholder",
-    );
-    if (heroVideoPlaceholder) {
-      const videoWrapper = heroVideoPlaceholder.closest(".video-wrapper");
+  <!-- ===== HEADER ===== -->
+  <header class="site-header" id="siteHeader">
+    <div class="wrap">
+      <a class="wordmark" href="/"><img src="/assets/logo-primary.png" alt="testfeed" /><span class="logodot"></span></a>
+      <nav class="nav" id="nav">
+        <a href="#platform">Product</a>
+        <a href="#tested">Use cases</a>
+        <a href={bookingUrl} target="_blank" rel="noopener">Pricing</a>
+        <a href={bookingUrl} target="_blank" rel="noopener">Contact</a>
+        <a class="btn nav-cta" href={bookingUrl} target="_blank" rel="noopener">Book a demo <span class="arr"><i data-lucide="arrow-right"></i></span></a>
+      </nav>
+      <a class="btn header-btn" href={bookingUrl} target="_blank" rel="noopener">Book a demo <span class="arr"><i data-lucide="arrow-right"></i></span></a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><i data-lucide="menu"></i></button>
+    </div>
+  </header>
 
-      heroVideoPlaceholder.addEventListener("click", loadHeroVideo);
-      heroVideoPlaceholder.addEventListener("keydown", (event) => {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          loadHeroVideo();
-        }
-      });
+  <!-- ===== HERO ===== -->
+  <section class="hero" data-screen-label="Hero">
+    <div class="wrap">
+      <div class="hero-left">
+        <p class="eyebrow-red">AI respondents. Built from real audience data.</p>
+        <h1>
+          <span class="rotator" aria-label="Customer">
+            <span>Customer</span>
+            <span>Shopper</span>
+            <span>Audience</span>
+            <span>Buyer</span>
+          </span><br/>
+          feedback<br/>
+          on-demand<span class="dot-red">.</span>
+        </h1>
+        <p class="lede">We build an AI panel of your audience, so you can ask them anything, at any time.</p>
+        <div class="hero-ctas">
+          <a class="btn" href={bookingUrl} target="_blank" rel="noopener">Book a demo <span class="arr"><i data-lucide="arrow-right"></i></span></a>
+          <a class="btn btn--outline" href="#platform">See TestFeed in action <i data-lucide="arrow-right"></i></a>
+        </div>
+        <div class="hero-checks">
+          <span class="hcheck"><span class="ck"><i data-lucide="check"></i></span>Real audience data</span>
+          <span class="hcheck"><span class="ck"><i data-lucide="check"></i></span>Human-benchmarked</span>
+          <span class="hcheck"><span class="ck"><i data-lucide="check"></i></span>Enterprise secure</span>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-circle"></div>
+        <div class="hero-dots"></div>
+        <img class="hero-figure" src="/assets/hero-figure-full.png" alt="1950s housewife holding a Sunny Crisp Corn Flakes box" />
+      </div>
+    </div>
+  </section>
 
-      function loadHeroVideo() {
-        if (!videoWrapper) return;
+  <!-- ===== TRUSTED ===== -->
+  <section class="trusted">
+    <div class="wrap">
+      <div class="label">Trusted by leading teams</div>
+      <div class="logos">
+        <div class="logos-track">
+          <div class="logos-set">
+            <div class="logo andie"><img src="/assets/logo-andie-t.png" alt="Andie" /></div>
+            <div class="logo clutch"><img src="/assets/logo-clutch-t.png" alt="Clutch" /></div>
+            <div class="logo baejuice"><img src="/assets/logo-baejuice-t.png" alt="Bae Juice" /></div>
+            <div class="logo solbevi"><img src="/assets/logo-solbevi-t.png" alt="Solbeví" /></div>
+            <div class="logo elita"><img src="/assets/logo-elita-t.png" alt="Elita" /></div>
+          </div>
+          <div class="logos-set" aria-hidden="true">
+            <div class="logo andie"><img src="/assets/logo-andie-t.png" alt="" /></div>
+            <div class="logo clutch"><img src="/assets/logo-clutch-t.png" alt="" /></div>
+            <div class="logo baejuice"><img src="/assets/logo-baejuice-t.png" alt="" /></div>
+            <div class="logo solbevi"><img src="/assets/logo-solbevi-t.png" alt="" /></div>
+            <div class="logo elita"><img src="/assets/logo-elita-t.png" alt="" /></div>
+          </div>
+          <div class="logos-set" aria-hidden="true">
+            <div class="logo andie"><img src="/assets/logo-andie-t.png" alt="" /></div>
+            <div class="logo clutch"><img src="/assets/logo-clutch-t.png" alt="" /></div>
+            <div class="logo baejuice"><img src="/assets/logo-baejuice-t.png" alt="" /></div>
+            <div class="logo solbevi"><img src="/assets/logo-solbevi-t.png" alt="" /></div>
+            <div class="logo elita"><img src="/assets/logo-elita-t.png" alt="" /></div>
+          </div>
+          <div class="logos-set" aria-hidden="true">
+            <div class="logo andie"><img src="/assets/logo-andie-t.png" alt="" /></div>
+            <div class="logo clutch"><img src="/assets/logo-clutch-t.png" alt="" /></div>
+            <div class="logo baejuice"><img src="/assets/logo-baejuice-t.png" alt="" /></div>
+            <div class="logo solbevi"><img src="/assets/logo-solbevi-t.png" alt="" /></div>
+            <div class="logo elita"><img src="/assets/logo-elita-t.png" alt="" /></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        const iframe = document.createElement("iframe");
-        iframe.setAttribute("width", "100%");
-        iframe.setAttribute("height", "100%");
-        iframe.setAttribute(
-          "src",
-          "https://www.youtube.com/embed/j6SDj67J5fM?autoplay=1&rel=0",
-        );
-        iframe.setAttribute("title", "TestFeed Demo Video");
-        iframe.setAttribute(
-          "allow",
-          "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
-        );
-        iframe.setAttribute("allowfullscreen", "");
-        iframe.style.borderRadius = "12px";
-        iframe.style.display = "block";
+  <!-- ===== PLATFORM / DASHBOARD ===== -->
+  <section class="platform" id="platform" data-screen-label="Platform">
+    <div class="wrap">
+      <div class="platform-left">
+        <p class="eyebrow-red">Platform</p>
+        <h2>See exactly what<br/>your audience thinks.</h2>
+        <p>Upload anything. Get a score, the quotes, and the next move.</p>
+        <div class="feat-list">
+          <div class="feat"><span class="ck"><i data-lucide="check"></i></span>Score and trend</div>
+          <div class="feat"><span class="ck"><i data-lucide="check"></i></span>Emotions and reactions</div>
+          <div class="feat"><span class="ck"><i data-lucide="check"></i></span>Audience quotes</div>
+          <div class="feat"><span class="ck"><i data-lucide="check"></i></span>Purchase intent</div>
+          <div class="feat"><span class="ck"><i data-lucide="check"></i></span>The next move</div>
+        </div>
+      </div>
 
-        videoWrapper.innerHTML = "";
-        videoWrapper.appendChild(iframe);
-      }
-    }
+      <div class="dash" aria-hidden="true">
+        <div class="dash-top">
+          <span class="dm">testfeed</span>
+          <span class="crumb">Concept Test · <b>Sunny Crisp Cereal</b></span>
+          <span class="spacer"></span>
+          <span class="pill"><i data-lucide="upload"></i> Export</span>
+          <span class="pill">Last 30 days <i data-lucide="chevron-down"></i></span>
+        </div>
+        <div class="dash-body">
+          <div class="dash-side">
+            <a class="on"><i data-lucide="layout-dashboard"></i> Overview</a>
+            <a><i data-lucide="message-square"></i> Responses</a>
+            <a><i data-lucide="users"></i> Audience</a>
+            <a><i data-lucide="bar-chart-3"></i> Benchmarks</a>
+            <a><i data-lucide="file-text"></i> Reports</a>
+            <a><i data-lucide="flask-conical"></i> Tests</a>
+            <a><i data-lucide="settings"></i> Settings</a>
+          </div>
+          <div class="dash-main">
+            <div class="dash-row">
+              <div class="dcard">
+                <h4>Top 2 Box Score</h4>
+                <div class="dscore">
+                  <div>
+                    <div class="dscore-num">87%</div>
+                    <div class="dscore-lbl">Very Strong</div>
+                  </div>
+                  <div class="dscore-chart">
+                    <svg viewBox="0 0 200 56" preserveAspectRatio="none">
+                      <polyline class="trendline" pathLength="1" fill="none" stroke="#E6392E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        points="4,48 26,42 48,44 70,34 92,36 114,26 136,30 158,18 180,14 196,6" />
+                      <circle cx="26" cy="42" r="2.4" fill="#E6392E"/><circle cx="48" cy="44" r="2.4" fill="#E6392E"/>
+                      <circle cx="70" cy="34" r="2.4" fill="#E6392E"/><circle cx="92" cy="36" r="2.4" fill="#E6392E"/>
+                      <circle cx="114" cy="26" r="2.4" fill="#E6392E"/><circle cx="136" cy="30" r="2.4" fill="#E6392E"/>
+                      <circle cx="158" cy="18" r="2.4" fill="#E6392E"/><circle cx="180" cy="14" r="2.4" fill="#E6392E"/>
+                      <circle cx="196" cy="6" r="3" fill="#E6392E"/>
+                    </svg>
+                  </div>
+                </div>
+                <div class="dscore-foot">
+                  <span class="delta"><i data-lucide="trending-up"></i> 11% vs last 30 days</span>
+                  <span class="avg">87% Avg</span>
+                </div>
+              </div>
+              <div class="dcard">
+                <h4>Key takeaways</h4>
+                <div class="dtake">
+                  <div class="row"><span class="ck"><i data-lucide="check"></i></span>Strong visual appeal and shelf standout.</div>
+                  <div class="row"><span class="ck"><i data-lucide="check"></i></span>Health perception is a key purchase driver.</div>
+                  <div class="row"><span class="ck"><i data-lucide="check"></i></span>Consider bolder flavor messaging.</div>
+                </div>
+              </div>
+            </div>
+            <div class="dash-row">
+              <div class="dcard">
+                <h4>Emotion</h4>
+                <div class="dsplit">
+                  <div class="dstat">
+                    <div class="r"><span>Excited</span><b>46%</b></div>
+                    <div class="r"><span>Curious</span><b>22%</b></div>
+                    <div class="r"><span>Trusting</span><b>14%</b></div>
+                    <div class="r"><span>Other</span><b>6%</b></div>
+                  </div>
+                  <div class="ddonut" style="background: conic-gradient(#E6392E 0 46%, rgba(255,255,255,0.55) 46% 68%, rgba(255,255,255,0.32) 68% 82%, rgba(255,255,255,0.16) 82% 100%);"></div>
+                </div>
+              </div>
+              <div class="dcard">
+                <h4>Purchase intent</h4>
+                <div class="dsplit">
+                  <div class="dstat">
+                    <div class="r"><span>Definitely</span><b>38%</b></div>
+                    <div class="r"><span>Likely</span><b>45%</b></div>
+                    <div class="r"><span>Maybe</span><b>12%</b></div>
+                    <div class="r"><span>Not likely</span><b>5%</b></div>
+                  </div>
+                  <div class="ddonut" style="background: conic-gradient(#E6392E 0 38%, rgba(255,255,255,0.55) 38% 83%, rgba(255,255,255,0.32) 83% 95%, rgba(255,255,255,0.16) 95% 100%);"></div>
+                </div>
+              </div>
+            </div>
+            <div class="dcard">
+              <h4>Audience quote</h4>
+              <div class="dquote">
+                <div class="q">
+                  <div class="qt"><span class="mark">“</span><span>I love the clean look and feel like it's a healthier option. I'd definitely try this.”</span></div>
+                  <div class="qby"><i data-lucide="user"></i> Female, 34, Midwest</div>
+                </div>
+                <div class="thumbs">
+                  <span class="thumb-slot"></span>
+                  <span class="thumb-slot"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    // Chat feedback message rotation
-    const feedbackMessages = [
-      "I don't get it",
-      "This doesn't make sense",
-      "Hmm, that's cool",
-      "Love this approach",
-      "Not sure about this",
-    ];
+  <!-- ===== WHY TEAMS ===== -->
+  <section class="why">
+    <div class="wrap">
+      <div class="sec-head-center"><h2>Why teams use TestFeed<span class="dot-red">.</span></h2></div>
+      <div class="why-grid">
+        <div class="why-col">
+          <div class="ic"><i data-lucide="users-round"></i></div>
+          <h3>Modelled on your audience.</h3>
+          <p>Built from real survey data and behavioural signals.</p>
+        </div>
+        <div class="why-col">
+          <div class="ic"><i data-lucide="clock"></i></div>
+          <h3>The speed of a prompt.</h3>
+          <p>Results in an hour. Not weeks.</p>
+        </div>
+        <div class="why-col">
+          <div class="ic"><i data-lucide="zap"></i></div>
+          <h3>On-demand. Any time.</h3>
+          <p>No scheduling. No waiting. Run a test whenever you need to.</p>
+        </div>
+        <div class="why-col">
+          <div class="ic"><i data-lucide="target"></i></div>
+          <h3>The next move.</h3>
+          <p>Not just feedback. A clear call on what to send, fix, or forget.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    let currentMessageIndex = 0;
-    const feedbackMessageEl = document.getElementById(
-      "feedback-message",
-    ) as HTMLElement;
-    const loadingMessageEl = document.querySelector(
-      ".loading-message",
-    ) as HTMLElement;
+  <!-- ===== WHAT GETS TESTED ===== -->
+  <section class="tested" id="tested" data-screen-label="What gets tested">
+    <div class="wrap">
+      <div class="tested-head">
+        <h2>What gets tested<span class="dot-red">.</span></h2>
+        <a class="btn btn--outline" href="#tested">View all use cases <i data-lucide="arrow-right"></i></a>
+      </div>
+      <div class="tested-grid">
+        <div class="tcard">
+          <div class="pic"><img src="/assets/pack-box.png" alt="Sunny Crisp Corn Flakes box with a bowl of cereal" /></div>
+          <div class="info">
+            <span class="lbl">Pack</span>
+            <span class="desc">Standout. Appeal. Comprehension.</span>
+            <span class="go"><i data-lucide="arrow-right"></i></span>
+          </div>
+        </div>
+        <div class="tcard">
+          <div class="pic"><img src="/assets/ad-tv.png" alt="Vintage TV ad" /></div>
+          <div class="info">
+            <span class="lbl">Ad</span>
+            <span class="desc">Attention. Cut-through. Persuasion.</span>
+            <span class="go"><i data-lucide="arrow-right"></i></span>
+          </div>
+        </div>
+        <div class="tcard">
+          <div class="pic"><img src="/assets/claim-carton.png" alt="Hand holding a High Protein carton with a claim circled" /></div>
+          <div class="info">
+            <span class="lbl">Claim</span>
+            <span class="desc">Believability. Clarity. Purchase impact.</span>
+            <span class="go"><i data-lucide="arrow-right"></i></span>
+          </div>
+        </div>
+        <div class="tcard">
+          <div class="pic"><img src="/assets/price-tag.png" alt="Shelf price tag with the price circled in red" /></div>
+          <div class="info">
+            <span class="lbl">Price</span>
+            <span class="desc">Fairness. Value. Sensitivity.</span>
+            <span class="go"><i data-lucide="arrow-right"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    function rotateFeedbackMessage() {
-      if (!feedbackMessageEl || !loadingMessageEl) return;
+  <!-- ===== CTA BAND ===== -->
+  <section class="cta" data-screen-label="CTA">
+    <div class="wrap">
+      <div class="cta-band">
+        <div class="cta-visual">
+          <div class="cta-circle"></div>
+          <svg class="cta-spark" viewBox="0 0 52 58" fill="none" aria-hidden="true">
+            <g stroke="var(--tf-red)" stroke-width="3.2" stroke-linecap="round">
+              <line x1="46" y1="50" x2="4" y2="38"/>
+              <line x1="46" y1="50" x2="12" y2="16"/>
+              <line x1="46" y1="50" x2="30" y2="4"/>
+            </g>
+          </svg>
+          <img src="/assets/pack-box.png" alt="Sunny Crisp Corn Flakes pack" />
+        </div>
+        <div class="cta-copy">
+          <h2>Ready to see what your audience thinks?</h2>
+          <p>Get a score, reactions, quotes and next-step recommendations in under an hour.</p>
+        </div>
+        <div class="cta-actions">
+          <a class="btn" href={bookingUrl} target="_blank" rel="noopener">Book a demo <span class="arr"><i data-lucide="arrow-right"></i></span></a>
+          <a class="btn btn--outline" href="#platform">See TestFeed in action <i data-lucide="arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      // Hide current message with animation
-      feedbackMessageEl.classList.add("hidden");
-      feedbackMessageEl.classList.remove("show");
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="how" id="how" data-screen-label="How it works">
+    <div class="wrap">
+      <div class="sec-head-center"><h2>How it works<span class="dot-red">.</span></h2></div>
+      <div class="how-grid">
+        <div class="how-step">
+          <div class="circ"><i data-lucide="upload"></i></div>
+          <div>
+            <p class="num">01</p>
+            <h3>Pick what to test.</h3>
+            <p>Packs, ads, claims, prices, promos, concepts, names.</p>
+          </div>
+        </div>
+        <div class="how-arrow"><i data-lucide="arrow-right"></i></div>
+        <div class="how-step">
+          <div class="circ"><i data-lucide="users-round"></i></div>
+          <div>
+            <p class="num">02</p>
+            <h3>Run a test.</h3>
+            <p>Your AI panel, modelled on your audience and benchmarked against humans.</p>
+          </div>
+        </div>
+        <div class="how-arrow"><i data-lucide="arrow-right"></i></div>
+        <div class="how-step">
+          <div class="circ"><i data-lucide="bar-chart-3"></i></div>
+          <div>
+            <p class="num">03</p>
+            <h3>Get the next move.</h3>
+            <p>Score, quotes, emotional reactions, and a clear recommendation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      // Wait for fade out, then show loading
-      setTimeout(() => {
-        loadingMessageEl.classList.add("show");
+  <!-- ===== DEMO ===== -->
+  <section class="demo" data-screen-label="Demo">
+    <div class="wrap">
+      <div class="demo-panel">
+        <div class="demo-text">
+          <p class="eyebrow-red">Demo</p>
+          <h2>See TestFeed<br/>in action.</h2>
+          <p>2 minutes.</p>
+          <a class="btn btn--light" href={bookingUrl} target="_blank" rel="noopener">Book a demo <span class="arr"><i data-lucide="arrow-right"></i></span></a>
+        </div>
+        <div class="demo-stage">
+          <img src="/assets/live-products.png" alt="Product lineup with attention scores" />
+        </div>
+      </div>
+    </div>
+  </section>
 
-        // Update message while loading is showing
-        setTimeout(() => {
-          currentMessageIndex =
-            (currentMessageIndex + 1) % feedbackMessages.length;
-          feedbackMessageEl.textContent = feedbackMessages[currentMessageIndex];
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <div class="fm"><img src="/assets/logo-primary.png" alt="testfeed" /><span class="logodot"></span></div>
+          <p>Your AI panel. Ready when you are.</p>
+          <div class="foot-social">
+            <a href="https://www.linkedin.com/company/testfeed-ai/" target="_blank" rel="noopener" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+          </div>
+        </div>
+        <div class="foot-col foot-nav">
+          <a href="#platform">Product</a>
+          <a href="/blog">Blog</a>
+          <a href={bookingUrl} target="_blank" rel="noopener">Contact</a>
+          <a href="/privacy-policy">Privacy</a>
+        </div>
+        <div class="foot-signup">
+          <h4>Sign up for our updates</h4>
+          <form class="field" id="foot-signup-form" novalidate>
+            <input type="email" placeholder="Enter your email" aria-label="Email address" required />
+            <button type="submit" aria-label="Subscribe"><i data-lucide="arrow-right"></i></button>
+          </form>
+          <p class="foot-signup-msg" id="foot-signup-msg" hidden></p>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span class="cp">© 2025 TestFeed</span>
+      </div>
+    </div>
+  </footer>
 
-          // Hide loading
-          loadingMessageEl.classList.remove("show");
-
-          // Show new message with animation after a brief delay
-          setTimeout(() => {
-            feedbackMessageEl.classList.remove("hidden");
-            feedbackMessageEl.classList.add("show");
-          }, 100);
-        }, 1200); // Loading duration
-      }, 500); // Wait for message fade out
-    }
-
-    // Initialize - show first message after a brief delay
-    if (feedbackMessageEl && loadingMessageEl) {
-      // Set initial state
-      feedbackMessageEl.classList.add("show");
-
-      // Start rotation after initial display
-      setTimeout(() => {
-        setInterval(rotateFeedbackMessage, 5000); // Rotate every 5 seconds
-      }, 2000); // Wait 2 seconds before first rotation
-    }
-
-    // Use cases carousel
-    const slides = document.querySelectorAll(".use-case-slide");
-    const dots = document.querySelectorAll(".carousel-dot");
-    let currentSlide = 0;
-
-    function showSlide(index: number) {
-      slides.forEach((slide) => slide.classList.remove("active"));
-      dots.forEach((dot) => dot.classList.remove("active"));
-
-      slides[index].classList.add("active");
-      dots[index].classList.add("active");
-      currentSlide = index;
-    }
-
-    function nextSlide() {
-      currentSlide = (currentSlide + 1) % slides.length;
-      showSlide(currentSlide);
-    }
-
-    dots.forEach((dot, index) => {
-      dot.addEventListener("click", () => showSlide(index));
+<script is:inline>
+  if (window.lucide) lucide.createIcons();
+  (function(){
+    var header = document.getElementById('siteHeader');
+    var toggle = document.getElementById('navToggle');
+    if (toggle) toggle.addEventListener('click', function(){
+      var open = header.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.innerHTML = open ? '<i data-lucide="x"></i>' : '<i data-lucide="menu"></i>';
+      if (window.lucide) lucide.createIcons();
     });
+  })();
 
-    // Show first slide
-    if (slides.length > 0) {
-      showSlide(0);
-      // Auto-advance every 7 seconds
-      setInterval(nextSlide, 7000);
-    }
-
-    // FAQ functionality
-    const faqContainer = document.getElementById("faq");
-    if (faqContainer) {
-      const faqItems = faqContainer.querySelectorAll(".faq-item");
-      if (faqItems.length > 0) {
-        faqItems.forEach((item) => {
-          const question = item.querySelector(".faq-question");
-          if (!question) return;
-
-          question.setAttribute("aria-expanded", "false");
-
-          const answer = item.querySelector(".faq-answer");
-          if (!answer) return;
-
-          // Associate question with answer for screen readers
-          const answerId = `faq-answer-${Math.random().toString(36).substring(2, 15)}`;
-          answer.setAttribute("id", answerId);
-          question.setAttribute("aria-controls", answerId);
-          answer.setAttribute("aria-hidden", "true");
-
-          const clickHandler = () => {
-            const expanded = item.classList.contains("active");
-            question.setAttribute("aria-expanded", String(!expanded));
-            answer.setAttribute("aria-hidden", String(expanded));
-            item.classList.toggle("active");
-
-            // Close other items (accordion style)
-            faqItems.forEach((otherItem) => {
-              if (
-                otherItem !== item &&
-                otherItem.classList.contains("active")
-              ) {
-                otherItem.classList.remove("active");
-                const otherQuestion = otherItem.querySelector(".faq-question");
-                const otherAnswer = otherItem.querySelector(".faq-answer");
-                if (otherQuestion)
-                  otherQuestion.setAttribute("aria-expanded", "false");
-                if (otherAnswer)
-                  otherAnswer.setAttribute("aria-hidden", "true");
-              }
-            });
-          };
-
-          question.addEventListener("click", clickHandler);
-        });
+  (function(){
+    var form = document.getElementById('foot-signup-form');
+    if (!form) return;
+    var wrap = form.closest('.foot-signup');
+    var input = form.querySelector('input');
+    var msg = document.getElementById('foot-signup-msg');
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var val = (input.value || '').trim();
+      var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+      msg.hidden = false;
+      if (!valid) {
+        msg.className = 'foot-signup-msg err';
+        msg.textContent = 'Please enter a valid email address.';
+        input.focus();
+        return;
       }
-    }
+      wrap.classList.add('done');
+      msg.className = 'foot-signup-msg ok';
+      msg.innerHTML = '<span class="mi"><i data-lucide="check"></i></span>Thanks — you\'re on the list. We\'ll be in touch.';
+      if (window.lucide) lucide.createIcons();
+    });
+  })();
 
-    // Floating cursors with random comments
-    const startupComments = [
-      "Obviously we're building this already",
-      "This is just ChatGPT with extra steps",
-      "We did this at my last unicorn",
-      "Cool but where's the blockchain?",
-      "This won't scale past 10k users",
-      "My intern could build this in a weekend",
-      "Why didn't they just use our API?",
-      "We're disrupting this space harder",
-      "This is so 2023",
-      "Our solution is way more elegant",
-      "They clearly don't understand PMF",
-      "This is what we pivoted from",
-      "We should just acquihire them",
-      "Cute MVP but not enterprise-ready",
-      "Our Series A pitch deck had this",
-    ];
-
-    const cfoComments = [
-      "Can Marketing pay for half?",
-      "We're already over on software spend",
-      "Budget freeze until next quarter",
-      "Show me the cost per employee",
-      "Where's the business justification form?",
-      "Is this compliant with policy 4.2?",
-      "I need three vendor comparisons",
-      "This requires committee approval",
-      "Did you follow proper channels?",
-      "I'll need Legal's sign-off first",
-      "This wasn't in our approved budget",
-      "We need quarterly usage reports",
-      "Is there a volume discount available?",
-      "I'll add this to next month's review",
-      "This needs board notification",
-    ];
-
-    const genzComments = [
-      "This is actually genius ngl",
-      "Virtual personas hit different",
-      "No cap this slaps",
-      "Why didn't I think of this",
-      "This would save my content",
-      "My posts need this fr",
-      "People's reactions = everything",
-      "Testing before posting? Valid",
-      "This is so necessary bestie",
-      "My content flops need this",
-      "Actually revolutionary",
-      "This could change the game",
-      "Need this for my brand",
-      "Audience insight is chef's kiss",
-      "Why am I not using this yet",
-    ];
-
-    const empathyComments = [
-      "Wait... am I a persona?",
-      "This is lowkey meta ngl",
-      "I feel so seen... literally",
-      "Can I get a persona to step out of my bubble?",
-    ];
-
-    const founderFollowUpComments = [
-      "This sounds too desperate",
-      "What's the business impact here?",
-      "This guy's got no business sense",
-      "I don't want to be followed up on",
-    ];
-
-    function showRandomComment(commentId: string) {
-      const commentElement = document.getElementById(commentId);
-      if (!commentElement) return;
-
-      let comments;
-      if (commentId === "comment-1") comments = startupComments;
-      else if (commentId === "comment-2") comments = cfoComments;
-      else if (commentId === "comment-3") comments = genzComments;
-      else if (commentId === "founder-step2-comment")
-        comments = founderFollowUpComments;
-      else if (commentId === "empathy-comment") comments = empathyComments;
-      else return;
-
-      const randomComment =
-        comments[Math.floor(Math.random() * comments.length)];
-      commentElement.textContent = randomComment;
-      commentElement.classList.add("show");
-
-      setTimeout(() => {
-        commentElement.classList.remove("show");
-      }, 3000);
-    }
-
-    // Show random comments at intervals
-    setInterval(() => showRandomComment("comment-1"), 8000);
-    setInterval(() => showRandomComment("comment-2"), 12000);
-    setInterval(() => showRandomComment("comment-3"), 15000);
-    setInterval(() => showRandomComment("founder-step2-comment"), 5000);
-    setInterval(() => showRandomComment("empathy-comment"), 10000);
-
-    // Initial comments after page load
-    setTimeout(() => showRandomComment("comment-1"), 3000);
-    setTimeout(() => showRandomComment("comment-2"), 6000);
-    setTimeout(() => showRandomComment("comment-3"), 9000);
-    setTimeout(() => showRandomComment("founder-step2-comment"), 2000);
-    setTimeout(() => showRandomComment("empathy-comment"), 4000);
-
-    // Checkbox animation on scroll into view
-    const checkboxElement = document.querySelector(
-      ".suggestion-checkbox",
-    ) as HTMLElement;
-    if (checkboxElement) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (
-              entry.isIntersecting &&
-              !entry.target.classList.contains("animate")
-            ) {
-              entry.target.classList.add("animate");
-            }
-          });
-        },
-        {
-          threshold: 0.5, // Trigger when 50% of the element is visible
-        },
-      );
-
-      observer.observe(checkboxElement);
-    }
-
-    // Dropdown animation on scroll into view
-    const dropdownElement = document.getElementById("audience-dropdown");
-    if (dropdownElement) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (
-              entry.isIntersecting &&
-              !entry.target.classList.contains("animated")
-            ) {
-              entry.target.classList.add("animated");
-
-              // Animate the selection after a short delay
-              setTimeout(() => {
-                const startupItem = document.getElementById(
-                  "startup-founders-item",
-                );
-
-                if (startupItem) {
-                  // Add selection animation to the item
-                  startupItem.classList.add("animate-selection");
-
-                  // After animation completes, add the final selected state
-                  setTimeout(() => {
-                    startupItem.classList.add("selected");
-                  }, 500);
-                }
-              }, 500);
-            }
-          });
-        },
-        {
-          threshold: 0.4, // Trigger when 40% of the element is visible
-        },
-      );
-
-      observer.observe(dropdownElement);
-    }
-  });
+  (function(){
+    var dash = document.querySelector('.dash');
+    if (!dash) return;
+    if (!('IntersectionObserver' in window)) { dash.classList.add('in-view'); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { dash.classList.add('in-view'); io.disconnect(); }
+      });
+    }, { threshold: 0.35 });
+    io.observe(dash);
+  })();
 </script>
+</body>
+</html>
