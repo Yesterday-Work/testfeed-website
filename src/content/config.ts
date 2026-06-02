@@ -203,6 +203,12 @@ export const blogSchema = z.object({
   keyTakeaways: z.array(z.string()).optional().describe("1–3 citable sentences shown in the Key Takeaways box above the article; optimises for featured snippets and AI overviews"),
 
   // E-E-A-T author bio block
+  // FAQ items — used to emit FAQPage JSON-LD schema; also written as markdown in the body
+  faq: z.array(z.object({
+    question: z.string().describe("The FAQ question (also used as schema Question name)"),
+    answer: z.string().describe("The answer text (also used as schema acceptedAnswer)"),
+  })).optional().describe("FAQ items for FAQPage JSON-LD schema. Write corresponding FAQ section in the article body."),
+
   authorBio: z.object({
     role: z.string().optional().describe("Author's professional role / title"),
     credentials: z.string().optional().describe("Brief credential statement shown below the author name"),

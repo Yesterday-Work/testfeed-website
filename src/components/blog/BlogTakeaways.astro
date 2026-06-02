@@ -1,0 +1,78 @@
+---
+interface Props {
+  items: string[];
+}
+const { items } = Astro.props;
+---
+
+{items && items.length > 0 && (
+  <div class="takeaways">
+    <div class="tl-head">
+      <span class="eyebrow-red">Key takeaways</span>
+      <span class="tl-tag">TL;DR</span>
+    </div>
+    <ul>
+      {items.map(item => <li set:html={item} />)}
+    </ul>
+  </div>
+)}
+
+<style>
+  .takeaways {
+    background: var(--tf-card, #F1EDE7);
+    border: 1px solid var(--tf-line, rgba(0,0,0,0.10));
+    border-left: 3px solid var(--tf-red, #E6392E);
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin: 0 0 36px;
+  }
+  .tl-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .eyebrow-red {
+    color: var(--tf-red, #E6392E);
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .tl-tag {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: #5F5F5F;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  li {
+    position: relative;
+    padding-left: 30px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16.5px;
+    line-height: 1.5;
+    color: #111;
+    margin-bottom: 12px;
+  }
+  li:last-child { margin-bottom: 0; }
+  li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 16px;
+    height: 16px;
+    border-radius: 999px;
+    border: 1.5px solid #E6392E;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23E6392E' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+</style>

@@ -1,0 +1,151 @@
+---
+interface AuthorBioData {
+  role?: string;
+  credentials?: string;
+  linkedinUrl?: string;
+  headshotUrl?: string;
+  authorPageUrl?: string;
+}
+interface Props {
+  author: string;
+  authorBio?: AuthorBioData;
+}
+const { author, authorBio } = Astro.props;
+---
+
+<div class="author" id="author" itemscope itemtype="https://schema.org/Person">
+  <div class="av">
+    {authorBio?.headshotUrl ? (
+      <img
+        src={authorBio.headshotUrl}
+        alt={`${author} headshot`}
+        width="64"
+        height="64"
+        loading="lazy"
+        decoding="async"
+        itemprop="image"
+        style="width:100%;height:100%;object-fit:cover;display:block;"
+      />
+    ) : (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#B5B5B5" stroke-width="1.5" aria-hidden="true" style="margin:auto;display:block;margin-top:16px;">
+        <circle cx="12" cy="8" r="4"/>
+        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+      </svg>
+    )}
+  </div>
+  <div class="meta">
+    <p class="by">Written by</p>
+    {authorBio?.authorPageUrl ? (
+      <a href={authorBio.authorPageUrl} class="nm" itemprop="name">{author}</a>
+    ) : (
+      <p class="nm" itemprop="name">{author}</p>
+    )}
+    {authorBio?.role && (
+      <p class="role" itemprop="jobTitle">{authorBio.role}</p>
+    )}
+    {authorBio?.credentials && (
+      <p class="cred" itemprop="description">{authorBio.credentials}</p>
+    )}
+    <div class="links">
+      {authorBio?.linkedinUrl && (
+        <a href={authorBio.linkedinUrl} target="_blank" rel="noopener noreferrer" itemprop="sameAs" aria-label={`${author} on LinkedIn`}>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+          LinkedIn
+        </a>
+      )}
+      {authorBio?.authorPageUrl && (
+        <a href={authorBio.authorPageUrl}>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+          </svg>
+          View profile
+        </a>
+      )}
+    </div>
+  </div>
+</div>
+
+<style>
+  .author {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    margin-top: 56px;
+    padding: 28px;
+    background: #F1EDE7;
+    border: 1px solid rgba(0,0,0,0.10);
+    border-radius: 10px;
+  }
+  .av {
+    width: 64px;
+    height: 64px;
+    flex: 0 0 64px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: #EFEAE3;
+    border: 1px solid rgba(0,0,0,0.10);
+  }
+  .by {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #5F5F5F;
+    margin: 0 0 6px;
+    font-family: 'Inter', sans-serif;
+  }
+  .nm {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 19px;
+    color: #111;
+    margin: 0 0 3px;
+    text-decoration: none;
+    display: block;
+    border: none;
+  }
+  a.nm:hover { color: #E6392E; }
+  .role {
+    font-size: 13px;
+    color: #E6392E;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+    font-family: 'Inter', sans-serif;
+  }
+  .cred {
+    font-size: 15px;
+    line-height: 1.55;
+    color: #5F5F5F;
+    margin: 0 0 12px;
+    font-family: 'Inter', sans-serif;
+  }
+  .links {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #111;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,0,0,0.25);
+    font-family: 'Inter', sans-serif;
+  }
+  .links a:hover {
+    color: #E6392E;
+    border-color: #E6392E;
+  }
+
+  @media (max-width: 600px) {
+    .author { flex-direction: column; gap: 16px; }
+  }
+</style>
