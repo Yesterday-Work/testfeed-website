@@ -1,16 +1,14 @@
 ---
-// Define props for the BlogHero
 export interface Props {
-  title: string; 
+  title: string;
   author: string;
-  publishDate: Date; 
-  featuredImage?: string; // Optional featured image URL
+  publishDate: Date;
+  featuredImage?: string;
   tags?: string[];
 }
 
 const { title, author, publishDate, featuredImage, tags } = Astro.props;
 
-// Format the date
 const formattedDate = new Date(publishDate).toLocaleDateString('en-US', {
   year: 'numeric',
   month: 'long',
@@ -21,7 +19,7 @@ const formattedDate = new Date(publishDate).toLocaleDateString('en-US', {
 <section class="blog-hero">
   <div class="container">
     <div class="hero-content">
-      <h1>{title}</h1> 
+      <h1>{title}</h1>
       <div class="meta-info">
         <span>By {author}</span>
         <span>&bull;</span>
@@ -45,83 +43,84 @@ const formattedDate = new Date(publishDate).toLocaleDateString('en-US', {
 
 <style>
 .blog-hero {
-  padding: var(--spacing-xl) 0;
-  background-color: #1a1a1a;
+  padding: 60px 0 48px;
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--border-1, rgba(0,0,0,0.10));
 }
 
 .blog-hero .container {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: var(--spacing-lg);
+  gap: 40px;
 }
 
 .hero-content h1 {
-  font-size: 3rem; 
-  margin-bottom: var(--spacing-md);
-  color: var(--color-white);
-  line-height: 1.2;
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--tf-ink);
+  line-height: 1.1;
+  max-width: 820px;
+  margin: 0 auto 1rem;
 }
 
 .meta-info {
-  font-size: 1rem;
-  color: var(--color-text-light);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--tf-stone);
   display: flex;
-  gap: var(--spacing-sm);
+  gap: 10px;
   justify-content: center;
   flex-wrap: wrap;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: 0;
 }
 
 .tags-container {
-  margin-top: var(--spacing-md); 
+  margin-top: 16px;
   display: flex;
-  gap: var(--spacing-sm);
+  gap: 8px;
   justify-content: center;
   flex-wrap: wrap;
 }
 
 .tag-chip {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: var(--color-white);
-  padding: var(--spacing-xs) var(--spacing-sm);
-  border-radius: var(--border-radius-sm);
-  font-size: 0.85rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.2s ease;
+  background: var(--bg-1);
+  color: var(--tf-stone);
+  padding: 4px 14px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: var(--w-medium);
+  border: 1px solid var(--border-1, rgba(0,0,0,0.12));
+  transition: border-color 0.2s, color 0.2s;
 }
 
 .tag-chip:hover {
-  background-color: rgba(255, 255, 255, 0.15);
-  transform: translateY(-1px);
+  border-color: var(--tf-red);
+  color: var(--tf-red);
 }
 
 .hero-visual {
   width: 100%;
-  max-width: 800px; 
+  max-width: 860px;
   margin: 0 auto;
 }
 
 .hero-visual img {
   width: 100%;
   height: auto;
-  max-height: 450px;
+  max-height: 460px;
   object-fit: cover;
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.10);
 }
 
 @media (max-width: 768px) {
-  .hero-content h1 {
-    font-size: 2.5rem;
-  }
-
-  .meta-info {
-    font-size: 0.9rem;
-  }
+  .blog-hero { padding: 40px 0 32px; }
+  .hero-content h1 { font-size: 1.9rem; }
+  .meta-info { font-size: 0.875rem; }
 }
 </style>

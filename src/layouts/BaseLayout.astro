@@ -1,6 +1,5 @@
 ---
-import '../styles/styles.css'; 
-import Header from '../components/Header.astro'; 
+import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro'; 
 
 export interface Props {
@@ -114,13 +113,15 @@ if (ogImage) {
 	{/* Schema.org JSON-LD structured data */}
 	<script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
 
+	{/* Design system + brand tokens */}
+	<link rel="stylesheet" href="/assets/ds.css" />
+
 	{/* SEO Performance Suggestions */}
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	
-	{/* Google Fonts */}
-	<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Tiny5&display=swap" rel="stylesheet">
+
+	{/* Space Mono (code/mono) + Tiny5 (logo) still needed */}
+	<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Tiny5&display=swap" rel="stylesheet">
 
 	{/* Favicons */}
 	<link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -139,4 +140,68 @@ if (ogImage) {
 	<script src="/src/scripts/script.js"></script>
 
 </body>
-</html> 
+</html>
+
+<style is:global>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--tf-ink);
+    background: var(--bg-1);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--tf-ink);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+  h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+  h2 { font-size: clamp(1.6rem, 3.5vw, 2.5rem); text-align: left; }
+  h3 { font-size: 1.4rem; }
+  p  { color: var(--tf-stone); margin-bottom: 1rem; }
+  a  { color: var(--tf-red); text-decoration: none; transition: color 0.2s; }
+  a:hover { color: #b32820; }
+  ul { list-style: disc; }
+  ol { list-style: decimal; }
+  section { padding: 80px 0; }
+  img { display: block; max-width: 100%; }
+
+  /* Shared button */
+  .btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-family: var(--font-body); font-weight: var(--w-semibold);
+    font-size: 15px; padding: 11px 12px 11px 22px;
+    border-radius: 999px; background: var(--tf-black);
+    color: #fff; border: 0; cursor: pointer;
+    text-decoration: none; transition: background 0.2s;
+  }
+  .btn:hover { background: #222; color: #fff; }
+  .btn .arr {
+    width: 26px; height: 26px; border-radius: 999px;
+    background: rgba(255,255,255,0.18);
+    display: inline-grid; place-items: center;
+  }
+  .btn .arr svg { width: 13px; height: 13px; stroke: currentColor; stroke-width: 2.2; fill: none; }
+  .btn-primary { background: var(--tf-red); }
+  .btn-primary:hover { background: #b32820; }
+
+  /* Scroll animation */
+  .animate-on-scroll { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .animate-on-scroll.show { opacity: 1; transform: translateY(0); }
+
+  /* Logo font */
+  .testfeed-font { font-family: 'Tiny5', monospace; font-size: 120%; display: inline-block; vertical-align: middle; }
+</style>
