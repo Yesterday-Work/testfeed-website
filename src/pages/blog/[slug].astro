@@ -7,41 +7,38 @@ import MarkdownContent from "../../components/MarkdownContent.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import type { BreadcrumbItem } from "../../components/Breadcrumbs.astro";
 import EmpathyMapBuilder from "../../components/tools/empathy-map-builder/EmpathyMapBuilder.astro";
+import TableOfContents from "../../components/TableOfContents.astro";
+import KeyTakeaways from "../../components/KeyTakeaways.astro";
+import AuthorBio from "../../components/AuthorBio.astro";
+import SocialShare from "../../components/SocialShare.astro";
 
-// Get the dynamic route parameter
 export async function getStaticPaths() {
   const blogEntries = await getCollection("blog");
-
   return blogEntries.map((entry) => ({
     params: { slug: entry.slug },
     props: { entry, allBlogs: blogEntries },
   }));
 }
 
-// Get the entry and all blogs from the params
 const { entry, allBlogs } = Astro.props;
 
-// Get related posts based on frontmatter
 const relatedPosts = entry.data.relatedPosts
   ? allBlogs.filter((blog) => entry.data.relatedPosts!.includes(blog.slug))
   : [];
 
-// Prepare breadcrumb items
 const breadcrumbItems: BreadcrumbItem[] = [
   { label: "home", href: "/" },
   { label: "blog", href: "/blog/" },
   { label: entry.slug },
 ];
 
-// Extract necessary data for BlogHero
-const articleDisplayTitle = entry.data.articleTitle;
 const author = entry.data.author || "TestFeed Team";
 const publishDate = entry.data.publishDate || new Date();
 const featuredImage = entry.data.featuredImage;
 const tags = entry.data.tags;
 
-// Render the markdown content
-const { Content } = await entry.render();
+const { Content, headings } = await entry.render();
+const pageUrl = Astro.url.href;
 ---
 
 <BaseLayout
@@ -49,10 +46,15 @@ const { Content } = await entry.render();
   description={entry.data.description}
   entry={entry}
 >
+  <!-- WCAG 2.2 skip-to-content bypass link -->
+  <a href="#article-body" class="skip-link">Skip to main content</a>
+
   <BlogHero
-    title={articleDisplayTitle}
+    title={entry.data.articleTitle}
     author={author}
     publishDate={publishDate}
+    updatedDate={entry.data.updatedDate}
+    minutesRead={entry.data.minutesRead}
     featuredImage={featuredImage}
     tags={tags}
   />
@@ -61,85 +63,222 @@ const { Content } = await entry.render();
     <Breadcrumbs items={breadcrumbItems} />
   </div>
 
-  <!-- Conditional empathy map component for empathy map blog post -->
   {entry.slug === "empathy-map-template" && <EmpathyMapBuilder />}
 
-  <!-- Main content section with the blog content -->
   <section class="blog-content">
     <div class="container">
-      <article class="content-wrapper">
-        <MarkdownContent>
-          <Content />
-        </MarkdownContent>
-      </article>
+      <div class="blog-grid-layout">
 
-      <!-- Related Posts Section -->
-      {
-        relatedPosts.length > 0 && (
-          <div class="related-posts">
-            <h2 class="related-posts-title">More blogs you might like</h2>
-            <div class="posts-grid">
-              {relatedPosts.map((post) => (
-                <a href={`/blog/${post.slug}/`} class="post-card">
-                  <div class="post-card-content">
-                    <h3>{post.data.articleTitle}</h3>
-                    <p>{post.data.excerpt}</p>
-                  </div>
-                </a>
-              ))}
-            </div>
+        <!-- Sticky TOC sidebar — desktop only, collapses on mobile -->
+        <aside class="sticky-aside" aria-label="Table of contents">
+          <TableOfContents headings={headings} />
+        </aside>
+
+        <!-- Main article column — warm paper reading surface -->
+        <article id="article-body" class="article-column">
+          {entry.data.keyTakeaways && entry.data.keyTakeaways.length > 0 && (
+            <KeyTakeaways items={entry.data.keyTakeaways} />
+          )}
+
+          <MarkdownContent>
+            <Content />
+          </MarkdownContent>
+
+          <SocialShare url={pageUrl} title={entry.data.articleTitle} />
+          <AuthorBio author={author} authorBio={entry.data.authorBio} />
+        </article>
+
+      </div>
+
+      <!-- Related Posts Grid — distributes internal PageRank -->
+      {relatedPosts.length > 0 && (
+        <div class="related-posts">
+          <h2 class="related-posts-title">More blogs you might like</h2>
+          <div class="posts-grid">
+            {relatedPosts.map((post) => (
+              <a href={`/blog/${post.slug}/`} class="post-card">
+                <div class="post-card-content">
+                  <h3>{post.data.articleTitle}</h3>
+                  <p>{post.data.excerpt}</p>
+                </div>
+              </a>
+            ))}
           </div>
-        )
-      }
+        </div>
+      )}
     </div>
   </section>
 
-  <!-- Final CTA section if available -->
-  {
-    entry.data.finalCtaSection && (
-      <FinalCTASection {...entry.data.finalCtaSection} />
-    )
-  }
+  {entry.data.finalCtaSection && (
+    <FinalCTASection {...entry.data.finalCtaSection} />
+  )}
 </BaseLayout>
 
 <style>
+  /* Skip-to-content accessibility bypass link (WCAG 2.2) */
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 9999;
+    background: #241f19;
+    color: #fbf8f0;
+    padding: 0.5rem 1.25rem;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 0 0 6px 0;
+  }
+  .skip-link:focus {
+    left: 0;
+  }
+
   .blog-content {
     padding-top: var(--spacing-sm);
     padding-bottom: var(--spacing-xl);
-    padding-left: 0;
-    padding-right: 0;
     background-color: var(--color-background);
   }
 
-  .content-wrapper {
-    background-color: var(--color-card-bg);
-    border-radius: var(--border-radius);
-    padding: var(--spacing-md) var(--spacing-xl) var(--spacing-xl);
-    max-width: 900px;
+  /* Two-column CSS Grid — 260px TOC + main reading column
+     will-change: transform on .sticky-aside offloads scroll
+     calculations to the GPU, maintaining a CLS score of 0 */
+  .blog-grid-layout {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 720px);
+    gap: 3.5rem;
+    max-width: 1100px;
     margin: 0 auto;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: var(--shadow);
+    align-items: start;
   }
 
-  /* Ensure blog headings are left-aligned */
-  .content-wrapper :global(h1),
-  .content-wrapper :global(h2),
-  .content-wrapper :global(h3),
-  .content-wrapper :global(h4),
-  .content-wrapper :global(h5),
-  .content-wrapper :global(h6) {
+  /* Sticky TOC sidebar */
+  .sticky-aside {
+    position: sticky;
+    top: 2rem;
+    height: fit-content;
+    will-change: transform;
+    padding: 1.25rem 1rem;
+    background: #fbf8f0;
+    border-radius: 8px;
+    border: 1px solid rgba(36, 31, 25, 0.1);
+    max-height: calc(100vh - 4rem);
+    overflow-y: auto;
+  }
+
+  /* Warm Paper reading surface — #FBF8F0 / #241F19 ≈ 14:1 contrast (WCAG AAA) */
+  .article-column {
+    background: #fbf8f0;
+    color: #241f19;
+    border-radius: 8px;
+    padding: var(--spacing-md) var(--spacing-xl) var(--spacing-xl);
+    border: 1px solid rgba(36, 31, 25, 0.08);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Prose colours within the warm paper surface */
+  .article-column :global(h1),
+  .article-column :global(h2),
+  .article-column :global(h3),
+  .article-column :global(h4),
+  .article-column :global(h5),
+  .article-column :global(h6) {
+    color: #241f19 !important;
     text-align: left !important;
   }
 
-  /* Related Posts Section */
+  .article-column :global(p),
+  .article-column :global(li) {
+    color: #241f19;
+  }
+
+  .article-column :global(a) {
+    color: #4a3c26;
+    text-underline-offset: 2px;
+  }
+  .article-column :global(a:hover) {
+    color: #241f19;
+  }
+
+  /* Semantic blockquote / pull-quote styling */
+  .article-column :global(blockquote) {
+    border-left: 4px solid #241f19;
+    padding: 0.875rem 1.25rem;
+    margin: 1.75rem 0;
+    background: rgba(36, 31, 25, 0.04);
+    border-radius: 0 6px 6px 0;
+    color: #241f19;
+  }
+  .article-column :global(blockquote p) {
+    font-style: italic;
+    font-size: 1.05rem;
+    margin: 0;
+  }
+
+  .article-column :global(code) {
+    background: rgba(36, 31, 25, 0.08);
+    color: #241f19;
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+    font-size: 0.875em;
+  }
+  .article-column :global(pre) {
+    background: #241f19 !important;
+    border-radius: 8px;
+    overflow-x: auto;
+  }
+  .article-column :global(pre code) {
+    background: transparent;
+    color: #fbf8f0;
+    padding: 0;
+  }
+
+  .article-column :global(table) {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .article-column :global(th),
+  .article-column :global(td) {
+    border: 1px solid rgba(36, 31, 25, 0.2);
+    padding: 0.6rem 0.875rem;
+    color: #241f19;
+    text-align: left;
+  }
+  .article-column :global(th) {
+    background: rgba(36, 31, 25, 0.06);
+    font-weight: 700;
+  }
+
+  /* Responsive: collapse to single column below 1024px */
+  @media (max-width: 1023px) {
+    .blog-grid-layout {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    .sticky-aside {
+      position: static;
+      will-change: auto;
+      max-height: none;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .blog-content {
+      padding: var(--spacing-lg) 0;
+    }
+    .article-column {
+      padding: var(--spacing-md);
+    }
+  }
+
+  /* Related Posts Grid */
   .related-posts {
     margin-top: var(--spacing-lg);
     padding-top: var(--spacing-md);
-    max-width: 900px;
+    max-width: 1100px;
     margin-left: auto;
     margin-right: auto;
   }
-
   .related-posts-title {
     font-size: 1.5rem;
     font-weight: 700;
@@ -147,13 +286,11 @@ const { Content } = await entry.render();
     color: var(--color-white);
     text-align: center;
   }
-
   .posts-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: var(--spacing-md);
   }
-
   .post-card {
     background-color: rgba(255, 255, 255, 0.05);
     border-radius: var(--border-radius);
@@ -164,21 +301,18 @@ const { Content } = await entry.render();
     text-decoration: none;
     color: inherit;
   }
-
   .post-card:hover {
     transform: translateY(-3px);
     box-shadow: var(--shadow-lg);
     border: 1px solid rgba(255, 255, 255, 0.2);
     background-color: rgba(255, 255, 255, 0.08);
   }
-
   .post-card-content h3 {
     font-size: 1.1rem;
     margin-bottom: var(--spacing-sm);
     color: var(--color-white);
     line-height: 1.3;
   }
-
   .post-card-content p {
     font-size: 0.9rem;
     color: var(--color-text-light);
@@ -190,26 +324,10 @@ const { Content } = await entry.render();
     line-height: 1.4;
   }
 
-  /* Responsive adjustments */
-  @media (max-width: 992px) {
-    .content-wrapper {
-      padding: var(--spacing-lg);
-    }
-  }
-
   @media (max-width: 768px) {
-    .blog-content {
-      padding: var(--spacing-lg) 0;
-    }
-
-    .content-wrapper {
-      padding: var(--spacing-md);
-    }
-
     .posts-grid {
       grid-template-columns: 1fr;
     }
-
     .related-posts-title {
       font-size: 1.3rem;
     }
