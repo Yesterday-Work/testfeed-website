@@ -1,6 +1,4 @@
 ---
-// Define the props that this component accepts
-import { Icon } from "astro-icon/components";
 export interface Props {
   post: {
     slug: string;
@@ -12,191 +10,120 @@ export interface Props {
       author: string;
       featuredImage?: string;
       tags?: string[];
+      minutesRead?: number;
     };
   };
 }
 
 const { post } = Astro.props;
-
-// Format the date
-const formattedDate = new Date(post.data.publishDate).toLocaleDateString(
-  "en-US",
-  {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  },
-);
-
-// Use articleTitle for the card display
-const displayTitle = post.data.articleTitle;
 ---
 
-<div class="blog-card">
-  <div class="blog-card-image">
-    {
-      post.data.featuredImage ? (
-        <img
-          src={post.data.featuredImage}
-          alt={post.data.title}
-          loading="lazy"
-        />
-      ) : (
-        <div class="placeholder-image">
-          <Icon name="lucide:file-text" />
-        </div>
-      )
-    }
+<a class="rcard" href={`/blog/${post.slug}/`}>
+  <div class="thumb">
+    {post.data.featuredImage ? (
+      <img
+        src={post.data.featuredImage}
+        alt={post.data.articleTitle}
+        width="400"
+        height="168"
+        loading="lazy"
+        decoding="async"
+        style="width:100%;height:100%;object-fit:cover;display:block;"
+      />
+    ) : (
+      <div class="thumb-placeholder"></div>
+    )}
   </div>
-  <div class="blog-card-content">
-    <div class="blog-meta">
-      <span class="date">{formattedDate}</span>
-      {
-        post.data.tags && post.data.tags.length > 0 && (
-          <span class="tags">{post.data.tags[0]}</span>
-        )
-      }
-    </div>
-    <h2><a href={`/blog/${post.slug}/`}>{displayTitle}</a></h2>
-    <p class="excerpt">{post.data.excerpt}</p>
-    <div class="blog-footer">
-      <span class="author">By {post.data.author}</span>
-      <a href={`/blog/${post.slug}/`} class="read-more"
-        >Read article <Icon name="lucide:arrow-right" /></a
-      >
+  <div class="rc-body">
+    {post.data.tags && post.data.tags[0] && (
+      <p class="rc-cat">{post.data.tags[0]}</p>
+    )}
+    <h3>{post.data.articleTitle}</h3>
+    <p class="rc-excerpt">{post.data.excerpt}</p>
+    <div class="rc-foot">
+      {post.data.minutesRead && <span>{post.data.minutesRead} min read</span>}
+      <span class="go">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </span>
     </div>
   </div>
-</div>
+</a>
 
 <style>
-  .blog-card {
-    background-color: var(--color-card-bg);
-    border-radius: var(--border-radius);
+  .rcard {
+    background: #F8F5F1;
+    border: 1px solid rgba(0,0,0,0.10);
+    border-radius: 10px;
     overflow: hidden;
-    transition: var(--transition);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    height: 100%;
+    text-decoration: none;
     display: flex;
     flex-direction: column;
+    transition: transform 240ms cubic-bezier(0.22,1,0.36,1), box-shadow 240ms cubic-bezier(0.22,1,0.36,1);
   }
-
-  .blog-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-    border-color: rgba(255, 255, 255, 0.2);
+  .rcard:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.08);
   }
-
-  .blog-card-image {
-    height: 200px;
+  .thumb {
+    height: 168px;
+    background: #F1EDE7;
+    border-bottom: 1px solid rgba(0,0,0,0.10);
     overflow: hidden;
+    flex-shrink: 0;
   }
-
-  .blog-card-image img {
+  .thumb-placeholder {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
+    background: #E8E1DA;
   }
-
-  .blog-card:hover .blog-card-image img {
-    transform: scale(1.05);
-  }
-
-  .placeholder-image {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.05);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-text-light);
-  }
-
-  .placeholder-image :global(svg) {
-    width: 40px;
-    height: 40px;
-  }
-
-  .blog-card-content {
-    padding: var(--spacing-md);
+  .rc-body {
+    padding: 18px 20px 22px;
     display: flex;
     flex-direction: column;
     flex: 1;
   }
-
-  .blog-meta {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: var(--spacing-sm);
-    font-size: 0.9rem;
+  .rc-cat {
+    font-family: 'Inter', sans-serif;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #E6392E;
+    margin: 0 0 10px;
   }
-
-  .date,
-  .tags {
-    color: var(--color-text-light);
+  .rcard h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+    color: #111111;
+    margin: 0 0 10px;
   }
-
-  .tags {
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 0.8rem;
+  .rc-excerpt {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #5F5F5F;
+    margin: 0 0 16px;
+    flex: 1;
   }
-
-  .blog-card h2 {
-    font-size: 1.4rem;
-    margin-bottom: var(--spacing-sm);
-    text-align: left;
-  }
-
-  .blog-card h2 a {
-    color: var(--color-white);
-    text-decoration: none;
-  }
-
-  .excerpt {
-    color: var(--color-text-light);
-    margin-bottom: var(--spacing-md);
-    font-size: 0.95rem;
-    flex-grow: 1;
-  }
-
-  .blog-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  .rc-foot {
     margin-top: auto;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: var(--spacing-sm);
-  }
-
-  .author {
-    font-size: 0.9rem;
-    color: var(--color-text-light);
-  }
-
-  .read-more {
-    font-size: 0.9rem;
     display: flex;
     align-items: center;
-    gap: 5px;
-    color: var(--color-primary);
-    font-weight: 600;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12.5px;
+    color: #5F5F5F;
   }
-
-  .read-more :global(svg) {
-    width: 16px;
-    height: 16px;
-    transition: transform 0.3s ease;
-  }
-
-  .read-more:hover :global(svg) {
-    transform: translateX(3px);
-  }
-
-  @media (max-width: 768px) {
-    .blog-card-image {
-      height: 180px;
-    }
+  .go {
+    margin-left: auto;
+    color: #E6392E;
+    display: grid;
+    place-items: center;
   }
 </style>

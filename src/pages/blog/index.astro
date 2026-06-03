@@ -1,121 +1,108 @@
 ---
 import { getCollection } from "astro:content";
-import Layout from "../../layouts/Layout.astro";
-import FormattedDate from "../../components/FormattedDate.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 import BlogPostPreview from "../../components/BlogPostPreview.astro";
 
 const posts = await getCollection("blog", ({ data }) => {
-  return true; // Temporarily fetch all posts
+  return !data.draft;
 });
 
 posts.sort(
   (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
 );
 
-// SEO metadata
 const title = "Blog | TestFeed | AI Audience Simulation";
 const description =
   "Explore the latest insights on content performance, audience simulation, and LinkedIn optimization from the TestFeed team.";
 ---
 
-<Layout title={title} description={description}>
-  <main class="py-12 md:py-16 lg:py-20">
-    <div class="container">
-      <div class="blog-header">
-        <h1>Blog <span class="highlight">Posts</span></h1>
-        <p class="subtitle">
-          Insights and strategies for optimizing your content performance
-        </p>
-      </div>
+<BaseLayout title={title} description={description}>
 
-      <div class="blog-grid">
+  <div class="blog-page">
+
+    <!-- Page header band -->
+    <header class="blog-head">
+      <div class="head-wrap">
+        <p class="eyebrow">From the TestFeed team</p>
+        <h1>The Blog<span class="dot-red">.</span></h1>
+        <p class="sub">Sharp, practical writing on audience research and decision-making.</p>
+      </div>
+    </header>
+
+    <!-- Post grid -->
+    <div class="grid-wrap">
+      <div class="post-grid">
         {posts.map((post) => <BlogPostPreview post={post} />)}
       </div>
     </div>
-  </main>
-</Layout>
+
+  </div>
+
+</BaseLayout>
 
 <style>
-  .blog-header {
-    text-align: center;
-    padding-top: var(--spacing-lg);
-    margin-bottom: var(--spacing-xl);
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+  .blog-page {
+    background: #F8F5F1;
+    min-height: 60vh;
   }
 
-  .blog-header h1 {
-    margin-bottom: var(--spacing-md);
-    font-size: 3.5rem;
+  /* ── Page header ─────────────────────────────────────────── */
+  .blog-head {
+    background: #EFEAE3;
+    border-bottom: 1px solid rgba(0,0,0,0.10);
   }
-
-  .subtitle {
-    font-size: 1.2rem;
-    color: var(--color-text-light);
-    max-width: 600px;
+  .head-wrap {
+    max-width: 1200px;
     margin: 0 auto;
-    line-height: 1.6;
+    padding: 56px 40px 52px;
+    text-align: center;
+  }
+  .eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #E6392E;
+    margin: 0 0 18px;
+  }
+  .blog-head h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    color: #111111;
+    margin: 0 auto 16px;
+  }
+  .dot-red { color: #E6392E; }
+  .sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    line-height: 1.5;
+    color: #5F5F5F;
+    margin: 0 auto;
+    max-width: 480px;
   }
 
-  .blog-grid {
+  /* ── Post grid ───────────────────────────────────────────── */
+  .grid-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 52px 40px 80px;
+  }
+  .post-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: var(--spacing-lg);
-    margin-bottom: var(--spacing-xl);
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 24px;
   }
 
-  @media (max-width: 768px) {
-    .blog-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .blog-header h1 {
-      font-size: 2.5rem;
-    }
+  @media (max-width: 1000px) {
+    .post-grid { grid-template-columns: repeat(2, 1fr); }
   }
-
-  /* Animation for cards */
-  .animate-on-scroll {
-    opacity: 0;
-    transform: translateY(20px);
-    transition:
-      opacity 0.6s ease,
-      transform 0.6s ease;
-  }
-
-  .animate-on-scroll.show {
-    opacity: 1;
-    transform: translateY(0);
+  @media (max-width: 600px) {
+    .head-wrap { padding: 40px 20px 36px; }
+    .grid-wrap { padding: 36px 20px 60px; }
+    .post-grid { grid-template-columns: 1fr; }
   }
 </style>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const animateElements = document.querySelectorAll(".animate-on-scroll");
-
-    // Function to check if element is in viewport
-    function isInViewport(element: HTMLElement) {
-      const rect = element.getBoundingClientRect();
-      return rect.top <= window.innerHeight - 100;
-    }
-
-    // Function to handle scroll animation
-    function handleScroll() {
-      animateElements.forEach((element, index) => {
-        if (isInViewport(element as HTMLElement)) {
-          // Add delay based on index for staggered animation
-          setTimeout(() => {
-            element.classList.add("show");
-          }, index * 100);
-        }
-      });
-    }
-
-    // Run once on load
-    handleScroll();
-
-    // Add scroll listener
-    window.addEventListener("scroll", handleScroll);
-  });
-</script>

@@ -68,32 +68,46 @@ const faqJsonLd =
   <!-- Article head band -->
   <header class="article-head">
     <div class="head-inner">
-      <div class="head-crumbs">
-        <Breadcrumbs items={breadcrumbItems} />
-      </div>
       {entry.data.tags && entry.data.tags[0] && (
         <p class="tag-eyebrow">{entry.data.tags[0]}</p>
       )}
       <h1 class="article-title">{entry.data.articleTitle}</h1>
       <div class="byline">
-        <span class="byline-author">{author}</span>
-        <span class="sep" aria-hidden="true">·</span>
-        <time datetime={publishDate.toISOString()}>{fmtDate(publishDate)}</time>
+        <span class="who">By <a href="#author">{author}</a></span>
+        <span class="sep-dot" aria-hidden="true"></span>
+        <time datetime={publishDate.toISOString()}>Published {fmtDate(publishDate)}</time>
         {entry.data.updatedDate && (
           <>
-            <span class="sep" aria-hidden="true">·</span>
+            <span class="sep-dot" aria-hidden="true"></span>
             <span class="upd-label">Updated {fmtDate(entry.data.updatedDate)}</span>
           </>
         )}
         {entry.data.minutesRead && (
           <>
-            <span class="sep" aria-hidden="true">·</span>
-            <span>{entry.data.minutesRead} min read</span>
+            <span class="sep-dot" aria-hidden="true"></span>
+            <span class="rt">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              {entry.data.minutesRead} min read
+            </span>
           </>
         )}
       </div>
+      {entry.data.tags && entry.data.tags.length > 0 && (
+        <div class="tag-pills">
+          {entry.data.tags.map((tag: string) => (
+            <span class="tag-pill">{tag}</span>
+          ))}
+        </div>
+      )}
     </div>
   </header>
+
+  <!-- Breadcrumb (separate, centered, below the head band) -->
+  <div class="crumbs-bar">
+    <div class="crumbs-inner">
+      <Breadcrumbs items={breadcrumbItems} />
+    </div>
+  </div>
 
   <!-- Optional cover image -->
   {entry.data.featuredImage && (
@@ -235,15 +249,12 @@ const faqJsonLd =
   /* ── Article head band ───────────────────────────────────── */
   .article-head {
     background: var(--tf-linen);
-    border-bottom: 1px solid var(--tf-line);
   }
   .head-inner {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 40px 40px 48px;
-  }
-  .head-crumbs {
-    margin-bottom: 20px;
+    padding: 52px 40px 40px;
+    text-align: center;
   }
   .tag-eyebrow {
     font-family: 'Inter', sans-serif;
@@ -252,33 +263,84 @@ const faqJsonLd =
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--tf-red);
-    margin: 0 0 14px;
+    margin: 0 0 18px;
   }
   .article-title {
     font-family: 'Playfair Display', serif;
     font-weight: 700;
-    font-size: clamp(34px, 5vw, 58px);
-    line-height: 1.08;
+    font-size: clamp(38px, 5vw, 60px);
+    line-height: 1.04;
     letter-spacing: -0.02em;
     color: var(--tf-black);
-    margin: 0 0 20px;
-    max-width: 860px;
+    margin: 0 auto 22px;
+    max-width: 900px;
   }
   .byline {
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 8px 14px;
     font-family: 'Inter', sans-serif;
-    font-size: 14px;
+    font-size: 15px;
     color: var(--tf-stone);
+    font-weight: 500;
   }
-  .byline-author {
-    font-weight: 600;
+  .who { color: var(--tf-black); }
+  .who a {
     color: var(--tf-black);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,0,0,0.25);
   }
-  .sep { opacity: 0.4; }
-  .upd-label { color: var(--tf-red); font-weight: 500; }
+  .who a:hover { color: var(--tf-red); border-color: var(--tf-red); }
+  .sep-dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 999px;
+    background: var(--tf-fog);
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .upd-label { color: var(--tf-red); }
+  .rt {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .rt svg { flex-shrink: 0; }
+
+  /* Tag pills below byline */
+  .tag-pills {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 22px;
+  }
+  .tag-pill {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--tf-stone);
+    border: 1px solid var(--tf-line);
+    border-radius: 999px;
+    padding: 7px 16px;
+    white-space: nowrap;
+  }
+
+  /* ── Breadcrumb bar ──────────────────────────────────────── */
+  .crumbs-bar {
+    border-bottom: 1px solid var(--tf-line);
+    background: var(--tf-linen);
+  }
+  .crumbs-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 14px 40px;
+    display: flex;
+    justify-content: center;
+  }
 
   /* ── Cover image ─────────────────────────────────────────── */
   .cover-wrap {
@@ -491,7 +553,8 @@ const faqJsonLd =
     }
   }
   @media (max-width: 600px) {
-    .head-inner { padding: 28px 20px 36px; }
+    .head-inner { padding: 36px 20px 30px; }
+    .crumbs-inner { padding: 12px 20px; justify-content: flex-start; }
     .cover-wrap { padding: 20px 20px 0; }
     .article-page { padding: 36px 0 60px; }
     .article-grid { padding: 0 20px; }
