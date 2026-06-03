@@ -1,0 +1,36 @@
+name: Weekly Content Co-worker
+
+on:
+  schedule:
+    # Every Monday at 9am UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch: # allows manual trigger from GitHub Actions tab
+
+jobs:
+  coworker:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Run coworker skill
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          claude --print "/coworker" \
+            --allowedTools "Bash,Read,Write,Edit,mcp__42347bf1-27cd-4477-ba2e-fd74d0695f38__*,mcp__github__*"
