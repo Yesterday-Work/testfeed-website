@@ -198,7 +198,25 @@ export const blogSchema = z.object({
   minutesRead: z.number().optional().describe("Estimated time to read the article in minutes"),
   draft: z.boolean().default(false).describe("Set to true to hide post from production builds"),
   relatedPosts: z.array(z.string()).optional().describe("Array of blog slugs for related posts to display at bottom"),
-  
+
+  // Key Takeaways / TL;DR box rendered above the article body
+  keyTakeaways: z.array(z.string()).optional().describe("1–3 citable sentences shown in the Key Takeaways box above the article; optimises for featured snippets and AI overviews"),
+
+  // E-E-A-T author bio block
+  // FAQ items — used to emit FAQPage JSON-LD schema; also written as markdown in the body
+  faq: z.array(z.object({
+    question: z.string().describe("The FAQ question (also used as schema Question name)"),
+    answer: z.string().describe("The answer text (also used as schema acceptedAnswer)"),
+  })).optional().describe("FAQ items for FAQPage JSON-LD schema. Write corresponding FAQ section in the article body."),
+
+  authorBio: z.object({
+    role: z.string().optional().describe("Author's professional role / title"),
+    credentials: z.string().optional().describe("Brief credential statement shown below the author name"),
+    linkedinUrl: z.string().url().optional().describe("Verified LinkedIn profile URL"),
+    headshotUrl: z.string().optional().describe("Path to author headshot image (relative to /public or absolute URL)"),
+    authorPageUrl: z.string().optional().describe("Internal author profile page URL for entity-relationship mapping"),
+  }).optional().describe("E-E-A-T compliant author bio block — include headshot, role, credentials, and LinkedIn link"),
+
   // Schema.org markup for rich results
   schemaMarkup: z.object({
     type: z.string().default("BlogPosting").describe("Schema.org type (almost always 'BlogPosting' for blogs)"),

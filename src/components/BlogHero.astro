@@ -1,31 +1,47 @@
 ---
-// Define props for the BlogHero
 export interface Props {
-  title: string; 
+  title: string;
   author: string;
-  publishDate: Date; 
-  featuredImage?: string; // Optional featured image URL
+  publishDate: Date;
+  updatedDate?: Date;
+  minutesRead?: number;
+  featuredImage?: string;
   tags?: string[];
 }
 
-const { title, author, publishDate, featuredImage, tags } = Astro.props;
+const { title, author, publishDate, updatedDate, minutesRead, featuredImage, tags } = Astro.props;
 
-// Format the date
-const formattedDate = new Date(publishDate).toLocaleDateString('en-US', {
+const formatDate = (d: Date) => new Date(d).toLocaleDateString('en-US', {
   year: 'numeric',
   month: 'long',
   day: 'numeric'
 });
+
+const formattedPublish = formatDate(publishDate);
+const formattedUpdated = updatedDate ? formatDate(updatedDate) : null;
 ---
 
 <section class="blog-hero">
   <div class="container">
     <div class="hero-content">
-      <h1>{title}</h1> 
+      <h1>{title}</h1>
       <div class="meta-info">
         <span>By {author}</span>
-        <span>&bull;</span>
-        <span>{formattedDate}</span>
+        <span aria-hidden="true">&bull;</span>
+        {formattedUpdated ? (
+          <>
+            <span>Updated <time datetime={new Date(updatedDate!).toISOString().split('T')[0]}>{formattedUpdated}</time></span>
+            <span class="original-date">(Published <time datetime={new Date(publishDate).toISOString().split('T')[0]}>{formattedPublish}</time>)</span>
+          </>
+        ) : (
+          <span><time datetime={new Date(publishDate).toISOString().split('T')[0]}>{formattedPublish}</time></span>
+        )}
+        {minutesRead && (
+          <>
+            <span aria-hidden="true">&bull;</span>
+            <span>{minutesRead} min read</span>
+          </>
+        )}
       </div>
       {tags && tags.length > 0 && (
         <div class="tags-container">
@@ -75,6 +91,11 @@ const formattedDate = new Date(publishDate).toLocaleDateString('en-US', {
   justify-content: center;
   flex-wrap: wrap;
   margin-bottom: var(--spacing-md);
+  align-items: center;
+}
+.original-date {
+  font-size: 0.85rem;
+  opacity: 0.65;
 }
 
 .tags-container {

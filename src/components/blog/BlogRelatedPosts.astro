@@ -1,0 +1,191 @@
+---
+interface RelatedPost {
+  slug: string;
+  data: {
+    articleTitle: string;
+    excerpt: string;
+    featuredImage?: string;
+    tags?: string[];
+    minutesRead?: number;
+  };
+}
+interface Props {
+  posts: RelatedPost[];
+}
+const { posts } = Astro.props;
+---
+
+<section class="related">
+  <div class="rel-wrap">
+    <div class="related-head">
+      <h2>Keep reading<span class="dot-red">.</span></h2>
+      <a class="view-all" href="/blog/">
+        View all articles
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </a>
+    </div>
+    <div class="related-grid">
+      {posts.map((post) => (
+        <a class="rcard" href={`/blog/${post.slug}/`}>
+          {post.data.featuredImage && (
+            <div class="thumb">
+              <img
+                src={post.data.featuredImage}
+                alt={post.data.articleTitle}
+                width="400"
+                height="168"
+                loading="lazy"
+                decoding="async"
+                style="width:100%;height:100%;object-fit:cover;display:block;"
+              />
+            </div>
+          )}
+          {!post.data.featuredImage && <div class="thumb thumb-placeholder"></div>}
+          <div class="rc-body">
+            {post.data.tags && post.data.tags[0] && (
+              <p class="rc-cat">{post.data.tags[0]}</p>
+            )}
+            <h3>{post.data.articleTitle}</h3>
+            <p>{post.data.excerpt}</p>
+            <div class="rc-foot">
+              {post.data.minutesRead && <span>{post.data.minutesRead} min read</span>}
+              <span class="go">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .related {
+    background: #EFEAE3;
+  }
+  .rel-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 56px 40px 64px;
+  }
+  .related-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .related-head h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 34px;
+    letter-spacing: -0.02em;
+    color: #111;
+    margin: 0;
+    line-height: 1;
+  }
+  .dot-red { color: #E6392E; }
+  .view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #111;
+    text-decoration: none;
+    border: 1px solid rgba(0,0,0,0.28);
+    border-radius: 999px;
+    padding: 9px 18px;
+    transition: border-color 160ms;
+  }
+  .view-all:hover { border-color: #111; }
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .rcard {
+    background: #F8F5F1;
+    border: 1px solid rgba(0,0,0,0.10);
+    border-radius: 10px;
+    overflow: hidden;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    transition: transform 240ms cubic-bezier(0.22,1,0.36,1), box-shadow 240ms cubic-bezier(0.22,1,0.36,1);
+  }
+  .rcard:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.08);
+  }
+  .thumb {
+    height: 168px;
+    background: #F1EDE7;
+    border-bottom: 1px solid rgba(0,0,0,0.10);
+    overflow: hidden;
+  }
+  .thumb-placeholder { background: #E8E1DA; }
+  .rc-body {
+    padding: 18px 20px 22px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .rc-cat {
+    font-family: 'Inter', sans-serif;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #E6392E;
+    margin: 0 0 10px;
+  }
+  .rcard h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+    color: #111;
+    margin: 0 0 10px;
+  }
+  .rcard p {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #5F5F5F;
+    margin: 0 0 16px;
+  }
+  .rc-foot {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12.5px;
+    color: #5F5F5F;
+  }
+  .go {
+    margin-left: auto;
+    color: #E6392E;
+    display: grid;
+    place-items: center;
+  }
+
+  @media (max-width: 1000px) {
+    .related-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .rel-wrap { padding: 40px 20px 52px; }
+    .related-grid { grid-template-columns: 1fr; }
+  }
+</style>

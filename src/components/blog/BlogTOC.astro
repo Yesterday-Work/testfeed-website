@@ -1,0 +1,101 @@
+---
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+
+interface TOCItem extends MarkdownHeading { subheadings: TOCItem[]; }
+
+function buildTOC(flat: MarkdownHeading[]): TOCItem[] {
+  const root: TOCItem[] = [];
+  const map = new Map<number, TOCItem>();
+  let inFAQ = false;
+  flat.forEach(h => {
+    if (h.depth === 2) {
+      inFAQ = h.slug === 'frequently-asked-questions';
+    }
+    if (h.depth === 3 && inFAQ) return; // skip FAQ sub-questions
+    if (h.depth !== 2 && h.depth !== 3) return;
+    const item: TOCItem = { ...h, subheadings: [] };
+    map.set(h.depth, item);
+    if (h.depth === 2) {
+      root.push(item);
+    } else {
+      const parent = map.get(2);
+      if (parent) parent.subheadings.push(item);
+    }
+  });
+  return root;
+}
+
+const toc = buildTOC(headings);
+---
+
+{toc.length > 0 && (
+  <nav aria-label="Table of contents">
+    <p class="toc-label">On this page</p>
+    <ul class="toc" id="toc">
+      {toc.map(item => (
+        <li>
+          <a href={`#${item.slug}`}>{item.text}</a>
+          {item.subheadings.length > 0 && item.subheadings.map(sub => (
+            <li class="sub">
+              <a href={`#${sub.slug}`}>{sub.text}</a>
+            </li>
+          ))}
+        </li>
+      ))}
+    </ul>
+  </nav>
+)}
+
+<style>
+  .toc-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #5F5F5F;
+    margin: 0 0 16px;
+    font-family: 'Inter', sans-serif;
+  }
+  .toc {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-left: 1px solid rgba(0,0,0,0.10);
+  }
+  .toc li { margin: 0; }
+  .toc a {
+    display: block;
+    padding: 7px 0 7px 16px;
+    margin-left: -1px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13.5px;
+    line-height: 1.35;
+    color: #5F5F5F;
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    transition: color 160ms, border-color 160ms;
+    border: none;
+  }
+  .toc a:hover { color: #111; }
+  .toc li.sub a {
+    padding-left: 30px;
+    font-size: 12.5px;
+    color: #B5B5B5;
+  }
+  .toc li.sub a:hover { color: #5F5F5F; }
+  :global(.toc a.active) {
+    color: #E6392E !important;
+    border-left: 2px solid #E6392E !important;
+    font-weight: 600;
+    padding-left: 14px;
+  }
+  :global(.toc li.sub a.active) {
+    color: #E6392E !important;
+  }
+</style>

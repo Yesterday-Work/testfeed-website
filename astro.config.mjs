@@ -7,6 +7,7 @@ import posthogAnalytics from './src/integrations/posthog';
 import customerIoAnalytics from './src/integrations/customer-io';
 import icon from 'astro-icon';
 import rehypeExternalLinks from 'rehype-external-links';
+import rehypeSlug from 'rehype-slug';
 
 dotenv.config();
 
@@ -23,9 +24,10 @@ export default defineConfig({
   },
   markdown: {
     rehypePlugins: [
-      [rehypeExternalLinks, { 
-        target: '_blank', 
-        rel: ['noopener', 'noreferrer'] 
+      rehypeSlug,
+      [rehypeExternalLinks, {
+        target: '_blank',
+        rel: ['noopener', 'noreferrer']
       }]
     ]
   },

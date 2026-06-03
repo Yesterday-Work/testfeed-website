@@ -1,0 +1,102 @@
+---
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+
+const filteredHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
+
+interface TOCItem extends MarkdownHeading {
+  subheadings: TOCItem[];
+}
+
+function buildNestedTOC(flatHeadings: MarkdownHeading[]): TOCItem[] {
+  const root: TOCItem[] = [];
+  const map = new Map<number, TOCItem>();
+  flatHeadings.forEach(h => {
+    const item: TOCItem = { ...h, subheadings: [] };
+    map.set(h.depth, item);
+    if (h.depth === 2) {
+      root.push(item);
+    } else {
+      const parent = map.get(h.depth - 1);
+      if (parent) parent.subheadings.push(item);
+    }
+  });
+  return root;
+}
+
+const nestedTOC = buildNestedTOC(filteredHeadings);
+---
+
+{nestedTOC.length > 0 && (
+  <nav class="article-toc" aria-label="Table of contents">
+    <p class="toc-title">In this article</p>
+    <ul class="toc-list" role="list">
+      {nestedTOC.map((item) => (
+        <li class="toc-item-h2">
+          <a href={`#${item.slug}`} class="toc-link">{item.text}</a>
+          {item.subheadings.length > 0 && (
+            <ul class="toc-sublist" role="list">
+              {item.subheadings.map((sub) => (
+                <li class="toc-item-h3">
+                  <a href={`#${sub.slug}`} class="toc-link toc-link-sub">{sub.text}</a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </li>
+      ))}
+    </ul>
+  </nav>
+)}
+
+<style>
+  .article-toc {
+    font-size: 0.875rem;
+    color: #241f19;
+  }
+  .toc-title {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.7rem;
+    color: #756c60;
+    margin: 0 0 0.75rem 0;
+  }
+  .toc-list,
+  .toc-sublist {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+  .toc-sublist {
+    padding-left: 0.875rem;
+    margin-top: 0.2rem;
+  }
+  .toc-item-h2 {
+    margin-bottom: 0.45rem;
+  }
+  .toc-item-h3 {
+    margin-bottom: 0.2rem;
+  }
+  .toc-link {
+    color: #756c60;
+    text-decoration: none;
+    display: block;
+    padding: 0.2rem 0.5rem;
+    line-height: 1.4;
+    transition: color 0.15s ease-in-out, border-left-color 0.15s ease-in-out;
+    border-left: 2px solid transparent;
+  }
+  .toc-link:hover {
+    color: #241f19;
+    border-left-color: #241f19;
+  }
+  .toc-link-sub {
+    font-size: 0.8rem;
+  }
+</style>

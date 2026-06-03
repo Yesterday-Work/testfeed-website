@@ -1,217 +1,504 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import BlogHero from "../../components/BlogHero.astro";
 import FinalCTASection from "../../components/FinalCTASection.astro";
-import MarkdownContent from "../../components/MarkdownContent.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import type { BreadcrumbItem } from "../../components/Breadcrumbs.astro";
 import EmpathyMapBuilder from "../../components/tools/empathy-map-builder/EmpathyMapBuilder.astro";
+import BlogTOC from "../../components/blog/BlogTOC.astro";
+import BlogTakeaways from "../../components/blog/BlogTakeaways.astro";
+import BlogShareRail from "../../components/blog/BlogShareRail.astro";
+import BlogAuthorBio from "../../components/blog/BlogAuthorBio.astro";
+import BlogRelatedPosts from "../../components/blog/BlogRelatedPosts.astro";
+import BlogNewsletter from "../../components/blog/BlogNewsletter.astro";
 
-// Get the dynamic route parameter
 export async function getStaticPaths() {
   const blogEntries = await getCollection("blog");
-
   return blogEntries.map((entry) => ({
     params: { slug: entry.slug },
     props: { entry, allBlogs: blogEntries },
   }));
 }
 
-// Get the entry and all blogs from the params
 const { entry, allBlogs } = Astro.props;
 
-// Get related posts based on frontmatter
 const relatedPosts = entry.data.relatedPosts
   ? allBlogs.filter((blog) => entry.data.relatedPosts!.includes(blog.slug))
   : [];
 
-// Prepare breadcrumb items
 const breadcrumbItems: BreadcrumbItem[] = [
   { label: "home", href: "/" },
   { label: "blog", href: "/blog/" },
   { label: entry.slug },
 ];
 
-// Extract necessary data for BlogHero
-const articleDisplayTitle = entry.data.articleTitle;
 const author = entry.data.author || "TestFeed Team";
 const publishDate = entry.data.publishDate || new Date();
-const featuredImage = entry.data.featuredImage;
-const tags = entry.data.tags;
+const pageUrl = Astro.url.href;
 
-// Render the markdown content
-const { Content } = await entry.render();
+const { Content, headings } = await entry.render();
+
+const fmtDate = (d: Date) =>
+  d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+
+const faqJsonLd =
+  entry.data.faq && entry.data.faq.length > 0
+    ? JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: entry.data.faq.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: { "@type": "Answer", text: item.answer },
+        })),
+      })
+    : null;
 ---
 
-<BaseLayout
-  title={entry.data.title}
-  description={entry.data.description}
-  entry={entry}
->
-  <BlogHero
-    title={articleDisplayTitle}
-    author={author}
-    publishDate={publishDate}
-    featuredImage={featuredImage}
-    tags={tags}
-  />
+<BaseLayout title={entry.data.title} description={entry.data.description} entry={entry}>
 
-  <div class="container">
-    <Breadcrumbs items={breadcrumbItems} />
-  </div>
+  {faqJsonLd && <script is:inline type="application/ld+json" set:html={faqJsonLd} />}
 
-  <!-- Conditional empathy map component for empathy map blog post -->
-  {entry.slug === "empathy-map-template" && <EmpathyMapBuilder />}
+  <!-- Reading progress bar -->
+  <div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
 
-  <!-- Main content section with the blog content -->
-  <section class="blog-content">
-    <div class="container">
-      <article class="content-wrapper">
-        <MarkdownContent>
+  <!-- Skip link -->
+  <a href="#article-body" class="skip-link">Skip to main content</a>
+
+  <!-- Article head band -->
+  <header class="article-head">
+    <div class="head-inner">
+      <div class="head-crumbs">
+        <Breadcrumbs items={breadcrumbItems} />
+      </div>
+      {entry.data.tags && entry.data.tags[0] && (
+        <p class="tag-eyebrow">{entry.data.tags[0]}</p>
+      )}
+      <h1 class="article-title">{entry.data.articleTitle}</h1>
+      <div class="byline">
+        <span class="byline-author">{author}</span>
+        <span class="sep" aria-hidden="true">·</span>
+        <time datetime={publishDate.toISOString()}>{fmtDate(publishDate)}</time>
+        {entry.data.updatedDate && (
+          <>
+            <span class="sep" aria-hidden="true">·</span>
+            <span class="upd-label">Updated {fmtDate(entry.data.updatedDate)}</span>
+          </>
+        )}
+        {entry.data.minutesRead && (
+          <>
+            <span class="sep" aria-hidden="true">·</span>
+            <span>{entry.data.minutesRead} min read</span>
+          </>
+        )}
+      </div>
+    </div>
+  </header>
+
+  <!-- Optional cover image -->
+  {entry.data.featuredImage && (
+    <div class="cover-wrap">
+      <img
+        src={entry.data.featuredImage}
+        alt={entry.data.articleTitle}
+        width="960"
+        height="504"
+        loading="eager"
+        decoding="async"
+        class="cover-img"
+      />
+    </div>
+  )}
+
+  <!-- Two-column grid: sidebar + reading column -->
+  <div class="article-page">
+    <div class="article-grid">
+
+      <!-- Sticky sidebar: TOC + share -->
+      <aside class="article-sidebar" aria-label="Article navigation">
+        <BlogTOC headings={headings} />
+        <BlogShareRail url={pageUrl} title={entry.data.articleTitle} />
+      </aside>
+
+      <!-- Main reading column -->
+      <article id="article-body" class="article-body">
+
+        {entry.data.keyTakeaways && entry.data.keyTakeaways.length > 0 && (
+          <BlogTakeaways items={entry.data.keyTakeaways} />
+        )}
+
+        <div class="prose">
           <Content />
-        </MarkdownContent>
+        </div>
+
+        {entry.slug === "empathy-map-template" && <EmpathyMapBuilder />}
+
+        <BlogAuthorBio author={author} authorBio={entry.data.authorBio} />
       </article>
 
-      <!-- Related Posts Section -->
-      {
-        relatedPosts.length > 0 && (
-          <div class="related-posts">
-            <h2 class="related-posts-title">More blogs you might like</h2>
-            <div class="posts-grid">
-              {relatedPosts.map((post) => (
-                <a href={`/blog/${post.slug}/`} class="post-card">
-                  <div class="post-card-content">
-                    <h3>{post.data.articleTitle}</h3>
-                    <p>{post.data.excerpt}</p>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-        )
-      }
     </div>
-  </section>
+  </div>
 
-  <!-- Final CTA section if available -->
-  {
-    entry.data.finalCtaSection && (
-      <FinalCTASection {...entry.data.finalCtaSection} />
-    )
-  }
+  {relatedPosts.length > 0 && <BlogRelatedPosts posts={relatedPosts} />}
+
+  <BlogNewsletter />
+
+  {entry.data.finalCtaSection && <FinalCTASection {...entry.data.finalCtaSection} />}
+
 </BaseLayout>
 
+<script>
+  // Reading progress bar
+  const bar = document.getElementById("readingProgress");
+  const art = document.getElementById("article-body");
+
+  function updateProgress() {
+    if (!bar || !art) return;
+    const rect = art.getBoundingClientRect();
+    const total = art.scrollHeight - window.innerHeight;
+    const scrolled = Math.max(0, -rect.top);
+    bar.style.width = total > 0 ? Math.min(100, (scrolled / total) * 100) + "%" : "0%";
+  }
+  window.addEventListener("scroll", updateProgress, { passive: true });
+  updateProgress();
+</script>
+
+<script>
+  // TOC scrollspy
+  const tocLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>("#toc a"));
+  const articleHeadings = Array.from(
+    document.querySelectorAll<HTMLElement>("#article-body h2, #article-body h3")
+  );
+
+  function syncTOC() {
+    const threshold = window.scrollY + 148;
+    let active: HTMLElement | null = null;
+    for (const h of articleHeadings) {
+      const top = h.getBoundingClientRect().top + window.scrollY;
+      if (top <= threshold) active = h;
+    }
+    tocLinks.forEach((link) => link.classList.remove("active"));
+    if (active) {
+      const target = document.querySelector<HTMLAnchorElement>(
+        `#toc a[href="#${active.id}"]`
+      );
+      if (target) target.classList.add("active");
+    }
+  }
+
+  window.addEventListener("scroll", syncTOC, { passive: true });
+  syncTOC();
+</script>
+
 <style>
-  .blog-content {
-    padding-top: var(--spacing-sm);
-    padding-bottom: var(--spacing-xl);
-    padding-left: 0;
-    padding-right: 0;
-    background-color: var(--color-background);
+  /* ── Design tokens ───────────────────────────────────────── */
+  :root {
+    --tf-black:  #111111;
+    --tf-red:    #E6392E;
+    --tf-stone:  #5F5F5F;
+    --tf-fog:    #B5B5B5;
+    --tf-mist:   #E8E1DA;
+    --tf-paper:  #F1EDE7;
+    --tf-cream:  #F8F5F1;
+    --tf-linen:  #EFEAE3;
+    --tf-line:   rgba(0,0,0,0.10);
   }
 
-  .content-wrapper {
-    background-color: var(--color-card-bg);
-    border-radius: var(--border-radius);
-    padding: var(--spacing-md) var(--spacing-xl) var(--spacing-xl);
-    max-width: 900px;
-    margin: 0 auto;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: var(--shadow);
+  /* ── Reading progress bar ────────────────────────────────── */
+  .reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0;
+    background: var(--tf-red);
+    z-index: 9999;
+    transition: width 80ms linear;
   }
 
-  /* Ensure blog headings are left-aligned */
-  .content-wrapper :global(h1),
-  .content-wrapper :global(h2),
-  .content-wrapper :global(h3),
-  .content-wrapper :global(h4),
-  .content-wrapper :global(h5),
-  .content-wrapper :global(h6) {
-    text-align: left !important;
-  }
-
-  /* Related Posts Section */
-  .related-posts {
-    margin-top: var(--spacing-lg);
-    padding-top: var(--spacing-md);
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .related-posts-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: var(--spacing-lg);
-    color: var(--color-white);
-    text-align: center;
-  }
-
-  .posts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--spacing-md);
-  }
-
-  .post-card {
-    background-color: rgba(255, 255, 255, 0.05);
-    border-radius: var(--border-radius);
-    padding: var(--spacing-md);
-    transition: var(--transition);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    display: block;
+  /* ── Skip link ───────────────────────────────────────────── */
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 9999;
+    background: var(--tf-black);
+    color: #fff;
+    padding: 0.5rem 1.25rem;
     text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 0 0 6px 0;
+  }
+  .skip-link:focus { left: 0; }
+
+  /* ── Article head band ───────────────────────────────────── */
+  .article-head {
+    background: var(--tf-linen);
+    border-bottom: 1px solid var(--tf-line);
+  }
+  .head-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 40px 48px;
+  }
+  .head-crumbs {
+    margin-bottom: 20px;
+  }
+  .tag-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--tf-red);
+    margin: 0 0 14px;
+  }
+  .article-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: clamp(34px, 5vw, 58px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--tf-black);
+    margin: 0 0 20px;
+    max-width: 860px;
+  }
+  .byline {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--tf-stone);
+  }
+  .byline-author {
+    font-weight: 600;
+    color: var(--tf-black);
+  }
+  .sep { opacity: 0.4; }
+  .upd-label { color: var(--tf-red); font-weight: 500; }
+
+  /* ── Cover image ─────────────────────────────────────────── */
+  .cover-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 40px 0;
+  }
+  .cover-img {
+    width: 100%;
+    max-width: 960px;
+    height: auto;
+    aspect-ratio: 1200 / 630;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+    border: 1px solid var(--tf-line);
+  }
+
+  /* ── Article page / grid ─────────────────────────────────── */
+  .article-page {
+    background: var(--tf-cream);
+    padding: 56px 0 80px;
+  }
+  .article-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 236px minmax(0, 1fr);
+    gap: 64px;
+    align-items: start;
+  }
+
+  /* ── Sidebar ─────────────────────────────────────────────── */
+  .article-sidebar {
+    position: sticky;
+    top: 110px;
+    height: fit-content;
+    will-change: transform;
+  }
+
+  /* ── Article body ────────────────────────────────────────── */
+  .article-body {
+    min-width: 0;
+    max-width: 720px;
+  }
+
+  /* ── Prose ───────────────────────────────────────────────── */
+  .prose {
+    font-family: 'Inter', sans-serif;
+    font-size: 18.5px;
+    line-height: 1.72;
+    color: #2A2A2A;
+  }
+  .prose :global(p) {
+    margin: 0 0 1.4em;
+    color: #2A2A2A;
+  }
+  .prose :global(h2) {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--tf-black);
+    margin: 2.2em 0 0.6em;
+  }
+  .prose :global(h3) {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--tf-black);
+    margin: 1.8em 0 0.5em;
+  }
+  .prose :global(h4) {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--tf-black);
+    margin: 1.5em 0 0.4em;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .prose :global(ul),
+  .prose :global(ol) {
+    padding-left: 1.6em;
+    margin: 0 0 1.4em;
+  }
+  .prose :global(li) {
+    margin-bottom: 0.5em;
+    color: #2A2A2A;
+  }
+  .prose :global(a) {
+    color: var(--tf-black);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(0,0,0,0.30);
+    transition: text-decoration-color 160ms;
+  }
+  .prose :global(a:hover) {
+    text-decoration-color: var(--tf-red);
+    color: var(--tf-red);
+  }
+  .prose :global(strong) { font-weight: 700; color: var(--tf-black); }
+  .prose :global(em) { font-style: italic; }
+  .prose :global(blockquote) {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-style: italic;
+    font-size: 26px;
+    line-height: 1.35;
+    color: var(--tf-black);
+    border-left: 3px solid var(--tf-red);
+    padding: 4px 0 4px 24px;
+    margin: 2em 0;
+  }
+  .prose :global(blockquote p) {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    font-style: inherit;
+    line-height: inherit;
     color: inherit;
   }
-
-  .post-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-lg);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background-color: rgba(255, 255, 255, 0.08);
+  .prose :global(hr) {
+    border: 0;
+    border-top: 1px solid var(--tf-line);
+    margin: 2.5em 0;
+  }
+  .prose :global(figure) {
+    margin: 2em 0;
+  }
+  .prose :global(figcaption) {
+    font-size: 13.5px;
+    color: var(--tf-stone);
+    text-align: center;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+  }
+  .prose :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid var(--tf-line);
+    display: block;
+  }
+  .prose :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    margin: 1.5em 0;
+  }
+  .prose :global(th) {
+    background: var(--tf-paper);
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    border: 1px solid var(--tf-line);
+    color: var(--tf-black);
+    text-align: left;
+  }
+  .prose :global(td) {
+    padding: 10px 14px;
+    border: 1px solid var(--tf-line);
+    color: #2A2A2A;
+    vertical-align: top;
+  }
+  .prose :global(tr:nth-child(even) td) { background: rgba(0,0,0,0.02); }
+  .prose :global(code) {
+    font-size: 0.875em;
+    background: var(--tf-paper);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    border: 1px solid var(--tf-line);
+    color: var(--tf-black);
+    font-family: 'Space Mono', monospace;
+  }
+  .prose :global(pre) {
+    background: var(--tf-black);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+    margin: 1.5em 0;
+  }
+  .prose :global(pre code) {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    color: #f8f8f2;
+    font-size: 14px;
   }
 
-  .post-card-content h3 {
-    font-size: 1.1rem;
-    margin-bottom: var(--spacing-sm);
-    color: var(--color-white);
-    line-height: 1.3;
-  }
-
-  .post-card-content p {
-    font-size: 0.9rem;
-    color: var(--color-text-light);
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    margin-bottom: 0;
-    line-height: 1.4;
-  }
-
-  /* Responsive adjustments */
-  @media (max-width: 992px) {
-    .content-wrapper {
-      padding: var(--spacing-lg);
-    }
-  }
-
-  @media (max-width: 768px) {
-    .blog-content {
-      padding: var(--spacing-lg) 0;
-    }
-
-    .content-wrapper {
-      padding: var(--spacing-md);
-    }
-
-    .posts-grid {
+  /* ── Responsive ──────────────────────────────────────────── */
+  @media (max-width: 1000px) {
+    .article-grid {
       grid-template-columns: 1fr;
+      gap: 0;
     }
-
-    .related-posts-title {
-      font-size: 1.3rem;
+    .article-sidebar {
+      display: none;
     }
+    .article-body {
+      max-width: 100%;
+    }
+  }
+  @media (max-width: 600px) {
+    .head-inner { padding: 28px 20px 36px; }
+    .cover-wrap { padding: 20px 20px 0; }
+    .article-page { padding: 36px 0 60px; }
+    .article-grid { padding: 0 20px; }
+    .article-title { font-size: 30px; }
+    .prose { font-size: 17px; }
+    .prose :global(h2) { font-size: 26px; }
+    .prose :global(h3) { font-size: 21px; }
+    .prose :global(blockquote) { font-size: 20px; }
   }
 </style>

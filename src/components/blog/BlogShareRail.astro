@@ -1,0 +1,119 @@
+---
+interface Props {
+  url: string;
+  title: string;
+}
+const { url, title } = Astro.props;
+const enc = (s: string) => encodeURIComponent(s);
+---
+
+<div class="share">
+  <p class="share-label">Share</p>
+  <div class="share-row">
+    <a
+      href={`https://www.linkedin.com/sharing/share-offsite/?url=${enc(url)}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Share on LinkedIn"
+      class="share-btn"
+    >
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+      </svg>
+    </a>
+    <a
+      href={`https://x.com/intent/tweet?url=${enc(url)}&text=${enc(title)}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Share on X"
+      class="share-btn"
+    >
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.734-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+      </svg>
+    </a>
+    <button
+      class="share-btn copy-btn"
+      data-url={url}
+      aria-label="Copy link"
+      type="button"
+      id="copyLinkBtn"
+    >
+      <svg class="icon-link" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+      </svg>
+      <svg class="icon-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  const btn = document.getElementById('copyLinkBtn') as HTMLButtonElement | null;
+  if (btn) {
+    btn.addEventListener('click', () => {
+      const url = btn.dataset.url ?? window.location.href;
+      const iconLink = btn.querySelector<SVGElement>('.icon-link');
+      const iconCheck = btn.querySelector<SVGElement>('.icon-check');
+      navigator.clipboard.writeText(url).then(() => {
+        btn.classList.add('copied');
+        if (iconLink) iconLink.style.display = 'none';
+        if (iconCheck) iconCheck.style.display = 'block';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (iconLink) iconLink.style.display = 'block';
+          if (iconCheck) iconCheck.style.display = 'none';
+        }, 1600);
+      }).catch(() => {});
+    });
+  }
+</script>
+
+<style>
+  .share {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(0,0,0,0.10);
+  }
+  .share-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #5F5F5F;
+    margin: 0 0 14px;
+    font-family: 'Inter', sans-serif;
+  }
+  .share-row {
+    display: flex;
+    gap: 10px;
+  }
+  .share-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 999px;
+    background: transparent;
+    border: 1px solid rgba(0,0,0,0.10);
+    color: #111;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: none;
+    font-family: inherit;
+    transition: background 160ms, color 160ms, border-color 160ms;
+    flex-shrink: 0;
+  }
+  .share-btn:hover {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+  }
+  .share-btn.copied {
+    background: #E6392E;
+    color: #fff;
+    border-color: #E6392E;
+  }
+</style>
