@@ -1,16 +1,17 @@
 ---
 name: publish-blog-post
-description: Publish a blog post that was previously saved as a draft by the add-blog-post skill. Sets draft:false, commits, and merges the PR to main so the post goes live. Use after reviewing the draft PR created by add-blog-post.
+description: Publish a draft blog post that was saved by the add-blog-post skill. Removes draft:true, commits, merges the PR to main, and the post goes live on testfeed.ai. Run after reviewing the draft PR.
 model: claude-haiku-4-5-20251001
 ---
 
 # Publish Blog Post Skill
 
-Publish a draft blog post on the testfeed-website at `/home/user/testfeed-website`.
+Publish a draft blog post on testfeed.ai.
 
-This skill is the second step in the two-step publishing workflow:
-1. **`add-blog-post`** — saves the post as `draft: true`, opens a PR for review
-2. **`publish-blog-post`** (this skill) — flips `draft: false`, merges to main → post goes live
+This is **Step 3 of 3** in the publishing pipeline:
+1. **`write-blog-post`** — researches and writes the post
+2. **`add-blog-post`** — saves it as a draft and opens a PR for review
+3. **`publish-blog-post`** (this skill) — merges to main and makes it live
 
 ## Workflow
 
@@ -20,36 +21,32 @@ Make a todo list and work through these steps one at a time.
 
 If the user provided a slug (e.g. `/publish-blog-post best-concept-testing-platforms`), use that.
 
-If no slug was provided, list all current draft posts:
+If no slug was provided, list all current draft posts and ask which to publish:
 ```bash
 grep -rl "draft: true" /home/user/testfeed-website/src/content/blog/
 ```
-Show the list to the user and ask which one to publish.
+Show the slugs (filenames without `.md`) and wait for the user to choose.
 
-### 2. Confirm the Post Exists as a Draft
+### 2. Confirm the Post Is a Draft
 
-Read the file at `/home/user/testfeed-website/src/content/blog/[slug].md` and confirm:
-- The file exists
-- `draft: true` is set in the frontmatter
+Read `/home/user/testfeed-website/src/content/blog/[slug].md` and confirm `draft: true` is present.
 
-If `draft` is already `false` or missing, tell the user the post is already published.
+If `draft: true` is not in the file, tell the user: *"This post is already published at `https://testfeed.ai/blog/[slug]/`."* Stop here.
 
 ### 3. Check Out the Draft Branch
-
-The draft branch is named `blog/draft-[slug]`. Check it out:
 
 ```bash
 git fetch origin blog/draft-[slug]
 git checkout blog/draft-[slug]
 ```
 
-If the branch doesn't exist locally or remotely, stay on the current branch and proceed.
+If the branch doesn't exist, stay on main and proceed.
 
-### 4. Set draft: false
+### 4. Remove the Draft Flag
 
-Edit the file `/home/user/testfeed-website/src/content/blog/[slug].md`:
-- Find the line `draft: true`
-- Remove it entirely (the schema defaults to false, so omitting it is correct)
+Edit `/home/user/testfeed-website/src/content/blog/[slug].md`:
+- Remove the line `draft: true` entirely
+- Do not replace it with `draft: false` — omitting it is correct (schema defaults to false)
 
 ### 5. Commit and Push
 
@@ -59,16 +56,15 @@ git commit -m "publish: [slug]"
 git push -u origin blog/draft-[slug]
 ```
 
-If the push fails due to a network error, retry up to 4 times with exponential backoff (2s, 4s, 8s, 16s).
+Retry up to 4 times with exponential backoff (2s, 4s, 8s, 16s) on network errors.
 
 ### 6. Merge the PR to Main
 
-Use the GitHub MCP tool `mcp__github__merge_pull_request` to merge the open PR for this draft branch:
-- Find the open PR with head branch `blog/draft-[slug]` using `mcp__github__list_pull_requests`
-- Merge it using the `squash` method
-- commit_title: `publish: [slug]`
+Use the GitHub MCP tool:
+1. Find the open PR with head `blog/draft-[slug]` using `mcp__github__list_pull_requests`
+2. Merge it with method `squash`, commit title: `publish: [slug]`
 
-If no open PR exists, push the change to main directly:
+If no open PR exists, merge directly:
 ```bash
 git checkout main
 git pull origin main
@@ -78,13 +74,20 @@ git push origin main
 
 ### 7. Confirm
 
-Report back to the user with:
-- **Status: Live**
+Report back:
+- **Status:** Live
 - **URL:** `https://testfeed.ai/blog/[slug]/`
-- Remind them that Netlify/Vercel will take 1–3 minutes to rebuild
+- **Note:** Netlify/Vercel will take 1–3 minutes to rebuild — check back shortly.
 
 ## Key Paths
 
 - **Blog directory**: `/home/user/testfeed-website/src/content/blog/`
 - **Live site**: `https://testfeed.ai`
 - **GitHub repo**: `yesterday-work/testfeed-website`
+
+## Pipeline
+
+```
+/write-blog-post  →  /add-blog-post  →  /publish-blog-post
+   (write)              (draft PR)           (go live)
+```

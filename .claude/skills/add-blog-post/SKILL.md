@@ -1,67 +1,70 @@
 ---
 name: add-blog-post
-description: Add a new blog post to the testfeed-website. Use when the user wants to publish a markdown file as a blog post. Accepts a file path or pasted markdown content, validates frontmatter, writes the file to the blog directory as a DRAFT, commits, pushes, and opens a PR for review. Posts are always saved as draft:true first — use the publish-blog-post skill to make a post live.
+description: Add a new blog post to the testfeed-website as a draft. Accepts a file path, pasted content, or picks up from the Google Drive SEO Blog Drops folder. Validates and fixes frontmatter, saves with draft:true, commits, pushes, and opens a GitHub PR for review. Always saves as draft — use publish-blog-post to go live.
 model: claude-haiku-4-5-20251001
 ---
 
 # Add Blog Post Skill
 
-Add a new blog post to the testfeed-website at `/home/user/testfeed-website`.
+Save a blog post as a draft on the testfeed-website at `/home/user/testfeed-website`.
 
-Posts are **always saved as `draft: true`** first. They will not appear on the live site until the `publish-blog-post` skill is run.
+This is **Step 2 of 3** in the publishing pipeline:
+1. **`write-blog-post`** — researches and writes the post
+2. **`add-blog-post`** (this skill) — saves it as a draft and opens a PR for review
+3. **`publish-blog-post`** — merges to main and makes it live
+
+Posts are **always saved as `draft: true`** — they are invisible on the live site until `publish-blog-post` is run.
 
 ## Workflow
 
 Make a todo list and work through these steps one at a time.
 
-### 1. Accept the Markdown File
+### 1. Accept the Markdown Content
 
-If the user provided a file path or pasted content, use that.
-
-If no file was provided, check the Google Drive "SEO Blog Drops" folder (ID: `1246GXzreY3HR0KP4HfFwyWWrOw4N-o_7`) for any `.md` files using the Google Drive MCP tool `mcp__42347bf1-27cd-4477-ba2e-fd74d0695f38__list_recent_files`. If files are found, ask the user which one to process. If no files are found, ask the user to share the content.
+Check in this order:
+1. **File path or pasted content** — if the user provided one, use it
+2. **Google Drive** — if nothing was provided, check the SEO Blog Drops folder (ID: `1246GXzreY3HR0KP4HfFwyWWrOw4N-o_7`) for `.md` files using the Google Drive MCP tool. If files are found, show the list and ask which to process.
+3. **Ask** — if Drive is empty, ask the user to paste or share the content.
 
 ### 2. Determine the Slug
 
 The slug becomes the URL (`/blog/[slug]/`) and the filename (`[slug].md`).
 
-- Derive the slug from the `title` or `articleTitle` frontmatter field: lowercase, replace spaces and special characters with hyphens, strip punctuation.
-- If a file already exists at that slug, warn the user and ask whether to overwrite or use a different slug.
+Derive from `articleTitle` or `title`: lowercase, replace spaces and special characters with hyphens, strip punctuation.
 
-### 3. Validate Frontmatter
+If a file already exists at that slug, warn the user and ask whether to overwrite or use a different slug.
 
-Parse the YAML frontmatter and check for all **required fields**:
+### 3. Validate and Fix Frontmatter
+
+**Required fields — must be present before writing the file:**
 
 | Field | Type | Notes |
 |-------|------|-------|
-| `title` | string | Browser tab title — should include primary keyword and end with `\| TestFeed` |
-| `description` | string | Meta description — 150–160 characters with primary keyword |
-| `articleTitle` | string | Main H1 displayed on the page |
+| `title` | string | Must end with `\| TestFeed` |
+| `description` | string | 150–160 characters, includes primary keyword |
+| `articleTitle` | string | The H1 shown on the page |
 | `publishDate` | date | Format: `YYYY-MM-DD` |
-| `author` | string | Author name (e.g., `"Millie Marconi"`) |
-| `excerpt` | string | Short summary for preview cards |
-
-**If any required field is missing or malformed:**
-- List the missing fields clearly
-- Infer values where obvious (e.g. derive `articleTitle` from `title`, derive `excerpt` from the opening paragraph)
-- Only ask the user for values that cannot be reasonably inferred
+| `author` | string | e.g. `"Millie Marconi"` |
+| `excerpt` | string | 2–3 sentence summary for preview cards |
 
 **Fix these automatically without asking:**
 - `pubDate` → rename to `publishDate`
 - `updatedAt` → rename to `updatedDate`
-- `image: ""` → remove (empty featuredImage)
+- `image: ""` → remove
 - `schemaMarkup: true` → remove (invalid format)
-- `title` missing `| TestFeed` suffix → append it
-- Map `keyTakeaways` from any "Key Points" or "Key Takeaways" section in the body
-- Extract `faq` frontmatter from any FAQ section in the body
+- `title` missing `| TestFeed` → append it
+- `featuredImage: ""` → remove
+- Extract `keyTakeaways` from any "Key Points" or "Key Takeaways" section in the body
+- Extract `faq` from any FAQ section in the body and add to frontmatter
 
-**Optional fields** (include if present in the file, don't add if absent):
-- `updatedDate` — date, format `YYYY-MM-DD`
-- `featuredImage` — string, path relative to `/public`
+**Optional fields — include if present, do not add if absent:**
+- `updatedDate` — date `YYYY-MM-DD`
+- `featuredImage` — path relative to `/public`
 - `tags` — array of strings
 - `minutesRead` — number
-- `relatedPosts` — array of blog slugs (filenames without `.md`)
+- `relatedPosts` — array of blog slugs
 - `keyTakeaways` — array of strings (renders TL;DR box)
-- `faq` — array of `{question, answer}` objects (emits FAQPage JSON-LD)
+- `faq` — array of `{question, answer}` (emits FAQPage JSON-LD)
 - `authorBio` — object with `role`, `credentials`, `linkedinUrl`, `headshotUrl`, `authorPageUrl`
 - `schemaMarkup` — object with `type: "BlogPosting"` and `properties`
 
@@ -79,8 +82,6 @@ Write the validated markdown content to:
 
 ### 5. Commit and Push to Draft Branch
 
-Create and push to a branch named `blog/draft-[slug]`:
-
 ```bash
 git checkout -b blog/draft-[slug]
 git add src/content/blog/[slug].md
@@ -88,9 +89,7 @@ git commit -m "draft: [slug]"
 git push -u origin blog/draft-[slug]
 ```
 
-If the branch already exists, check it out instead of creating it.
-
-If the push fails due to a network error, retry up to 4 times with exponential backoff (2s, 4s, 8s, 16s).
+If the branch already exists, check it out instead of creating it. Retry up to 4 times with exponential backoff (2s, 4s, 8s, 16s) on network errors.
 
 ### 6. Open a Pull Request
 
@@ -98,18 +97,26 @@ Use the GitHub MCP tool to open a PR:
 - **title:** `[DRAFT] [articleTitle]`
 - **head:** `blog/draft-[slug]`
 - **base:** `main`
-- **body:** Include the slug, excerpt, author, publish date, and a note that this is a draft — merge with `publish-blog-post` to go live.
+- **body:** Slug, excerpt, author, publish date, and: *"Draft post — review the Netlify/Vercel preview, then run `/publish-blog-post [slug]` to go live."*
 
 ### 7. Confirm
 
-Report back to the user with:
-- The slug: `[slug]`
-- Status: **Draft — not live**
-- PR link to review the post
-- Next step: run `/publish-blog-post [slug]` to make it live
+Report back:
+- **Slug:** `[slug]`
+- **Status:** Draft — not live
+- **PR:** [link]
+- **Next step:** Review the preview, then run `/publish-blog-post [slug]`
 
 ## Key Paths
 
 - **Blog directory**: `/home/user/testfeed-website/src/content/blog/`
 - **Content schema**: `/home/user/testfeed-website/src/content/config.ts`
 - **Google Drive SEO Blog Drops folder ID**: `1246GXzreY3HR0KP4HfFwyWWrOw4N-o_7`
+- **GitHub repo**: `yesterday-work/testfeed-website`
+
+## Pipeline
+
+```
+/write-blog-post  →  /add-blog-post  →  /publish-blog-post
+   (write)              (draft PR)           (go live)
+```
