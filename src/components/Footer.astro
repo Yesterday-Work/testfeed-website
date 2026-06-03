@@ -1,174 +1,163 @@
 ---
-
 ---
 
-<footer>
-  <div class="container">
-    <div class="footer-content">
-      <div class="footer-top">
-        <div class="footer-logo">
-          <span class="testfeed-font">testfeed</span>
-        </div>
-        <div class="footer-links">
-          <div class="footer-section">
-            <h4>Product</h4>
-            <ul>
-              <li><a href="/tools/">Tools</a></li>
-              <li><a href="/about/">About</a></li>
-            </ul>
-          </div>
-          <div class="footer-section">
-            <h4>Resources</h4>
-            <ul>
-              <li><a href="/blog/">Blog</a></li>
-            </ul>
-          </div>
-          <div class="footer-section">
-            <h4>Legal</h4>
-            <ul>
-              <li><a href="/privacy-policy/">Privacy Policy</a></li>
-              <li><a href="/terms-of-service/">Terms of Service</a></li>
-            </ul>
-          </div>
+<footer class="site-footer">
+  <div class="ft-wrap">
+
+    <div class="foot-grid">
+
+      <!-- Brand col -->
+      <div class="foot-brand">
+        <a class="ft-mark" href="/">
+          <img src="/assets/logo-primary.png" alt="testfeed" width="88" height="20" />
+          <span class="logodot" aria-hidden="true"></span>
+        </a>
+        <p>Your AI panel. Ready when you are.</p>
+        <div class="foot-social">
+          <a href="https://www.linkedin.com/company/testfeed-ai/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
         </div>
       </div>
-      <div class="footer-bottom">
-        <div class="copyright">
-          <p>&copy; 2026 testfeed. All rights reserved.</p>
-        </div>
-        <div class="made-by">
-          <p>
-            Made by <a href="https://yesterday.work" target="_blank"
-              >yesterday</a
-            >
-          </p>
-        </div>
+
+      <!-- Nav col -->
+      <div class="foot-col">
+        <a href="/">Product</a>
+        <a href="/blog/">Blog</a>
+        <a href="/about/">About</a>
+        <a href="/privacy-policy/">Privacy</a>
       </div>
+
+      <!-- CTA col -->
+      <div class="foot-col">
+        <h4>Stop guessing.</h4>
+        <a href="https://app.usemotion.com/meet/millie-marconi/meeting" target="_blank" rel="noopener">Book a demo</a>
+        <a href="https://yesterday.work" target="_blank" rel="noopener">Made by Yesterday</a>
+      </div>
+
     </div>
+
+    <div class="foot-bottom">
+      <span class="cp">&copy; 2026 TestFeed</span>
+    </div>
+
   </div>
 </footer>
 
 <style>
-  footer {
-    background-color: #0a0a0a;
-    padding: var(--spacing-xl) 0 var(--spacing-lg);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  .site-footer {
+    background: #161616;
+    color: rgba(255,255,255,0.7);
+    font-family: 'Inter', sans-serif;
+  }
+  .ft-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 44px 40px 26px;
   }
 
-  .footer-content {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xl);
+  /* ── Grid ────────────────────────────────────────────────── */
+  .foot-grid {
+    display: grid;
+    grid-template-columns: 1.7fr 1fr 1.2fr;
+    gap: 28px;
+    margin-bottom: 36px;
   }
 
-  .footer-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: var(--spacing-xl);
+  /* ── Brand col ───────────────────────────────────────────── */
+  .ft-mark {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 0;
+    text-decoration: none;
+    border: 0;
+    margin-bottom: 16px;
   }
-
-  .footer-logo {
+  .ft-mark img {
+    height: 20px;
+    width: auto;
+    display: block;
+    filter: invert(1);
+  }
+  .logodot {
+    width: 5px;
+    height: 5px;
+    border-radius: 999px;
+    background: #E6392E;
+    display: inline-block;
+    margin: 0 0 2px 3px;
     flex-shrink: 0;
   }
-
-  .footer-logo .testfeed-font {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: var(--color-white);
+  .foot-brand p {
+    font-size: 13.5px;
+    line-height: 1.4;
+    color: rgba(255,255,255,0.55);
+    margin: 0 0 18px;
+    max-width: 180px;
   }
-
-  .footer-links {
+  .foot-social {
     display: flex;
-    gap: var(--spacing-xl);
-    flex-wrap: wrap;
+    gap: 10px;
   }
-
-  .footer-section h4 {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 0.9rem;
-    font-weight: 400;
-    margin-bottom: var(--spacing-sm);
-    font-family: "Poppins", sans-serif;
-  }
-
-  .footer-section ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .footer-section li {
-    margin-bottom: var(--spacing-xs);
-  }
-
-  .footer-section a {
-    color: var(--color-white);
+  .foot-social a {
+    width: 30px;
+    height: 30px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.08);
+    display: grid;
+    place-items: center;
+    color: #fff;
+    border: 0;
     text-decoration: none;
-    font-size: 0.9rem;
-    transition: var(--transition);
+    transition: background 160ms;
   }
+  .foot-social a:hover { background: #E6392E; }
 
-  .footer-section a:hover {
-    color: var(--color-primary);
-  }
-
-  .footer-bottom {
+  /* ── Nav / CTA cols ──────────────────────────────────────── */
+  .foot-col {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 11px;
+    padding-top: 2px;
+  }
+  .foot-col h4 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: #fff;
+    margin: 0 0 5px;
+  }
+  .foot-col a {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    border: 0;
+    transition: color 160ms;
+  }
+  .foot-col a:hover { color: #fff; }
+
+  /* ── Bottom bar ──────────────────────────────────────────── */
+  .foot-bottom {
+    display: flex;
     align-items: center;
-    padding-top: var(--spacing-lg);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    justify-content: flex-end;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255,255,255,0.10);
+  }
+  .cp {
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.4);
+    white-space: nowrap;
   }
 
-  .copyright p,
-  .made-by p {
-    color: var(--color-text-light);
-    margin: 0;
-    font-size: 0.85rem;
-  }
-
-  .made-by a {
-    color: var(--color-text-light);
-    text-decoration: underline;
-    transition: var(--transition);
-  }
-
-  .made-by a:hover {
-    color: var(--color-white);
-  }
-
+  /* ── Responsive ──────────────────────────────────────────── */
   @media (max-width: 768px) {
-    .footer-top {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: var(--spacing-lg);
-    }
-
-    .footer-links {
-      gap: var(--spacing-lg);
-      width: 100%;
-      justify-content: center;
-    }
-
-    .footer-section {
-      flex: 1;
-      min-width: 120px;
-      text-align: center;
-    }
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+    .foot-brand { grid-column: 1 / -1; }
   }
-
-  @media (max-width: 480px) {
-    .footer-links {
-      flex-direction: column;
-      gap: var(--spacing-md);
-    }
-
-    .footer-bottom {
-      flex-direction: column;
-      gap: var(--spacing-sm);
-      text-align: center;
-    }
+  @media (max-width: 600px) {
+    .ft-wrap { padding: 36px 20px 22px; }
+    .foot-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+    .foot-brand { grid-column: 1 / -1; }
   }
 </style>
