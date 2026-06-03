@@ -27,10 +27,14 @@ jobs:
       - name: Install Claude Code CLI
         run: npm install -g @anthropic-ai/claude-code
 
+      - name: Write Google Drive credentials
+        run: echo '${{ secrets.GOOGLE_DRIVE_CREDENTIALS }}' > /tmp/gdrive-credentials.json
+
       - name: Run coworker skill
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GOOGLE_APPLICATION_CREDENTIALS: /tmp/gdrive-credentials.json
         run: |
           claude --print "/coworker" \
             --allowedTools "Bash,Read,Write,Edit,mcp__42347bf1-27cd-4477-ba2e-fd74d0695f38__*,mcp__github__*"

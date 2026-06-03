@@ -1,17 +1,17 @@
 ---
 name: publish-blog-post
-description: Publish a draft blog post that was saved by the add-blog-post skill. Removes draft:true, commits, merges the PR to main, and the post goes live on testfeed.ai. Run after reviewing the draft PR.
+description: Publish a draft blog post that was saved by write-blog-post, add-blog-post, or coworker. Removes draft:true, commits, merges the PR to main, and the post goes live on testfeed.ai. Run after reviewing the draft PR.
 model: claude-haiku-4-5-20251001
 ---
 
 # Publish Blog Post Skill
 
-Publish a draft blog post on testfeed.ai.
+Make a draft blog post live on testfeed.ai. This is the final step in both publishing pipelines:
 
-This is **Step 3 of 3** in the publishing pipeline:
-1. **`write-blog-post`** — researches and writes the post
-2. **`add-blog-post`** — saves it as a draft and opens a PR for review
-3. **`publish-blog-post`** (this skill) — merges to main and makes it live
+```
+/write-blog-post  →  [review PR]  →  /publish-blog-post
+/coworker         →  [review PR]  →  /publish-blog-post
+```
 
 ## Workflow
 
@@ -19,7 +19,7 @@ Make a todo list and work through these steps one at a time.
 
 ### 1. Identify the Post to Publish
 
-If the user provided a slug (e.g. `/publish-blog-post best-concept-testing-platforms`), use that.
+If the user provided a slug (e.g. `/publish-blog-post best-concept-testing-platforms`), use it.
 
 If no slug was provided, list all current draft posts and ask which to publish:
 ```bash
@@ -31,30 +31,39 @@ Show the slugs (filenames without `.md`) and wait for the user to choose.
 
 Read `/home/user/testfeed-website/src/content/blog/[slug].md` and confirm `draft: true` is present.
 
-If `draft: true` is not in the file, tell the user: *"This post is already published at `https://testfeed.ai/blog/[slug]/`."* Stop here.
+If not found, tell the user: *"This post is already published at `https://testfeed.ai/blog/[slug]/`."* Stop here.
 
-### 3. Check Out the Draft Branch
+### 3. Check Out the Correct Branch
 
+Try to check out the draft branch:
 ```bash
-git fetch origin blog/draft-[slug]
-git checkout blog/draft-[slug]
+git fetch origin blog/draft-[slug] 2>/dev/null && git checkout blog/draft-[slug]
 ```
 
-If the branch doesn't exist, stay on main and proceed.
+If the branch doesn't exist remotely or locally, stay on `main` and note this — the push in step 5 will go directly to main.
 
 ### 4. Remove the Draft Flag
 
 Edit `/home/user/testfeed-website/src/content/blog/[slug].md`:
-- Remove the line `draft: true` entirely
-- Do not replace it with `draft: false` — omitting it is correct (schema defaults to false)
+- Remove the line `draft: true` entirely (do not replace with `draft: false` — omitting it is correct, the schema defaults to false)
 
 ### 5. Commit and Push
 
+**If on the draft branch:**
 ```bash
 git add src/content/blog/[slug].md
 git commit -m "publish: [slug]"
 git push -u origin blog/draft-[slug]
 ```
+Then proceed to step 6 to merge the PR.
+
+**If no draft branch exists (staying on main):**
+```bash
+git add src/content/blog/[slug].md
+git commit -m "publish: [slug]"
+git push origin main
+```
+Skip step 6 — it's already on main.
 
 Retry up to 4 times with exponential backoff (2s, 4s, 8s, 16s) on network errors.
 
@@ -62,32 +71,18 @@ Retry up to 4 times with exponential backoff (2s, 4s, 8s, 16s) on network errors
 
 Use the GitHub MCP tool:
 1. Find the open PR with head `blog/draft-[slug]` using `mcp__github__list_pull_requests`
-2. Merge it with method `squash`, commit title: `publish: [slug]`
+2. Merge with method `squash`, commit title: `publish: [slug]`
 
-If no open PR exists, merge directly:
-```bash
-git checkout main
-git pull origin main
-git merge blog/draft-[slug]
-git push origin main
-```
+If no open PR is found, the push in step 5 already went to main — skip this step.
 
 ### 7. Confirm
 
-Report back:
 - **Status:** Live
 - **URL:** `https://testfeed.ai/blog/[slug]/`
-- **Note:** Netlify/Vercel will take 1–3 minutes to rebuild — check back shortly.
+- **Note:** Netlify/Vercel takes 1–3 minutes to rebuild — check back shortly.
 
 ## Key Paths
 
 - **Blog directory**: `/home/user/testfeed-website/src/content/blog/`
-- **Live site**: `https://testfeed.ai`
 - **GitHub repo**: `yesterday-work/testfeed-website`
-
-## Pipeline
-
-```
-/write-blog-post  →  /add-blog-post  →  /publish-blog-post
-   (write)              (draft PR)           (go live)
-```
+- **Live site**: `https://testfeed.ai`
