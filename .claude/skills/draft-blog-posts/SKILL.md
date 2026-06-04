@@ -1,12 +1,12 @@
 ---
-name: coworker
-description: Weekly content co-worker. Checks the Google Drive SEO Blog Drops folder for new posts, drafts each one, and opens a PR per post for review. Run once a week — or schedule via GitHub Actions to run automatically every Monday.
+name: draft-blog-posts
+description: Picks up .md files from the Google Drive SEO Blog Drops folder, validates frontmatter, saves each one as a draft in the repo, opens a GitHub PR per post for review, and moves processed files to a Published subfolder. Run once a week — or schedule via GitHub Actions to run automatically every Monday.
 model: claude-sonnet-4-6
 ---
 
-# Coworker Skill
+# Draft Blog Posts Skill
 
-Your weekly content co-worker. Checks Google Drive for new posts, drafts them all, and lines up PRs for your review.
+Picks up written posts from Google Drive, validates them, opens a draft PR per post, and moves each file to Published in Drive so the queue stays clean.
 
 **Entry Point B** — for posts already written and dropped in Drive:
 ```
@@ -31,7 +31,21 @@ Filter for `.md` files only. If none found:
 
 Stop here.
 
-### 2. Identify New Files
+### 2. Ensure the Published Subfolder Exists
+
+Check whether a subfolder named `Published` exists inside the SEO Blog Drops folder (ID: `1246GXzreY3HR0KP4HfFwyWWrOw4N-o_7`).
+
+Use the Google Drive MCP search tool to find it:
+- Query: `title = 'Published' and parentId = '1246GXzreY3HR0KP4HfFwyWWrOw4N-o_7' and mimeType = 'application/vnd.google-apps.folder'`
+
+If it does not exist, create it using the Google Drive MCP create tool with:
+- name: `Published`
+- mimeType: `application/vnd.google-apps.folder`
+- parents: `1246GXzreY3HR0KP4HfFwyWWrOw4N-o_7`
+
+Store the folder ID for use in step 4.
+
+### 3. Identify New Files
 
 Cross-reference Drive files against the blog directory to skip anything already processed:
 ```bash
@@ -40,14 +54,14 @@ ls /home/user/testfeed-website/src/content/blog/
 
 A file is considered already processed if a post with the same slug (derived from its filename or title) exists in the blog directory. List skipped files in the final summary.
 
-### 3. Process Each New File
+### 4. Process Each New File
 
-For each new file, follow the same rules as `add-blog-post` — download, validate, fix, save, branch, commit, push, PR:
+For each new file, follow these steps one at a time. Do not move to the next file until the PR is open and the file has been moved.
 
 **Download:** Use the Google Drive MCP tool to get the file content.
 
 **Validate and fix frontmatter** (same rules as `add-blog-post`):
-- Required: `title` (must end `| TestFeed`), `description` (150–160 chars), `articleTitle`, `publishDate`, `author`, `excerpt`
+- Required: `title` (must end `| TestFeed`), `description` (150-160 chars), `articleTitle`, `publishDate`, `author`, `excerpt`
 - Auto-fix: rename `pubDate`→`publishDate`, `updatedAt`→`updatedDate`, remove empty `image`/`featuredImage`, remove `schemaMarkup: true`, append `| TestFeed` if missing from title, extract `keyTakeaways` and `faq` from body sections
 - Always set: `draft: true`
 
@@ -66,16 +80,16 @@ git push -u origin blog/draft-[slug]
 
 **Open PR:** title `[DRAFT] [articleTitle]`, head `blog/draft-[slug]`, base `main`. Body: slug, excerpt, author, and *"Review then run `/publish-blog-post [slug]` to go live."*
 
-Process files one at a time. Do not move to the next until the PR is open.
+**Move the file to Published:** Once the PR is open, move the Drive file from the SEO Blog Drops folder into the Published subfolder using the Google Drive MCP copy/move tool. Use the Published folder ID from step 2.
 
-### 4. Weekly Summary
+### 5. Weekly Summary
 
 ```
 Weekly content check complete.
 
 Drafted this week:
-- [articleTitle] → PR #[N] → /publish-blog-post [slug]
-- [articleTitle] → PR #[N] → /publish-blog-post [slug]
+- [articleTitle] → PR #[N] → /publish-blog-post [slug] → moved to Published in Drive
+- [articleTitle] → PR #[N] → /publish-blog-post [slug] → moved to Published in Drive
 
 Skipped (already exist):
 - [slug]
