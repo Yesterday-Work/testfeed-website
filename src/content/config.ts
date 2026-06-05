@@ -213,9 +213,10 @@ export const blogSchema = z.object({
     role: z.string().optional().describe("Author's professional role / title"),
     credentials: z.string().optional().describe("Brief credential statement shown below the author name"),
     linkedinUrl: z.string().url().optional().describe("Verified LinkedIn profile URL"),
+    xUrl: z.string().url().optional().describe("X (Twitter) profile URL"),
     headshotUrl: z.string().optional().describe("Path to author headshot image (relative to /public or absolute URL)"),
     authorPageUrl: z.string().optional().describe("Internal author profile page URL for entity-relationship mapping"),
-  }).optional().describe("E-E-A-T compliant author bio block — include headshot, role, credentials, and LinkedIn link"),
+  }).optional().describe("E-E-A-T compliant author bio block — include headshot, role, credentials, LinkedIn and X links"),
 
   // Schema.org markup for rich results
   schemaMarkup: z.object({

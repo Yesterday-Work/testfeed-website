@@ -4,13 +4,20 @@ description: "Learn how to craft compelling LinkedIn headlines that attract recr
 articleTitle: "The Ultimate Guide to LinkedIn Headline Examples That Get You Noticed in 2025"
 publishDate: 2025-05-05
 # updatedDate: YYYY-MM-DD # Optional: Add if post is updated
-author: "Millie"
+author: "Millie Marconi"
 featuredImage: ""
 excerpt: "Learn how to craft compelling LinkedIn headlines that attract recruiters and opportunities with proven formulas and examples."
 tags: ["linkedin", "career", "personal branding", "job search"]
 minutesRead: 15
 draft: false
 relatedPosts: ["linkedin-character-limits", "linkedin-impressions"]
+authorBio:
+  role: "CEO & Co-Founder, TestFeed"
+  credentials: "Market research practitioner and founder of TestFeed, an AI-native synthetic audience research platform."
+  linkedinUrl: "https://www.linkedin.com/in/millie-marconi/"
+  xUrl: "https://x.com/MillieMarconnni"
+  headshotUrl: "/assets/authors/millie-marconi.jpg"
+  authorPageUrl: "/authors/millie-marconi/"
 schemaMarkup:
   type: "BlogPosting"
   properties:
