@@ -50,7 +50,7 @@ Minimum required: **topic or target keyword**. Ask for anything not provided:
 - **Topic / target keyword** (required)
 - **Angle or hook** (optional) — what makes this post different from what's already ranking?
 - **Target audience** (optional) — defaults to "operators, marketers, and insights professionals"
-- **Author** (optional) — defaults to `"TestFeed"`; use `"Millie Marconi"` if specified
+- **Author** (optional) — defaults to `"Millie Marconi"`
 - **Related internal posts to link** (optional) — check `/src/content/blog/` for existing slugs
 
 Do not ask for information already given.
@@ -91,7 +91,8 @@ authorBio:  # required — use Millie Marconi's details unless another author is
   role: "CEO & Co-Founder, TestFeed"
   credentials: "Market research practitioner and founder of TestFeed, an AI-native synthetic audience research platform."
   linkedinUrl: "https://www.linkedin.com/in/millie-marconi/"
-  headshotUrl: "/assets/authors/millie-marconi.jpg"
+  xUrl: "https://x.com/MillieMarconnni"
+  headshotUrl: "/assets/authors/headshot.jpg"
   authorPageUrl: "/authors/millie-marconi/"
 faq:  # required — minimum 4 questions matching natural search queries
   - question: "[Question phrased as a user would type it into Google]"
