@@ -1,0 +1,205 @@
+---
+// Brand header — matches the editorial style of the landing page
+// (src/pages/index.astro). Self-contained: defines its own scoped styles
+// and does not depend on the landing page's CSS variables, so it can be
+// used by BaseLayout across the blog, tools, about and legal pages.
+const bookingUrl = "https://app.usemotion.com/meet/millie-marconi/meeting";
+
+const navLinks = [
+  { label: "Product", href: "/#platform" },
+  { label: "Use cases", href: "/#tested" },
+  { label: "Blog", href: "/blog/" },
+];
+---
+
+<header class="brand-header" id="brandHeader">
+  <div class="bh-wrap">
+    <a class="bh-wordmark" href="/" aria-label="testfeed home">
+      <img src="/assets/logo-primary.png" alt="testfeed" />
+      <span class="bh-logodot"></span>
+    </a>
+
+    <nav class="bh-nav" id="brandNav">
+      {navLinks.map((link) => (
+        <a href={link.href}>{link.label}</a>
+      ))}
+      <a class="bh-btn bh-nav-cta" href={bookingUrl} target="_blank" rel="noopener">
+        Book a demo
+        <span class="bh-arr" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </a>
+    </nav>
+
+    <a class="bh-btn bh-header-btn" href={bookingUrl} target="_blank" rel="noopener">
+      Book a demo
+      <span class="bh-arr" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </span>
+    </a>
+
+    <button class="bh-toggle" id="brandNavToggle" aria-label="Open menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+
+<script is:inline>
+  (function () {
+    var toggle = document.getElementById("brandNavToggle");
+    var header = document.getElementById("brandHeader");
+    if (toggle && header) {
+      toggle.addEventListener("click", function () {
+        var open = header.classList.toggle("open");
+        toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    }
+  })();
+</script>
+
+<style>
+  .brand-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(248, 245, 241, 0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+  .bh-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px 40px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+  .bh-wordmark {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 0;
+    line-height: 1;
+    text-decoration: none;
+    border: 0;
+  }
+  .bh-wordmark img {
+    height: 22px;
+    width: auto;
+    display: block;
+  }
+  .bh-logodot {
+    width: 5px;
+    height: 5px;
+    border-radius: 999px;
+    background: #e6392e;
+    display: inline-block;
+    margin: 0 0 3px 3px;
+    flex: 0 0 auto;
+  }
+  .bh-nav {
+    display: flex;
+    gap: 34px;
+    align-items: center;
+    margin: 0 0 0 auto;
+  }
+  .bh-nav a:not(.bh-btn) {
+    color: #111111;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    text-decoration: none;
+    border: 0;
+    white-space: nowrap;
+  }
+  .bh-nav a:not(.bh-btn):hover {
+    color: #e6392e;
+  }
+
+  .bh-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-family: "Playfair Display", serif;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 10px 12px 10px 20px;
+    border-radius: 999px;
+    background: #111111;
+    color: #ffffff;
+    border: 0;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 160ms ease;
+  }
+  .bh-btn:hover {
+    background: #222222;
+    color: #ffffff;
+  }
+  .bh-arr {
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.18);
+    display: inline-grid;
+    place-items: center;
+  }
+  .bh-arr svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  /* The standalone CTA outside the nav is only shown on mobile */
+  .bh-header-btn {
+    display: none;
+  }
+  .bh-toggle {
+    display: none;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    color: #111111;
+    padding: 6px;
+  }
+  .bh-toggle svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  @media (max-width: 860px) {
+    .bh-wrap {
+      padding: 14px 20px;
+    }
+    .bh-nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      margin: 0;
+      padding: 8px 20px 18px;
+      background: #f8f5f1;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+    .brand-header.open .bh-nav {
+      display: flex;
+    }
+    .bh-nav a:not(.bh-btn) {
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+    .bh-nav-cta {
+      display: none;
+    }
+    .bh-header-btn {
+      display: inline-flex;
+      margin-left: auto;
+    }
+    .bh-toggle {
+      display: inline-flex;
+    }
+  }
+</style>
