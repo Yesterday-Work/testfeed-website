@@ -1,27 +1,146 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+const bookingUrl = "https://app.usemotion.com/meet/millie-marconi/meeting";
 ---
 
 <Layout
   title="Page Not Found | TestFeed"
   description="The page you're looking for doesn't exist."
 >
-  <main
-    style="padding: 4rem 1rem; text-align: center; max-width: 600px; margin: 0 auto;"
-  >
-    <h1 style="font-size: 3rem; margin-bottom: 1rem;">404</h1>
-    <h2 style="font-size: 1.5rem; margin-bottom: 2rem;">Page Not Found</h2>
+  <main class="nf-page">
+    <div class="nf-wrap">
+      <p class="nf-eyebrow">Error 404</p>
+      <h1 class="nf-title">This page took a day off<span class="nf-dot">.</span></h1>
+      <p class="nf-sub">
+        The page you're looking for doesn't exist or has moved. Let's get you
+        back to something useful.
+      </p>
 
-    <div style="margin: 2rem 0;">
-      <img
-        src="/cat-laptop.gif"
-        alt="Cat typing frantically on laptop"
-        style="max-width: 300px; width: 100%; height: auto; border-radius: 8px;"
-      />
+      <div class="nf-art">
+        <img
+          src="/cat-laptop.gif"
+          alt="Cat typing frantically on a laptop"
+          width="300"
+          height="300"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+
+      <div class="nf-actions">
+        <a class="nf-btn" href="/">
+          Back to home
+          <span class="nf-arr" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+        </a>
+        <a class="nf-btn nf-btn--outline" href="/blog/">Read the blog</a>
+      </div>
     </div>
-
-    <p style="font-size: 1.125rem; color: #666;">
-      Page not found. Our developers are working on it.
-    </p>
   </main>
 </Layout>
+
+<style>
+  .nf-page {
+    background: #f8f5f1;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 72px 20px 96px;
+  }
+  .nf-wrap {
+    max-width: 560px;
+    text-align: center;
+  }
+  .nf-eyebrow {
+    font-family: "Inter", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #e6392e;
+    margin: 0 0 18px;
+  }
+  .nf-title {
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+    font-size: clamp(34px, 5vw, 52px);
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    color: #111111;
+    margin: 0 0 18px;
+  }
+  .nf-dot {
+    color: #e6392e;
+  }
+  .nf-sub {
+    font-family: "Inter", sans-serif;
+    font-size: 17px;
+    line-height: 1.55;
+    color: #5f5f5f;
+    margin: 0 auto;
+    max-width: 420px;
+  }
+  .nf-art {
+    margin: 40px 0;
+  }
+  .nf-art img {
+    max-width: 280px;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    display: inline-block;
+  }
+  .nf-actions {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .nf-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-family: "Playfair Display", serif;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 11px 12px 11px 22px;
+    border-radius: 999px;
+    background: #111111;
+    color: #ffffff;
+    border: 1px solid #111111;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 160ms ease, color 160ms ease;
+  }
+  .nf-btn:hover {
+    background: #222222;
+    color: #ffffff;
+  }
+  .nf-arr {
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.18);
+    display: inline-grid;
+    place-items: center;
+  }
+  .nf-arr svg {
+    width: 13px;
+    height: 13px;
+  }
+  .nf-btn--outline {
+    background: transparent;
+    color: #111111;
+    border: 1px solid rgba(0, 0, 0, 0.28);
+    padding: 11px 22px;
+  }
+  .nf-btn--outline:hover {
+    background: transparent;
+    color: #111111;
+    border-color: #111111;
+  }
+</style>

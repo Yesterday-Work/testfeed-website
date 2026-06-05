@@ -16,8 +16,10 @@ export default defineConfig({
   site: 'https://testfeed.ai',
   trailingSlash: 'always',
   redirects: {
-    '/blog/ai_market_research_guide': '/blog/ai-market-research-guide',
-    '/blog/potentially_sensitive_language': '/blog/potentially-sensitive-language',
+    // These articles are no longer published; send the old underscore URLs
+    // to the blog index instead of dead-ending at a 404.
+    '/blog/ai_market_research_guide': '/blog/',
+    '/blog/potentially_sensitive_language': '/blog/',
   },
   vite: {
     envPrefix: 'PUBLIC_'
