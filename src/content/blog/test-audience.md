@@ -9,7 +9,7 @@ excerpt: "Master audience testing before publishing content. Learn proven method
 tags: ["test audience", "audience testing", "content testing"]
 minutesRead: 15
 draft: false
-relatedPosts: ["potentially-sensitive-language", "product-launch-strategy"]
+relatedPosts: ["customer-experience-research", "product-launch-strategy"]
 schemaMarkup:
   type: "BlogPosting"
   properties:

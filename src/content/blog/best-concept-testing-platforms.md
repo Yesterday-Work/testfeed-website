@@ -8,7 +8,7 @@ updatedDate: 2026-06-02
 minutesRead: 11
 tags: ["concept-testing", "market-research", "audience-research", "product-testing"]
 excerpt: "Not all concept testing platforms work the same way. This guide compares seven tools across method, speed, cost, and use case — so you can pick the right one for your team and decision stakes."
-relatedPosts: ["test-audience", "ai-market-research-guide", "how-to-do-customer-research"]
+relatedPosts: ["test-audience", "customer-experience-research", "voice-of-customer-research"]
 keyTakeaways:
   - "Concept testing platforms now span four categories: traditional survey panels, AI-moderated qualitative tools, advanced quantitative platforms, and synthetic audience tools — each with genuinely different trade-offs."
   - "Enterprise platforms offer normative benchmarks but carry high costs and multi-day turnaround; synthetic panel tools return directional results in minutes at a fraction of the cost."
@@ -119,7 +119,7 @@ For teams that want to understand why a concept works or fails, qualitative inte
 
 TestFeed runs concept tests against synthetic respondents: AI-generated audience profiles built from demographic and behavioural data. No panel recruitment required. Studies complete in minutes and can be iterated repeatedly without incremental cost per run.
 
-For teams running [AI-driven market research](https://testfeed.ai/blog/ai-market-research-guide/) at early stages of development, synthetic panels are most useful for directional feedback: which concept scores higher, which message resonates, which angle to eliminate before investing in a full panel study. TestFeed's always-on model means research does not have to wait for a panel to be fielded or a budget to be approved.
+For teams running [AI-driven market research](https://testfeed.ai/blog/customer-experience-research/) at early stages of development, synthetic panels are most useful for directional feedback: which concept scores higher, which message resonates, which angle to eliminate before investing in a full panel study. TestFeed's always-on model means research does not have to wait for a panel to be fielded or a budget to be approved.
 
 Synthetic panels are not a direct replacement for recruited panels in final validation studies. They work best as a fast, affordable first pass, or for teams that previously could not afford to test at all.
 
@@ -148,7 +148,7 @@ Three questions cut through the noise.
 
 **What kind of output do you need?** Quantitative platforms give you scores and rankings with statistical significance. Qualitative platforms give you themes and verbatim responses. Most product and marketing teams need both at different stages of development. Budget for at least two tool types if you are building a research programme rather than running a one-off study.
 
-For a broader view of customer research methods before committing to any platform, the [TestFeed guide to customer research](https://testfeed.ai/blog/how-to-do-customer-research/) covers the full toolkit.
+For a broader view of customer research methods before committing to any platform, the [TestFeed guide to customer experience research](https://testfeed.ai/blog/customer-experience-research/) covers the full toolkit.
 
 ## Frequently asked questions
 
@@ -166,7 +166,7 @@ For quantitative studies, 100-200 completed responses per concept is a common be
 
 ### Can I use AI for concept testing?
 
-Yes. AI is used in two distinct ways in this space: AI-moderated interviews, where an AI runs qualitative conversations and analyses themes; and synthetic audience panels, where AI-generated respondents stand in for recruited participants. Both approaches have specific use cases and trade-offs, covered in the [TestFeed guide to AI market research](https://testfeed.ai/blog/ai-market-research-guide/).
+Yes. AI is used in two distinct ways in this space: AI-moderated interviews, where an AI runs qualitative conversations and analyses themes; and synthetic audience panels, where AI-generated respondents stand in for recruited participants. Both approaches have specific use cases and trade-offs, covered in the [TestFeed guide to voice of customer research](https://testfeed.ai/blog/voice-of-customer-research/).
 
 ### What is monadic concept testing?
 

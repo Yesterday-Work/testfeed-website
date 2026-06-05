@@ -8,7 +8,7 @@ excerpt: "Move beyond post-interaction surveys to predictive customer intelligen
 tags: ["customer experience research", "predictive analytics", "customer intelligence"]
 minutesRead: 24
 draft: false
-relatedPosts: ["voice-of-customer-research", "how-to-do-customer-research"]
+relatedPosts: ["voice-of-customer-research", "voice-of-customer-tools"]
 schemaMarkup:
   type: "BlogPosting"
   properties:

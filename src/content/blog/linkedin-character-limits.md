@@ -51,7 +51,7 @@ While 3,000 characters offer a good amount of space, remember that conciseness i
 
 ## LinkedIn Headline Character Limit: Your Professional Billboard
 
-Your LinkedIn headline is one of the first things people see. It's prime real estate!
+Your [LinkedIn headline](https://testfeed.ai/blog/linkedin-headlines/) is one of the first things people see. It's prime real estate!
 
 **LinkedIn Headline Character Limit: 220 characters**
 
@@ -151,8 +151,8 @@ These are estimates as word length varies. Always default to the character count
 - **Proofread**: Typos look unprofessional and waste precious characters.
 - **Prioritize Your Hook**: Especially for posts, make the first ~200 characters irresistible.
 
-Staying informed about the LinkedIn character limit across all features is essential for anyone serious about using the platform effectively. Whether it's the character limit for LinkedIn posts or the nuanced LinkedIn headline character limit, knowledge is power.
+Staying informed about the LinkedIn character limit across all features is essential for anyone serious about using the platform effectively. Whether it's the character limit for LinkedIn posts or the nuanced [LinkedIn headline character limit](https://testfeed.ai/blog/linkedin-headlines/), knowledge is power.
 
-Bookmark this guide for your 2025 LinkedIn strategy and ensure your voice is heard, clearly and completely!
+Bookmark this guide for your 2025 LinkedIn strategy and ensure your voice is heard, clearly and completely! For tips on maximising those characters in your headline, see our guide to [LinkedIn headline examples](https://testfeed.ai/blog/linkedin-headlines/). To understand how your posts are actually performing, check out our breakdown of [LinkedIn impressions](https://testfeed.ai/blog/linkedin-impressions/).
 
 Found this guide helpful? Share it with your network or comment below with any other LinkedIn tips! 
