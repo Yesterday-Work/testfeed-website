@@ -16,7 +16,7 @@ authorBio:
   credentials: "Market research practitioner and founder of TestFeed, an AI-native synthetic audience research platform."
   linkedinUrl: "https://www.linkedin.com/in/millie-marconi/"
   xUrl: "https://x.com/MillieMarconnni"
-  headshotUrl: "/assets/authors/millie-marconi.jpg"
+  headshotUrl: "/assets/authors/headshot.jpg"
   authorPageUrl: "/authors/millie-marconi/"
 schemaMarkup:
   type: "BlogPosting"
