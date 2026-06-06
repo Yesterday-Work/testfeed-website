@@ -64,6 +64,7 @@ If a file already exists at that slug, warn the user and ask whether to overwrit
 - `keyTakeaways` — array of strings (renders TL;DR box)
 - `faq` — array of `{question, answer}` (emits FAQPage JSON-LD)
 - `authorBio` — object with `role`, `credentials`, `linkedinUrl`, `xUrl`, `headshotUrl` (`/assets/authors/headshot.jpg` for Millie), `authorPageUrl`
+- `finalCtaSection` — object with `title` and `text` (renders post-article CTA before newsletter); strongly recommended
 - `schemaMarkup` — object with `type: "BlogPosting"` and `properties`
 
 **Always set:**
