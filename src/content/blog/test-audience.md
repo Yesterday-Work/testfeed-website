@@ -3,13 +3,20 @@ title: "Test Audience: Complete Guide + Next-Generation Alternatives"
 description: "Master audience testing before publishing content. Learn proven methods from film industry to AI-powered testing. Free templates + advanced techniques."
 articleTitle: "Test Audience: Complete Guide + Next-Generation Alternatives"
 publishDate: 2025-07-22
-author: "Millie"
+author: "Millie Marconi"
 featuredImage: ""
 excerpt: "Master audience testing before publishing content. Learn proven methods from film industry to AI-powered testing. Free templates + advanced techniques."
 tags: ["test audience", "audience testing", "content testing"]
 minutesRead: 15
 draft: false
-relatedPosts: ["potentially-sensitive-language", "product-launch-strategy"]
+relatedPosts: ["customer-experience-research", "product-launch-strategy"]
+authorBio:
+  role: "CEO & Co-Founder, TestFeed"
+  credentials: "Market research practitioner and founder of TestFeed, an AI-native synthetic audience research platform."
+  linkedinUrl: "https://www.linkedin.com/in/millie-marconi/"
+  xUrl: "https://x.com/MillieMarconnni"
+  headshotUrl: "/assets/authors/headshot.jpg"
+  authorPageUrl: "/authors/millie-marconi/"
 schemaMarkup:
   type: "BlogPosting"
   properties:

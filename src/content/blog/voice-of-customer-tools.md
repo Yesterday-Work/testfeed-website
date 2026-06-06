@@ -3,13 +3,20 @@ title: "Voice of Customer Tools: Complete Guide + Next-Generation Alternatives |
 description: "Compare top VoC tools like Medallia, Qualtrics & InMoment. Learn limitations of reactive feedback and discover predictive audience intelligence alternatives."
 articleTitle: "Voice of Customer Tools: Complete Guide + Next-Generation Alternatives"
 publishDate: 2025-07-28
-author: "Millie"
+author: "Millie Marconi"
 featuredImage: ""
 excerpt: "Compare top VoC tools like Medallia, Qualtrics & InMoment. Learn limitations of reactive feedback and discover predictive audience intelligence alternatives."
 tags: ["voice of customer tools", "customer feedback", "audience intelligence"]
 minutesRead: 18
 draft: false
-relatedPosts: ["voice-of-customer-research", "ai-market-research-guide"]
+relatedPosts: ["voice-of-customer-research", "customer-experience-research"]
+authorBio:
+  role: "CEO & Co-Founder, TestFeed"
+  credentials: "Market research practitioner and founder of TestFeed, an AI-native synthetic audience research platform."
+  linkedinUrl: "https://www.linkedin.com/in/millie-marconi/"
+  xUrl: "https://x.com/MillieMarconnni"
+  headshotUrl: "/assets/authors/headshot.jpg"
+  authorPageUrl: "/authors/millie-marconi/"
 schemaMarkup:
   type: "BlogPosting"
   properties:

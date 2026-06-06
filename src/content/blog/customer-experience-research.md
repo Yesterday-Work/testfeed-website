@@ -3,12 +3,19 @@ title: "Customer Experience Research Guide: Predictive vs Reactive | TestFeed"
 description: "Transform customer experience research from reactive surveys to predictive intelligence. Learn advanced methodologies that prevent problems before they occur."
 articleTitle: "Customer Experience Research: From Reactive Analysis to Predictive Content Testing"
 publishDate: 2025-08-03
-author: "Millie"
+author: "Millie Marconi"
 excerpt: "Move beyond post-interaction surveys to predictive customer intelligence. Learn how AI-powered simulation prevents experience problems before they damage relationships."
 tags: ["customer experience research", "predictive analytics", "customer intelligence"]
 minutesRead: 24
 draft: false
-relatedPosts: ["voice-of-customer-research", "how-to-do-customer-research"]
+relatedPosts: ["voice-of-customer-research", "voice-of-customer-tools"]
+authorBio:
+  role: "CEO & Co-Founder, TestFeed"
+  credentials: "Market research practitioner and founder of TestFeed, an AI-native synthetic audience research platform."
+  linkedinUrl: "https://www.linkedin.com/in/millie-marconi/"
+  xUrl: "https://x.com/MillieMarconnni"
+  headshotUrl: "/assets/authors/headshot.jpg"
+  authorPageUrl: "/authors/millie-marconi/"
 schemaMarkup:
   type: "BlogPosting"
   properties:

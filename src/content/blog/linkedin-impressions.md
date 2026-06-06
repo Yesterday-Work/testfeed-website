@@ -4,13 +4,20 @@ description: "Complete guide to understanding LinkedIn impressions, how they wor
 articleTitle: "Understanding LinkedIn Impressions: The Foundation of Visibility"
 publishDate: 2025-05-07
 # updatedDate: YYYY-MM-DD # Optional: Add if post is updated
-author: "Millie"
+author: "Millie Marconi"
 featuredImage: ""
 excerpt: "A comprehensive guide to understanding and maximizing LinkedIn impressions."
 tags: ["linkedin", "social media", "analytics", "marketing"]
 minutesRead: 14
 draft: false
 relatedPosts: ["linkedin-headlines", "linkedin-character-limits"]
+authorBio:
+  role: "CEO & Co-Founder, TestFeed"
+  credentials: "Market research practitioner and founder of TestFeed, an AI-native synthetic audience research platform."
+  linkedinUrl: "https://www.linkedin.com/in/millie-marconi/"
+  xUrl: "https://x.com/MillieMarconnni"
+  headshotUrl: "/assets/authors/headshot.jpg"
+  authorPageUrl: "/authors/millie-marconi/"
 schemaMarkup:
   type: "BlogPosting"
   properties:

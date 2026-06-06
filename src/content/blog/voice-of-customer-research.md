@@ -4,12 +4,19 @@ description: "Master voice of customer research with proven methodologies that d
 articleTitle: "Voice of Customer Research Guide 2025: Complete Methods"
 publishDate: 2025-07-17
 updatedDate: 2025-07-31
-author: "Millie"
+author: "Millie Marconi"
 excerpt: "Master voice of customer research with proven methodologies that drive real business results. From data collection to ROI measurement - everything you need to transform customer feedback into competitive advantage."
 tags: ["voice of customer", "customer research", "voc methodology"]
 minutesRead: 15
 draft: false
-relatedPosts: ["voice-of-customer-tools", "ai-market-research-guide"]
+relatedPosts: ["voice-of-customer-tools", "customer-experience-research"]
+authorBio:
+  role: "CEO & Co-Founder, TestFeed"
+  credentials: "Market research practitioner and founder of TestFeed, an AI-native synthetic audience research platform."
+  linkedinUrl: "https://www.linkedin.com/in/millie-marconi/"
+  xUrl: "https://x.com/MillieMarconnni"
+  headshotUrl: "/assets/authors/headshot.jpg"
+  authorPageUrl: "/authors/millie-marconi/"
 schemaMarkup:
   type: "BlogPosting"
   properties:

@@ -6,14 +6,21 @@ description: "Master product launch strategy with communication intelligence. Te
 # Blog Post Display Content
 articleTitle: "New Product Launch Strategy: The Communication Intelligence Guide to Success"
 publishDate: 2025-07-18
-author: "Millie"
+author: "Millie Marconi"
 excerpt: "95% of product launches fail, and over half fail due to communication problems. Discover the missing communication intelligence step that transforms launch success rates."
 tags: ["product launch", "communication strategy", "message testing"]
 minutesRead: 12
 draft: false
-relatedPosts: ["test-audience", "potentially-sensitive-language"]
+relatedPosts: ["test-audience", "best-concept-testing-platforms"]
 
 # Schema.org structured data
+authorBio:
+  role: "CEO & Co-Founder, TestFeed"
+  credentials: "Market research practitioner and founder of TestFeed, an AI-native synthetic audience research platform."
+  linkedinUrl: "https://www.linkedin.com/in/millie-marconi/"
+  xUrl: "https://x.com/MillieMarconnni"
+  headshotUrl: "/assets/authors/headshot.jpg"
+  authorPageUrl: "/authors/millie-marconi/"
 schemaMarkup:
   type: "BlogPosting"
   properties:
