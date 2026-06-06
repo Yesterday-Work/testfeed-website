@@ -5,15 +5,18 @@ export default function posthogAnalytics(): AstroIntegration {
     name: 'astro-posthog-analytics-integration',
     hooks: {
       'astro:config:setup': ({ injectScript }) => {
-        const posthogApiKey = process.env.PUBLIC_POSTHOG_API_KEY;
-        // Default to 'https://us.i.posthog.com'
+        // Public PostHog project API key (client-side / publishable). Hardcoded as
+        // the default so analytics work on every deployed page without extra host
+        // configuration; an environment variable still overrides it when present.
+        const posthogApiKey = process.env.PUBLIC_POSTHOG_API_KEY || 'phc_oWamipWEWzhXMfZRxagdjE5A8oi4bXmbPvRAm4oPq35p';
+        // Default to PostHog US Cloud.
         const posthogApiHost = process.env.PUBLIC_POSTHOG_API_HOST || 'https://us.i.posthog.com';
 
         if (!posthogApiKey) {
-          // console.warn(
-          //   "PUBLIC_POSTHOG_API_KEY is not set in environment variables. PostHog script injection skipped."
-          // );
-          // return;
+          console.warn(
+            'PostHog API key is not set. PostHog script injection skipped.'
+          );
+          return;
         }
 
         // Snippet based on PostHog's documentation for web, adapted for Astro integration
