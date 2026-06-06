@@ -54,6 +54,9 @@ Temporary Items
 .env.test.local
 .env.production.local
 
+# Claude Code local settings (contains secrets)
+.claude/settings.local.json
+
 # Editor directories and files (Some might be duplicates, that's ok)
 .vscode/
 *.suo

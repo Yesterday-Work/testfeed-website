@@ -101,7 +101,51 @@ Use the GitHub MCP tool:
 
 If no open PR is found, the push in step 6 already went to main — skip this step.
 
-### 8. Update Notion SEO Content Pipeline
+### 8. Submit to Search Engines
+
+Wait 90 seconds for the site to rebuild, then run both submissions:
+
+```bash
+# Submit to Google Indexing API (uses GOOGLE_INDEXING_CREDENTIALS env var)
+node -e "
+const crypto = require('crypto');
+const https = require('https');
+
+const creds = JSON.parse(process.env.GOOGLE_INDEXING_CREDENTIALS);
+const now = Math.floor(Date.now() / 1000);
+const header = Buffer.from(JSON.stringify({alg:'RS256',typ:'JWT'})).toString('base64url');
+const payload = Buffer.from(JSON.stringify({
+  iss: creds.client_email,
+  scope: 'https://www.googleapis.com/auth/indexing',
+  aud: 'https://oauth2.googleapis.com/token',
+  exp: now + 3600,
+  iat: now
+})).toString('base64url');
+const sign = crypto.createSign('RSA-SHA256');
+sign.update(header + '.' + payload);
+const jwt = header + '.' + payload + '.' + sign.sign(creds.private_key, 'base64url');
+
+const tokenBody = 'grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer&assertion=' + jwt;
+const tokenReq = https.request({hostname:'oauth2.googleapis.com',path:'/token',method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'}}, res => {
+  let d=''; res.on('data',c=>d+=c); res.on('end',()=>{
+    const token = JSON.parse(d).access_token;
+    const body = JSON.stringify({url:'https://testfeed.ai/blog/[slug]/',type:'URL_UPDATED'});
+    const req = https.request({hostname:'indexing.googleapis.com',path:'/v3/urlNotifications:publish',method:'POST',headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json','Content-Length':body.length}}, r=>{
+      let o=''; r.on('data',c=>o+=c); r.on('end',()=>console.log('Google:', r.statusCode, o));
+    }); req.write(body); req.end();
+  });
+}); tokenReq.write(tokenBody); tokenReq.end();
+"
+
+# Submit to IndexNow (Bing/Yandex) — no auth needed
+curl -s -X POST https://api.indexnow.org/indexnow \
+  -H "Content-Type: application/json" \
+  -d "{\"host\":\"testfeed.ai\",\"key\":\"a7f3c2e1-9b4d-4f8a-b6e2-1d5c8a3f7e9b\",\"keyLocation\":\"https://testfeed.ai/a7f3c2e1-9b4d-4f8a-b6e2-1d5c8a3f7e9b.txt\",\"urlList\":[\"https://testfeed.ai/blog/[slug]/\"]}"
+```
+
+Replace `[slug]` with the actual slug. Google returning `200` and IndexNow returning `200` or `202` means success.
+
+### 9. Update Notion SEO Content Pipeline
 
 Find the matching row in the SEO Content Pipeline database and set Status to `Published`.
 
@@ -112,12 +156,13 @@ Find the matching row in the SEO Content Pipeline database and set Status to `Pu
 2. If found: update `Status` to `Published` using the Notion MCP `notion-update-page` tool
 3. If not found: create a new row with `Name: [slug]`, `Primary Keyword: [primary keyword from frontmatter tags[0]]`, `Status: Published`, `Format: [format type e.g. Guide/Comparison]`
 
-### 9. Confirm
+### 10. Confirm
 
 - **Status:** Live
 - **URL:** `https://testfeed.ai/blog/[slug]/`
 - **Notion:** SEO Content Pipeline updated to Published
-- **Note:** Netlify/Vercel takes 1–3 minutes to rebuild — check back shortly.
+- **Indexing:** Submitted to Google Indexing API and IndexNow
+- **Note:** Cloudflare takes 1–3 minutes to rebuild — check back shortly.
 
 ## Frontmatter Rules (for Drive imports)
 
