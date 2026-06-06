@@ -101,25 +101,7 @@ Use the GitHub MCP tool:
 
 If no open PR is found, the push in step 6 already went to main — skip this step.
 
-### 8. Submit to Search Engines
-
-After the PR is merged (or after the push to main in the no-branch case), wait 90 seconds for Netlify to deploy, then submit the new URL to both Google and Bing/Yandex:
-
-```bash
-# Submit to Google Indexing API
-curl -s -X POST https://testfeed.ai/.netlify/functions/submit-to-google-indexing \
-  -H "Content-Type: application/json" \
-  -d "{\"urls\": [\"https://testfeed.ai/blog/[slug]/\"]}"
-
-# Submit to IndexNow (Bing/Yandex)
-curl -s -X POST https://testfeed.ai/.netlify/functions/submit-to-indexnow \
-  -H "Content-Type: application/json" \
-  -d "{\"urls\": [\"https://testfeed.ai/blog/[slug]/\"]}"
-```
-
-Replace `[slug]` with the actual slug. Log the responses — a `submitted: 1` result from each confirms success.
-
-### 9. Update Notion SEO Content Pipeline
+### 8. Update Notion SEO Content Pipeline
 
 Find the matching row in the SEO Content Pipeline database and set Status to `Published`.
 
@@ -130,13 +112,12 @@ Find the matching row in the SEO Content Pipeline database and set Status to `Pu
 2. If found: update `Status` to `Published` using the Notion MCP `notion-update-page` tool
 3. If not found: create a new row with `Name: [slug]`, `Primary Keyword: [primary keyword from frontmatter tags[0]]`, `Status: Published`, `Format: [format type e.g. Guide/Comparison]`
 
-### 10. Confirm
+### 9. Confirm
 
 - **Status:** Live
 - **URL:** `https://testfeed.ai/blog/[slug]/`
 - **Notion:** SEO Content Pipeline updated to Published
-- **Indexing:** Submitted to Google Indexing API and IndexNow (Bing/Yandex)
-- **Note:** Netlify takes 1–3 minutes to rebuild — check back shortly.
+- **Note:** Netlify/Vercel takes 1–3 minutes to rebuild — check back shortly.
 
 ## Frontmatter Rules (for Drive imports)
 
