@@ -1,8 +1,9 @@
 ---
-title: "The Ultimate Guide to LinkedIn Character Limits in 2025: Maximize Your Impact! | TestFeed"
-description: "Learn the essential LinkedIn character limits for posts, headlines, and messages to optimize your professional presence and engagement in 2025."
-articleTitle: "The Ultimate Guide to LinkedIn Character Limits in 2025: Maximize Your Impact!"
+title: "LinkedIn Character Limits 2026: Complete List (Posts, Headlines & More) | TestFeed"
+description: "LinkedIn post limit: 3,000 chars. Headline: 220. About: 2,600. Connection request: 300. The complete 2026 guide to every LinkedIn character limit."
+articleTitle: "LinkedIn Character Limits 2026: Complete List"
 publishDate: 2025-05-09
+updatedDate: 2026-06-06
 author: "Millie Marconi"
 featuredImage: ""
 excerpt: "Learn the essential LinkedIn character limits for posts, headlines, and messages to optimize your professional presence and engagement in 2025."
