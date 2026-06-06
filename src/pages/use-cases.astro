@@ -337,9 +337,9 @@ const schema = {
       <nav class="nav" id="nav">
         <a href="/#platform">Product</a>
         <a class="active" href="/use-cases/">Use cases</a>
-        <a href={bookingUrl} target="_blank" rel="noopener">Pricing</a>
-        <a href="/blog/">Blog</a>
-        <a href={bookingUrl} target="_blank" rel="noopener">Contact</a>
+        <a href="/contact">Pricing</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
         <a class="btn nav-cta" href={bookingUrl} target="_blank" rel="noopener">Book a demo <span class="arr"><i data-lucide="arrow-right"></i></span></a>
       </nav>
       <a class="btn header-btn" href={bookingUrl} target="_blank" rel="noopener">Book a demo <span class="arr"><i data-lucide="arrow-right"></i></span></a>
@@ -357,7 +357,7 @@ const schema = {
           <p class="uc-lede">Packs, ads, claims, pricing, names. Whatever the decision, your AI panel gives you a score, the quotes, and a next move. Usually inside an hour.</p>
           <div class="uc-hero-actions">
             <a class="btn" href={bookingUrl} target="_blank" rel="noopener">Book a demo <span class="arr"><i data-lucide="arrow-right"></i></span></a>
-            <a class="btn btn--outline" href={bookingUrl} target="_blank" rel="noopener">Talk to us <i data-lucide="arrow-right"></i></a>
+            <a class="btn btn--outline" href="/contact">Talk to us <i data-lucide="arrow-right"></i></a>
           </div>
         </div>
       </div>
@@ -389,7 +389,7 @@ const schema = {
       <div class="uc-grid" id="ucGrid">
 
         <!-- 1 — wide dark -->
-        <a class="uc wide dark" data-cat="creative" href={bookingUrl} target="_blank" rel="noopener">
+        <a class="uc wide dark" data-cat="creative" href="/contact">
           <span class="ic"><i data-lucide="clapperboard"></i></span>
           <p class="cat">Creative · Ad testing</p>
           <h3>Know which cut lands before the media.</h3>
@@ -400,7 +400,7 @@ const schema = {
         </a>
 
         <!-- 2 -->
-        <a class="uc" data-cat="creative" href={bookingUrl} target="_blank" rel="noopener">
+        <a class="uc" data-cat="creative" href="/contact">
           <span class="ic"><i data-lucide="package"></i></span>
           <p class="cat">Creative · Packaging</p>
           <h3>Pick the pack that earns the shelf.</h3>
@@ -411,7 +411,7 @@ const schema = {
         </a>
 
         <!-- 3 -->
-        <a class="uc" data-cat="creative" href={bookingUrl} target="_blank" rel="noopener">
+        <a class="uc" data-cat="creative" href="/contact">
           <span class="ic"><i data-lucide="badge-check"></i></span>
           <p class="cat">Creative · Claims</p>
           <h3>Find the line people believe.</h3>
@@ -422,7 +422,7 @@ const schema = {
         </a>
 
         <!-- 4 -->
-        <a class="uc" data-cat="pricing" href={bookingUrl} target="_blank" rel="noopener">
+        <a class="uc" data-cat="pricing" href="/contact">
           <span class="ic"><i data-lucide="tag"></i></span>
           <p class="cat">Pricing · Willingness to pay</p>
           <h3>See what they'll actually pay.</h3>
@@ -433,7 +433,7 @@ const schema = {
         </a>
 
         <!-- 5 -->
-        <a class="uc" data-cat="product" href={bookingUrl} target="_blank" rel="noopener">
+        <a class="uc" data-cat="product" href="/contact">
           <span class="ic"><i data-lucide="lightbulb"></i></span>
           <p class="cat">Product · Concept</p>
           <h3>Kill the weak ideas early.</h3>
@@ -444,7 +444,7 @@ const schema = {
         </a>
 
         <!-- 6 — wide -->
-        <a class="uc wide" data-cat="brand" href={bookingUrl} target="_blank" rel="noopener">
+        <a class="uc wide" data-cat="brand" href="/contact">
           <span class="ic"><i data-lucide="type"></i></span>
           <p class="cat">Brand · Naming</p>
           <h3>Name it the way your audience already would.</h3>
@@ -455,7 +455,7 @@ const schema = {
         </a>
 
         <!-- 7 -->
-        <a class="uc" data-cat="brand" href={bookingUrl} target="_blank" rel="noopener">
+        <a class="uc" data-cat="brand" href="/contact">
           <span class="ic"><i data-lucide="message-square-quote"></i></span>
           <p class="cat">Brand · Messaging</p>
           <h3>Lead with the line that moves them.</h3>
@@ -466,7 +466,7 @@ const schema = {
         </a>
 
         <!-- 8 — wide -->
-        <a class="uc wide" data-cat="product" href={bookingUrl} target="_blank" rel="noopener">
+        <a class="uc wide" data-cat="product" href="/contact">
           <span class="ic"><i data-lucide="list-checks"></i></span>
           <p class="cat">Product · Prioritisation</p>
           <h3>Build what they'll actually use.</h3>
@@ -477,7 +477,7 @@ const schema = {
         </a>
 
         <!-- 9 -->
-        <a class="uc" data-cat="brand" href={bookingUrl} target="_blank" rel="noopener">
+        <a class="uc" data-cat="brand" href="/contact">
           <span class="ic"><i data-lucide="activity"></i></span>
           <p class="cat">Brand · Tracking</p>
           <h3>Watch perception shift, week to week.</h3>
@@ -507,7 +507,7 @@ const schema = {
         <a class="btn btn--light" href={bookingUrl} target="_blank" rel="noopener">See a sample report <span class="arr"><i data-lucide="arrow-right"></i></span></a>
       </div>
       <div class="insight">
-        <div class="thumb"><img src="/assets/use-cases/pack-sunny-crisp.png" alt="Sunny Crisp pack" /></div>
+        <div class="thumb"><img src="/assets/pack-box.png" alt="Sunny Crisp pack" /></div>
         <p class="cat">Packaging · Top-2-box appeal</p>
         <div class="score">
           <span class="v">87%</span>
@@ -516,7 +516,7 @@ const schema = {
         </div>
         <p class="line">Pack B reads as more premium and more “for me” across the target. The matte finish does most of the work; the badge does the rest.</p>
         <div class="quote-row">
-          <span class="av"><img src="/assets/use-cases/respondent.png" alt="Respondent" /></span>
+          <span class="av"><img src="/assets/q-head-1.png" alt="Respondent" /></span>
           <span class="qt">“This one looks like it belongs in my cupboard, not the bargain bin.”</span>
         </div>
         <div class="action">
@@ -564,7 +564,7 @@ const schema = {
         <p>Tell us what you're deciding. We'll set up an AI panel and walk you through what your audience really thinks.</p>
         <div class="closing-actions">
           <a class="btn" href={bookingUrl} target="_blank" rel="noopener">Book a demo <span class="arr"><i data-lucide="arrow-right"></i></span></a>
-          <a class="btn btn--outline" href={bookingUrl} target="_blank" rel="noopener">Get in touch <i data-lucide="arrow-right"></i></a>
+          <a class="btn btn--outline" href="/contact">Get in touch <i data-lucide="arrow-right"></i></a>
         </div>
       </div>
     </div>
@@ -583,9 +583,8 @@ const schema = {
         </div>
         <div class="foot-col foot-nav">
           <a href="/#platform">Product</a>
-          <a href="/use-cases/">Use cases</a>
           <a href="/blog/">Blog</a>
-          <a href={bookingUrl} target="_blank" rel="noopener">Contact</a>
+          <a href="/contact">Contact</a>
           <a href="/privacy-policy">Privacy</a>
         </div>
         <div class="foot-signup">

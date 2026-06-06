@@ -1,0 +1,369 @@
+---
+const title = "TestFeed — Contact";
+const description =
+  "Get in touch with TestFeed. Tell us about your audience and what you want to test — we'll set up a panel and walk you through a demo.";
+const bookingUrl = "https://app.usemotion.com/meet/millie-marconi/meeting";
+const siteUrl = Astro.url.origin;
+const ogImage = new URL("/assets/og-image.jpg", siteUrl).href;
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  name: title,
+  description,
+  url: Astro.url.href,
+};
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href={Astro.url.href} />
+
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={Astro.url.href} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="TestFeed" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+<meta name="twitter:site" content="@testfeed" />
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="/assets/ds.css" />
+<script src="https://unpkg.com/lucide@0.456.0/dist/umd/lucide.min.js" is:inline></script>
+<style>
+  :root {
+    --page: #F5F3EE;
+    --band: #ECE9E3;
+    --card: #F1EFEA;
+    --line: rgba(0,0,0,0.10);
+    --dash: #161616;
+    --dash-line: rgba(255,255,255,0.10);
+    --wrap: 1200px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body { margin: 0; background: var(--page); }
+  body { font-family: var(--font-body); color: var(--tf-ink); -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; }
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 40px; }
+  .eyebrow-red { color: var(--tf-red); font-family: var(--font-body); font-weight: var(--w-bold); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; margin: 0; }
+  .dot-red { color: var(--tf-red); }
+
+  /* ===== HEADER (shared) ===== */
+  .site-header { padding: 26px 0 18px; position: relative; }
+  .site-header .wrap { display: flex; align-items: center; gap: 28px; }
+  .wordmark { display: inline-flex; align-items: flex-end; gap: 0; line-height: 1; text-decoration: none; border: 0; }
+  .wordmark img { height: 22px; width: auto; display: block; }
+  .logodot { width: 5px; height: 5px; border-radius: 999px; background: var(--tf-red); display: inline-block; margin: 0 0 3px 3px; flex: 0 0 auto; }
+  .nav { display: flex; gap: 34px; align-items: center; margin: 0 auto; }
+  .nav a { color: var(--tf-ink); font-family: var(--font-body); font-weight: var(--w-medium); font-size: 15px; text-decoration: none; border: 0; cursor: pointer; white-space: nowrap; }
+  .nav a:hover { color: var(--tf-red); }
+  .nav a.active { color: var(--tf-black); }
+  .nav-cta { display: none; }
+  .nav-toggle { display: none; background: none; border: 0; cursor: pointer; color: var(--tf-black); padding: 6px; margin-left: auto; align-items: center; justify-content: center; }
+  .nav-toggle svg { width: 26px; height: 26px; }
+  .btn { display: inline-flex; align-items: center; gap: 16px; font-family: var(--font-display); font-weight: 400; font-size: 16px; padding: 11px 12px 11px 22px; border-radius: 999px; background: var(--tf-black); color: var(--tf-white); border: 0; cursor: pointer; text-decoration: none; white-space: nowrap; transition: background var(--dur-fast) var(--ease-out); }
+  .btn:hover { background: #222; color: var(--tf-white); }
+  .btn .arr { width: 26px; height: 26px; border-radius: 999px; background: rgba(255,255,255,0.18); display: inline-grid; place-items: center; }
+  .btn .arr svg { width: 13px; height: 13px; stroke-width: 2.2; }
+
+  /* ===== CONTACT ===== */
+  .contact .wrap { padding-top: 36px; padding-bottom: 80px; display: grid; grid-template-columns: 0.85fr 1fr; gap: 64px; align-items: start; }
+  .contact-left { max-width: 420px; padding-top: 8px; }
+  .contact-left .eyebrow-red { margin-bottom: 24px; }
+  .contact-left h1 { font-family: var(--font-display); font-weight: 400; font-size: 60px; line-height: 0.98; letter-spacing: -0.025em; color: var(--tf-black); margin: 0; }
+  .contact-left p.lede { margin: 24px 0 0; font-size: 17px; line-height: 1.5; color: var(--tf-ink); font-weight: var(--w-regular); max-width: 360px; }
+  .assure { margin-top: 34px; display: flex; flex-direction: column; gap: 16px; }
+  .assure .row { display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: var(--w-medium); color: var(--tf-ink); }
+  .assure .ck { width: 20px; height: 20px; flex: 0 0 20px; border-radius: 999px; border: 1.5px solid var(--tf-red); color: var(--tf-red); display: grid; place-items: center; }
+  .assure .ck svg { width: 11px; height: 11px; stroke-width: 3; }
+  .contact-left .direct { margin-top: 38px; padding-top: 24px; border-top: 1px solid var(--line); }
+  .contact-left .direct .lbl { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: var(--w-bold); color: var(--tf-stone); margin: 0 0 8px; }
+  .contact-left .direct a { font-family: var(--font-display); font-size: 22px; color: var(--tf-black); text-decoration: none; border: 0; }
+  .contact-left .direct a:hover { color: var(--tf-red); }
+
+  /* form card */
+  .form-card { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 32px; box-shadow: 0 24px 50px rgba(0,0,0,0.06); }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .field-group { display: flex; flex-direction: column; gap: 7px; }
+  .field-group.full { grid-column: 1 / -1; }
+  .field-group label { font-size: 12px; font-weight: var(--w-semibold); letter-spacing: 0.02em; color: var(--tf-ink); }
+  .field-group label .req { color: var(--tf-red); }
+  .field-group input, .field-group select, .field-group textarea {
+    font-family: var(--font-body); font-size: 15px; color: var(--tf-black);
+    background: #fff; border: 1px solid rgba(0,0,0,0.16); border-radius: 6px;
+    padding: 12px 13px; outline: 0; width: 100%;
+    transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+  }
+  .field-group textarea { resize: vertical; min-height: 104px; }
+  .field-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 38px; }
+  .field-group input::placeholder, .field-group textarea::placeholder { color: var(--tf-fog); }
+  .field-group input:focus, .field-group select:focus, .field-group textarea:focus { border-color: var(--tf-red); box-shadow: 0 0 0 3px rgba(252,3,1,0.10); }
+  .form-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 24px; flex-wrap: wrap; }
+  .form-foot .fine { font-size: 12px; color: var(--tf-stone); line-height: 1.4; max-width: 280px; }
+  .form-foot .fine a { color: var(--tf-ink); }
+  .form-card button.submit { display: inline-flex; align-items: center; gap: 16px; font-family: var(--font-display); font-size: 16px; padding: 12px 14px 12px 24px; border-radius: 999px; background: var(--tf-black); color: var(--tf-white); border: 0; cursor: pointer; transition: background var(--dur-fast) var(--ease-out); }
+  .form-card button.submit:hover { background: #222; }
+  .form-card button.submit .arr { width: 26px; height: 26px; border-radius: 999px; background: rgba(255,255,255,0.18); display: inline-grid; place-items: center; }
+  .form-card button.submit .arr svg { width: 13px; height: 13px; stroke-width: 2.2; }
+
+  /* success state */
+  .form-success { display: none; text-align: center; padding: 40px 20px; }
+  .form-success .badge { width: 56px; height: 56px; border-radius: 999px; background: var(--tf-red); color: #fff; display: grid; place-items: center; margin: 0 auto 20px; }
+  .form-success .badge svg { width: 26px; height: 26px; stroke-width: 2.4; }
+  .form-success h3 { font-family: var(--font-display); font-weight: 400; font-size: 28px; color: var(--tf-black); margin: 0 0 10px; }
+  .form-success p { font-size: 15px; color: var(--tf-ink); margin: 0; }
+  .form-card.sent form { display: none; }
+  .form-card.sent .form-success { display: block; }
+
+  /* ===== FOOTER (shared) ===== */
+  .site-footer { background: var(--dash); color: rgba(255,255,255,0.7); }
+  .site-footer .wrap { padding-top: 44px; padding-bottom: 26px; }
+  .foot-grid { display: grid; grid-template-columns: 1.7fr 1fr 1.2fr; gap: 28px; }
+  .foot-nav { display: flex; flex-direction: column; gap: 11px; padding-top: 2px; }
+  .foot-nav a { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; border: 0; }
+  .foot-nav a:hover { color: #fff; }
+  .foot-brand .fm { display: inline-flex; align-items: flex-end; margin-bottom: 16px; }
+  .foot-brand .fm img { height: 20px; width: auto; display: block; filter: invert(1); }
+  .foot-brand p { font-size: 13.5px; line-height: 1.4; color: rgba(255,255,255,0.55); margin: 0 0 18px; max-width: 180px; }
+  .foot-social { display: flex; gap: 10px; }
+  .foot-social a { width: 30px; height: 30px; border-radius: 999px; background: rgba(255,255,255,0.08); display: grid; place-items: center; color: #fff; border: 0; }
+  .foot-social a svg { width: 14px; height: 14px; }
+  .foot-social a:hover { background: var(--tf-red); }
+  .foot-col h4 { font-family: var(--font-body); font-weight: var(--w-bold); font-size: 13px; color: #fff; margin: 0 0 16px; letter-spacing: 0; }
+  .foot-col a { display: block; font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; border: 0; margin-bottom: 11px; }
+  .foot-col a:hover { color: #fff; }
+  .foot-signup h4 { font-family: var(--font-body); font-weight: var(--w-bold); font-size: 13px; color: #fff; margin: 0 0 16px; }
+  .foot-signup .field { display: flex; background: rgba(255,255,255,0.07); border: 1px solid var(--dash-line); border-radius: 6px; overflow: hidden; }
+  .foot-signup input { flex: 1; background: transparent; border: 0; outline: 0; color: #fff; font: inherit; font-size: 13px; padding: 10px 12px; }
+  .foot-signup input::placeholder { color: rgba(255,255,255,0.45); }
+  .foot-signup button { background: transparent; border: 0; color: var(--tf-red); padding: 0 12px; cursor: pointer; display: grid; place-items: center; }
+  .foot-signup button svg { width: 16px; height: 16px; }
+  .foot-signup-msg { margin: 12px 0 0; font-size: 12.5px; line-height: 1.4; display: flex; align-items: center; gap: 7px; }
+  .foot-signup-msg.ok { color: #fff; }
+  .foot-signup-msg.err { color: var(--tf-red); }
+  .foot-signup-msg .mi { display: inline-grid; place-items: center; width: 16px; height: 16px; flex: 0 0 16px; }
+  .foot-signup-msg.ok .mi { color: #4ED07A; }
+  .foot-signup-msg .mi svg { width: 14px; height: 14px; stroke-width: 3; }
+  .foot-signup.done .field { display: none; }
+  .foot-bottom { display: flex; align-items: center; justify-content: flex-end; margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--dash-line); }
+  .foot-bottom .cp { font-size: 11.5px; color: rgba(255,255,255,0.4); white-space: nowrap; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1000px) {
+    .nav { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--page); border-top: 1px solid var(--line); padding: 6px 0 10px; margin: 0; display: none; z-index: 60; box-shadow: 0 24px 40px rgba(0,0,0,0.10); }
+    .site-header.open .nav { display: flex; }
+    .nav a { padding: 14px 40px; font-size: 16px; }
+    .nav a:not(:last-child) { border-bottom: 1px solid var(--line); }
+    .nav a.nav-cta { display: block; margin: 10px 40px 0; padding: 13px 40px; text-align: center; background: var(--tf-black); color: #fff; border-radius: 999px; }
+    .nav a.nav-cta:hover { color: #fff; }
+    .site-header .btn { display: none; }
+    .nav-toggle { display: inline-grid; }
+    .contact .wrap { grid-template-columns: 1fr; gap: 40px; }
+    .contact-left { max-width: 560px; }
+    .foot-grid { grid-template-columns: 1fr 1fr; gap: 28px 24px; }
+    .foot-brand, .foot-signup { grid-column: 1 / -1; }
+  }
+  @media (max-width: 600px) {
+    .wrap { padding: 0 20px; }
+    .nav a, .nav a.nav-cta { padding-left: 20px; padding-right: 20px; }
+    .nav a.nav-cta { margin-left: 20px; margin-right: 20px; }
+    .contact-left h1 { font-size: 46px; }
+    .form-card { padding: 22px; }
+    .form-grid { grid-template-columns: 1fr; }
+    .foot-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header" id="siteHeader">
+    <div class="wrap">
+      <a class="wordmark" href="/"><img src="/assets/logo-primary.png" alt="testfeed" /><span class="logodot"></span></a>
+      <nav class="nav" id="nav">
+        <a href="/#platform">Product</a>
+        <a href="/use-cases/">Use cases</a>
+        <a href="/contact">Pricing</a>
+        <a href="/about">About</a>
+        <a class="active" href="/contact">Contact</a>
+        <a class="nav-cta" href={bookingUrl} target="_blank" rel="noopener">Book a demo</a>
+      </nav>
+      <a class="btn header-btn" href={bookingUrl} target="_blank" rel="noopener">Book a demo <span class="arr"><i data-lucide="arrow-right"></i></span></a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><i data-lucide="menu"></i></button>
+    </div>
+  </header>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="contact" data-screen-label="Contact">
+    <div class="wrap">
+      <div class="contact-left">
+        <p class="eyebrow-red">Get in touch</p>
+        <h1>Let's talk<span class="dot-red">.</span></h1>
+        <p class="lede">Tell us about your audience and what you want to test. We'll set up a TestFeed panel and walk you through a demo.</p>
+        <div class="assure">
+          <div class="row"><span class="ck"><i data-lucide="check"></i></span>Reply within one business day</div>
+          <div class="row"><span class="ck"><i data-lucide="check"></i></span>A live walk-through, not a sales pitch</div>
+          <div class="row"><span class="ck"><i data-lucide="check"></i></span>No commitment to get started</div>
+        </div>
+        <div class="direct">
+          <p class="lbl">Prefer email?</p>
+          <a href="mailto:hello@testfeed.com">hello@testfeed.com</a>
+        </div>
+      </div>
+
+      <div class="form-card" id="formCard">
+        <form id="contactForm" novalidate>
+          <div class="form-grid">
+            <div class="field-group">
+              <label for="f-name">Full name <span class="req">*</span></label>
+              <input type="text" id="f-name" name="name" placeholder="Jane Cooper" required />
+            </div>
+            <div class="field-group">
+              <label for="f-email">Work email <span class="req">*</span></label>
+              <input type="email" id="f-email" name="email" placeholder="jane@company.com" required />
+            </div>
+            <div class="field-group">
+              <label for="f-company">Company <span class="req">*</span></label>
+              <input type="text" id="f-company" name="company" placeholder="Company name" required />
+            </div>
+            <div class="field-group">
+              <label for="f-role">Role / title</label>
+              <input type="text" id="f-role" name="role" placeholder="e.g. Brand Manager" />
+            </div>
+            <div class="field-group">
+              <label for="f-size">Team size</label>
+              <select id="f-size" name="teamSize">
+                <option value="" selected>Select…</option>
+                <option>Just me</option>
+                <option>2–10</option>
+                <option>11–50</option>
+                <option>51–200</option>
+                <option>200+</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label for="f-interest">What are you testing?</label>
+              <select id="f-interest" name="interest">
+                <option value="" selected>Select…</option>
+                <option>Packaging</option>
+                <option>Ads &amp; creative</option>
+                <option>Claims &amp; messaging</option>
+                <option>Pricing</option>
+                <option>Concepts &amp; naming</option>
+                <option>Something else</option>
+              </select>
+            </div>
+            <div class="field-group full">
+              <label for="f-message">Anything else?</label>
+              <textarea id="f-message" name="message" placeholder="Tell us a little about your audience and goals…"></textarea>
+            </div>
+          </div>
+          <div class="form-foot">
+            <p class="fine">By submitting, you agree to our <a href="/privacy-policy">privacy policy</a>. We'll only use your details to get back to you.</p>
+            <button type="submit" class="submit">Send message <span class="arr"><i data-lucide="arrow-right"></i></span></button>
+          </div>
+        </form>
+        <div class="form-success">
+          <div class="badge"><i data-lucide="check"></i></div>
+          <h3>Thanks — we've got it.</h3>
+          <p>We'll be in touch within one business day.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <div class="fm"><img src="/assets/logo-primary.png" alt="testfeed" /><span class="logodot"></span></div>
+          <p>Your AI panel. Ready when you are.</p>
+          <div class="foot-social">
+            <a href="https://www.linkedin.com/company/testfeed-ai/" target="_blank" rel="noopener" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+          </div>
+        </div>
+        <div class="foot-col foot-nav">
+          <a href="/#platform">Product</a>
+          <a href="/blog/">Blog</a>
+          <a href="/contact">Contact</a>
+          <a href="/privacy-policy">Privacy</a>
+        </div>
+        <div class="foot-signup">
+          <h4>Sign up for our updates</h4>
+          <form class="field" id="foot-signup-form" novalidate>
+            <input type="email" placeholder="Enter your email" aria-label="Email address" required />
+            <button type="submit" aria-label="Subscribe"><i data-lucide="arrow-right"></i></button>
+          </form>
+          <p class="foot-signup-msg" id="foot-signup-msg" hidden></p>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span class="cp">© 2025 TestFeed</span>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  if (window.lucide) lucide.createIcons();
+  (function(){
+    var header = document.getElementById('siteHeader');
+    var toggle = document.getElementById('navToggle');
+    if (toggle) toggle.addEventListener('click', function(){
+      var open = header.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.innerHTML = open ? '<i data-lucide="x"></i>' : '<i data-lucide="menu"></i>';
+      if (window.lucide) lucide.createIcons();
+    });
+  })();
+  (function(){
+    var form = document.getElementById('contactForm');
+    var card = document.getElementById('formCard');
+    if (!form) return;
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      card.classList.add('sent');
+    });
+  })();
+  (function(){
+    var form = document.getElementById('foot-signup-form');
+    if (!form) return;
+    var wrap = form.closest('.foot-signup');
+    var input = form.querySelector('input');
+    var msg = document.getElementById('foot-signup-msg');
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var val = (input.value || '').trim();
+      var valid = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(val);
+      msg.hidden = false;
+      if (!valid) {
+        msg.className = 'foot-signup-msg err';
+        msg.textContent = 'Please enter a valid email address.';
+        input.focus();
+        return;
+      }
+      wrap.classList.add('done');
+      msg.className = 'foot-signup-msg ok';
+      msg.innerHTML = '<span class="mi"><i data-lucide="check"></i></span>Thanks — you\'re on the list. We\'ll be in touch.';
+      if (window.lucide) lucide.createIcons();
+    });
+  })();
+</script>
+</body>
+</html>

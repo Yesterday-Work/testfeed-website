@@ -1,46 +1,357 @@
 ---
-import { getCollection } from "astro:content";
-import LegalLayout from "../layouts/LegalLayout.astro";
-import LegalPageContent from "../components/LegalPageContent.astro";
-import FormattedDate from "../components/FormattedDate.astro";
-
-// Get the legal content from markdown
-const legalEntries = await getCollection("legal");
-const entry = legalEntries.find((entry) => entry.id === "privacy-policy.md");
-
-// Default values in case entry is missing
-const defaultTitle = "Privacy Policy | testfeed";
-const defaultDescription =
-  "Learn how TestFeed handles your data, protects your privacy, and maintains security for virtual audience simulation and content testing.";
-
-// Get frontmatter data with fallbacks
-const title = entry?.data.title || defaultTitle;
-const description = entry?.data.description || defaultDescription;
-const lastUpdated = entry?.data.lastUpdated;
-
-// Render the markdown content
-const { Content } = (await entry?.render()) || { Content: () => null };
+const title = "TestFeed — Privacy Policy";
+const description =
+  "Yesterday Pty Ltd, trading as TestFeed, operates a synthetic consumer research platform. Here's what we collect, how we use it, and the rights you have.";
+const bookingUrl = "https://app.usemotion.com/meet/millie-marconi/meeting";
+const siteUrl = Astro.url.origin;
+const ogImage = new URL("/assets/og-image.jpg", siteUrl).href;
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: title,
+  description,
+  url: Astro.url.href,
+};
 ---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href={Astro.url.href} />
 
-<LegalLayout title={title} description={description} pageSlug="privacy-policy">
-  <LegalPageContent>
-    {
-      entry ? (
-        <div>
-          <h1>TestFeed Privacy Policy</h1>
-          {lastUpdated && (
-            <p style="font-style: italic; margin-bottom: 2rem; color: #666; text-align: center;">
-              Last Updated: <FormattedDate date={new Date(lastUpdated)} />
-            </p>
-          )}
-          <Content />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={Astro.url.href} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="TestFeed" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+<meta name="twitter:site" content="@testfeed" />
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="/assets/ds.css" />
+<script src="https://unpkg.com/lucide@0.456.0/dist/umd/lucide.min.js" is:inline></script>
+<style>
+  :root {
+    --page: #F5F3EE;
+    --band: #ECE9E3;
+    --card: #F1EFEA;
+    --line: rgba(0,0,0,0.10);
+    --dash: #161616;
+    --dash-line: rgba(255,255,255,0.10);
+    --wrap: 1200px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body { margin: 0; background: var(--page); overflow-x: hidden; }
+  body { font-family: var(--font-body); color: var(--tf-ink); -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; }
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 40px; }
+  .dot-red { color: var(--tf-red); }
+
+  /* ===== HEADER (shared) ===== */
+  .site-header { padding: 26px 0 18px; position: relative; z-index: 40; }
+  .site-header .wrap { display: flex; align-items: center; gap: 28px; }
+  .wordmark { display: inline-flex; align-items: flex-end; gap: 0; line-height: 1; text-decoration: none; border: 0; }
+  .wordmark img { height: 22px; width: auto; display: block; }
+  .logodot { width: 5px; height: 5px; border-radius: 999px; background: var(--tf-red); display: inline-block; margin: 0 0 3px 3px; flex: 0 0 auto; }
+  .nav { display: flex; gap: 34px; align-items: center; margin: 0 auto; }
+  .nav a:not(.btn) { color: var(--tf-ink); font-family: var(--font-body); font-weight: var(--w-medium); font-size: 15px; text-decoration: none; border: 0; cursor: pointer; white-space: nowrap; }
+  .nav a:not(.btn):hover { color: var(--tf-red); }
+  .nav a.active { color: var(--tf-black); border-bottom: 2px solid var(--tf-red); padding-bottom: 2px; }
+  .nav a.nav-cta { display: none; }
+  .nav-toggle { display: none; background: none; border: 0; cursor: pointer; color: var(--tf-black); padding: 6px; margin-left: auto; align-items: center; justify-content: center; }
+  .nav-toggle svg { width: 26px; height: 26px; }
+  .btn { display: inline-flex; align-items: center; gap: 16px; font-family: var(--font-display); font-weight: 500; font-size: 16px; padding: 11px 12px 11px 22px; border-radius: 999px; background: var(--tf-black); color: var(--tf-white); border: 0; cursor: pointer; text-decoration: none; white-space: nowrap; transition: background var(--dur-fast) var(--ease-out); }
+  .btn:hover { background: #222; color: var(--tf-white); }
+  .btn .arr { width: 26px; height: 26px; border-radius: 999px; background: rgba(255,255,255,0.18); display: inline-grid; place-items: center; }
+  .btn .arr svg { width: 13px; height: 13px; stroke-width: 2.2; }
+
+  /* ===== DOC ===== */
+  .doc-hero { border-top: 1px solid var(--line); }
+  .doc-hero .wrap { padding-top: 64px; padding-bottom: 8px; }
+  .doc-hero .inner { max-width: 720px; }
+  .doc-hero .eyebrow { color: var(--tf-red); font-weight: var(--w-bold); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; margin: 0 0 18px; }
+  .doc-hero h1 { font-family: var(--font-display); font-weight: 700; font-size: 60px; line-height: 1.02; letter-spacing: -0.03em; color: var(--tf-black); margin: 0 0 16px; max-width: 14ch; }
+  .doc-hero .updated { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--tf-stone); margin: 0; }
+  .doc-hero .updated .pip { width: 6px; height: 6px; border-radius: 999px; background: var(--tf-red); }
+
+  .doc { padding: 40px 0 64px; }
+  .doc .inner { max-width: 720px; }
+  .doc .lede { font-family: var(--font-display); font-weight: 700; font-size: 24px; line-height: 1.32; letter-spacing: -0.015em; color: var(--tf-black); margin: 0 0 8px; }
+  .doc h2 { font-family: var(--font-display); font-weight: 700; font-size: 28px; letter-spacing: -0.02em; color: var(--tf-black); margin: 52px 0 8px; padding-top: 28px; border-top: 1px solid var(--line); }
+  .doc h2 .s-num { color: var(--tf-red); margin-right: 12px; font-variant-numeric: tabular-nums; }
+  .doc-hero .entity { font-size: 15px; color: var(--tf-ink); margin: 0 0 10px; font-weight: var(--w-medium); }
+  .doc h3 { font-family: var(--font-body); font-weight: var(--w-bold); font-size: 16px; color: var(--tf-black); margin: 26px 0 12px; }
+  .doc p { font-size: 16.5px; line-height: 1.62; color: var(--tf-ink); font-weight: var(--w-regular); margin: 14px 0; max-width: 64ch; }
+  .doc ul { margin: 14px 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 11px; max-width: 64ch; }
+  .doc li { position: relative; padding-left: 24px; font-size: 16.5px; line-height: 1.55; color: var(--tf-ink); }
+  .doc li::before { content: ''; position: absolute; left: 3px; top: 9px; width: 6px; height: 6px; border-radius: 999px; background: var(--tf-red); }
+  .doc li strong { font-weight: var(--w-semibold); color: var(--tf-black); }
+  .doc .callout { background: var(--card); border: 1px solid var(--line); border-left: 3px solid var(--tf-red); border-radius: 10px; padding: 20px 24px; margin: 24px 0; }
+  .doc .callout p { margin: 0; font-size: 16px; }
+  .doc .callout strong { color: var(--tf-black); font-weight: var(--w-semibold); }
+  .doc .never { font-family: var(--font-display); font-weight: 700; font-size: 22px; letter-spacing: -0.015em; color: var(--tf-black); margin: 18px 0 4px; }
+  .doc .never em { font-style: normal; color: var(--tf-red); }
+  .doc a.inline { color: var(--tf-black); text-decoration: underline; text-decoration-color: var(--tf-red); text-underline-offset: 3px; text-decoration-thickness: 2px; border: 0; font-weight: var(--w-medium); }
+  .doc a.inline:hover { color: var(--tf-red); }
+  .doc .foot-note { margin-top: 44px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 13.5px; color: var(--tf-stone); }
+
+  /* ===== FOOTER (shared) ===== */
+  .site-footer { background: var(--dash); color: rgba(255,255,255,0.7); margin-top: 24px; }
+  .site-footer .wrap { padding-top: 44px; padding-bottom: 26px; }
+  .foot-grid { display: grid; grid-template-columns: 1.7fr 1fr 1.2fr; gap: 28px; }
+  .foot-nav { display: flex; flex-direction: column; gap: 11px; padding-top: 2px; }
+  .foot-nav a { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; border: 0; }
+  .foot-nav a:hover { color: #fff; }
+  .foot-brand .fm { display: inline-flex; align-items: flex-end; margin-bottom: 16px; }
+  .foot-brand .fm img { height: 20px; width: auto; display: block; filter: invert(1); }
+  .foot-brand p { font-size: 13.5px; line-height: 1.4; color: rgba(255,255,255,0.55); margin: 0 0 18px; max-width: 180px; }
+  .foot-social { display: flex; gap: 10px; }
+  .foot-social a { width: 30px; height: 30px; border-radius: 999px; background: rgba(255,255,255,0.08); display: grid; place-items: center; color: #fff; border: 0; }
+  .foot-social a svg { width: 14px; height: 14px; }
+  .foot-social a:hover { background: var(--tf-red); }
+  .foot-col h4 { font-family: var(--font-body); font-weight: var(--w-bold); font-size: 13px; color: #fff; margin: 0 0 16px; letter-spacing: 0; }
+  .foot-col a { display: block; font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; border: 0; margin-bottom: 11px; }
+  .foot-col a:hover { color: #fff; }
+  .foot-col a.active { color: #fff; }
+  .foot-signup h4 { font-family: var(--font-body); font-weight: var(--w-bold); font-size: 13px; color: #fff; margin: 0 0 16px; }
+  .foot-signup .field { display: flex; background: rgba(255,255,255,0.07); border: 1px solid var(--dash-line); border-radius: 6px; overflow: hidden; }
+  .foot-signup input { flex: 1; background: transparent; border: 0; outline: 0; color: #fff; font: inherit; font-size: 13px; padding: 10px 12px; }
+  .foot-signup input::placeholder { color: rgba(255,255,255,0.45); }
+  .foot-signup button { background: transparent; border: 0; color: var(--tf-red); padding: 0 12px; cursor: pointer; display: grid; place-items: center; }
+  .foot-signup button svg { width: 16px; height: 16px; }
+  .foot-signup-msg { margin: 12px 0 0; font-size: 12.5px; line-height: 1.4; display: flex; align-items: center; gap: 7px; }
+  .foot-signup-msg.ok { color: #fff; }
+  .foot-signup-msg.err { color: var(--tf-red); }
+  .foot-signup-msg .mi { display: inline-grid; place-items: center; width: 16px; height: 16px; flex: 0 0 16px; }
+  .foot-signup-msg.ok .mi { color: #4ED07A; }
+  .foot-signup-msg .mi svg { width: 14px; height: 14px; stroke-width: 3; }
+  .foot-signup.done .field { display: none; }
+  .foot-bottom { display: flex; align-items: center; justify-content: flex-end; margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--dash-line); }
+  .foot-bottom .cp { font-size: 11.5px; color: rgba(255,255,255,0.4); white-space: nowrap; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1000px) {
+    .nav { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--page); border-top: 1px solid var(--line); padding: 6px 0 10px; margin: 0; display: none; z-index: 60; box-shadow: 0 24px 40px rgba(0,0,0,0.10); }
+    .site-header.open .nav { display: flex; }
+    .nav a:not(.btn) { padding: 14px 40px; font-size: 16px; }
+    .nav a.active { border-bottom: 0; padding-bottom: 14px; }
+    .nav a:not(.nav-cta):not(:last-child) { border-bottom: 1px solid var(--line); }
+    .nav a.nav-cta { display: block; margin: 10px 40px 0; padding: 13px 40px; text-align: center; background: var(--tf-black); color: #fff; border-radius: 999px; }
+    .nav a.nav-cta:hover { color: #fff; }
+    .site-header .header-btn { display: none; }
+    .nav-toggle { display: inline-grid; }
+    .foot-grid { grid-template-columns: 1fr 1fr; gap: 28px 24px; }
+    .foot-brand, .foot-signup { grid-column: 1 / -1; }
+  }
+  @media (max-width: 600px) {
+    .wrap { padding: 0 20px; }
+    .nav a:not(.btn), .nav a.nav-cta { padding-left: 20px; padding-right: 20px; }
+    .nav a.nav-cta { margin-left: 20px; margin-right: 20px; }
+    .doc-hero .wrap { padding-top: 40px; }
+    .doc-hero h1 { font-size: 40px; }
+    .doc .lede { font-size: 20px; }
+    .doc h2 { font-size: 24px; }
+    .foot-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header" id="siteHeader">
+    <div class="wrap">
+      <a class="wordmark" href="/"><img src="/assets/logo-primary.png" alt="testfeed" /><span class="logodot"></span></a>
+      <nav class="nav" id="nav">
+        <a href="/#platform">Product</a>
+        <a href="/use-cases/">Use cases</a>
+        <a href="/contact">Pricing</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a class="nav-cta" href={bookingUrl} target="_blank" rel="noopener">Book a demo</a>
+      </nav>
+      <a class="btn header-btn" href={bookingUrl} target="_blank" rel="noopener">Book a demo <span class="arr"><i data-lucide="arrow-right"></i></span></a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><i data-lucide="menu"></i></button>
+    </div>
+  </header>
+
+  <!-- ===== DOC HERO ===== -->
+  <section class="doc-hero" data-screen-label="Privacy hero">
+    <div class="wrap">
+      <div class="inner">
+        <p class="eyebrow">Legal</p>
+        <h1>Privacy policy<span class="dot-red">.</span></h1>
+        <p class="entity">Yesterday Pty Ltd, trading as TestFeed.</p>
+        <p class="updated"><span class="pip"></span> Last updated June 2026</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DOC BODY ===== -->
+  <main class="doc">
+    <div class="wrap">
+      <div class="inner">
+
+        <p class="lede">Yesterday Pty Ltd, trading as TestFeed, operates a synthetic consumer research platform. Here's what we collect, how we use it, and the rights you have.</p>
+
+        <h2><span class="s-num">01</span>Who we are</h2>
+        <p>Yesterday Pty Ltd (ABN 69 670 639 219), trading as TestFeed, operates a synthetic consumer research platform. We are headquartered in Australia.</p>
+        <ul>
+          <li><strong>Registered address</strong> — 156 Boundary Street, West End QLD 4101.</li>
+          <li><strong>Privacy contact</strong> — <a class="inline" href="mailto:millie@yesterday.work">millie@yesterday.work</a>.</li>
+        </ul>
+
+        <h2><span class="s-num">02</span>What data we collect</h2>
+        <p>We collect limited personal information in the following contexts:</p>
+        <ul>
+          <li><strong>Website visitors</strong> — anonymised usage data, browser type, referring URL, and standard server logs via Cloudflare.</li>
+          <li><strong>Enquiries and signups</strong> — name, email address, company name, and any details you provide when contacting us or joining our waitlist.</li>
+          <li><strong>Client and prospect interactions</strong> — contact details and communication history collected through our CRM and outbound tools.</li>
+          <li><strong>Study configuration</strong> — project briefs, stimulus descriptions, and research parameters submitted by clients to configure studies.</li>
+        </ul>
+        <div class="callout">
+          <p><strong>Important.</strong> TestFeed does not collect or store personal data from survey respondents. Our platform uses AI-generated synthetic personas, not real people, to simulate consumer responses.</p>
         </div>
-      ) : (
-        <div>
-          <h1>Privacy Policy</h1>
-          <p>Content not found. Please check back later.</p>
+
+        <h2><span class="s-num">03</span>How we use your data</h2>
+        <p>We use personal information to:</p>
+        <ul>
+          <li>Operate and deliver our research platform and services.</li>
+          <li>Respond to enquiries and manage client relationships.</li>
+          <li>Send commercial communications about TestFeed — you can opt out at any time.</li>
+          <li>Improve our platform and methodology.</li>
+          <li>Comply with legal obligations.</li>
+        </ul>
+
+        <h2><span class="s-num">04</span>Who we share data with</h2>
+        <p>We share data only where necessary to operate our business. Our service providers include:</p>
+        <ul>
+          <li><strong>Cloudflare</strong> — infrastructure, storage, and content delivery.</li>
+          <li><strong>AI processing partners</strong> — third-party AI models used to generate synthetic research outputs. No personal data is passed to these providers.</li>
+          <li><strong>Pureprofile</strong> — human panel partner for research validation, subject to their own privacy policy.</li>
+          <li><strong>Google Workspace</strong> — email and document management.</li>
+          <li><strong>CRM and outbound tools</strong> — contact management and sales communications.</li>
+        </ul>
+        <p class="never">We do not sell personal information to third parties.</p>
+
+        <h2><span class="s-num">05</span>Cookies and tracking</h2>
+        <p>Our website uses cookies and similar technologies to understand how visitors use the site, including analytics cookies to measure traffic and performance. You can disable cookies through your browser settings, though this may affect site functionality.</p>
+
+        <h2><span class="s-num">06</span>Data storage and security</h2>
+        <p>Your data is stored on Cloudflare infrastructure, which may be located outside Australia. We take reasonable steps to protect personal information from misuse, loss, and unauthorised access. If you believe a security incident has occurred, please contact us immediately at <a class="inline" href="mailto:millie@yesterday.work">millie@yesterday.work</a>.</p>
+
+        <h2><span class="s-num">07</span>Your rights under Australian privacy law</h2>
+        <p>We comply with the Privacy Act 1988 (Cth) and the Australian Privacy Principles (APPs). You have the right to:</p>
+        <ul>
+          <li>Request access to the personal information we hold about you.</li>
+          <li>Request correction of inaccurate or out-of-date information.</li>
+          <li>Request deletion of your personal information, subject to legal obligations.</li>
+          <li>Opt out of direct marketing communications at any time.</li>
+        </ul>
+        <p>To exercise any of these rights, email <a class="inline" href="mailto:millie@yesterday.work">millie@yesterday.work</a>. We will respond within 30 days.</p>
+
+        <h2><span class="s-num">08</span>California residents (CCPA)</h2>
+        <p>If you are a California resident, you have additional rights under the California Consumer Privacy Act (CCPA), including the right to know what personal information we collect about you, the right to request deletion, and the right to opt out of the sale of your personal information. We do not sell personal information. To make a request, contact <a class="inline" href="mailto:millie@yesterday.work">millie@yesterday.work</a>.</p>
+
+        <h2><span class="s-num">09</span>Data retention</h2>
+        <p>We retain personal information only for as long as necessary to fulfil the purposes described in this policy, or as required by law. Contact and CRM data is retained for the duration of a business relationship and a reasonable period thereafter.</p>
+
+        <h2><span class="s-num">10</span>Changes to this policy</h2>
+        <p>We may update this policy from time to time. The current version will always be available on our website. Material changes will be notified by email where we hold your contact details.</p>
+
+        <h2><span class="s-num">11</span>Contact us</h2>
+        <p>For any privacy-related queries or requests:</p>
+        <ul>
+          <li><strong>Email</strong> — <a class="inline" href="mailto:millie@yesterday.work">millie@yesterday.work</a>.</li>
+          <li><strong>Post</strong> — Yesterday Pty Ltd, 156 Boundary Street, West End QLD 4101.</li>
+        </ul>
+
+        <p class="foot-note">This page reflects the TestFeed privacy policy and is provided for transparency, not as legal advice.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <div class="fm"><img src="/assets/logo-primary.png" alt="testfeed" /><span class="logodot"></span></div>
+          <p>Your AI panel. Ready when you are.</p>
+          <div class="foot-social">
+            <a href="https://www.linkedin.com/company/testfeed-ai/" target="_blank" rel="noopener" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+          </div>
         </div>
-      )
-    }
-  </LegalPageContent>
-</LegalLayout>
+        <div class="foot-col foot-nav">
+          <a href="/#platform">Product</a>
+          <a href="/blog/">Blog</a>
+          <a href="/contact">Contact</a>
+          <a class="active" href="/privacy-policy">Privacy</a>
+        </div>
+        <div class="foot-signup">
+          <h4>Sign up for our updates</h4>
+          <form class="field" id="foot-signup-form" novalidate>
+            <input type="email" placeholder="Enter your email" aria-label="Email address" required />
+            <button type="submit" aria-label="Subscribe"><i data-lucide="arrow-right"></i></button>
+          </form>
+          <p class="foot-signup-msg" id="foot-signup-msg" hidden></p>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span class="cp">© 2025 TestFeed</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    if (window.lucide) lucide.createIcons();
+    (function(){
+      var header = document.getElementById('siteHeader');
+      var toggle = document.getElementById('navToggle');
+      if (toggle) toggle.addEventListener('click', function(){
+        var open = header.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        toggle.innerHTML = open ? '<i data-lucide="x"></i>' : '<i data-lucide="menu"></i>';
+        if (window.lucide) lucide.createIcons();
+      });
+    })();
+    (function(){
+      var form = document.getElementById('foot-signup-form');
+      if (!form) return;
+      var wrap = form.closest('.foot-signup');
+      var input = form.querySelector('input');
+      var msg = document.getElementById('foot-signup-msg');
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        var val = (input.value || '').trim();
+        var valid = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(val);
+        msg.hidden = false;
+        if (!valid) {
+          msg.className = 'foot-signup-msg err';
+          msg.textContent = 'Please enter a valid email address.';
+          input.focus();
+          return;
+        }
+        wrap.classList.add('done');
+        msg.className = 'foot-signup-msg ok';
+        msg.innerHTML = '<span class="mi"><i data-lucide="check"></i></span>Thanks — you\'re on the list. We\'ll be in touch.';
+        if (window.lucide) lucide.createIcons();
+      });
+    })();
+  </script>
+</body>
+</html>

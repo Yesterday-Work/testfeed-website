@@ -1,273 +1,637 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+const title = "TestFeed — About";
+const description = "We're a small group of researchers, builders and operators who believe the best decisions get made with your audience in the room — not after they've left.";
+const bookingUrl = "https://app.usemotion.com/meet/millie-marconi/meeting";
+const siteUrl = Astro.url.origin;
+const ogImage = new URL("/assets/og-image.jpg", siteUrl).href;
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": title,
+  "description": description,
+  "url": new URL("/about", siteUrl).href,
+};
 ---
-
-<BaseLayout
-  title="About TestFeed - Why I Built This"
-  description="The story behind TestFeed - from send-button anxiety to building virtual audiences that help you communicate with confidence."
->
-  <main class="about-page">
-    <div class="container">
-      <header class="about-header">
-        <h1>Why I built <span class="testfeed-font">testfeed</span></h1>
-      </header>
-
-      <article class="about-content">
-        <div class="story-flow">
-          <p class="opener">Hi, I'm Millie.</p>
-
-          <p>
-            TestFeed started on a completely different path. My company
-            yesterday was building a product in HR tech, and we were seeing some
-            promising signals. I'd done everything by the book - spoke to over
-            100 prospective customers before we even started building, validated
-            the problem, got great initial momentum.
-          </p>
-
-          <p>
-            But then things started to wane. The early excitement faded,
-            traction slowed, and I couldn't figure out why.
-          </p>
-
-          <p>
-            Here's the thing about customer research: it's brilliant, but it's
-            also a snapshot in time. I couldn't realistically talk to 10
-            customers every day about every product decision. And the gap
-            between those formal research sessions? That's where I was making
-            hundreds of small choices that ultimately shaped how people
-            experienced what we were building.
-          </p>
-
-          <h2>The LinkedIn post that started it all</h2>
-
-          <p>
-            As any founder has to be these days, you're also expected to be a
-            content creator. So I was batching out LinkedIn posts, trying to
-            build our brand and share industry insights. One day, I quickly
-            wrote something up, didn't give it a second thought, and hit
-            publish.
-          </p>
-
-          <p>
-            The reactions were brutal. People completely misinterpreted what I
-            was trying to say, and not in good ways.
-          </p>
-
-          <p>
-            I sat there reading the comments thinking "how did I get this so
-            wrong?" That's when it hit me like a truck: I was creating
-            everything - posts, features, messaging, product decisions -
-            completely trapped in my own bubble.
-          </p>
-
-          <h2>The epiphany</h2>
-
-          <p>
-            That LinkedIn disaster made me realize something bigger. All those
-            customer conversations I'd had were incredibly valuable, but they
-            couldn't be with me every day when I was making the thousands of
-            micro-decisions that shape a product.
-          </p>
-
-          <p>
-            Should I word this feature description this way or that way? Will
-            users understand this interface flow? Is this pricing page going to
-            make sense to them? Every single day, I needed that customer
-            perspective, but I couldn't exactly fire off Calendly invites for
-            every small decision.
-          </p>
-
-          <p>
-            I started thinking: what if I could have AI versions of those
-            customers I'd interviewed? Personas that thought like them, reacted
-            like them, and could give me their perspective in real-time while
-            I'm building?
-          </p>
-
-          <p>
-            Not generic AI that helps you write better. AI personas that
-            actually think like your real customers and can see what you're
-            working on - whether that's code, designs, presentations, or
-            campaigns.
-          </p>
-
-          <h2>Building TestFeed</h2>
-
-          <p>
-            That's what became TestFeed. I started building it as an internal
-            tool, honestly just trying to regain some confidence in my own
-            decision-making. A prototype that could give me other perspectives
-            when I needed them most.
-          </p>
-
-          <p>
-            And then something unexpected happened - it actually worked. Like,
-            really worked.
-          </p>
-
-          <p>
-            Now I use it every single day. When I'm working on features and
-            wondering if the flow makes sense. When I'm reviewing designs and
-            need a user's honest take. When I'm writing a LinkedIn post and want
-            to know if I won't get cancelled. When I'm prepping pitch decks and
-            need to stress-test my messaging.
-          </p>
-
-          <p>
-            Our early users are the same. They've built it into their daily
-            workflow - developers getting customer feedback on localhost,
-            designers pressure-testing interfaces in Figma, marketers validating
-            campaign ideas, founders rehearsing investor presentations. They're
-            getting multiple perspectives from AI personas across every part of
-            building their products.
-          </p>
-
-          <p>
-            I genuinely love what we've built. Not in a "proud founder" way, but
-            in a "holy shit this actually solves the problem I had" way.
-          </p>
-
-          <h2>The journey continues</h2>
-
-          <p>
-            I'm building this in public because I've learned that building in
-            isolation leads to products nobody wants. You can follow along on <a
-              href="https://www.linkedin.com/in/millie-marconi/"
-              target="_blank"
-              rel="noopener noreferrer">LinkedIn</a
-            > or <a
-              href="https://x.com/MillieMarconnni"
-              target="_blank"
-              rel="noopener noreferrer">X</a
-            > for the real, unfiltered journey.
-          </p>
-
-          <p>
-            If you've ever felt like you're making decisions in your own head,
-            wondering what your customers would actually think, <a
-              href="/#get-started"
-              class="inline-cta">join our waitlist</a
-            >.
-          </p>
-
-          <p>
-            Because having customer perspective available 24/7 isn't just nice
-            to have - it's how you build things people actually want.
-          </p>
-        </div>
-      </article>
-    </div>
-  </main>
-</BaseLayout>
-
+<!doctype html>
+<html lang="en" data-hero="manifesto">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="canonical" href={new URL("/about", siteUrl).href} />
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<link rel="stylesheet" href="/assets/ds.css" />
+<script src="https://unpkg.com/lucide@0.456.0/dist/umd/lucide.min.js"></script>
+<script src="/image-slot.js" is:inline></script>
 <style>
-  .about-page {
-    background-color: var(--color-background);
-    min-height: 100vh;
-    padding: var(--spacing-xxl) 0;
+  :root {
+    --page: #F5F3EE;
+    --band: #ECE9E3;
+    --card: #F1EFEA;
+    --line: rgba(0,0,0,0.10);
+    --dash: #161616;
+    --dash-line: rgba(255,255,255,0.10);
+    --wrap: 1200px;
   }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body { margin: 0; background: var(--page); }
+  body { font-family: var(--font-body); color: var(--tf-ink); -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; }
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 40px; }
+  .eyebrow-red { color: var(--tf-red); font-family: var(--font-body); font-weight: var(--w-bold); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; margin: 0; }
+  .dot-red { color: var(--tf-red); }
 
-  .about-header {
-    margin-bottom: var(--spacing-xl);
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
+  /* ===== HEADER ===== */
+  .site-header { padding: 26px 0 18px; position: relative; z-index: 40; }
+  .site-header .wrap { display: flex; align-items: center; gap: 28px; }
+  .wordmark { display: inline-flex; align-items: flex-end; gap: 0; line-height: 1; text-decoration: none; border: 0; }
+  .wordmark img { height: 22px; width: auto; display: block; }
+  .logodot { width: 5px; height: 5px; border-radius: 999px; background: var(--tf-red); display: inline-block; margin: 0 0 3px 3px; flex: 0 0 auto; }
+  .nav { display: flex; gap: 34px; align-items: center; margin: 0 auto; }
+  .nav a:not(.btn) { color: var(--tf-ink); font-family: var(--font-body); font-weight: var(--w-medium); font-size: 15px; text-decoration: none; border: 0; cursor: pointer; white-space: nowrap; }
+  .nav a:not(.btn):hover { color: var(--tf-red); }
+  .nav a.active { color: var(--tf-black); border-bottom: 2px solid var(--tf-red); padding-bottom: 2px; }
+  .nav a.nav-cta { display: none; }
+  .nav-toggle { display: none; background: none; border: 0; cursor: pointer; color: var(--tf-black); padding: 6px; margin-left: auto; align-items: center; justify-content: center; }
+  .nav-toggle svg { width: 26px; height: 26px; }
+  .btn { display: inline-flex; align-items: center; gap: 16px; font-family: var(--font-display); font-weight: 500; font-size: 16px; padding: 11px 12px 11px 22px; border-radius: 999px; background: var(--tf-black); color: var(--tf-white); border: 0; cursor: pointer; text-decoration: none; white-space: nowrap; transition: background var(--dur-fast) var(--ease-out); }
+  .btn:hover { background: #222; color: var(--tf-white); }
+  .btn .arr { width: 26px; height: 26px; border-radius: 999px; background: rgba(255,255,255,0.18); display: inline-grid; place-items: center; }
+  .btn .arr svg { width: 13px; height: 13px; stroke-width: 2.2; }
+  .btn--outline { background: transparent; color: var(--tf-black); border: 1px solid rgba(0,0,0,0.28); padding: 11px 20px; gap: 12px; }
+  .btn--outline:hover { background: transparent; color: var(--tf-black); border-color: var(--tf-black); }
+  .btn--outline svg { width: 15px; height: 15px; stroke-width: 2; }
+  .btn--light { background: var(--tf-white); color: var(--tf-black); }
+  .btn--light:hover { background: #fff; color: var(--tf-black); }
+  .btn--light .arr { background: var(--tf-black); color: var(--tf-white); }
+
+  /* ===== ABOUT HERO ===== */
+  .about-hero { position: relative; transition: background var(--dur-base) var(--ease-out); }
+  .about-hero .wrap { padding-top: 56px; padding-bottom: 64px; }
+  .about-hero .eyebrow-red { margin-bottom: 26px; }
+  .about-hl { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.03em; color: var(--tf-black); margin: 0; max-width: 14ch; }
+  .about-lede { font-family: var(--font-body); font-weight: var(--w-regular); color: var(--tf-ink); margin: 30px 0 0; }
+  .hero-stats { margin-top: 52px; padding-top: 30px; border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .hero-stats .st { display: flex; flex-direction: column; gap: 7px; }
+  .hero-stats .st + .st { border-left: 1px solid var(--line); padding-left: 24px; }
+  .hero-stats .st .n { font-family: var(--font-display); font-weight: 700; font-size: 40px; line-height: 0.95; letter-spacing: -0.02em; color: var(--tf-black); }
+  .hero-stats .st .n em { font-style: normal; color: var(--tf-red); }
+  .hero-stats .st .l { font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; font-weight: var(--w-semibold); color: var(--tf-stone); }
+
+  html[data-hero="manifesto"] .about-hero { background: var(--page); }
+  html[data-hero="manifesto"] .about-hl { font-size: 84px; line-height: 0.98; }
+  html[data-hero="manifesto"] .about-lede { font-size: 21px; line-height: 1.5; max-width: 560px; }
+
+  html[data-hero="inverse"] .about-hero { background: var(--dash); }
+  html[data-hero="inverse"] .about-hero .wrap { padding-top: 88px; padding-bottom: 88px; text-align: center; }
+  html[data-hero="inverse"] .about-hl { color: #fff; font-size: 80px; line-height: 1.0; margin-left: auto; margin-right: auto; max-width: 18ch; }
+  html[data-hero="inverse"] .about-lede { color: rgba(255,255,255,0.72); font-size: 21px; line-height: 1.55; max-width: 600px; margin-left: auto; margin-right: auto; }
+  html[data-hero="inverse"] .hero-stats { border-top-color: var(--dash-line); max-width: 760px; margin-left: auto; margin-right: auto; }
+  html[data-hero="inverse"] .hero-stats .st + .st { border-left-color: var(--dash-line); }
+  html[data-hero="inverse"] .hero-stats .st .n { color: #fff; }
+  html[data-hero="inverse"] .hero-stats .st .l { color: rgba(255,255,255,0.55); }
+
+  /* ===== MISSION ===== */
+  .mission { background: var(--band); }
+  .mission .wrap { padding-top: 96px; padding-bottom: 96px; display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; align-items: start; }
+  .mission .lead-col .eyebrow-red { margin-bottom: 22px; }
+  .mission .lead-col .tag { font-family: var(--font-body); font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; font-weight: var(--w-semibold); color: var(--tf-stone); }
+  .mission-statement { font-family: var(--font-display); font-weight: 700; font-size: 46px; line-height: 1.12; letter-spacing: -0.02em; color: var(--tf-black); margin: 0; }
+  .mission-statement em { font-style: normal; color: var(--tf-red); }
+  .mission-body { margin: 28px 0 0; max-width: 520px; }
+  .mission-body p { font-size: 17px; line-height: 1.6; color: var(--tf-ink); margin: 0 0 16px; }
+  .mission-body p:last-child { margin-bottom: 0; }
+
+  /* ===== BELIEFS ===== */
+  .beliefs .wrap { padding-top: 96px; padding-bottom: 32px; }
+  .sec-head { margin-bottom: 56px; max-width: 640px; }
+  .sec-head .eyebrow-red { margin-bottom: 18px; }
+  .sec-head h2 { font-family: var(--font-display); font-weight: 700; font-size: 44px; line-height: 1.06; letter-spacing: -0.02em; color: var(--tf-black); margin: 0; }
+  .sec-head p { font-size: 17px; line-height: 1.55; color: var(--tf-stone); margin: 18px 0 0; }
+  .beliefs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 64px; }
+  .belief { padding: 32px 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: 56px 1fr; gap: 8px 4px; align-items: start; }
+  .belief .num { font-family: var(--font-display); font-weight: 700; font-size: 18px; color: var(--tf-red); padding-top: 6px; }
+  .belief h3 { font-family: var(--font-display); font-weight: 700; font-size: 28px; line-height: 1.1; letter-spacing: -0.015em; color: var(--tf-black); margin: 0; }
+  .belief p { grid-column: 2; font-size: 16px; line-height: 1.55; color: var(--tf-ink); margin: 12px 0 0; max-width: 420px; }
+
+  /* ===== TIMELINE ===== */
+  .timeline { background: var(--dash); color: #fff; }
+  .timeline .wrap { padding-top: 96px; padding-bottom: 96px; }
+  .timeline .sec-head h2 { color: #fff; }
+  .timeline .sec-head p { color: rgba(255,255,255,0.6); }
+  .tl { position: relative; margin-top: 12px; padding-left: 0; }
+  .tl::before { content: ""; position: absolute; left: 7px; top: 10px; bottom: 10px; width: 2px; background: var(--dash-line); }
+  .tl-row { position: relative; display: grid; grid-template-columns: 140px 1fr; gap: 40px; padding: 26px 0; padding-left: 40px; border-bottom: 1px solid var(--dash-line); }
+  .tl-row:last-child { border-bottom: 0; }
+  .tl-row::before { content: ""; position: absolute; left: 0; top: 34px; width: 16px; height: 16px; border-radius: 999px; background: var(--dash); border: 2px solid var(--tf-red); }
+  .tl-row .yr { font-family: var(--font-display); font-weight: 700; font-size: 30px; letter-spacing: -0.02em; color: #fff; }
+  .tl-row .body h3 { font-family: var(--font-body); font-weight: var(--w-bold); font-size: 18px; color: #fff; margin: 4px 0 8px; letter-spacing: 0; }
+  .tl-row .body p { font-size: 15.5px; line-height: 1.55; color: rgba(255,255,255,0.68); margin: 0; max-width: 560px; }
+
+  /* ===== TEAM ===== */
+  .team .wrap { padding-top: 96px; padding-bottom: 96px; }
+  .founders { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-bottom: 56px; }
+  .founder { display: flex; flex-direction: column; }
+  .founder .portrait { aspect-ratio: 4 / 5; background: var(--band); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin-bottom: 18px; }
+  .founder image-slot, .member image-slot { width: 100%; height: 100%; display: block; }
+  .founder .name { font-family: var(--font-display); font-weight: 700; font-size: 24px; letter-spacing: -0.01em; color: var(--tf-black); margin: 0; }
+  .founder .role { font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; font-weight: var(--w-semibold); color: var(--tf-red); margin: 7px 0 0; }
+  .founder .bio { font-size: 15px; line-height: 1.55; color: var(--tf-ink); margin: 14px 0 0; }
+  .team-divider { border: 0; border-top: 1px solid var(--line); margin: 0 0 48px; }
+  .team-sub { font-family: var(--font-body); font-weight: var(--w-bold); font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--tf-stone); margin: 0 0 28px; }
+  .members { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .member { display: flex; flex-direction: column; }
+  .member .portrait { aspect-ratio: 1 / 1; background: var(--band); border: 1px solid var(--line); border-radius: 999px; overflow: hidden; margin-bottom: 14px; }
+  .member .name { font-family: var(--font-display); font-weight: 700; font-size: 18px; color: var(--tf-black); margin: 0; }
+  .member .role { font-size: 13px; color: var(--tf-stone); margin: 5px 0 0; font-weight: var(--w-medium); }
+
+  /* ===== BACKERS ===== */
+  .backers { background: var(--band); }
+  .backers .wrap { padding-top: 80px; padding-bottom: 80px; display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 56px; align-items: center; }
+  .backers .lead .eyebrow-red { margin-bottom: 18px; }
+  .backers .lead h2 { font-family: var(--font-display); font-weight: 700; font-size: 34px; line-height: 1.14; letter-spacing: -0.02em; color: var(--tf-black); margin: 0; }
+  .backers .lead p { font-size: 16px; line-height: 1.6; color: var(--tf-ink); margin: 18px 0 0; max-width: 380px; }
+  .backer-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .backer { background: var(--page); padding: 30px 26px; min-height: 116px; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
+  .backer .bn { font-family: var(--font-display); font-weight: 700; font-size: 24px; letter-spacing: -0.01em; color: var(--tf-black); }
+  .backer .bd { font-size: 13px; color: var(--tf-stone); letter-spacing: 0.02em; }
+
+  /* ===== CAREERS ===== */
+  .careers .wrap { padding-top: 96px; padding-bottom: 96px; }
+  .careers-top { display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: end; margin-bottom: 8px; }
+  .careers-top .eyebrow-red { margin-bottom: 18px; }
+  .careers-top h2 { font-family: var(--font-display); font-weight: 700; font-size: 48px; line-height: 1.0; letter-spacing: -0.02em; color: var(--tf-black); margin: 0; }
+  .careers-top p { font-size: 17px; line-height: 1.55; color: var(--tf-stone); margin: 18px 0 0; max-width: 460px; }
+  .roles { margin-top: 40px; }
+  .role { display: grid; grid-template-columns: 1.4fr 1fr auto; gap: 24px; align-items: center; padding: 24px 4px; border-top: 1px solid var(--line); text-decoration: none; color: inherit; transition: padding var(--dur-fast) var(--ease-out); }
+  .role:last-child { border-bottom: 1px solid var(--line); }
+  .role:hover { padding-left: 12px; }
+  .role .rt { font-family: var(--font-display); font-weight: 700; font-size: 24px; letter-spacing: -0.01em; color: var(--tf-black); }
+  .role:hover .rt { color: var(--tf-red); }
+  .role .meta { display: flex; gap: 10px; flex-wrap: wrap; }
+  .role .meta span { font-size: 13px; color: var(--tf-stone); }
+  .role .meta span + span::before { content: "·"; margin-right: 10px; color: var(--tf-fog); }
+  .role .go { width: 38px; height: 38px; border-radius: 999px; border: 1px solid rgba(0,0,0,0.18); display: grid; place-items: center; color: var(--tf-black); justify-self: end; transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out); }
+  .role .go svg { width: 16px; height: 16px; }
+  .role:hover .go { background: var(--tf-red); border-color: var(--tf-red); color: #fff; }
+
+  /* ===== CLOSING CTA ===== */
+  .closing .wrap { padding-bottom: 96px; }
+  .closing-band { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 64px 40px; text-align: center; }
+  .closing-band .eyebrow-red { margin-bottom: 18px; }
+  .closing-band h2 { font-family: var(--font-display); font-weight: 700; font-size: 44px; line-height: 1.05; letter-spacing: -0.02em; color: var(--tf-black); margin: 0 auto; max-width: 16ch; }
+  .closing-band p { font-size: 17px; line-height: 1.55; color: var(--tf-stone); margin: 18px auto 0; max-width: 460px; }
+  .closing-actions { margin-top: 34px; display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap; }
+
+  /* ===== FOOTER ===== */
+  .site-footer { background: var(--dash); color: rgba(255,255,255,0.7); }
+  .site-footer .wrap { padding-top: 44px; padding-bottom: 26px; }
+  .foot-grid { display: grid; grid-template-columns: 1.7fr 1fr 1.2fr; gap: 28px; }
+  .foot-nav { display: flex; flex-direction: column; gap: 11px; padding-top: 2px; }
+  .foot-nav a { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; border: 0; }
+  .foot-nav a:hover { color: #fff; }
+  .foot-brand .fm { display: inline-flex; align-items: flex-end; margin-bottom: 16px; }
+  .foot-brand .fm img { height: 20px; width: auto; display: block; filter: invert(1); }
+  .foot-brand p { font-size: 13.5px; line-height: 1.4; color: rgba(255,255,255,0.55); margin: 0 0 18px; max-width: 180px; }
+  .foot-social { display: flex; gap: 10px; }
+  .foot-social a { width: 30px; height: 30px; border-radius: 999px; background: rgba(255,255,255,0.08); display: grid; place-items: center; color: #fff; border: 0; }
+  .foot-social a svg { width: 14px; height: 14px; }
+  .foot-social a:hover { background: var(--tf-red); }
+  .foot-col h4 { font-family: var(--font-body); font-weight: var(--w-bold); font-size: 13px; color: #fff; margin: 0 0 16px; letter-spacing: 0; }
+  .foot-col a { display: block; font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; border: 0; margin-bottom: 11px; }
+  .foot-col a:hover { color: #fff; }
+  .foot-col a.active { color: #fff; }
+  .foot-signup h4 { font-family: var(--font-body); font-weight: var(--w-bold); font-size: 13px; color: #fff; margin: 0 0 16px; }
+  .foot-signup .field { display: flex; background: rgba(255,255,255,0.07); border: 1px solid var(--dash-line); border-radius: 6px; overflow: hidden; }
+  .foot-signup input { flex: 1; background: transparent; border: 0; outline: 0; color: #fff; font: inherit; font-size: 13px; padding: 10px 12px; }
+  .foot-signup input::placeholder { color: rgba(255,255,255,0.45); }
+  .foot-signup button { background: transparent; border: 0; color: var(--tf-red); padding: 0 12px; cursor: pointer; display: grid; place-items: center; }
+  .foot-signup button svg { width: 16px; height: 16px; }
+  .foot-signup-msg { margin: 12px 0 0; font-size: 12.5px; line-height: 1.4; display: flex; align-items: center; gap: 7px; }
+  .foot-signup-msg.ok { color: #fff; }
+  .foot-signup-msg.err { color: var(--tf-red); }
+  .foot-signup-msg .mi { display: inline-grid; place-items: center; width: 16px; height: 16px; flex: 0 0 16px; }
+  .foot-signup-msg.ok .mi { color: #4ED07A; }
+  .foot-signup-msg .mi svg { width: 14px; height: 14px; stroke-width: 3; }
+  .foot-signup.done .field { display: none; }
+  .foot-bottom { display: flex; align-items: center; justify-content: flex-end; margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--dash-line); }
+  .foot-bottom .cp { font-size: 11.5px; color: rgba(255,255,255,0.4); white-space: nowrap; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1000px) {
+    .nav { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--page); border-top: 1px solid var(--line); padding: 6px 0 10px; margin: 0; display: none; z-index: 60; box-shadow: 0 24px 40px rgba(0,0,0,0.10); }
+    .site-header.open .nav { display: flex; }
+    .nav a:not(.btn) { padding: 14px 40px; font-size: 16px; }
+    .nav a.active { border-bottom: 0; padding-bottom: 14px; }
+    .nav a:not(.nav-cta):not(:last-child) { border-bottom: 1px solid var(--line); }
+    .nav a.nav-cta { display: block; margin: 10px 40px 0; padding: 13px 40px; text-align: center; background: var(--tf-black); color: #fff; border-radius: 999px; }
+    .nav a.nav-cta:hover { color: #fff; }
+    .site-header .header-btn { display: none; }
+    .nav-toggle { display: inline-grid; }
+
+    html[data-hero="manifesto"] .about-hl { font-size: 60px; }
+    html[data-hero="inverse"] .about-hl { font-size: 54px; }
+    .mission .wrap { grid-template-columns: 1fr; gap: 32px; padding-top: 72px; padding-bottom: 72px; }
+    .mission-statement { font-size: 38px; }
+    .beliefs-grid { grid-template-columns: 1fr; gap: 0; }
+    .founders { grid-template-columns: 1fr 1fr; }
+    .members { grid-template-columns: repeat(3, 1fr); }
+    .backers .wrap { grid-template-columns: 1fr; gap: 36px; }
+    .careers-top { grid-template-columns: 1fr; }
+    .foot-grid { grid-template-columns: 1fr 1fr; gap: 28px 24px; }
+    .foot-brand, .foot-signup { grid-column: 1 / -1; }
   }
-
-  .about-header h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    color: var(--color-white);
-    margin-bottom: var(--spacing-md);
-    line-height: 1.2;
-    text-align: left;
-  }
-
-  .about-header h1 .testfeed-font {
-    display: inline-block;
-    transform: translateY(-0.11em);
-  }
-
-  .about-content {
-    max-width: 700px;
-    margin: 0 auto;
-    line-height: 1.8;
-  }
-
-  .story-flow p {
-    font-size: 1.125rem;
-    color: var(--color-text-light);
-    margin-bottom: var(--spacing-md);
-    line-height: 1.8;
-  }
-
-  .story-flow h2 {
-    font-size: 1.375rem;
-    font-weight: 600;
-    color: var(--color-white);
-    margin-bottom: var(--spacing-md);
-    margin-top: var(--spacing-xl);
-    line-height: 1.3;
-    text-align: left;
-  }
-
-  .opener {
-    font-size: 1.25rem !important;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.9) !important;
-    margin-bottom: var(--spacing-md) !important;
-  }
-
-  .story-flow strong {
-    color: var(--color-white);
-    font-weight: 600;
-  }
-
-  .inline-cta {
-    color: var(--color-white);
-    text-decoration: underline;
-    text-decoration-color: rgba(255, 255, 255, 0.4);
-    text-underline-offset: 3px;
-    transition: all 0.2s ease;
-    font-weight: 500;
-  }
-
-  .inline-cta:hover {
-    color: var(--color-white);
-    text-decoration-color: var(--color-white);
-    text-decoration-thickness: 2px;
-  }
-
-  /* Responsive design */
-  @media (max-width: 768px) {
-    .about-page {
-      padding: var(--spacing-xl) 0;
-    }
-
-    .about-header {
-      max-width: 100%;
-      padding: 0 var(--spacing-md);
-    }
-
-    .about-header h1 {
-      font-size: 2.25rem;
-    }
-
-    .about-content {
-      max-width: 100%;
-      padding: 0 var(--spacing-md);
-    }
-
-    .story-flow p {
-      font-size: 1rem;
-    }
-
-    .story-flow h2 {
-      font-size: 1.25rem;
-    }
-
-    .opener {
-      font-size: 1.125rem !important;
-    }
+  @media (max-width: 600px) {
+    .wrap { padding: 0 20px; }
+    .nav a:not(.btn), .nav a.nav-cta { padding-left: 20px; padding-right: 20px; }
+    .nav a.nav-cta { margin-left: 20px; margin-right: 20px; }
+    html[data-hero="manifesto"] .about-hl { font-size: 44px; }
+    html[data-hero="inverse"] .about-hl { font-size: 40px; }
+    .about-hero .wrap { padding-top: 40px; padding-bottom: 48px; }
+    .about-lede, html[data-hero="manifesto"] .about-lede, html[data-hero="inverse"] .about-lede { font-size: 18px; }
+    .hero-stats { grid-template-columns: 1fr 1fr; gap: 24px 0; margin-top: 36px; }
+    .hero-stats .st { padding: 0 16px; }
+    .hero-stats .st + .st { border-left: 0; padding-left: 16px; }
+    .hero-stats .st:nth-child(odd) { border-left: 0; padding-left: 0; }
+    .hero-stats .st:nth-child(n+3) { border-top: 1px solid var(--line); padding-top: 22px; }
+    html[data-hero="inverse"] .hero-stats .st:nth-child(n+3) { border-top-color: var(--dash-line); }
+    .mission-statement { font-size: 30px; }
+    .sec-head h2 { font-size: 32px; }
+    .belief { grid-template-columns: 40px 1fr; }
+    .belief h3 { font-size: 23px; }
+    .belief p { grid-column: 1 / -1; }
+    .tl-row { grid-template-columns: 1fr; gap: 6px; padding-left: 34px; }
+    .founders { grid-template-columns: 1fr; }
+    .members { grid-template-columns: 1fr 1fr; }
+    .backer-grid { grid-template-columns: 1fr; }
+    .careers-top h2 { font-size: 34px; }
+    .role { grid-template-columns: 1fr auto; gap: 6px 16px; }
+    .role .meta { grid-column: 1; }
+    .closing-band { padding: 44px 24px; }
+    .closing-band h2 { font-size: 32px; }
+    .closing-actions { flex-direction: column; align-items: stretch; }
+    .closing-actions .btn { width: 100%; justify-content: space-between; }
+    .foot-grid { grid-template-columns: 1fr; }
   }
 </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header" id="siteHeader">
+    <div class="wrap">
+      <a class="wordmark" href="/"><img src="/assets/logo-primary.png" alt="testfeed" /><span class="logodot"></span></a>
+      <nav class="nav" id="nav">
+        <a href="/#platform">Product</a>
+        <a href="/use-cases/">Use cases</a>
+        <a href="/contact">Pricing</a>
+        <a class="active" href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a class="nav-cta" href={bookingUrl} target="_blank" rel="noopener">Book a demo</a>
+      </nav>
+      <a class="btn header-btn" href={bookingUrl} target="_blank" rel="noopener">Book a demo <span class="arr"><i data-lucide="arrow-right"></i></span></a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><i data-lucide="menu"></i></button>
+    </div>
+  </header>
+
+  <!-- ABOUT HERO -->
+  <section class="about-hero">
+    <div class="wrap">
+      <p class="eyebrow-red">About TestFeed</p>
+      <h1 class="about-hl"><span class="hl-text">The team behind the panel</span><span class="dot-red">.</span></h1>
+      <p class="about-lede">We're a small group of researchers, builders and operators who believe the best decisions get made with your audience in the room — not after they've left.</p>
+      <div class="hero-stats">
+        <div class="st"><span class="n">2023</span><span class="l">Founded</span></div>
+        <div class="st"><span class="n">18</span><span class="l">People</span></div>
+        <div class="st"><span class="n">Remote</span><span class="l">First, by design</span></div>
+        <div class="st"><span class="n">4,200<em>+</em></span><span class="l">Tests run</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION -->
+  <section class="mission">
+    <div class="wrap">
+      <div class="lead-col">
+        <p class="eyebrow-red">Why we exist</p>
+        <p class="tag">Our mission</p>
+      </div>
+      <div class="state-col">
+        <p class="mission-statement">Decisions should be shaped <em>with</em> the people they're for — not made about them, then explained away.</p>
+        <div class="mission-body">
+          <p>For most teams, audience feedback shows up too late to matter. The work ships, the numbers come back, and the research becomes a post-mortem instead of a steer.</p>
+          <p>TestFeed turns real audience data into an AI panel you can ask anything, any time. A score, the quotes, and a clear next move — while you can still act on it. That's the whole point.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BELIEFS -->
+  <section class="beliefs">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow-red">What we believe</p>
+        <h2>Four things we won't<br/>compromise on<span class="dot-red">.</span></h2>
+      </div>
+      <div class="beliefs-grid">
+        <div class="belief">
+          <span class="num">01</span>
+          <h3>Ask, don't assume.</h3>
+          <p>A guess in a nice deck is still a guess. When the answer matters, we'd rather go and ask the people it's for.</p>
+        </div>
+        <div class="belief">
+          <span class="num">02</span>
+          <h3>Speed is the feature.</h3>
+          <p>Feedback in an hour gets used. A week later it's a footnote. We optimise relentlessly for the moment of the decision.</p>
+        </div>
+        <div class="belief">
+          <span class="num">03</span>
+          <h3>Honest over flattering.</h3>
+          <p>The panel tells you what your audience actually thinks — including the parts you were hoping not to hear.</p>
+        </div>
+        <div class="belief">
+          <span class="num">04</span>
+          <h3>Built on real people.</h3>
+          <p>Every panel is modelled on real audience data and benchmarked against humans. No vibes, no invented opinions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="timeline">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow-red">How we got here</p>
+        <h2>A short history<span class="dot-red">.</span></h2>
+        <p>We started with one stubborn question and a spreadsheet. Here's the rest.</p>
+      </div>
+      <div class="tl">
+        <div class="tl-row">
+          <div class="yr">2023</div>
+          <div class="body">
+            <h3>Two founders, one question.</h3>
+            <p>Why is audience feedback always too late to change anything? TestFeed begins as a way to answer that — fast.</p>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="yr">2024</div>
+          <div class="body">
+            <h3>The first panel ships.</h3>
+            <p>Our first AI panel goes live with a handful of design partners testing packs, ads and claims.</p>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="yr">2024</div>
+          <div class="body">
+            <h3>A thousand tests in.</h3>
+            <p>Teams run their first thousand tests in six months. Human benchmarking moves from idea to standard.</p>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="yr">2025</div>
+          <div class="body">
+            <h3>We raise to scale.</h3>
+            <p>A Series A to put an on-demand panel in the hands of every team that has to decide before it can know.</p>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="yr">2026</div>
+          <div class="body">
+            <h3>Teams in twelve countries.</h3>
+            <p>From cereal boxes to streaming ads, teams across twelve countries test before they ship.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="team">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow-red">The people</p>
+        <h2>Builders, researchers,<br/>and the occasional contrarian<span class="dot-red">.</span></h2>
+      </div>
+
+      <div class="founders">
+        <div class="founder">
+          <div class="portrait"><image-slot id="founder-1" shape="rect" fit="cover" placeholder="Portrait — Mara"></image-slot></div>
+          <p class="name">Mara Ellison</p>
+          <p class="role">Co-founder &amp; CEO</p>
+          <p class="bio">Spent a decade running insight teams and watching good research arrive a week too late. Started TestFeed to fix the timing.</p>
+        </div>
+        <div class="founder">
+          <div class="portrait"><image-slot id="founder-2" shape="rect" fit="cover" placeholder="Portrait — Daniel"></image-slot></div>
+          <p class="name">Daniel Cho</p>
+          <p class="role">Co-founder &amp; CTO</p>
+          <p class="bio">Builds the modelling that turns real audience data into a panel you can actually trust — and benchmark.</p>
+        </div>
+        <div class="founder">
+          <div class="portrait"><image-slot id="founder-3" shape="rect" fit="cover" placeholder="Portrait — Priya"></image-slot></div>
+          <p class="name">Priya Nair</p>
+          <p class="role">Co-founder &amp; Head of Research</p>
+          <p class="bio">Keeps us honest. If a result wouldn't hold up against a human study, it doesn't ship.</p>
+        </div>
+      </div>
+
+      <hr class="team-divider" />
+      <p class="team-sub">And the rest of the team</p>
+      <div class="members">
+        <div class="member">
+          <div class="portrait"><image-slot id="member-1" shape="circle" fit="cover" placeholder="Portrait"></image-slot></div>
+          <p class="name">Sam Whitlock</p>
+          <p class="role">Product</p>
+        </div>
+        <div class="member">
+          <div class="portrait"><image-slot id="member-2" shape="circle" fit="cover" placeholder="Portrait"></image-slot></div>
+          <p class="name">Lena Ortiz</p>
+          <p class="role">Design</p>
+        </div>
+        <div class="member">
+          <div class="portrait"><image-slot id="member-3" shape="circle" fit="cover" placeholder="Portrait"></image-slot></div>
+          <p class="name">Tomas Berg</p>
+          <p class="role">Engineering</p>
+        </div>
+        <div class="member">
+          <div class="portrait"><image-slot id="member-4" shape="circle" fit="cover" placeholder="Portrait"></image-slot></div>
+          <p class="name">Aisha Bello</p>
+          <p class="role">Data Science</p>
+        </div>
+        <div class="member">
+          <div class="portrait"><image-slot id="member-5" shape="circle" fit="cover" placeholder="Portrait"></image-slot></div>
+          <p class="name">Jonah Reed</p>
+          <p class="role">Customer</p>
+        </div>
+        <div class="member">
+          <div class="portrait"><image-slot id="member-6" shape="circle" fit="cover" placeholder="Portrait"></image-slot></div>
+          <p class="name">Yuki Tanaka</p>
+          <p class="role">Operations</p>
+        </div>
+        <div class="member">
+          <div class="portrait"><image-slot id="member-7" shape="circle" fit="cover" placeholder="Portrait"></image-slot></div>
+          <p class="name">Elena Marsh</p>
+          <p class="role">Marketing</p>
+        </div>
+        <div class="member">
+          <div class="portrait"><image-slot id="member-8" shape="circle" fit="cover" placeholder="Portrait"></image-slot></div>
+          <p class="name">Omar Haddad</p>
+          <p class="role">Research</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BACKERS -->
+  <section class="backers">
+    <div class="wrap">
+      <div class="lead">
+        <p class="eyebrow-red">Who's behind us</p>
+        <h2>Backed by people who've<br/>built and sold the<br/>products you use.</h2>
+        <p>Our investors have shipped, scaled and second-guessed enough launches to know why TestFeed has to exist.</p>
+      </div>
+      <div class="backer-grid">
+        <div class="backer"><span class="bn">Ridgeline</span><span class="bd">Lead · Series A</span></div>
+        <div class="backer"><span class="bn">Atlas Seed</span><span class="bd">Pre-seed · Seed</span></div>
+        <div class="backer"><span class="bn">Brightwater</span><span class="bd">Series A</span></div>
+        <div class="backer"><span class="bn">Meridian</span><span class="bd">Seed</span></div>
+        <div class="backer"><span class="bn">Cardinal &amp; Co.</span><span class="bd">Angels</span></div>
+        <div class="backer"><span class="bn">North Loop</span><span class="bd">Series A</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAREERS -->
+  <section class="careers" id="careers">
+    <div class="wrap">
+      <div class="careers-top">
+        <div>
+          <p class="eyebrow-red">Careers</p>
+          <h2>We're hiring<span class="dot-red">.</span></h2>
+          <p>Small team, big surface area. If you like being close to the decision and allergic to spin, you'll fit right in.</p>
+        </div>
+        <a class="btn btn--outline" href="/contact">See all open roles <i data-lucide="arrow-right"></i></a>
+      </div>
+      <div class="roles">
+        <a class="role" href="/contact">
+          <span class="rt">Senior Product Engineer</span>
+          <span class="meta"><span>Engineering</span><span>Remote</span><span>Full-time</span></span>
+          <span class="go"><i data-lucide="arrow-right"></i></span>
+        </a>
+        <a class="role" href="/contact">
+          <span class="rt">Research Scientist, Panels</span>
+          <span class="meta"><span>Research</span><span>Remote</span><span>Full-time</span></span>
+          <span class="go"><i data-lucide="arrow-right"></i></span>
+        </a>
+        <a class="role" href="/contact">
+          <span class="rt">Product Designer</span>
+          <span class="meta"><span>Design</span><span>Remote</span><span>Full-time</span></span>
+          <span class="go"><i data-lucide="arrow-right"></i></span>
+        </a>
+        <a class="role" href="/contact">
+          <span class="rt">Customer Lead</span>
+          <span class="meta"><span>Customer</span><span>Remote</span><span>Full-time</span></span>
+          <span class="go"><i data-lucide="arrow-right"></i></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING CTA -->
+  <section class="closing">
+    <div class="wrap">
+      <div class="closing-band">
+        <p class="eyebrow-red">Come say hello</p>
+        <h2>Want to meet your audience?</h2>
+        <p>Tell us what you're building. We'll set up a panel and walk you through what your audience really thinks.</p>
+        <div class="closing-actions">
+          <a class="btn" href={bookingUrl} target="_blank" rel="noopener">Book a demo <span class="arr"><i data-lucide="arrow-right"></i></span></a>
+          <a class="btn btn--outline" href="/contact">Get in touch <i data-lucide="arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <div class="fm"><img src="/assets/logo-primary.png" alt="testfeed" /><span class="logodot"></span></div>
+          <p>Your AI panel. Ready when you are.</p>
+          <div class="foot-social">
+            <a href="https://www.linkedin.com/company/testfeed-ai/" target="_blank" rel="noopener" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+          </div>
+        </div>
+        <div class="foot-col foot-nav">
+          <a href="/#platform">Product</a>
+          <a href="/blog/">Blog</a>
+          <a href="/contact">Contact</a>
+          <a href="/privacy-policy">Privacy</a>
+        </div>
+        <div class="foot-signup">
+          <h4>Sign up for our updates</h4>
+          <form class="field" id="foot-signup-form" novalidate>
+            <input type="email" placeholder="Enter your email" aria-label="Email address" required />
+            <button type="submit" aria-label="Subscribe"><i data-lucide="arrow-right"></i></button>
+          </form>
+          <p class="foot-signup-msg" id="foot-signup-msg" hidden></p>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span class="cp">© 2025 TestFeed</span>
+      </div>
+    </div>
+  </footer>
+
+  <script is:inline>
+    if (window.lucide) lucide.createIcons();
+
+    (function(){
+      var header = document.getElementById('siteHeader');
+      var toggle = document.getElementById('navToggle');
+      if (toggle) toggle.addEventListener('click', function(){
+        var open = header.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        toggle.innerHTML = open ? '<i data-lucide="x"></i>' : '<i data-lucide="menu"></i>';
+        if (window.lucide) lucide.createIcons();
+      });
+    })();
+
+    (function(){
+      var form = document.getElementById('foot-signup-form');
+      if (!form) return;
+      var wrap = form.closest('.foot-signup');
+      var input = form.querySelector('input');
+      var msg = document.getElementById('foot-signup-msg');
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        var val = (input.value || '').trim();
+        var valid = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(val);
+        msg.hidden = false;
+        if (!valid) {
+          msg.className = 'foot-signup-msg err';
+          msg.textContent = 'Please enter a valid email address.';
+          input.focus();
+          return;
+        }
+        wrap.classList.add('done');
+        msg.className = 'foot-signup-msg ok';
+        msg.innerHTML = '<span class="mi"><i data-lucide="check"></i></span>Thanks — you\'re on the list. We\'ll be in touch.';
+        if (window.lucide) lucide.createIcons();
+      });
+    })();
+  </script>
+</body>
+</html>
