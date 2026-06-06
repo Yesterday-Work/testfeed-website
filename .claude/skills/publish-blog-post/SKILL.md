@@ -1,52 +1,79 @@
 ---
 name: publish-blog-post
-description: Publish a draft blog post. Removes draft:true, commits, merges the PR to main, and the post goes live on testfeed.ai. Run after reviewing the draft PR.
+description: Publish a draft blog post. First pulls any pending posts from the Google Drive SEO Blog Drops folder into the repo as drafts so nothing gets missed, then removes draft:true, commits, merges the PR to main, and the post goes live on testfeed.ai.
 model: claude-haiku-4-5-20251001
 ---
 
 # Publish Blog Post Skill
 
-Make a draft blog post live on testfeed.ai. This is the final step in the publishing pipeline:
+Make a draft blog post live on testfeed.ai. Before publishing, the skill sweeps
+the Google Drive SEO Blog Drops folder so any pre-written post that was never
+drafted into the repo gets picked up first — nothing slips through.
 
 ```
-[draft PR]  →  [review PR]  →  /publish-blog-post
+[Google Drive SEO Blog Drops]  ┐
+                               ├─→  /publish-blog-post  →  [review]  →  live
+[existing draft .md in repo]   ┘
 ```
 
 ## Workflow
 
 Make a todo list and work through these steps one at a time.
 
-### 1. Identify the Post to Publish
+### 1. Intake from Google Drive (so nothing gets missed)
+
+Check the **SEO Blog Drops** folder (ID: `1246GXzreY3HR0KP4HfFwyWWrOw4N-o_7`)
+for `.md` files using the Google Drive MCP tools.
+
+For each file found, derive its slug (see step 3) and check whether
+`src/content/blog/[slug].md` already exists in the repo:
+- **Already in repo** → skip it (it's already a draft or already published).
+- **Not in repo** → import it as a new draft: validate/fix the frontmatter
+  (see "Frontmatter Rules" below), set `draft: true`, and write it to
+  `src/content/blog/[slug].md`.
+
+Show the user a summary of what was imported (e.g. *"Imported 2 new drafts from
+Drive: `slug-a`, `slug-b`"*). If Drive is empty or unreachable, note that and
+carry on with whatever drafts already exist in the repo.
+
+### 2. Identify the Post(s) to Publish
 
 If the user provided a slug (e.g. `/publish-blog-post best-concept-testing-platforms`), use it.
 
-If no slug was provided, list all current draft posts and ask which to publish:
+If no slug was provided, list all current draft posts (including any just
+imported in step 1) and ask which to publish:
 ```bash
 grep -rl "draft: true" /home/user/testfeed-website/src/content/blog/
 ```
-Show the slugs (filenames without `.md`) and wait for the user to choose.
+Show the slugs (filenames without `.md`) and wait for the user to choose. Do
+not auto-publish freshly imported Drive posts without confirmation.
 
-### 2. Confirm the Post Is a Draft
+### 3. Determine the Slug & Confirm the Post Is a Draft
+
+Slug derivation (for Drive imports): from `articleTitle` or `title` — lowercase,
+replace spaces and special characters with hyphens, strip punctuation.
 
 Read `/home/user/testfeed-website/src/content/blog/[slug].md` and confirm `draft: true` is present.
 
 If not found, tell the user: *"This post is already published at `https://testfeed.ai/blog/[slug]/`."* Stop here.
 
-### 3. Check Out the Correct Branch
+### 4. Check Out the Correct Branch
 
 Try to check out the draft branch:
 ```bash
 git fetch origin blog/draft-[slug] 2>/dev/null && git checkout blog/draft-[slug]
 ```
 
-If the branch doesn't exist remotely or locally, stay on `main` and note this — the push in step 5 will go directly to main.
+If the branch doesn't exist remotely or locally, create it from `main` for the
+import case, or stay on `main` for an existing in-repo draft and note this — the
+push in step 6 will go directly to main.
 
-### 4. Remove the Draft Flag
+### 5. Remove the Draft Flag
 
 Edit `/home/user/testfeed-website/src/content/blog/[slug].md`:
 - Remove the line `draft: true` entirely (do not replace with `draft: false` — omitting it is correct, the schema defaults to false)
 
-### 5. Commit and Push
+### 6. Commit and Push
 
 **If on the draft branch:**
 ```bash
@@ -54,7 +81,7 @@ git add src/content/blog/[slug].md
 git commit -m "publish: [slug]"
 git push -u origin blog/draft-[slug]
 ```
-Then proceed to step 6 to merge the PR.
+Then proceed to step 7 to merge the PR.
 
 **If no draft branch exists (staying on main):**
 ```bash
@@ -62,19 +89,19 @@ git add src/content/blog/[slug].md
 git commit -m "publish: [slug]"
 git push origin main
 ```
-Skip step 6 — it's already on main.
+Skip step 7 — it's already on main.
 
 Retry up to 4 times with exponential backoff (2s, 4s, 8s, 16s) on network errors.
 
-### 6. Merge the PR to Main
+### 7. Merge the PR to Main
 
 Use the GitHub MCP tool:
 1. Find the open PR with head `blog/draft-[slug]` using `mcp__github__list_pull_requests`
 2. Merge with method `squash`, commit title: `publish: [slug]`
 
-If no open PR is found, the push in step 5 already went to main — skip this step.
+If no open PR is found, the push in step 6 already went to main — skip this step.
 
-### 7. Update Notion SEO Content Pipeline
+### 8. Update Notion SEO Content Pipeline
 
 Find the matching row in the SEO Content Pipeline database and set Status to `Published`.
 
@@ -85,15 +112,48 @@ Find the matching row in the SEO Content Pipeline database and set Status to `Pu
 2. If found: update `Status` to `Published` using the Notion MCP `notion-update-page` tool
 3. If not found: create a new row with `Name: [slug]`, `Primary Keyword: [primary keyword from frontmatter tags[0]]`, `Status: Published`, `Format: [format type e.g. Guide/Comparison]`
 
-### 8. Confirm
+### 9. Confirm
 
 - **Status:** Live
 - **URL:** `https://testfeed.ai/blog/[slug]/`
 - **Notion:** SEO Content Pipeline updated to Published
 - **Note:** Netlify/Vercel takes 1–3 minutes to rebuild — check back shortly.
 
+## Frontmatter Rules (for Drive imports)
+
+**Required fields:**
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `title` | string | Must end with `\| TestFeed` |
+| `description` | string | 150–160 characters with primary keyword |
+| `articleTitle` | string | The H1 shown on the page |
+| `publishDate` | date | Format: `YYYY-MM-DD` |
+| `author` | string | e.g. `"Millie Marconi"` |
+| `excerpt` | string | 2–3 sentence summary for preview cards |
+
+**Fix automatically without asking:**
+- `pubDate` → rename to `publishDate`
+- `updatedAt` → rename to `updatedDate`
+- `image: ""` or `featuredImage: ""` → remove
+- `schemaMarkup: true` → remove (invalid format)
+- `title` missing `| TestFeed` → append it
+- Extract `keyTakeaways` from any "Key Points" section in the body
+- Extract `faq` from any FAQ section in the body
+
+**Optional fields — include if present, skip if absent:**
+- `updatedDate`, `featuredImage`, `tags`, `minutesRead`, `relatedPosts`
+- `keyTakeaways` — array of strings (renders TL;DR box)
+- `faq` — array of `{question, answer}` (emits FAQPage JSON-LD)
+- `authorBio` — object with `role`, `credentials`, `linkedinUrl`, `xUrl`, `headshotUrl` (`/assets/authors/headshot.jpg` for Millie), `authorPageUrl`
+- `finalCtaSection` — object with `title` and `text`; strongly recommended
+- `schemaMarkup` — object with `type: "BlogPosting"` and `properties`
+
+**Always set on import:** `draft: true`
+
 ## Key Paths
 
 - **Blog directory**: `/home/user/testfeed-website/src/content/blog/`
+- **Google Drive SEO Blog Drops folder ID**: `1246GXzreY3HR0KP4HfFwyWWrOw4N-o_7`
 - **GitHub repo**: `yesterday-work/testfeed-website`
 - **Live site**: `https://testfeed.ai`
