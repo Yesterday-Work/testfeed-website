@@ -1,0 +1,671 @@
+---
+// TestFeed Use cases page — ported from the Claude Design handoff bundle
+// ("Use Cases.html"). Self-contained editorial design that shares the landing
+// page's design system (/assets/ds.css), header and footer, so it intentionally
+// does NOT use BaseLayout — matching the sibling page src/pages/index.astro.
+const title = "TestFeed — Use cases";
+const description =
+  "Nine ways teams put a decision to their AI panel — ad testing, packaging, claims, pricing, concepts, naming, messaging, prioritisation and brand tracking. A score, the quotes, and a next move, usually inside an hour.";
+const bookingUrl = "https://app.usemotion.com/meet/millie-marconi/meeting";
+const siteUrl = Astro.url.origin;
+const ogImage = new URL("/assets/og-image.jpg", siteUrl).href;
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: title,
+  description,
+  url: Astro.url.href,
+  image: ogImage,
+};
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href={Astro.url.href} />
+
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={Astro.url.href} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="TestFeed" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+<meta name="twitter:site" content="@testfeed" />
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="/assets/ds.css" />
+<script src="https://unpkg.com/lucide@0.456.0/dist/umd/lucide.min.js" is:inline></script>
+<style>
+  /* ===== LOCAL PAGE TOKENS ===== */
+  :root {
+    --page: #F5F3EE;
+    --band: #ECE9E3;
+    --card: #F1EFEA;
+    --line: rgba(0,0,0,0.10);
+    --dash: #161616;
+    --dash-line: rgba(255,255,255,0.10);
+    --wrap: 1200px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body { margin: 0; background: var(--page); }
+  body { font-family: var(--font-body); color: var(--tf-ink); -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; }
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 40px; }
+  .eyebrow-red { color: var(--tf-red); font-family: var(--font-body); font-weight: var(--w-bold); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; margin: 0; }
+  .dot-red { color: var(--tf-red); }
+
+  /* ===== HEADER (shared) ===== */
+  .site-header { padding: 26px 0 18px; position: relative; z-index: 40; }
+  .site-header .wrap { display: flex; align-items: center; gap: 28px; }
+  .wordmark { display: inline-flex; align-items: flex-end; gap: 0; line-height: 1; text-decoration: none; border: 0; }
+  .wordmark img { height: 22px; width: auto; display: block; }
+  .logodot { width: 5px; height: 5px; border-radius: 999px; background: var(--tf-red); display: inline-block; margin: 0 0 3px 3px; flex: 0 0 auto; }
+  .nav { display: flex; gap: 34px; align-items: center; margin: 0 auto; }
+  .nav a:not(.btn) { color: var(--tf-ink); font-family: var(--font-body); font-weight: var(--w-medium); font-size: 15px; text-decoration: none; border: 0; cursor: pointer; white-space: nowrap; }
+  .nav a:not(.btn):hover { color: var(--tf-red); }
+  .nav a.active { color: var(--tf-black); border-bottom: 2px solid var(--tf-red); padding-bottom: 2px; }
+  .nav a.nav-cta { display: none; }
+  .nav-toggle { display: none; background: none; border: 0; cursor: pointer; color: var(--tf-black); padding: 6px; margin-left: auto; align-items: center; justify-content: center; }
+  .nav-toggle svg { width: 26px; height: 26px; }
+  .btn { display: inline-flex; align-items: center; gap: 16px; font-family: var(--font-display); font-weight: 500; font-size: 16px; padding: 11px 12px 11px 22px; border-radius: 999px; background: var(--tf-black); color: var(--tf-white); border: 0; cursor: pointer; text-decoration: none; white-space: nowrap; transition: background var(--dur-fast) var(--ease-out); }
+  .btn:hover { background: #222; color: var(--tf-white); }
+  .btn .arr { width: 26px; height: 26px; border-radius: 999px; background: rgba(255,255,255,0.18); display: inline-grid; place-items: center; }
+  .btn .arr svg { width: 13px; height: 13px; stroke-width: 2.2; }
+  .btn--outline { background: transparent; color: var(--tf-black); border: 1px solid rgba(0,0,0,0.28); padding: 11px 20px; gap: 12px; }
+  .btn--outline:hover { background: transparent; color: var(--tf-black); border-color: var(--tf-black); }
+  .btn--outline svg { width: 15px; height: 15px; stroke-width: 2; }
+  .btn--light { background: var(--tf-white); color: var(--tf-black); }
+  .btn--light:hover { background: #fff; color: var(--tf-black); }
+  .btn--light .arr { background: var(--tf-black); color: var(--tf-white); }
+
+  /* ===== HERO ===== */
+  .uc-hero .wrap { padding-top: 60px; padding-bottom: 54px; }
+  .uc-hero .eyebrow-red { margin-bottom: 26px; }
+  .uc-hero-top { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 56px; align-items: end; }
+  .uc-hl { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.03em; color: var(--tf-black); margin: 0; font-size: 76px; line-height: 0.98; max-width: 13ch; }
+  .rotator > span > .dot-red { font-style: normal; }
+  /* rotating word (matches Landing Page hero) */
+  .rotator { display: inline-grid; vertical-align: bottom; text-align: left; }
+  .rotator > span {
+    grid-area: 1 / 1;
+    color: var(--tf-red);
+    opacity: 0;
+    will-change: opacity, transform;
+    animation: ucWordCycle 30s infinite;
+    animation-timing-function: var(--ease-in-out, cubic-bezier(.4,0,.2,1));
+  }
+  .rotator > span:nth-child(1)  { animation-delay: 0s; }
+  .rotator > span:nth-child(2)  { animation-delay: 2s; }
+  .rotator > span:nth-child(3)  { animation-delay: 4s; }
+  .rotator > span:nth-child(4)  { animation-delay: 6s; }
+  .rotator > span:nth-child(5)  { animation-delay: 8s; }
+  .rotator > span:nth-child(6)  { animation-delay: 10s; }
+  .rotator > span:nth-child(7)  { animation-delay: 12s; }
+  .rotator > span:nth-child(8)  { animation-delay: 14s; }
+  .rotator > span:nth-child(9)  { animation-delay: 16s; }
+  .rotator > span:nth-child(10) { animation-delay: 18s; }
+  .rotator > span:nth-child(11) { animation-delay: 20s; }
+  .rotator > span:nth-child(12) { animation-delay: 22s; }
+  .rotator > span:nth-child(13) { animation-delay: 24s; }
+  .rotator > span:nth-child(14) { animation-delay: 26s; }
+  .rotator > span:nth-child(15) { animation-delay: 28s; }
+  @keyframes ucWordCycle {
+    0%    { opacity: 0; transform: translateY(0.16em); }
+    1.6%  { opacity: 1; transform: translateY(0); }
+    5%    { opacity: 1; transform: translateY(0); }
+    6.6%  { opacity: 0; transform: translateY(-0.16em); }
+    100%  { opacity: 0; transform: translateY(-0.16em); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .rotator > span { animation: none; }
+    .rotator > span:nth-child(1) { opacity: 1; }
+    .rotator > span:nth-child(n+2) { display: none; }
+  }
+  .uc-hero-right { padding-bottom: 8px; }
+  .uc-lede { font-family: var(--font-body); font-weight: var(--w-regular); color: var(--tf-ink); margin: 0; font-size: 19px; line-height: 1.55; }
+  .uc-hero-actions { margin-top: 26px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .uc-hero-meta { margin-top: 48px; padding-top: 26px; border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(2, auto) 1fr; gap: 40px; align-items: center; }
+  .uc-hero-meta .m { display: flex; flex-direction: column; gap: 4px; }
+  .uc-hero-meta .m .n { font-family: var(--font-display); font-weight: 700; font-size: 30px; line-height: 1; letter-spacing: -0.02em; color: var(--tf-black); }
+  .uc-hero-meta .m .n em { font-style: normal; color: var(--tf-red); }
+  .uc-hero-meta .m .l { font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; font-weight: var(--w-semibold); color: var(--tf-stone); }
+  .uc-hero-meta .tagline { justify-self: end; font-family: var(--font-display); font-style: italic; font-size: 18px; color: var(--tf-stone); text-align: right; max-width: 22ch; }
+
+  /* ===== USE-CASE GRID ===== */
+  .uc-grid-sec { background: var(--band); }
+  .uc-grid-sec .wrap { padding-top: 72px; padding-bottom: 80px; }
+  .uc-grid-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; margin-bottom: 30px; flex-wrap: wrap; }
+  .uc-grid-head h2 { font-family: var(--font-display); font-weight: 700; font-size: 38px; line-height: 1.05; letter-spacing: -0.02em; color: var(--tf-black); margin: 0; }
+  .uc-grid-head .eyebrow-red { margin-bottom: 14px; }
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+  .filters button { font-family: var(--font-body); font-weight: var(--w-semibold); font-size: 13px; letter-spacing: 0.01em; color: var(--tf-stone); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 9px 16px; cursor: pointer; transition: all var(--dur-fast) var(--ease-out); }
+  .filters button:hover { border-color: var(--tf-black); color: var(--tf-black); transform: none; }
+  .filters button.on { background: var(--tf-black); border-color: var(--tf-black); color: #fff; }
+  .filters button .ct { opacity: 0.5; margin-left: 6px; font-variant-numeric: tabular-nums; }
+
+  .uc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; grid-auto-flow: row dense; }
+  .uc { background: var(--page); border: 1px solid var(--line); border-radius: 14px; padding: 26px 26px 24px; display: flex; flex-direction: column; min-height: 230px; text-decoration: none; color: inherit; position: relative; overflow: hidden; transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-base) var(--ease-out), border-color var(--dur-fast) var(--ease-out); }
+  .uc:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(0,0,0,0.09); border-color: rgba(0,0,0,0.16); }
+  .uc .ic { width: 42px; height: 42px; border-radius: 999px; background: var(--tf-black); color: #fff; display: grid; place-items: center; margin-bottom: 20px; flex: 0 0 auto; transition: background var(--dur-fast) var(--ease-out); }
+  .uc:hover .ic { background: var(--tf-red); }
+  .uc .ic svg { width: 19px; height: 19px; stroke-width: 2; }
+  .uc .cat { font-size: 10.5px; letter-spacing: 0.09em; text-transform: uppercase; font-weight: var(--w-bold); color: var(--tf-red); margin: 0 0 8px; }
+  .uc h3 { font-family: var(--font-display); font-weight: 700; font-size: 23px; line-height: 1.1; letter-spacing: -0.01em; color: var(--tf-black); margin: 0; }
+  .uc p { font-size: 14.5px; line-height: 1.5; color: var(--tf-stone); margin: 10px 0 0; }
+  .uc .foot { margin-top: auto; padding-top: 18px; display: flex; align-items: center; justify-content: flex-end; gap: 12px; }
+  .uc .metric { display: inline-flex; align-items: baseline; gap: 7px; }
+  .uc .metric .v { font-family: var(--font-display); font-weight: 700; font-size: 24px; letter-spacing: -0.02em; color: var(--tf-black); }
+  .uc .metric .k { font-size: 11px; letter-spacing: 0.03em; text-transform: uppercase; font-weight: var(--w-semibold); color: var(--tf-fog); }
+  .uc .go { width: 34px; height: 34px; border-radius: 999px; border: 1px solid var(--line); display: grid; place-items: center; color: var(--tf-black); flex: 0 0 auto; transition: all var(--dur-fast) var(--ease-out); }
+  .uc .go svg { width: 15px; height: 15px; }
+  .uc:hover .go { background: var(--tf-black); border-color: var(--tf-black); color: #fff; }
+
+  /* wide featured cards */
+  .uc.wide { grid-column: span 2; }
+  .uc.wide h3 { font-size: 28px; max-width: 16ch; }
+  .uc.wide p { font-size: 15.5px; max-width: 42ch; }
+  .uc .quote { margin: 16px 0 0; font-family: var(--font-display); font-style: italic; font-size: 16px; line-height: 1.45; color: var(--tf-ink); }
+  .uc:not(.wide) .quote { display: none; }
+
+  /* dark feature card */
+  .uc.dark { background: var(--dash); border-color: var(--dash-line); color: #fff; }
+  .uc.dark h3 { color: #fff; }
+  .uc.dark p { color: rgba(255,255,255,0.62); }
+  .uc.dark .quote { color: rgba(255,255,255,0.85); }
+  .uc.dark .ic { background: var(--tf-red); }
+  .uc.dark .metric .v { color: #fff; }
+  .uc.dark .go { border-color: var(--dash-line); color: #fff; }
+  .uc.dark:hover .ic { background: #fff; color: var(--tf-black); }
+  .uc.dark:hover .go { background: #fff; border-color: #fff; color: var(--tf-black); }
+
+  /* filtered state — uniform tiles, no holes */
+  .uc-grid.filtered .uc.wide { grid-column: span 1; }
+  .uc-grid.filtered .uc .quote { display: none; }
+  .uc.hide { display: none; }
+  .uc-empty { display: none; }
+
+  /* ===== SPOTLIGHT (dark, worked example) ===== */
+  .spotlight { background: var(--dash); color: #fff; }
+  .spotlight .wrap { padding-top: 96px; padding-bottom: 96px; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+  .spotlight .lead .eyebrow-red { margin-bottom: 20px; }
+  .spotlight .lead h2 { font-family: var(--font-display); font-weight: 700; font-size: 42px; line-height: 1.1; letter-spacing: -0.02em; color: #fff; margin: 0; }
+  .spotlight .lead p { font-size: 16.5px; line-height: 1.6; color: rgba(255,255,255,0.66); margin: 22px 0 0; max-width: 420px; }
+  .spotlight .steps { margin: 30px 0 0; display: flex; flex-direction: column; gap: 14px; }
+  .spotlight .steps .s { display: grid; grid-template-columns: 26px 1fr; gap: 14px; align-items: start; }
+  .spotlight .steps .s .n { font-family: var(--font-display); font-weight: 700; font-size: 16px; color: var(--tf-red); padding-top: 1px; }
+  .spotlight .steps .s p { margin: 0; font-size: 15px; color: rgba(255,255,255,0.8); }
+  .spotlight .lead .btn { margin-top: 32px; }
+
+  /* insight card mock */
+  .insight { background: var(--page); border-radius: 16px; padding: 26px; color: var(--tf-ink); box-shadow: 0 24px 60px rgba(0,0,0,0.32); }
+  .insight .thumb { aspect-ratio: 16/10; background: var(--band); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; display: grid; place-items: center; }
+  .insight .thumb img { width: 64%; height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+  .insight .cat { font-size: 10.5px; letter-spacing: 0.09em; text-transform: uppercase; font-weight: var(--w-bold); color: var(--tf-red); margin: 22px 0 12px; }
+  .insight .score { display: flex; align-items: baseline; gap: 12px; }
+  .insight .score .v { font-family: var(--font-display); font-weight: 700; font-size: 64px; line-height: 0.9; letter-spacing: -0.03em; color: var(--tf-black); }
+  .insight .score .delta { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: var(--w-bold); color: #1E7A3C; }
+  .insight .score .delta svg { width: 14px; height: 14px; }
+  .insight .score .k { font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; font-weight: var(--w-semibold); color: var(--tf-stone); margin-left: auto; }
+  .insight .line { font-size: 15.5px; line-height: 1.5; color: var(--tf-ink); margin: 16px 0 0; padding-top: 16px; border-top: 1px solid var(--line); }
+  .insight .quote-row { display: flex; gap: 12px; align-items: center; margin: 18px 0 0; }
+  .insight .quote-row .av { width: 38px; height: 38px; border-radius: 999px; overflow: hidden; background: var(--band); border: 1px solid var(--line); flex: 0 0 auto; }
+  .insight .quote-row .av img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); }
+  .insight .quote-row .qt { font-family: var(--font-display); font-style: italic; font-size: 15px; line-height: 1.4; color: var(--tf-ink); }
+  .insight .action { margin-top: 22px; display: flex; align-items: center; justify-content: space-between; padding-top: 18px; border-top: 1px solid var(--line); }
+  .insight .action .label { font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; font-weight: var(--w-bold); color: var(--tf-stone); }
+  .insight .action .arr-red { width: 34px; height: 34px; border-radius: 999px; background: var(--tf-red); color: #fff; display: grid; place-items: center; }
+  .insight .action .arr-red svg { width: 15px; height: 15px; }
+
+  /* ===== PROCESS (light, 3 steps) ===== */
+  .process .wrap { padding-top: 96px; padding-bottom: 40px; }
+  .sec-head { max-width: 620px; margin-bottom: 52px; }
+  .sec-head .eyebrow-red { margin-bottom: 16px; }
+  .sec-head h2 { font-family: var(--font-display); font-weight: 700; font-size: 42px; line-height: 1.06; letter-spacing: -0.02em; color: var(--tf-black); margin: 0; }
+  .sec-head p { font-size: 16.5px; line-height: 1.55; color: var(--tf-stone); margin: 16px 0 0; }
+  .proc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+  .proc { padding: 32px 36px 36px 0; border-top: 2px solid var(--tf-black); }
+  .proc + .proc { padding-left: 36px; border-left: 1px solid var(--line); }
+  .proc .n { font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--tf-red); margin: 0 0 16px; }
+  .proc h3 { font-family: var(--font-display); font-weight: 700; font-size: 26px; line-height: 1.1; letter-spacing: -0.01em; color: var(--tf-black); margin: 0; }
+  .proc p { font-size: 15px; line-height: 1.55; color: var(--tf-stone); margin: 12px 0 0; }
+
+  /* ===== CTA BAND ===== */
+  .closing .wrap { padding-top: 96px; padding-bottom: 96px; }
+  .closing-band { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 60px 40px; text-align: center; }
+  .closing-band .eyebrow-red { margin-bottom: 18px; }
+  .closing-band h2 { font-family: var(--font-display); font-weight: 700; font-size: 44px; line-height: 1.05; letter-spacing: -0.02em; color: var(--tf-black); margin: 0 auto; max-width: 16ch; }
+  .closing-band p { font-size: 17px; line-height: 1.55; color: var(--tf-stone); margin: 18px auto 0; max-width: 460px; }
+  .closing-actions { margin-top: 32px; display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap; }
+
+  /* ===== FOOTER (shared with landing page) ===== */
+  .site-footer { background: var(--dash); color: rgba(255,255,255,0.7); }
+  .site-footer .wrap { padding-top: 44px; padding-bottom: 26px; }
+  .foot-grid { display: grid; grid-template-columns: 1.7fr 1fr 1.2fr; gap: 28px; }
+  .foot-brand .fm { display: inline-flex; align-items: flex-end; margin-bottom: 16px; }
+  .foot-brand .fm img { height: 20px; width: auto; display: block; filter: invert(1); }
+  .foot-brand p { font-size: 13.5px; line-height: 1.4; color: rgba(255,255,255,0.55); margin: 0 0 18px; max-width: 180px; }
+  .foot-social { display: flex; gap: 10px; }
+  .foot-social a { width: 30px; height: 30px; border-radius: 999px; background: rgba(255,255,255,0.08); display: grid; place-items: center; color: #fff; border: 0; }
+  .foot-social a svg { width: 14px; height: 14px; }
+  .foot-social a:hover { background: var(--tf-red); }
+  .foot-nav { display: flex; flex-direction: column; gap: 11px; padding-top: 2px; }
+  .foot-col a { display: block; font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; border: 0; margin-bottom: 11px; }
+  .foot-col a:hover { color: #fff; }
+  .foot-signup h4 { font-family: var(--font-body); font-weight: var(--w-bold); font-size: 13px; color: #fff; margin: 0 0 16px; }
+  .foot-signup .field { display: flex; background: rgba(255,255,255,0.07); border: 1px solid var(--dash-line); border-radius: 6px; overflow: hidden; }
+  .foot-signup input { flex: 1; background: transparent; border: 0; outline: 0; color: #fff; font: inherit; font-size: 13px; padding: 10px 12px; }
+  .foot-signup input::placeholder { color: rgba(255,255,255,0.45); }
+  .foot-signup button { background: transparent; border: 0; color: var(--tf-red); padding: 0 12px; cursor: pointer; display: grid; place-items: center; }
+  .foot-signup button svg { width: 16px; height: 16px; }
+  .foot-signup-msg { margin: 12px 0 0; font-size: 12.5px; line-height: 1.4; display: flex; align-items: center; gap: 7px; }
+  .foot-signup-msg.ok { color: #fff; }
+  .foot-signup-msg.err { color: var(--tf-red); }
+  .foot-signup-msg .mi { display: inline-grid; place-items: center; width: 16px; height: 16px; flex: 0 0 16px; }
+  .foot-signup-msg.ok .mi { color: #4ED07A; }
+  .foot-signup-msg .mi svg { width: 14px; height: 14px; stroke-width: 3; }
+  .foot-signup.done .field { display: none; }
+  .foot-bottom { display: flex; align-items: center; justify-content: flex-end; margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--dash-line); }
+  .foot-bottom .cp { font-size: 11.5px; color: rgba(255,255,255,0.4); white-space: nowrap; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1000px) {
+    .nav { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--page); border-top: 1px solid var(--line); padding: 6px 0 10px; margin: 0; display: none; z-index: 60; box-shadow: 0 24px 40px rgba(0,0,0,0.10); }
+    .site-header.open .nav { display: flex; }
+    .nav a:not(.btn) { padding: 14px 40px; font-size: 16px; }
+    .nav a.active { border-bottom: 0; padding-bottom: 14px; }
+    .nav a:not(.nav-cta):not(:last-child) { border-bottom: 1px solid var(--line); }
+    .nav a.nav-cta { display: block; margin: 10px 40px 0; padding: 13px 40px; text-align: center; background: var(--tf-black); color: #fff; border-radius: 999px; }
+    .nav a.nav-cta:hover { color: #fff; }
+    .site-header .header-btn { display: none; }
+    .nav-toggle { display: inline-grid; }
+    .uc-hero-top { grid-template-columns: 1fr; gap: 28px; align-items: start; }
+    .uc-hl { font-size: 58px; }
+    .uc-hero-meta { grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .uc-hero-meta .tagline { display: none; }
+    .uc-grid { grid-template-columns: repeat(2, 1fr); }
+    .uc.wide { grid-column: span 2; }
+    .uc-grid.filtered .uc.wide { grid-column: span 1; }
+    .spotlight .wrap { grid-template-columns: 1fr; gap: 40px; }
+    .proc-grid { grid-template-columns: 1fr; }
+    .proc { padding: 26px 0 26px; }
+    .proc + .proc { padding-left: 0; border-left: 0; }
+    .foot-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+  }
+  @media (max-width: 600px) {
+    .wrap { padding: 0 20px; }
+    .nav a:not(.btn), .nav a.nav-cta { padding-left: 20px; padding-right: 20px; }
+    .nav a.nav-cta { margin-left: 20px; margin-right: 20px; }
+    .uc-hl { font-size: 42px; }
+    .uc-hero .wrap { padding-top: 36px; }
+    .uc-hero-meta { grid-template-columns: 1fr 1fr; gap: 22px; }
+    .uc-grid { grid-template-columns: 1fr; }
+    .uc.wide, .uc-grid.filtered .uc.wide { grid-column: span 1; }
+    .uc:not(.wide) .quote, .uc.wide .quote { display: block; }
+    .uc-grid-head h2 { font-size: 30px; }
+    .spotlight .lead h2 { font-size: 32px; }
+    .insight .score .v { font-size: 52px; }
+    .sec-head h2 { font-size: 32px; }
+    .closing-band { padding: 44px 24px; }
+    .closing-band h2 { font-size: 32px; }
+    .closing-actions { flex-direction: column; align-items: stretch; }
+    .closing-actions .btn { width: 100%; justify-content: space-between; }
+    .foot-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header" id="siteHeader">
+    <div class="wrap">
+      <a class="wordmark" href="/"><img src="/assets/logo-primary.png" alt="testfeed" /><span class="logodot"></span></a>
+      <nav class="nav" id="nav">
+        <a href="/#platform">Product</a>
+        <a class="active" href="/use-cases/">Use cases</a>
+        <a href={bookingUrl} target="_blank" rel="noopener">Pricing</a>
+        <a href="/blog/">Blog</a>
+        <a href={bookingUrl} target="_blank" rel="noopener">Contact</a>
+        <a class="btn nav-cta" href={bookingUrl} target="_blank" rel="noopener">Book a demo <span class="arr"><i data-lucide="arrow-right"></i></span></a>
+      </nav>
+      <a class="btn header-btn" href={bookingUrl} target="_blank" rel="noopener">Book a demo <span class="arr"><i data-lucide="arrow-right"></i></span></a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><i data-lucide="menu"></i></button>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="uc-hero">
+    <div class="wrap">
+      <p class="eyebrow-red">Use cases</p>
+      <div class="uc-hero-top">
+        <h1 class="uc-hl">Nine ways teams ask before they <span class="rotator" aria-label="ship"><span>ship<i class="dot-red">.</i></span><span>launch<i class="dot-red">.</i></span><span>commit<i class="dot-red">.</i></span><span>spend<i class="dot-red">.</i></span><span>invest<i class="dot-red">.</i></span><span>build<i class="dot-red">.</i></span><span>brief<i class="dot-red">.</i></span><span>buy<i class="dot-red">.</i></span><span>bet<i class="dot-red">.</i></span><span>sign off<i class="dot-red">.</i></span><span>go live<i class="dot-red">.</i></span><span>decide<i class="dot-red">.</i></span><span>scale<i class="dot-red">.</i></span><span>price<i class="dot-red">.</i></span><span>pitch<i class="dot-red">.</i></span></span></h1>
+        <div class="uc-hero-right">
+          <p class="uc-lede">Packs, ads, claims, pricing, names. Whatever the decision, your AI panel gives you a score, the quotes, and a next move. Usually inside an hour.</p>
+          <div class="uc-hero-actions">
+            <a class="btn" href={bookingUrl} target="_blank" rel="noopener">Book a demo <span class="arr"><i data-lucide="arrow-right"></i></span></a>
+            <a class="btn btn--outline" href={bookingUrl} target="_blank" rel="noopener">Talk to us <i data-lucide="arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="uc-hero-meta">
+        <div class="m"><span class="n">9</span><span class="l">Use cases</span></div>
+        <div class="m"><span class="n">~1<em>hr</em></span><span class="l">To first read</span></div>
+        <p class="tagline">Ask them anything,<br>at any time.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== USE-CASE GRID ===== -->
+  <section class="uc-grid-sec">
+    <div class="wrap">
+      <div class="uc-grid-head">
+        <div>
+          <p class="eyebrow-red">The full set</p>
+          <h2>Every decision, put to the panel.</h2>
+        </div>
+        <div class="filters" id="filters">
+          <button class="on" data-filter="all">All <span class="ct">9</span></button>
+          <button data-filter="creative">Creative <span class="ct">3</span></button>
+          <button data-filter="product">Product <span class="ct">2</span></button>
+          <button data-filter="brand">Brand <span class="ct">3</span></button>
+          <button data-filter="pricing">Pricing <span class="ct">1</span></button>
+        </div>
+      </div>
+
+      <div class="uc-grid" id="ucGrid">
+
+        <!-- 1 — wide dark -->
+        <a class="uc wide dark" data-cat="creative" href={bookingUrl} target="_blank" rel="noopener">
+          <span class="ic"><i data-lucide="clapperboard"></i></span>
+          <p class="cat">Creative · Ad testing</p>
+          <h3>Know which cut lands before the media.</h3>
+          <p>Run your creative against an AI panel. Find out what earns attention before the budget goes out.</p>
+          <div class="foot">
+            <span class="go"><i data-lucide="arrow-right"></i></span>
+          </div>
+        </a>
+
+        <!-- 2 -->
+        <a class="uc" data-cat="creative" href={bookingUrl} target="_blank" rel="noopener">
+          <span class="ic"><i data-lucide="package"></i></span>
+          <p class="cat">Creative · Packaging</p>
+          <h3>Pick the pack that earns the shelf.</h3>
+          <p>Shopper-test designs head to head. See which one they reach for.</p>
+          <div class="foot">
+            <span class="go"><i data-lucide="arrow-right"></i></span>
+          </div>
+        </a>
+
+        <!-- 3 -->
+        <a class="uc" data-cat="creative" href={bookingUrl} target="_blank" rel="noopener">
+          <span class="ic"><i data-lucide="badge-check"></i></span>
+          <p class="cat">Creative · Claims</p>
+          <h3>Find the line people believe.</h3>
+          <p>Pressure-test claims for clarity, credibility, and cut-through.</p>
+          <div class="foot">
+            <span class="go"><i data-lucide="arrow-right"></i></span>
+          </div>
+        </a>
+
+        <!-- 4 -->
+        <a class="uc" data-cat="pricing" href={bookingUrl} target="_blank" rel="noopener">
+          <span class="ic"><i data-lucide="tag"></i></span>
+          <p class="cat">Pricing · Willingness to pay</p>
+          <h3>See what they'll actually pay.</h3>
+          <p>Map price sensitivity and find the number that holds.</p>
+          <div class="foot">
+            <span class="go"><i data-lucide="arrow-right"></i></span>
+          </div>
+        </a>
+
+        <!-- 5 -->
+        <a class="uc" data-cat="product" href={bookingUrl} target="_blank" rel="noopener">
+          <span class="ic"><i data-lucide="lightbulb"></i></span>
+          <p class="cat">Product · Concept</p>
+          <h3>Kill the weak ideas early.</h3>
+          <p>Screen concepts in a day, not a quarter.</p>
+          <div class="foot">
+            <span class="go"><i data-lucide="arrow-right"></i></span>
+          </div>
+        </a>
+
+        <!-- 6 — wide -->
+        <a class="uc wide" data-cat="brand" href={bookingUrl} target="_blank" rel="noopener">
+          <span class="ic"><i data-lucide="type"></i></span>
+          <p class="cat">Brand · Naming</p>
+          <h3>Name it the way your audience already would.</h3>
+          <p>Put the shortlist to an AI panel that fits your market. Learn what each name signals before the logo, before you fall in love with the wrong one.</p>
+          <div class="foot">
+            <span class="go"><i data-lucide="arrow-right"></i></span>
+          </div>
+        </a>
+
+        <!-- 7 -->
+        <a class="uc" data-cat="brand" href={bookingUrl} target="_blank" rel="noopener">
+          <span class="ic"><i data-lucide="message-square-quote"></i></span>
+          <p class="cat">Brand · Messaging</p>
+          <h3>Lead with the line that moves them.</h3>
+          <p>Stack-rank value props by what your audience actually feels.</p>
+          <div class="foot">
+            <span class="go"><i data-lucide="arrow-right"></i></span>
+          </div>
+        </a>
+
+        <!-- 8 — wide -->
+        <a class="uc wide" data-cat="product" href={bookingUrl} target="_blank" rel="noopener">
+          <span class="ic"><i data-lucide="list-checks"></i></span>
+          <p class="cat">Product · Prioritisation</p>
+          <h3>Build what they'll actually use.</h3>
+          <p>Stack-rank the roadmap by real demand, not the loudest stakeholder. Hand engineering a backlog your audience has already voted on.</p>
+          <div class="foot">
+            <span class="go"><i data-lucide="arrow-right"></i></span>
+          </div>
+        </a>
+
+        <!-- 9 -->
+        <a class="uc" data-cat="brand" href={bookingUrl} target="_blank" rel="noopener">
+          <span class="ic"><i data-lucide="activity"></i></span>
+          <p class="cat">Brand · Tracking</p>
+          <h3>Watch perception shift, week to week.</h3>
+          <p>Run the same panel on a cadence and catch drift early.</p>
+          <div class="foot">
+            <span class="go"><i data-lucide="arrow-right"></i></span>
+          </div>
+        </a>
+
+        <p class="uc-empty" id="ucEmpty">Nothing in this category yet.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SPOTLIGHT ===== -->
+  <section class="spotlight">
+    <div class="wrap">
+      <div class="lead">
+        <p class="eyebrow-red">What you get back</p>
+        <h2>Every use case ends the same way: a score, the quotes, a next move.</h2>
+        <p>Whatever you test, the panel hands back something you can act on this afternoon — not a 40-slide deck three weeks from now.</p>
+        <div class="steps">
+          <div class="s"><span class="n">1</span><p>Tell us what you're deciding and who it's for.</p></div>
+          <div class="s"><span class="n">2</span><p>We build an AI panel from real audience data and run it.</p></div>
+          <div class="s"><span class="n">3</span><p>You get the score, the verbatims, and the call — in about an hour.</p></div>
+        </div>
+        <a class="btn btn--light" href={bookingUrl} target="_blank" rel="noopener">See a sample report <span class="arr"><i data-lucide="arrow-right"></i></span></a>
+      </div>
+      <div class="insight">
+        <div class="thumb"><img src="/assets/use-cases/pack-sunny-crisp.png" alt="Sunny Crisp pack" /></div>
+        <p class="cat">Packaging · Top-2-box appeal</p>
+        <div class="score">
+          <span class="v">87%</span>
+          <span class="delta"><i data-lucide="arrow-up-right"></i>+12 pts</span>
+          <span class="k">Pack B</span>
+        </div>
+        <p class="line">Pack B reads as more premium and more “for me” across the target. The matte finish does most of the work; the badge does the rest.</p>
+        <div class="quote-row">
+          <span class="av"><img src="/assets/use-cases/respondent.png" alt="Respondent" /></span>
+          <span class="qt">“This one looks like it belongs in my cupboard, not the bargain bin.”</span>
+        </div>
+        <div class="action">
+          <span class="label">Action · Ship Pack B</span>
+          <span class="arr-red"><i data-lucide="arrow-right"></i></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROCESS ===== -->
+  <section class="process">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow-red">How it works</p>
+        <h2>One workflow, any question.</h2>
+        <p>The use case changes. The path to an answer doesn't.</p>
+      </div>
+      <div class="proc-grid">
+        <div class="proc">
+          <p class="n">01</p>
+          <h3>Frame the question.</h3>
+          <p>Pick a use case or write your own brief. Drop in the packs, ads, claims or prices you want judged.</p>
+        </div>
+        <div class="proc">
+          <p class="n">02</p>
+          <h3>Meet your AI panel.</h3>
+          <p>We model a panel from real audience data and benchmark it against humans, so the read holds up.</p>
+        </div>
+        <div class="proc">
+          <p class="n">03</p>
+          <h3>Act on the answer.</h3>
+          <p>Score, verbatims and a clear recommendation land in about an hour — while you can still change the outcome.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CLOSING CTA ===== -->
+  <section class="closing">
+    <div class="wrap">
+      <div class="closing-band">
+        <p class="eyebrow-red">Have a decision in front of you?</p>
+        <h2>Bring us the question. We'll bring the audience.</h2>
+        <p>Tell us what you're deciding. We'll set up an AI panel and walk you through what your audience really thinks.</p>
+        <div class="closing-actions">
+          <a class="btn" href={bookingUrl} target="_blank" rel="noopener">Book a demo <span class="arr"><i data-lucide="arrow-right"></i></span></a>
+          <a class="btn btn--outline" href={bookingUrl} target="_blank" rel="noopener">Get in touch <i data-lucide="arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <div class="fm"><img src="/assets/logo-primary.png" alt="testfeed" /><span class="logodot"></span></div>
+          <p>Your AI panel. Ready when you are.</p>
+          <div class="foot-social">
+            <a href="https://www.linkedin.com/company/testfeed-ai/" target="_blank" rel="noopener" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+          </div>
+        </div>
+        <div class="foot-col foot-nav">
+          <a href="/#platform">Product</a>
+          <a href="/use-cases/">Use cases</a>
+          <a href="/blog/">Blog</a>
+          <a href={bookingUrl} target="_blank" rel="noopener">Contact</a>
+          <a href="/privacy-policy">Privacy</a>
+        </div>
+        <div class="foot-signup">
+          <h4>Sign up for our updates</h4>
+          <form class="field" id="foot-signup-form" novalidate>
+            <input type="email" placeholder="Enter your email" aria-label="Email address" required />
+            <button type="submit" aria-label="Subscribe"><i data-lucide="arrow-right"></i></button>
+          </form>
+          <p class="foot-signup-msg" id="foot-signup-msg" hidden></p>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span class="cp">© 2025 TestFeed</span>
+      </div>
+    </div>
+  </footer>
+
+  <script is:inline>
+    if (window.lucide) lucide.createIcons();
+
+    /* mobile nav toggle */
+    (function(){
+      var header = document.getElementById('siteHeader');
+      var toggle = document.getElementById('navToggle');
+      if (toggle) toggle.addEventListener('click', function(){
+        var open = header.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        toggle.innerHTML = open ? '<i data-lucide="x"></i>' : '<i data-lucide="menu"></i>';
+        if (window.lucide) lucide.createIcons();
+      });
+    })();
+
+    /* use-case filter */
+    (function(){
+      var grid = document.getElementById('ucGrid');
+      var empty = document.getElementById('ucEmpty');
+      if (!grid) return;
+      var cards = Array.prototype.slice.call(grid.querySelectorAll('.uc'));
+      var buttons = Array.prototype.slice.call(document.querySelectorAll('#filters button'));
+      buttons.forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var f = btn.getAttribute('data-filter');
+          buttons.forEach(function(b){ b.classList.toggle('on', b === btn); });
+          grid.classList.toggle('filtered', f !== 'all');
+          var shown = 0;
+          cards.forEach(function(c){
+            var match = (f === 'all') || (c.getAttribute('data-cat') === f);
+            c.classList.toggle('hide', !match);
+            if (match) shown++;
+          });
+          empty.style.display = shown === 0 ? 'block' : 'none';
+        });
+      });
+    })();
+
+    /* footer signup */
+    (function(){
+      var form = document.getElementById('foot-signup-form');
+      if (!form) return;
+      var wrap = form.closest('.foot-signup');
+      var input = form.querySelector('input');
+      var msg = document.getElementById('foot-signup-msg');
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        var val = (input.value || '').trim();
+        var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+        msg.hidden = false;
+        if (!valid) {
+          msg.className = 'foot-signup-msg err';
+          msg.textContent = 'Please enter a valid email address.';
+          input.focus();
+          return;
+        }
+        wrap.classList.add('done');
+        msg.className = 'foot-signup-msg ok';
+        msg.innerHTML = '<span class="mi"><i data-lucide="check"></i></span>Thanks — you\'re on the list. We\'ll be in touch.';
+        if (window.lucide) lucide.createIcons();
+      });
+    })();
+  </script>
+
+</body>
+</html>
