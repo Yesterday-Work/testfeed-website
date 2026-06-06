@@ -30,6 +30,53 @@ export default function googleAnalytics(measurementId?: string): AstroIntegratio
             gtag('js', new Date());
             gtag('config', '${gaId}');
           })();
+
+          // ---- Custom event tracking (delegated, works on every page) ----
+          (function(){
+            function track(){ (window.dataLayer = window.dataLayer || []).push(arguments); }
+
+            // Clicks: use-case cards / filters, and Book-a-demo CTAs.
+            document.addEventListener('click', function(e){
+              var t = e.target;
+              if (!t || !t.closest) return;
+
+              var card = t.closest('a.uc');
+              if (card) {
+                var h3 = card.querySelector('h3');
+                track('event', 'use_case_click', {
+                  use_case: h3 ? h3.textContent.trim() : '',
+                  category: card.getAttribute('data-cat') || ''
+                });
+                return;
+              }
+
+              var filterBtn = t.closest('#filters button');
+              if (filterBtn) {
+                track('event', 'use_case_filter', { filter: filterBtn.getAttribute('data-filter') || '' });
+                return;
+              }
+
+              var link = t.closest('a[href]');
+              if (link && (link.href || '').indexOf('usemotion.com/meet') !== -1) {
+                track('event', 'book_demo_click', {
+                  link_text: (link.textContent || '').trim().slice(0, 60),
+                  page_path: location.pathname
+                });
+              }
+            }, true);
+
+            // Newsletter signups: fire on a valid submit of either footer form.
+            document.addEventListener('submit', function(e){
+              var form = e.target;
+              if (!form || (form.id !== 'foot-signup-form' && form.id !== 'bf-signup-form')) return;
+              var input = form.querySelector('input');
+              var val = input ? (input.value || '').trim() : '';
+              var at = val.indexOf('@');
+              if (at > 0 && val.indexOf('.', at) > at + 1) {
+                track('event', 'generate_lead', { method: 'newsletter_footer' });
+              }
+            }, true);
+          })();
         `);
       }
     }
