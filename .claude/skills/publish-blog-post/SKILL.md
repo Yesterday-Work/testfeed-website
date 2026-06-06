@@ -1,16 +1,15 @@
 ---
 name: publish-blog-post
-description: Publish a draft blog post that was saved by write-blog-post, add-blog-post, or coworker. Removes draft:true, commits, merges the PR to main, and the post goes live on testfeed.ai. Run after reviewing the draft PR.
+description: Publish a draft blog post. Removes draft:true, commits, merges the PR to main, and the post goes live on testfeed.ai. Run after reviewing the draft PR.
 model: claude-haiku-4-5-20251001
 ---
 
 # Publish Blog Post Skill
 
-Make a draft blog post live on testfeed.ai. This is the final step in both publishing pipelines:
+Make a draft blog post live on testfeed.ai. This is the final step in the publishing pipeline:
 
 ```
-/write-blog-post  →  [review PR]  →  /publish-blog-post
-/coworker         →  [review PR]  →  /publish-blog-post
+[draft PR]  →  [review PR]  →  /publish-blog-post
 ```
 
 ## Workflow
