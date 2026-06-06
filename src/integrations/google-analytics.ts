@@ -9,20 +9,14 @@ export default function googleAnalytics(): AstroIntegration {
         // import.meta.env is not populated in integration hooks during build time)
         const gaId = process.env.PUBLIC_GOOGLE_ANALYTICS_ID;
 
-        // Only run if GA_ID is set and we are building for production
-        // (or if you want it during development too, adjust the logic)
+        // Skip injection entirely if no ID is configured, otherwise we'd ship a
+        // broken `gtag/js?id=undefined` tag on every page.
         if (!gaId) {
-          // console.warn(
-          //   "PUBLIC_GOOGLE_ANALYTICS_ID is not set in environment variables. Google Analytics script injection skipped."
-          // );
-          // return;
+          console.warn(
+            "[google-analytics] PUBLIC_GOOGLE_ANALYTICS_ID is not set — skipping Google Analytics injection."
+          );
+          return;
         }
-
-        // Optional: Only inject in production builds
-        // if (command !== 'build') {
-        //   console.log("Skipping Google Analytics injection in development mode.");
-        //   return;
-        // }
 
         // Inject the script loader and the inline config script using 'head-inline'
         injectScript('head-inline', `
