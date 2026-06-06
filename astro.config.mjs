@@ -11,6 +11,11 @@ import rehypeSlug from 'rehype-slug';
 
 dotenv.config();
 
+// Google Analytics 4 Measurement ID. This is a public identifier (it ships in
+// every page's HTML), so it's committed here as the default to guarantee
+// tracking on every build. PUBLIC_GOOGLE_ANALYTICS_ID can override it per-env.
+const GA_MEASUREMENT_ID = process.env.PUBLIC_GOOGLE_ANALYTICS_ID || 'G-0HBK7XS1Z3';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://testfeed.ai',
@@ -43,7 +48,7 @@ export default defineConfig({
         return !page.includes('draft');
       }
     }),
-    googleAnalytics(),
+    googleAnalytics(GA_MEASUREMENT_ID),
     posthogAnalytics(),
     customerIoAnalytics(),
     icon()

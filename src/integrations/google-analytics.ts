@@ -1,13 +1,12 @@
 import type { AstroIntegration } from 'astro';
 
-export default function googleAnalytics(): AstroIntegration {
+export default function googleAnalytics(measurementId?: string): AstroIntegration {
   return {
     name: 'astro-google-analytics-integration', // Unique name for the integration
     hooks: {
       'astro:config:setup': ({ injectScript, command }) => {
-        // Get the GA ID from environment variables (use process.env here because
-        // import.meta.env is not populated in integration hooks during build time)
-        const gaId = process.env.PUBLIC_GOOGLE_ANALYTICS_ID;
+        // Prefer an explicitly passed ID; fall back to the environment variable.
+        const gaId = measurementId || process.env.PUBLIC_GOOGLE_ANALYTICS_ID;
 
         // Skip injection entirely if no ID is configured, otherwise we'd ship a
         // broken `gtag/js?id=undefined` tag on every page.
