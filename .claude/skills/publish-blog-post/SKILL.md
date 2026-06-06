@@ -75,10 +75,22 @@ Use the GitHub MCP tool:
 
 If no open PR is found, the push in step 5 already went to main — skip this step.
 
-### 7. Confirm
+### 7. Update Notion SEO Content Pipeline
+
+Find the matching row in the SEO Content Pipeline database and set Status to `Published`.
+
+**Database:** SEO Content Pipeline  
+**Data source ID:** `1f3798c8-bb64-4a16-81a0-5ae2cc318d0b`
+
+1. Search the database for a row where `Name` matches `[slug]`
+2. If found: update `Status` to `Published` using the Notion MCP `notion-update-page` tool
+3. If not found: create a new row with `Name: [slug]`, `Primary Keyword: [primary keyword from frontmatter tags[0]]`, `Status: Published`, `Format: [format type e.g. Guide/Comparison]`
+
+### 8. Confirm
 
 - **Status:** Live
 - **URL:** `https://testfeed.ai/blog/[slug]/`
+- **Notion:** SEO Content Pipeline updated to Published
 - **Note:** Netlify/Vercel takes 1–3 minutes to rebuild — check back shortly.
 
 ## Key Paths
