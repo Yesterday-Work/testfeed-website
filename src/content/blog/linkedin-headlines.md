@@ -3,7 +3,6 @@ title: "The Ultimate Guide to LinkedIn Headline Examples That Get You Noticed in
 description: "Learn how to craft compelling LinkedIn headlines that attract recruiters and opportunities with proven formulas and examples."
 articleTitle: "The Ultimate Guide to LinkedIn Headline Examples That Get You Noticed in 2025"
 publishDate: 2025-05-05
-# updatedDate: YYYY-MM-DD # Optional: Add if post is updated
 author: "Millie Marconi"
 featuredImage: ""
 excerpt: "Learn how to craft compelling LinkedIn headlines that attract recruiters and opportunities with proven formulas and examples."
