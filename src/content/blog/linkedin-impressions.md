@@ -3,7 +3,6 @@ title: "Understanding LinkedIn Impressions: The Foundation of Visibility | TestF
 description: "Complete guide to understanding LinkedIn impressions, how they work, optimization strategies, and tools to maximize visibility and engagement."
 articleTitle: "Understanding LinkedIn Impressions: The Foundation of Visibility"
 publishDate: 2025-05-07
-# updatedDate: YYYY-MM-DD # Optional: Add if post is updated
 author: "Millie Marconi"
 featuredImage: ""
 excerpt: "A comprehensive guide to understanding and maximizing LinkedIn impressions."
